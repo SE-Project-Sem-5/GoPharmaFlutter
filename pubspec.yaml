@@ -44,6 +44,7 @@ dependencies:
   permission_handler: ^8.1.4+2
   uuid: ^3.0.4
   carousel_slider: ^4.0.0
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:
