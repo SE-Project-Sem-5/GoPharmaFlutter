@@ -6,10 +6,11 @@ import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
-import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_up/delivery_agent_sign_up.dart';
 
-class CustomerSignInStart extends StatelessWidget {
-  static const String id = "customer_sign_in";
+// ignore: must_be_immutable
+class DeliveryAgentSignInStart extends StatelessWidget {
+  static const String id = "delivery_agent_sign_in";
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   static final GlobalKey<FormState> _form = GlobalKey<FormState>();
@@ -138,7 +139,7 @@ class CustomerSignInStart extends StatelessWidget {
                       onTap: () {
                         Navigator.pushNamed(
                           context,
-                          CustomerSignUpStart.id,
+                          DeliveryAgentSignUpStart.id,
                         );
                       },
                     ),

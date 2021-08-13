@@ -5,12 +5,12 @@ import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
-import 'package:go_pharma/ui/customer/sign_in/other_files/sign_in_start.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_in/other_files/sign_in_start.dart';
 
 //TODO: password needs to be more than 7 characters
 // ignore: must_be_immutable
-class SignUpStart extends StatelessWidget {
-  static const String id = "sign_up";
+class DeliveryAgentSignUpStart extends StatelessWidget {
+  static const String id = "delivery_agent_sign_up";
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   @override
@@ -123,7 +123,7 @@ class SignUpStart extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        SignInStart.id,
+                        DeliveryAgentSignInStart.id,
                       );
                     },
                   ),

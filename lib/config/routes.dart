@@ -1,20 +1,35 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/customer/camera/select_photo_screen.dart';
+import 'package:go_pharma/ui/customer/customer_starting_page.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/products/shopping_cart_page.dart';
 import 'package:go_pharma/ui/customer/sign_in/other_files/sign_in_start.dart';
-import 'package:go_pharma/ui/customer/sign_up/sign_up.dart';
+import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
-import 'package:go_pharma/ui/main_page.dart';
+import 'package:go_pharma/ui/delivery_agent/delivery_agent_starting_page.dart';
+import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_in/other_files/sign_in_start.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_up/delivery_agent_sign_up.dart';
+import 'package:go_pharma/ui/initial_routing_page.dart';
 
 Map<String, Widget Function(BuildContext context)> routes = {
-  SignInStart.id: (context) => SignInStart(),
-  SignUpStart.id: (context) => SignUpStart(),
-  MainPage.id: (context) => MainPage(),
+  //start page
+  InitialRoutingPage.id: (context) => InitialRoutingPage(),
+
+  //customer pages
+  CustomerStartingPage.id: (context) => CustomerStartingPage(),
+  CustomerSignInStart.id: (context) => CustomerSignInStart(),
+  CustomerSignUpStart.id: (context) => CustomerSignUpStart(),
   CustomerHomePage.id: (context) => CustomerHomePage(),
   ProductHomePage.id: (context) => ProductHomePage(),
   ShoppingCartPage.id: (context) => ShoppingCartPage(),
-  DeliveriesPage.id: (context) => DeliveriesPage(),
   SelectPhotoScreen.id: (context) => SelectPhotoScreen(),
+
+  //delivery agent pages
+  DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
+  DeliveryAgentSignUpStart.id: (context) => DeliveryAgentSignUpStart(),
+  DeliveryAgentSignInStart.id: (context) => DeliveryAgentSignInStart(),
+  DeliveryAgentHomePage.id: (context) => DeliveryAgentHomePage(),
+  DeliveriesPage.id: (context) => DeliveriesPage(),
 };

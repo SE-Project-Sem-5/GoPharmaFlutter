@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/camera/camera_bloc.dart';
 import 'package:go_pharma/bloc/internet_connectivity/internet_bloc.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/main_page.dart';
+import 'package:go_pharma/ui/initial_routing_page.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -59,7 +59,7 @@ class GoPharmaApp extends StatelessWidget {
             color: GoPharmaColors.PrimaryColor,
           ),
         ),
-        initialRoute: MainPage.id,
+        initialRoute: InitialRoutingPage.id,
         // email.compareTo("Not logged in") == 0 ? SignInStart.id : HomePage.id,
         routes: routes,
         theme: buildThemeData(context),
