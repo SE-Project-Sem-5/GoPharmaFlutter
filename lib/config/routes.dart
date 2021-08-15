@@ -4,6 +4,7 @@ import 'package:go_pharma/ui/customer/customer_starting_page.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/products/shopping_cart_page.dart';
+import 'package:go_pharma/ui/customer/profile/settings.dart';
 import 'package:go_pharma/ui/customer/sign_in/other_files/sign_in_start.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
@@ -25,6 +26,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   ProductHomePage.id: (context) => ProductHomePage(),
   ShoppingCartPage.id: (context) => ShoppingCartPage(),
   SelectPhotoScreen.id: (context) => SelectPhotoScreen(),
+  SettingsPage.id: (context) => SettingsPage(),
 
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
