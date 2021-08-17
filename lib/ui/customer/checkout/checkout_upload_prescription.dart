@@ -9,8 +9,8 @@ import 'package:go_pharma/bloc/customer/camera/camera_state.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class SelectPhotoScreen extends StatelessWidget {
-  static final String id = "select_photo_screen";
+class CheckoutUploadPrescription extends StatelessWidget {
+  static final String id = "checkout_upload_prescription";
   final ImagePicker imagePicker = new ImagePicker();
   final PageController controller = PageController(initialPage: 0);
 

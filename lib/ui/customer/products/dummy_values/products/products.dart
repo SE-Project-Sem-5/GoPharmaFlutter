@@ -7,7 +7,7 @@ List products = [
     supplier: "Supplier 1",
     inStock: true,
     price: 100.00,
-    boolPrescriptionRequired: false,
+    prescriptionRequired: false,
   ),
   Product(
     id: "2",
@@ -15,7 +15,7 @@ List products = [
     supplier: "Supplier 2",
     inStock: false,
     price: 9600.00,
-    boolPrescriptionRequired: false,
+    prescriptionRequired: false,
   ),
   Product(
     id: "3",
@@ -23,7 +23,7 @@ List products = [
     supplier: "Supplier 3",
     inStock: true,
     price: 2600.00,
-    boolPrescriptionRequired: false,
+    prescriptionRequired: false,
   ),
   Product(
     id: "4",
@@ -31,7 +31,7 @@ List products = [
     supplier: "Supplier 4",
     inStock: false,
     price: 180.00,
-    boolPrescriptionRequired: false,
+    prescriptionRequired: false,
   ),
   Product(
     id: "5",
@@ -39,7 +39,7 @@ List products = [
     supplier: "Supplier 5",
     inStock: true,
     price: 140.00,
-    boolPrescriptionRequired: false,
+    prescriptionRequired: false,
   ),
   Product(
     id: "6",
@@ -47,7 +47,7 @@ List products = [
     supplier: "Supplier 6",
     inStock: true,
     price: 14120.00,
-    boolPrescriptionRequired: true,
+    prescriptionRequired: true,
   ),
   Product(
     id: "7",
@@ -55,7 +55,7 @@ List products = [
     supplier: "Supplier 7",
     inStock: true,
     price: 40.00,
-    boolPrescriptionRequired: true,
+    prescriptionRequired: true,
   ),
   Product(
     id: "8",
@@ -63,6 +63,6 @@ List products = [
     supplier: "Supplier 8",
     inStock: false,
     price: 200.00,
-    boolPrescriptionRequired: false,
+    prescriptionRequired: false,
   ),
 ];

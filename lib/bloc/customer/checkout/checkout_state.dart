@@ -4,30 +4,35 @@ import 'package:go_pharma/repos/product/product_model.dart';
 @immutable
 class CheckoutState {
   final String error;
-  final List<Product> productList;
+  final List<Product> productListPrescriptionless;
+  final List<Product> productListNeedPrescriptions;
   final double productListTotal;
 
   CheckoutState({
     required this.error,
-    required this.productList,
+    required this.productListPrescriptionless,
     required this.productListTotal,
+    required this.productListNeedPrescriptions,
   });
 
   static CheckoutState get initialState => CheckoutState(
         error: '',
-        productList: [],
+        productListPrescriptionless: [],
+        productListNeedPrescriptions: [],
         productListTotal: 0.0,
       );
 
   CheckoutState clone({
     String error = '',
-    required List<Product> productList,
+    required List<Product> productListNeedPrescriptions,
+    required List<Product> productListPrescriptionless,
     productListTotal = 0.0,
   }) {
     return CheckoutState(
       error: error,
-      productList: productList,
+      productListPrescriptionless: productListPrescriptionless,
       productListTotal: productListTotal,
+      productListNeedPrescriptions: productListNeedPrescriptions,
     );
   }
 }

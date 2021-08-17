@@ -28,7 +28,8 @@ class ProductHomePage extends StatelessWidget {
               builder: (context, state) {
                 return ShoppingCart(
                   color: GoPharmaColors.WhiteColor,
-                  itemCount: state.productList.length,
+                  itemCount: state.productListPrescriptionless.length +
+                      state.productListNeedPrescriptions.length,
                 );
               },
             ),

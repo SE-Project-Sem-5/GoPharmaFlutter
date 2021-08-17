@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:go_pharma/ui/customer/products/shopping_cart_page.dart';
+import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
 
 class ShoppingCart extends StatelessWidget {
   final Color color;

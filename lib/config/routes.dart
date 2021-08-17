@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/customer/camera/select_photo_screen.dart';
+import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_start.dart';
 import 'package:go_pharma/ui/customer/customer_starting_page.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
-import 'package:go_pharma/ui/customer/products/shopping_cart_page.dart';
+import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
 import 'package:go_pharma/ui/customer/profile/settings.dart';
 import 'package:go_pharma/ui/customer/sign_in/other_files/sign_in_start.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
@@ -29,6 +30,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   SelectPhotoScreen.id: (context) => SelectPhotoScreen(),
   SettingsPage.id: (context) => SettingsPage(),
   CheckoutStart.id: (context) => CheckoutStart(),
+  CheckoutReceipt.id: (context) => CheckoutReceipt(),
 
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
