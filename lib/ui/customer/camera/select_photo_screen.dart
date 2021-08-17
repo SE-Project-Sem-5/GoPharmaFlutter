@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:go_pharma/bloc/customer/camera/camera_event.dart';
-import 'package:path/path.dart' as path;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +8,6 @@ import 'package:go_pharma/bloc/customer/camera/camera_bloc.dart';
 import 'package:go_pharma/bloc/customer/camera/camera_state.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:uuid/uuid.dart';
 
 class SelectPhotoScreen extends StatelessWidget {
   static final String id = "select_photo_screen";

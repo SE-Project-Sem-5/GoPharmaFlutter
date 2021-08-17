@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
+import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/profile/settings.dart';
 import 'package:go_pharma/ui/customer/sign_in/other_files/sign_in_start.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
@@ -53,7 +54,7 @@ class CustomerStartingPage extends StatelessWidget {
                 textColor: GoPharmaColors.BlackColor,
                 onTapped: () => Navigator.pushNamed(
                   context,
-                  CustomerHomePage.id,
+                  ProductHomePage.id,
                 ),
               ),
               RoundedButtonFilled(
