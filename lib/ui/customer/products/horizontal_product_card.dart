@@ -110,6 +110,8 @@ class HorizontalProductCard extends StatelessWidget {
                                       ),
                                       onPressed: product.inStock
                                           ? () {
+                                              print(state
+                                                  .productListNeedPrescriptions);
                                               bloc.add(
                                                 UpdateProductListEvent(
                                                   product,
@@ -117,14 +119,16 @@ class HorizontalProductCard extends StatelessWidget {
                                               );
                                             }
                                           : null,
-                                      child:
-                                          (state.productList.contains(product))
-                                              ? ButtonText(
-                                                  text: 'Remove from cart',
-                                                )
-                                              : ButtonText(
-                                                  text: 'Add to cart',
-                                                ),
+                                      child: (state.productListPrescriptionless
+                                                  .contains(product) ||
+                                              state.productListNeedPrescriptions
+                                                  .contains(product))
+                                          ? ButtonText(
+                                              text: 'Remove from cart',
+                                            )
+                                          : ButtonText(
+                                              text: 'Add to cart',
+                                            ),
                                     ),
                                   );
                                 },

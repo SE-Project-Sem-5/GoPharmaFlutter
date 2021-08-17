@@ -4,7 +4,7 @@ class Product {
   final String supplier;
   final bool inStock;
   final double price;
-  final boolPrescriptionRequired;
+  final bool prescriptionRequired;
   final String imageURL;
   final String description;
   int amountOrdered;
@@ -20,7 +20,7 @@ class Product {
     required this.supplier,
     required this.inStock,
     required this.price,
-    required this.boolPrescriptionRequired,
+    required this.prescriptionRequired,
     this.imageURL = "images/pills.png",
     this.amountOrdered = 0,
   });

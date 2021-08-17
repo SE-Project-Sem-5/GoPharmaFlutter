@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
+import 'package:go_pharma/repos/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/back_button.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
-import 'package:go_pharma/ui/customer/checkout/checkout_start.dart';
 import 'package:go_pharma/ui/customer/products/shopping_cart_page_product_card.dart';
 
 class ShoppingCartPage extends StatelessWidget {
@@ -24,12 +24,14 @@ class ShoppingCartPage extends StatelessWidget {
         ),
         body: BlocBuilder<CheckoutBloc, CheckoutState>(
           builder: (context, state) {
+            List<Product> products = state.productListNeedPrescriptions +
+                state.productListPrescriptionless;
             return Container(
               child: ListView.builder(
                 physics: ClampingScrollPhysics(),
-                itemCount: state.productList.length,
+                itemCount: products.length,
                 itemBuilder: (context, index) => ShoppingCartPageProductCard(
-                  product: state.productList[index],
+                  product: products[index],
                 ),
               ),
             );

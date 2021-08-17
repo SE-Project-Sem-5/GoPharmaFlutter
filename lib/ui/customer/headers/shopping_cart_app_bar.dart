@@ -21,7 +21,8 @@ class ShoppingCartAppBar extends StatelessWidget
         BlocBuilder<CheckoutBloc, CheckoutState>(
           builder: (context, state) {
             return ShoppingCart(
-              itemCount: state.productList.length,
+              itemCount: state.productListPrescriptionless.length +
+                  state.productListNeedPrescriptions.length,
             );
           },
         ),

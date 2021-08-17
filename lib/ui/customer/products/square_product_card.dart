@@ -165,7 +165,8 @@ class SquareProductCard extends StatelessWidget {
                                 );
                               }
                             : null,
-                        child: (state.productList.contains(product))
+                        child: (state.productListPrescriptionless
+                                .contains(product))
                             ? Text(
                                 'Remove from cart',
                                 style: TextStyle(
