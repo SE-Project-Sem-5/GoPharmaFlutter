@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
+import 'package:go_pharma/payment_gateway/payment.dart';
 import 'package:go_pharma/repos/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
@@ -48,7 +49,10 @@ class CheckoutReceipt extends StatelessWidget {
                     CheckoutReceiptProductList(
                       productList: state.productListPrescriptionless,
                     ),
-                    ProductReceiptText(text: "These items need prescriptions."),
+                    state.productListNeedPrescriptions.length > 0
+                        ? ProductReceiptText(
+                            text: "These items need prescriptions.")
+                        : Text(""),
                     CheckoutReceiptProductList(
                       productList: state.productListNeedPrescriptions,
                     ),
@@ -81,14 +85,14 @@ class CheckoutReceipt extends StatelessWidget {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: state.productListTotal > 0
-                          ? () {
-                              Navigator.pushNamed(
-                                context,
-                                CheckoutReceipt.id,
-                              );
-                            }
-                          : null,
+                      onPressed: () {
+                        PaymentGateway.pay(
+                            getProductNames(state.productListPrescriptionless +
+                                state.productListNeedPrescriptions),
+                            100,
+                            //TODO: pass customer name, pass order ID
+                            "orderID");
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: GoPharmaColors.PrimaryColor,
                         padding: EdgeInsets.symmetric(
@@ -168,4 +172,12 @@ class ProductReceiptText extends StatelessWidget {
       ),
     );
   }
+}
+
+getProductNames(List<Product> products) {
+  List<String> names = [];
+  for (Product i in products) {
+    names.add(i.name);
+  }
+  return names;
 }
