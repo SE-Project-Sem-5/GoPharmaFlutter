@@ -1,4 +1,3 @@
-import 'package:go_pharma/repos/user_customer/customer_model.dart';
 import 'package:payhere_mobilesdk_flutter/payhere_mobilesdk_flutter.dart';
 
 class PaymentGateway {
@@ -8,7 +7,7 @@ class PaymentGateway {
   static void pay(
     List<String> items,
     double amount,
-    Customer customer,
+    // Customer customer,
     String orderID,
   ) {
     //TODO: replace with values from logged in user
