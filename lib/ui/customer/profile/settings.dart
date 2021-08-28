@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/ui/customer/common_skeleton.dart';
 
 class SettingsPage extends StatelessWidget {
   static final String id = "customer_settings_page";
@@ -6,15 +7,9 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Settings",
-          ),
-        ),
-        body: Container(),
-      ),
+    return CommonSkeleton(
+      title: "Settings",
+      child: Container(),
     );
   }
 }

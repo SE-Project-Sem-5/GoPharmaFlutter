@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/camera/select_photo_screen.dart';
+import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 
 class CustomerDrawer extends StatelessWidget {
   const CustomerDrawer({
@@ -53,13 +54,18 @@ class CustomerDrawer extends StatelessWidget {
             DrawerTile(
               text: "Product Categories",
               icon: Icons.category,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(
+                  context,
+                  ProductCategoriesPage.id,
+                );
+              },
             ),
             DrawerTile(
               text: "Upload Prescription",
               icon: Icons.add_photo_alternate,
               onTap: () {
-                print("sdjfn");
                 Navigator.pop(context);
                 Navigator.pushNamed(
                   context,
