@@ -129,7 +129,8 @@ class OrderFullView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             PastOrderTitleText(text: "Total Price"),
-                            PastOrderTitleText(text: "Total Price Placeholder"),
+                            PastOrderTitleText(
+                                text: order.price.toStringAsFixed(2)),
                           ],
                         ),
                       ),
