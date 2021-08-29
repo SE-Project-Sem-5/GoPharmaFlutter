@@ -18,7 +18,7 @@ class SpecificCategoryPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(""),
+          title: Text(category),
           //TODO: Add product page title here?
           backgroundColor: GoPharmaColors.PrimaryColor,
           elevation: 0,
