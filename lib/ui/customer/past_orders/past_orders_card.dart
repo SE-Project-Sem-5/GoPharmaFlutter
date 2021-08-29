@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/order/order_model.dart';
+import 'package:go_pharma/repos/order/past_order_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_order_full_view.dart';
 import 'package:intl/intl.dart';
 
 class PastOrderCard extends StatelessWidget {
-  final Order order;
+  final PastOrder order;
 
   const PastOrderCard({Key? key, required this.order}) : super(key: key);
 
@@ -46,7 +46,7 @@ class PastOrderCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => OrderFullView(
+                          builder: (context) => PastOrderFullView(
                             order: order,
                           ),
                         ),

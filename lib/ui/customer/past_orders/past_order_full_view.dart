@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/order/order_model.dart';
+import 'package:go_pharma/repos/order/past_order_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:intl/intl.dart';
 
-class OrderFullView extends StatelessWidget {
-  final Order order;
+class PastOrderFullView extends StatelessWidget {
+  final PastOrder order;
   final double leftPadding = 72.0;
   final double rightPadding = 20.0;
-  const OrderFullView({Key? key, required this.order}) : super(key: key);
+  const PastOrderFullView({Key? key, required this.order}) : super(key: key);
   final String bullet = "\u2022 ";
   @override
   Widget build(BuildContext context) {
@@ -37,15 +37,18 @@ class OrderFullView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ListTile(
-                        leading: Icon(Icons.arrow_drop_down_circle),
-                        title: Text(
-                          "Order " + order.order_id,
-                          style: TextStyle(
-                            fontSize: 18.0,
+                        leading: SizedBox(),
+                        title: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: Text(
+                            "Order " + order.order_id,
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
                           ),
                         ),
                         subtitle: Text(
-                          "Ordered on: " +
+                          "Ordered: " +
                               DateFormat.yMMMMd('en_US')
                                   .format(order.orderedDate),
                           style: TextStyle(
@@ -55,6 +58,26 @@ class OrderFullView extends StatelessWidget {
                         ),
                       ),
                       Padding(
+                        padding: EdgeInsets.only(
+                          left: leftPadding,
+                          bottom: 10.0,
+                        ),
+                        child: Text(
+                          'Completed: ' +
+                              DateFormat.yMMMMd('en_US')
+                                  .format(order.completedDate),
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.6),
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      HorizontalLine(
+                          leftPadding: leftPadding, rightPadding: rightPadding),
+                      Padding(
                         padding: EdgeInsets.only(left: leftPadding),
                         child: Text(
                           'Products Ordered:',
@@ -63,6 +86,8 @@ class OrderFullView extends StatelessWidget {
                           ),
                         ),
                       ),
+                      HorizontalLine(
+                          leftPadding: leftPadding, rightPadding: rightPadding),
                       ListView.builder(
                         physics: ClampingScrollPhysics(),
                         itemCount: 5,
@@ -110,15 +135,8 @@ class OrderFullView extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: leftPadding,
-                          right: rightPadding,
-                        ),
-                        child: Divider(
-                          color: Colors.black,
-                        ),
-                      ),
+                      HorizontalLine(
+                          leftPadding: leftPadding, rightPadding: rightPadding),
                       Padding(
                         padding: EdgeInsets.only(
                           left: leftPadding,
@@ -142,6 +160,30 @@ class OrderFullView extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class HorizontalLine extends StatelessWidget {
+  const HorizontalLine({
+    Key? key,
+    required this.leftPadding,
+    required this.rightPadding,
+  }) : super(key: key);
+
+  final double leftPadding;
+  final double rightPadding;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: leftPadding,
+        right: rightPadding,
+      ),
+      child: Divider(
+        color: Colors.black,
       ),
     );
   }
