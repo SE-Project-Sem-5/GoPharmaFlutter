@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/camera/select_photo_screen.dart';
+import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 
@@ -98,7 +99,7 @@ class CustomerDrawer extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.pushNamed(
                   context,
-                  SelectPhotoScreen.id,
+                  PastOrdersPage.id,
                 );
               },
             ),
