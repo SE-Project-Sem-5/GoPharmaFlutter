@@ -54,6 +54,7 @@ class OrderFullView extends StatelessWidget {
                           ),
                         ),
                       ),
+                      //TODO: maybe add an indication about which products needed a prescription?
                       Padding(
                         padding: EdgeInsets.only(left: leftPadding),
                         child: Text(
