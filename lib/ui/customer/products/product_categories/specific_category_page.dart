@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/customer/home/components/drawer.dart';
+import 'package:go_pharma/ui/customer/drawer.dart';
 import 'package:go_pharma/ui/customer/products/components/shopping_cart.dart';
 import 'package:go_pharma/ui/customer/products/dummy_values/products/products.dart';
 import '../horizontal_product_card.dart';
