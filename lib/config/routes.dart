@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/customer/camera/select_photo_screen.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_start.dart';
+import 'package:go_pharma/ui/customer/current_orders/current_orders_page.dart';
 import 'package:go_pharma/ui/customer/customer_starting_page.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
@@ -37,6 +38,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   ProductCategoriesPage.id: (context) => ProductCategoriesPage(),
   SearchPage.id: (context) => SearchPage(),
   PastOrdersPage.id: (context) => PastOrdersPage(),
+  CurrentOrdersPage.id: (context) => CurrentOrdersPage(),
 
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
