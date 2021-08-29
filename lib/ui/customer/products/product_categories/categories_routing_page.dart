@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
+import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/customer/home/components/drawer.dart';
+import 'package:go_pharma/ui/customer/products/components/shopping_cart.dart';
 import 'package:go_pharma/ui/customer/products/dummy_values/categories/categories.dart';
 
 import 'category_card.dart';
@@ -11,6 +17,22 @@ class ProductCategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: GoPharmaColors.PrimaryColor,
+          elevation: 0,
+          actions: [
+            BlocBuilder<CheckoutBloc, CheckoutState>(
+              builder: (context, state) {
+                return ShoppingCart(
+                  color: GoPharmaColors.WhiteColor,
+                  itemCount: state.productListPrescriptionless.length +
+                      state.productListNeedPrescriptions.length,
+                );
+              },
+            ),
+          ],
+        ),
+        drawer: CustomerDrawer(),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Container(
