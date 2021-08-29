@@ -9,6 +9,7 @@ import 'package:go_pharma/ui/customer/products/product_categories/specific_categ
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
 import 'package:go_pharma/ui/customer/profile/settings.dart';
+import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
@@ -34,6 +35,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   CheckoutStart.id: (context) => CheckoutStart(),
   CheckoutReceipt.id: (context) => CheckoutReceipt(),
   ProductCategoriesPage.id: (context) => ProductCategoriesPage(),
+  SearchPage.id: (context) => SearchPage(),
 
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
