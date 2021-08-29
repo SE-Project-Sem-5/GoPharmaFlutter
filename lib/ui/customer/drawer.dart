@@ -73,6 +73,28 @@ class CustomerDrawer extends StatelessWidget {
                 );
               },
             ),
+            DrawerTile(
+              text: "Orders in Progress",
+              icon: Icons.shopping_cart,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(
+                  context,
+                  SelectPhotoScreen.id,
+                );
+              },
+            ),
+            DrawerTile(
+              text: "Past Orders",
+              icon: Icons.history,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(
+                  context,
+                  SelectPhotoScreen.id,
+                );
+              },
+            ),
           ],
         ),
       ),

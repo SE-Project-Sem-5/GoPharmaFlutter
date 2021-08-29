@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home/components/drawer.dart';
+import 'drawer.dart';
 
 class CommonSkeleton extends StatelessWidget {
   final Widget child;
