@@ -1,13 +1,14 @@
-class Order {
+class CurrentOrder {
   final String order_id;
   final DateTime orderedDate;
-  final DateTime completedDate;
   final double price;
+  final String status;
+  //TODO: make status an enum?
   //TODO: add products ordered
-  Order({
+  CurrentOrder({
     required this.orderedDate,
-    required this.completedDate,
     required this.price,
     required this.order_id,
+    required this.status,
   });
 }

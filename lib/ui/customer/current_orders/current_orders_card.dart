@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/order/past_order_model.dart';
+import 'package:go_pharma/repos/order/current_order_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/customer/past_orders/past_order_full_view.dart';
 import 'package:intl/intl.dart';
 
-class PastOrderCard extends StatelessWidget {
-  final PastOrder order;
+import 'current_order_full_view.dart';
+//TODO: get the orders list for the customer ordered by the ordered date
+//TODO: group orders in terms of status?
 
-  const PastOrderCard({Key? key, required this.order}) : super(key: key);
+class CurrentOrderCard extends StatelessWidget {
+  final CurrentOrder order;
+  const CurrentOrderCard({Key? key, required this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +42,19 @@ class PastOrderCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   const SizedBox(width: 8),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CurrentOrderStatusChip(
+                      text: order.status,
+                    ),
+                  ),
                   TextButton(
                     child: const Text('View Details'),
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PastOrderFullView(
+                          builder: (context) => CurrentOrderFullView(
                             order: order,
                           ),
                         ),
@@ -60,6 +68,27 @@ class PastOrderCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+Map<String, Color> orderStatusColorMapping = {
+  "Processing": Colors.blueAccent.withOpacity(0.2),
+  "Packing": Colors.orange.withOpacity(0.2),
+  "Being Delivered": GoPharmaColors.PrimaryColor.withOpacity(0.2),
+  "Delivered": Colors.green.withOpacity(0.2),
+};
+
+class CurrentOrderStatusChip extends StatelessWidget {
+  final String text;
+  CurrentOrderStatusChip({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      backgroundColor: orderStatusColorMapping[text],
+      label: Text(text),
     );
   }
 }

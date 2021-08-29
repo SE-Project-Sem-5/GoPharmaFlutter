@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/order/past_order_model.dart';
+import 'package:go_pharma/repos/order/current_order_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:intl/intl.dart';
 
-class PastOrderFullView extends StatelessWidget {
-  final PastOrder order;
+class CurrentOrderFullView extends StatelessWidget {
+  final CurrentOrder order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
-  const PastOrderFullView({Key? key, required this.order}) : super(key: key);
+  const CurrentOrderFullView({Key? key, required this.order}) : super(key: key);
   final String bullet = "\u2022 ";
   @override
   Widget build(BuildContext context) {
@@ -69,9 +69,7 @@ class PastOrderFullView extends StatelessWidget {
                           bottom: 10.0,
                         ),
                         child: Text(
-                          'Completed: ' +
-                              DateFormat.yMMMMd('en_US')
-                                  .format(order.completedDate),
+                          'Completed: ',
                           style: TextStyle(
                             color: Colors.black.withOpacity(0.6),
                             fontSize: 16.0,
