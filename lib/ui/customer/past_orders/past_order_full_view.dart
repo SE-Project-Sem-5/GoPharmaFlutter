@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 
 class PastOrderFullView extends StatelessWidget {
   final PastOrder order;
-  final double leftPadding = 72.0;
-  final double rightPadding = 20.0;
+  final double leftPadding = 30.0;
+  final double rightPadding = 30.0;
   const PastOrderFullView({Key? key, required this.order}) : super(key: key);
   final String bullet = "\u2022 ";
   @override
@@ -36,18 +36,23 @@ class PastOrderFullView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ListTile(
-                        leading: SizedBox(),
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          child: Text(
-                            "Order " + order.order_id,
-                            style: TextStyle(
-                              fontSize: 20.0,
-                            ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 30.0,
+                          horizontal: rightPadding,
+                        ),
+                        child: Text(
+                          "Order " + order.order_id,
+                          style: TextStyle(
+                            fontSize: 20.0,
                           ),
                         ),
-                        subtitle: Text(
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: rightPadding,
+                        ),
+                        child: Text(
                           "Ordered: " +
                               DateFormat.yMMMMd('en_US')
                                   .format(order.orderedDate),
@@ -60,6 +65,7 @@ class PastOrderFullView extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(
                           left: leftPadding,
+                          top: 10,
                           bottom: 10.0,
                         ),
                         child: Text(
