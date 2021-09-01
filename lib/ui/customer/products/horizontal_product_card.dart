@@ -7,6 +7,7 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/customer/products/product_card_image.dart';
 import 'package:go_pharma/ui/customer/products/product_full_view.dart';
 
 class HorizontalProductCard extends StatelessWidget {
@@ -168,76 +169,6 @@ class ButtonText extends StatelessWidget {
           color: this.color,
           fontStyle: this.fontStyle,
           fontWeight: this.fontWeight),
-    );
-  }
-}
-
-class ProductActionIcon extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onPressed;
-
-  const ProductActionIcon({
-    Key? key,
-    required this.icon,
-    required this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      width: 40,
-      child: FittedBox(
-        child: FloatingActionButton(
-          heroTag: Random().nextInt(100000).toString(),
-          child: Icon(
-            this.icon,
-            color: Colors.black87,
-          ),
-          backgroundColor: GoPharmaColors.GreyColor,
-          onPressed: onPressed,
-        ),
-      ),
-    );
-  }
-}
-
-class ProductCardImage extends StatelessWidget {
-  final double height;
-  final double width;
-
-  const ProductCardImage({
-    Key? key,
-    required this.imageURL,
-    this.height = 125.0,
-    this.width = 125.0,
-  }) : super(key: key);
-
-  final String imageURL;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: this.height,
-      width: this.width,
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: GoPharmaColors.PrimaryColor.withOpacity(0.1),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-        image: DecorationImage(
-          image: ExactAssetImage(
-            imageURL,
-          ),
-          fit: BoxFit.fill,
-        ),
-      ),
     );
   }
 }
