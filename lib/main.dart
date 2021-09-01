@@ -2,14 +2,12 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/customer/camera/camera_bloc.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_bloc.dart';
 import 'package:go_pharma/bloc/internet_connectivity/internet_bloc.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/customer/checkout/checkout_bloc.dart';
 import 'config/routes.dart';
 import 'config/theme.dart';
@@ -45,9 +43,6 @@ class GoPharmaApp extends StatelessWidget {
         ),
         BlocProvider<CheckoutBloc>(
           create: (context) => CheckoutBloc(context),
-        ),
-        BlocProvider<CameraBloc>(
-          create: (context) => CameraBloc(context),
         ),
         BlocProvider<PrescriptionOrderBloc>(
           create: (context) => PrescriptionOrderBloc(context),
