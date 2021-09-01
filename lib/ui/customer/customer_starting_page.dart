@@ -4,7 +4,7 @@ import 'package:go_pharma/bloc/customer/camera/camera_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
-import 'package:go_pharma/ui/customer/profile/settings.dart';
+import 'package:go_pharma/ui/customer/settings/settings.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
 import 'camera/select_photo_screen.dart';

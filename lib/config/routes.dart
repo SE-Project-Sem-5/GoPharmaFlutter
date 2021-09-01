@@ -9,7 +9,7 @@ import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
-import 'package:go_pharma/ui/customer/profile/settings.dart';
+import 'package:go_pharma/ui/customer/settings/settings.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
