@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/back_button.dart';
+import 'package:go_pharma/ui/customer/products/product_card_image.dart';
 import 'package:go_pharma/ui/customer/products/square_product_card.dart';
 
 import 'components/shopping_cart.dart';
+import 'horizontal_product_card.dart';
 
 class ProductFullView extends StatelessWidget {
   static final String id = "product_full_view";
@@ -19,6 +22,8 @@ class ProductFullView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<CheckoutBloc>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -80,25 +85,40 @@ class ProductFullView extends StatelessWidget {
               horizontal: 20.0,
               vertical: 20.0,
             ),
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                primary: GoPharmaColors.PrimaryColor,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 50,
-                  vertical: 20,
-                ),
-                textStyle: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              child: Text(
-                "Add to Cart",
-                style: TextStyle(
-                  fontSize: 18.0,
-                ),
-              ),
+            child: BlocBuilder<CheckoutBloc, CheckoutState>(
+              builder: (context, state) {
+                return ElevatedButton(
+                  onPressed: product.inStock
+                      ? () {
+                          print(state.productListNeedPrescriptions);
+                          bloc.add(
+                            UpdateProductListEvent(
+                              product,
+                            ),
+                          );
+                        }
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    primary: GoPharmaColors.PrimaryColor,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 50,
+                      vertical: 20,
+                    ),
+                    textStyle: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  child: (state.productListPrescriptionless.contains(product) ||
+                          state.productListNeedPrescriptions.contains(product))
+                      ? ButtonText(
+                          text: 'Remove from cart',
+                        )
+                      : ButtonText(
+                          text: 'Add to cart',
+                        ),
+                );
+              },
             ),
           ),
         ),

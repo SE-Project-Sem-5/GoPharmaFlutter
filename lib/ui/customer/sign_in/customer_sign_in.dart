@@ -6,7 +6,7 @@ import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
 import 'package:go_pharma/ui/customer/common_skeleton.dart';
-import 'package:go_pharma/ui/customer/products/product_home_page.dart';
+import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
 
 class CustomerSignInStart extends StatelessWidget {
@@ -144,7 +144,7 @@ class CustomerSignInStart extends StatelessWidget {
                   // if (_form.currentState!.validate()) {
                   Navigator.pushNamed(
                     context,
-                    ProductHomePage.id,
+                    CustomerHomePage.id,
                   );
                   // }
                 },

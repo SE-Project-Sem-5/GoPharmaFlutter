@@ -6,6 +6,7 @@ import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
 import 'package:go_pharma/ui/customer/common_skeleton.dart';
+import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 
 //TODO: password needs to be more than 7 characters
@@ -130,6 +131,10 @@ class CustomerSignUpStart extends StatelessWidget {
                 final bool isValid =
                     EmailValidator.validate(emailController.text);
                 print(isValid);
+                Navigator.pushNamed(
+                  context,
+                  CustomerHomePage.id,
+                );
               },
             ),
             Spacer(),

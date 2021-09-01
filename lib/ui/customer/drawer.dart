@@ -4,6 +4,7 @@ import 'package:go_pharma/ui/customer/camera/select_photo_screen.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
+import 'package:go_pharma/ui/customer/settings/settings.dart';
 
 import 'current_orders/current_orders_page.dart';
 
@@ -102,6 +103,17 @@ class CustomerDrawer extends StatelessWidget {
                 Navigator.pushNamed(
                   context,
                   PastOrdersPage.id,
+                );
+              },
+            ),
+            DrawerTile(
+              text: "Settings",
+              icon: Icons.settings,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(
+                  context,
+                  SettingsPage.id,
                 );
               },
             ),
