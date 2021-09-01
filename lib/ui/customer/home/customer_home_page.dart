@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/customer/camera/camera_bloc.dart';
-import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 
 import '../drawer.dart';
 
@@ -12,12 +9,37 @@ class CustomerHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Home"),
+    return WillPopScope(
+      onWillPop: () async {
+        bool willLeave = false;
+        // show the confirm dialog
+        await showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+                  title: Text('Are you sure want to leave?'),
+                  actions: [
+                    ElevatedButton(
+                      child: Text('Yes'),
+                      onPressed: () {
+                        willLeave = true;
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: Text('No'),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ));
+        return willLeave;
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Home"),
+          ),
+          drawer: CustomerDrawer(),
         ),
-        drawer: CustomerDrawer(),
       ),
     );
   }
