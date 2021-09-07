@@ -15,7 +15,7 @@ class DeliveryFullView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Order Details",
+            "Delivery Details",
           ),
         ),
         body: Container(
