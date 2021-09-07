@@ -8,6 +8,7 @@ import 'package:go_pharma/ui/delivery_agent/components/delivery_state_button.dar
 
 class DeliveriesPage extends StatelessWidget {
   static final String id = "deliveries_page";
+  final String title = "Deliveries";
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,14 @@ class DeliveriesPage extends StatelessWidget {
       ],
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            leading: Container(),
+            title: Row(
+              children: [
+                Text(title),
+              ],
+            ),
+          ),
           body: Container(
             child: Column(
               children: [

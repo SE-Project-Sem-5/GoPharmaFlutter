@@ -5,7 +5,7 @@ import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
-import 'package:go_pharma/ui/customer/products/product_home_page.dart';
+import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/sign_up/delivery_agent_sign_up.dart';
 
 // ignore: must_be_immutable
@@ -155,7 +155,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                     // if (_form.currentState!.validate()) {
                     Navigator.pushNamed(
                       context,
-                      ProductHomePage.id,
+                      DeliveriesPage.id,
                     );
                     // }
                   },

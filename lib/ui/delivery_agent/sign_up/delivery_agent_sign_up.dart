@@ -5,7 +5,8 @@ import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
-import 'package:go_pharma/ui/delivery_agent/sign_in/other_files/sign_in_start.dart';
+import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_in/delivery_agent_sign_in.dart';
 
 //TODO: password needs to be more than 7 characters
 // ignore: must_be_immutable
@@ -139,6 +140,10 @@ class DeliveryAgentSignUpStart extends StatelessWidget {
                   final bool isValid =
                       EmailValidator.validate(emailController.text);
                   print(isValid);
+                  Navigator.pushNamed(
+                    context,
+                    DeliveriesPage.id,
+                  );
                 },
               ),
               Spacer(),
