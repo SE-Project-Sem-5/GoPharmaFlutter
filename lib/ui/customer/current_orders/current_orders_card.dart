@@ -77,7 +77,7 @@ class CurrentOrderCard extends StatelessWidget {
 Map<String, Color> orderStatusColorMapping = {
   "Processing": Colors.blueAccent.withOpacity(0.2),
   "Packing": Colors.orange.withOpacity(0.2),
-  "Being Delivered": GoPharmaColors.PrimaryColor.withOpacity(0.2),
+  "In Transit": GoPharmaColors.PrimaryColor.withOpacity(0.2),
   "Delivered": Colors.green.withOpacity(0.2),
 };
 
@@ -90,7 +90,12 @@ class CurrentOrderStatusChip extends StatelessWidget {
     return Chip(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       backgroundColor: orderStatusColorMapping[text],
-      label: Text(text),
+      label: Container(
+        width: 75,
+        child: Center(
+          child: Text(text),
+        ),
+      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
+//TODO:skip the paid state if the order has been paid for online
 List<String> deliveryStates = [
   "Scheduled",
   "In Transit",

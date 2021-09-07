@@ -23,6 +23,6 @@ List<CurrentOrder> currentOrders = [
     order_id: "#abcd3456",
     price: 1000.00,
     orderedDate: DateTime.now(),
-    status: "Being Delivered",
+    status: "In Transit",
   ),
 ];

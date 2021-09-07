@@ -16,26 +16,69 @@ class DeliveryCard extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Card(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
-              BlocBuilder<DeliveryBloc, DeliveryState>(
-                builder: (context, state) {
-                  print(delivery.deliveryStatus);
-                  return Text(
-                    state.state,
-                  );
-                },
+              ListTile(
+                leading: Icon(
+                  Icons.article_rounded,
+                ),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(delivery.id),
+                    Text(
+                      "Rs. " + delivery.totalPrice.toStringAsFixed(2),
+                    ),
+                  ],
+                ),
               ),
-              DeliveryStateButton(
-                type: "Next",
-                delivery: delivery,
-              ),
-              DeliveryStateButton(
-                type: "Previous",
-                delivery: delivery,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const SizedBox(width: 8),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: BlocBuilder<DeliveryBloc, DeliveryState>(
+                      builder: (context, state) {
+                        print(delivery.deliveryStatus);
+                        return DeliveryStatusChip(
+                          text: delivery.deliveryStatus,
+                        );
+                      },
+                    ),
+                  ),
+                  DeliveryStateButton(
+                    type: "Next",
+                    delivery: delivery,
+                  ),
+                  const SizedBox(width: 8),
+                  DeliveryStateButton(
+                    type: "Previous",
+                    delivery: delivery,
+                  ),
+                  const SizedBox(width: 8),
+                ],
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class DeliveryStatusChip extends StatelessWidget {
+  final String text;
+  DeliveryStatusChip({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      backgroundColor: deliveryStatusColorMapping[text],
+      label: Container(
+        width: 75,
+        child: Center(
+          child: Text(text),
         ),
       ),
     );
