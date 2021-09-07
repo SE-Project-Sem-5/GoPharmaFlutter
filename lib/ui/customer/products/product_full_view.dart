@@ -112,9 +112,11 @@ class ProductFullView extends StatelessWidget {
                   child: (state.productListPrescriptionless.contains(product) ||
                           state.productListNeedPrescriptions.contains(product))
                       ? ButtonText(
+                          color: GoPharmaColors.WhiteColor,
                           text: 'Remove from cart',
                         )
                       : ButtonText(
+                          color: GoPharmaColors.WhiteColor,
                           text: 'Add to cart',
                         ),
                 );
