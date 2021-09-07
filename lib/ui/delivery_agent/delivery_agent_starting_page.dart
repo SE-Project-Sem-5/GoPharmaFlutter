@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
-import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
-import 'package:go_pharma/ui/delivery_agent/sign_in/other_files/sign_in_start.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_in/delivery_agent_sign_in.dart';
 import 'package:go_pharma/ui/delivery_agent/sign_up/delivery_agent_sign_up.dart';
 
 class DeliveryAgentStartingPage extends StatelessWidget {
@@ -41,16 +40,6 @@ class DeliveryAgentStartingPage extends StatelessWidget {
                 onTapped: () => Navigator.pushNamed(
                   context,
                   DeliveryAgentSignUpStart.id,
-                ),
-              ),
-              RoundedButtonFilled(
-                title: "HOME PAGE",
-                size: size,
-                fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
-                textColor: GoPharmaColors.BlackColor,
-                onTapped: () => Navigator.pushNamed(
-                  context,
-                  DeliveryAgentHomePage.id,
                 ),
               ),
             ],

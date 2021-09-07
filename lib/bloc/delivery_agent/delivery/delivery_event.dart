@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'delivery_state.dart';
 
 @immutable
@@ -12,12 +13,14 @@ class ErrorEvent extends DeliveryEvent {
 
 class NextDeliveryStatusEvent extends DeliveryEvent {
   final DeliveryTransitionState currentState;
+  final Delivery delivery;
 
-  NextDeliveryStatusEvent(this.currentState);
+  NextDeliveryStatusEvent(this.currentState, this.delivery);
 }
 
 class PreviousDeliveryStatusEvent extends DeliveryEvent {
   final DeliveryTransitionState currentState;
+  final Delivery delivery;
 
-  PreviousDeliveryStatusEvent(this.currentState);
+  PreviousDeliveryStatusEvent(this.currentState, this.delivery);
 }

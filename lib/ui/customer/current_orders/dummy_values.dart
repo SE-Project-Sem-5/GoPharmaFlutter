@@ -1,4 +1,4 @@
-import 'package:go_pharma/repos/order/current_order_model.dart';
+import 'package:go_pharma/repos/customer/order/current_order_model.dart';
 
 List<CurrentOrder> currentOrders = [
   new CurrentOrder(
@@ -23,6 +23,6 @@ List<CurrentOrder> currentOrders = [
     order_id: "#abcd3456",
     price: 1000.00,
     orderedDate: DateTime.now(),
-    status: "Being Delivered",
+    status: "In Transit",
   ),
 ];

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/order/current_order_model.dart';
+import 'package:go_pharma/repos/customer/order/current_order_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:intl/intl.dart';
 
@@ -8,7 +8,7 @@ import 'current_order_full_view.dart';
 //TODO: get the orders list for the customer ordered by the ordered date
 //TODO: group orders in terms of status?
 //TODO: add cancelling capability for the order
-//TODO:
+
 class CurrentOrderCard extends StatelessWidget {
   final CurrentOrder order;
   const CurrentOrderCard({Key? key, required this.order}) : super(key: key);
@@ -77,7 +77,7 @@ class CurrentOrderCard extends StatelessWidget {
 Map<String, Color> orderStatusColorMapping = {
   "Processing": Colors.blueAccent.withOpacity(0.2),
   "Packing": Colors.orange.withOpacity(0.2),
-  "Being Delivered": GoPharmaColors.PrimaryColor.withOpacity(0.2),
+  "In Transit": GoPharmaColors.PrimaryColor.withOpacity(0.2),
   "Delivered": Colors.green.withOpacity(0.2),
 };
 
@@ -90,7 +90,12 @@ class CurrentOrderStatusChip extends StatelessWidget {
     return Chip(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       backgroundColor: orderStatusColorMapping[text],
-      label: Text(text),
+      label: Container(
+        width: 75,
+        child: Center(
+          child: Text(text),
+        ),
+      ),
     );
   }
 }
