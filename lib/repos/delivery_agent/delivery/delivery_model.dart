@@ -18,6 +18,7 @@ Map<String, Color> deliveryStatusColorMapping = {
 };
 
 class Delivery {
+  String id;
   String destination;
   List<Product> products;
   double totalPrice;
@@ -26,6 +27,7 @@ class Delivery {
   late int deliveryStatusIndex;
 
   Delivery({
+    required this.id,
     required this.destination,
     required this.products,
     required this.deliveryStatus,
