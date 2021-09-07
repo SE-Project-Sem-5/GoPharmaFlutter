@@ -39,11 +39,13 @@ class Delivery {
     if (deliveryStatusIndex < deliveryStates.length - 1) {
       deliveryStatusIndex += 1;
     }
+    deliveryStatus = deliveryStates[deliveryStatusIndex];
   }
 
   previousDeliveryStatus() {
-    if (deliveryStatusIndex >= 0) {
+    if (deliveryStatusIndex > 0) {
       deliveryStatusIndex -= 1;
     }
+    deliveryStatus = deliveryStates[deliveryStatusIndex];
   }
 }

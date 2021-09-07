@@ -11,19 +11,32 @@ class DeliveryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          BlocBuilder<DeliveryBloc, DeliveryState>(
-            builder: (context, state) {
-              return Text(
-                state.orderTransitionState.toString(),
-              );
-            },
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              BlocBuilder<DeliveryBloc, DeliveryState>(
+                builder: (context, state) {
+                  print(delivery.deliveryStatus);
+                  return Text(
+                    state.state,
+                  );
+                },
+              ),
+              DeliveryStateButton(
+                type: "Next",
+                delivery: delivery,
+              ),
+              DeliveryStateButton(
+                type: "Previous",
+                delivery: delivery,
+              ),
+            ],
           ),
-          DeliveryStateButton(type: "Next"),
-          DeliveryStateButton(type: "Previous"),
-        ],
+        ),
       ),
     );
   }

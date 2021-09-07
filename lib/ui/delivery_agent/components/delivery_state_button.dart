@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_state.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 
 class DeliveryStateButton extends StatelessWidget {
   final String type;
-  const DeliveryStateButton({required this.type});
+  final Delivery delivery;
+  const DeliveryStateButton({required this.type, required this.delivery});
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +28,17 @@ class DeliveryStateButton extends StatelessWidget {
           onPressed: () {
             if (this.type == "Next") {
               bloc.add(
-                NextDeliveryStatusEvent(state.orderTransitionState),
+                NextDeliveryStatusEvent(
+                  state.orderTransitionState,
+                  delivery,
+                ),
               );
             } else {
               bloc.add(
-                PreviousDeliveryStatusEvent(state.orderTransitionState),
+                PreviousDeliveryStatusEvent(
+                  state.orderTransitionState,
+                  delivery,
+                ),
               );
             }
           },
