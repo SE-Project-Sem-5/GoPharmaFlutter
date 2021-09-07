@@ -1,4 +1,4 @@
-import 'package:go_pharma/repos/product/product_model.dart';
+import 'package:go_pharma/repos/customer/product/product_model.dart';
 
 List products = [
   Product(

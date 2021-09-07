@@ -1,4 +1,4 @@
-import 'package:go_pharma/repos/order/current_order_model.dart';
+import 'package:go_pharma/repos/customer/order/current_order_model.dart';
 
 List<CurrentOrder> currentOrders = [
   new CurrentOrder(

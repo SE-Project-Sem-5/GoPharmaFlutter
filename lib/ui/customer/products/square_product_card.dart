@@ -1,11 +1,10 @@
-import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
-import 'package:go_pharma/repos/product/product_model.dart';
+import 'package:go_pharma/repos/customer/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/products/product_action_icon.dart';
 import 'package:go_pharma/ui/customer/products/product_card_image.dart';
