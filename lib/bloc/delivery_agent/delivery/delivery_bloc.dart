@@ -26,11 +26,14 @@ class DeliveryBloc extends Bloc<DeliveryEvent, DeliveryState> {
         break;
       case NextDeliveryStatusEvent:
         final currentState = (event as NextDeliveryStatusEvent).currentState;
+        final delivery = (event).delivery;
+        delivery.nextDeliveryStatus();
         final nextStateIndex = deliveryStates.indexOf(currentState) + 1;
         if (nextStateIndex < deliveryStates.length) {
           yield state.clone(
             error: '',
             orderTransitionState: deliveryStates[nextStateIndex],
+            state: delivery.deliveryStatus,
           );
         } else {
           //  TODO: figure something out
@@ -39,11 +42,14 @@ class DeliveryBloc extends Bloc<DeliveryEvent, DeliveryState> {
       case PreviousDeliveryStatusEvent:
         final currentState =
             (event as PreviousDeliveryStatusEvent).currentState;
+        final delivery = (event).delivery;
+        delivery.previousDeliveryStatus();
         final previousStateIndex = deliveryStates.indexOf(currentState) - 1;
         if (previousStateIndex >= 0) {
           yield state.clone(
             error: '',
             orderTransitionState: deliveryStates[previousStateIndex],
+            state: delivery.deliveryStatus,
           );
         } else {
           //  TODO: figure something out
