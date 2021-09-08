@@ -22,9 +22,17 @@ class DeliveryNavigationBloc
         break;
       case ChangeIndexEvent:
         final index = (event as ChangeIndexEvent).index;
-        int newIndex = index == 0 ? 0 : 1;
-        yield state.clone(error: '', index: newIndex);
+        yield state.clone(
+          error: '',
+          index: index,
+          title: titles[index],
+        );
         break;
     }
   }
 }
+
+List<String> titles = [
+  "Deliveries",
+  "User Settings",
+];
