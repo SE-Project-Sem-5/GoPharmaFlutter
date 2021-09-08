@@ -24,8 +24,7 @@ class DeliveryAgentBottomNavigationBar extends StatelessWidget {
           ),
           onTap: (index) {
             bloc.add(ChangeIndexEvent(index));
-            print(index);
-            print(state.index);
+            if (state.index == 1) {}
           },
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
