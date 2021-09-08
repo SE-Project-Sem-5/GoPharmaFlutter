@@ -1,5 +1,5 @@
 class CurrentOrder {
-  final String order_id;
+  final String orderId;
   final DateTime orderedDate;
   final double price;
   final String status;
@@ -8,7 +8,7 @@ class CurrentOrder {
   CurrentOrder({
     required this.orderedDate,
     required this.price,
-    required this.order_id,
+    required this.orderId,
     required this.status,
   });
 }
