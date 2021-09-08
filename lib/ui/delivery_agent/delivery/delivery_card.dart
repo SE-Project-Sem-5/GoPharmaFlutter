@@ -6,6 +6,8 @@ import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'package:go_pharma/ui/delivery_agent/components/delivery_state_button.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/delivery_full_view.dart';
 
+import 'delivery_status_chip.dart';
+
 class DeliveryCard extends StatelessWidget {
   final Delivery delivery;
   const DeliveryCard({required this.delivery});
@@ -73,25 +75,6 @@ class DeliveryCard extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class DeliveryStatusChip extends StatelessWidget {
-  final String text;
-  DeliveryStatusChip({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Chip(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      backgroundColor: deliveryStatusColorMapping[text],
-      label: Container(
-        width: 75,
-        child: Center(
-          child: Text(text),
         ),
       ),
     );
