@@ -1,5 +1,5 @@
 class PastOrder {
-  final String order_id;
+  final String orderId;
   final DateTime orderedDate;
   final DateTime completedDate;
   final double price;
@@ -8,6 +8,6 @@ class PastOrder {
     required this.orderedDate,
     required this.completedDate,
     required this.price,
-    required this.order_id,
+    required this.orderId,
   });
 }
