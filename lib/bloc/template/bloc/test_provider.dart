@@ -19,7 +19,6 @@ class TestView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final testBloc = BlocProvider.of<TestBloc>(context);
 
     final scaffold = Scaffold(
       body: BlocBuilder<TestBloc, TestState>(
@@ -37,8 +36,7 @@ class TestView extends StatelessWidget {
         BlocListener<TestBloc, TestState>(
           listenWhen: (pre, current) => pre.error != current.error,
           listener: (context, state) {
-            if (state.error?.isNotEmpty ?? false)
-              print("ERROR: ${state.error}");
+            if (state.error.isNotEmpty) print("ERROR: ${state.error}");
           },
         ),
       ],
