@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:intl/intl.dart';
 
 class DeliveryFullView extends StatelessWidget {
   final Delivery delivery;

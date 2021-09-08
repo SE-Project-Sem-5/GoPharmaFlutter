@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'test_event.dart';
 import 'test_state.dart';
 
-class TestBloc extends Bloc<testEvent, TestState> {
+class TestBloc extends Bloc<TestEvent, TestState> {
   TestBloc(BuildContext context) : super(TestState.initialState);
 
   @override
-  Stream<TestState> mapEventToState(testEvent event) async* {
+  Stream<TestState> mapEventToState(TestEvent event) async* {
     switch (event.runtimeType) {
       case ErrorEvent:
         final error = (event as ErrorEvent).error;

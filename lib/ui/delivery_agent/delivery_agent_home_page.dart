@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/navigation/delivery_navigation_bloc.dart';
+import 'package:go_pharma/ui/delivery_agent/settings_page/settings.dart';
 
 import 'components/bottom_navigation_bar.dart';
+import 'delivery/deliveries_page.dart';
 
 class DeliveryAgentHomePage extends StatelessWidget {
   static const id = "delivery_agent_home_page";
@@ -28,12 +30,42 @@ class DeliveryAgentHomePage extends StatelessWidget {
             leading: Container(),
             title: Row(
               children: [
-                Text(title),
+                BlocBuilder<DeliveryNavigationBloc, DeliveryNavigationState>(
+                  builder: (context, state) {
+                    return Text(
+                      state.title,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+          body: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                BlocBuilder<DeliveryNavigationBloc, DeliveryNavigationState>(
+                  builder: (context, state) {
+                    return _stackedContainers(state.index);
+                  },
+                ),
               ],
             ),
           ),
           bottomNavigationBar: DeliveryAgentBottomNavigationBar(),
         ),
+      ),
+    );
+  }
+
+  Widget _stackedContainers(int index) {
+    return Expanded(
+      child: IndexedStack(
+        index: index,
+        children: <Widget>[
+          DeliveriesPage(),
+          DeliveryAgentSettingsPage(),
+        ],
       ),
     );
   }

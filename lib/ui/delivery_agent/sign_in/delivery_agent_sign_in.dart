@@ -6,7 +6,8 @@ import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
-import 'package:go_pharma/ui/delivery_agent/sign_up/delivery_agent_sign_up.dart';
+
+import '../delivery_agent_home_page.dart';
 
 // ignore: must_be_immutable
 class DeliveryAgentSignInStart extends StatelessWidget {
@@ -139,7 +140,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                       onTap: () {
                         Navigator.pushNamed(
                           context,
-                          DeliveryAgentSignUpStart.id,
+                          DeliveryAgentHomePage.id,
                         );
                       },
                     ),

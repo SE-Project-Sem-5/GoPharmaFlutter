@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class testEvent {}
+abstract class TestEvent {}
 
-class ErrorEvent extends testEvent {
+class ErrorEvent extends TestEvent {
   final String error;
 
   ErrorEvent(this.error);

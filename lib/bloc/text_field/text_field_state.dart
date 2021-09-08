@@ -16,7 +16,7 @@ class TextFieldState {
     String error = '',
   }) {
     return TextFieldState(
-      error: error ?? this.error,
+      error: error,
     );
   }
 }

@@ -24,7 +24,7 @@ class PastOrderCard extends StatelessWidget {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(order.order_id),
+                    Text(order.orderId),
                     Text(
                       "Rs. " + order.price.toStringAsFixed(2),
                     ),

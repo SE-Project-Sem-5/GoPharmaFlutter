@@ -42,7 +42,7 @@ class CurrentOrderFullView extends StatelessWidget {
                           horizontal: rightPadding,
                         ),
                         child: Text(
-                          "Order " + order.order_id,
+                          "Order " + order.orderId,
                           style: TextStyle(
                             fontSize: 20.0,
                           ),

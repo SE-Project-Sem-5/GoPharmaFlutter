@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/navigation/delivery_navigation_bloc.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
-import 'package:go_pharma/ui/delivery_agent/components/bottom_navigation_bar.dart';
 import 'package:go_pharma/ui/delivery_agent/dummy_values/deliveries.dart';
-
 import 'delivery_card.dart';
 
 class DeliveriesPage extends StatelessWidget {
@@ -27,26 +25,13 @@ class DeliveriesPage extends StatelessWidget {
           create: (_) => DeliveryBloc(_),
         ),
       ],
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            leading: Container(),
-            title: Row(
-              children: [
-                Text(title),
-              ],
-            ),
+      child: Container(
+        child: ListView.builder(
+          physics: ClampingScrollPhysics(),
+          itemCount: deliveries.length,
+          itemBuilder: (context, index) => DeliveryCard(
+            delivery: deliveries[index],
           ),
-          body: Container(
-            child: ListView.builder(
-              physics: ClampingScrollPhysics(),
-              itemCount: deliveries.length,
-              itemBuilder: (context, index) => DeliveryCard(
-                delivery: deliveries[index],
-              ),
-            ),
-          ),
-          bottomNavigationBar: DeliveryAgentBottomNavigationBar(),
         ),
       ),
     );

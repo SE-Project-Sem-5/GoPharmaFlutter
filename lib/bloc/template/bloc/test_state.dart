@@ -16,7 +16,7 @@ class TestState {
     String error = '',
   }) {
     return TestState(
-      error: error ?? this.error,
+      error: error,
     );
   }
 }
