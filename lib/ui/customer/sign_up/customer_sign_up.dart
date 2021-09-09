@@ -17,7 +17,7 @@ class CustomerSignUpStart extends StatelessWidget {
   TextEditingController passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    String title = S.of(context).sign_in_heading;
+    String title = S.of(context).sign_up_heading;
 
     return CommonSkeleton(
       title: title,

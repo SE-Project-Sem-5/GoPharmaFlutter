@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_in_to_your_account":
             MessageLookupByLibrary.simpleMessage("Sign in to your account"),
         "sign_up_button": MessageLookupByLibrary.simpleMessage("SIGN UP"),
+        "sign_up_heading": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "sign_up_text": MessageLookupByLibrary.simpleMessage("Sign up."),
         "your_email": MessageLookupByLibrary.simpleMessage("Your Email")
       };

@@ -120,6 +120,16 @@ class S {
     );
   }
 
+  /// `Sign Up`
+  String get sign_up_heading {
+    return Intl.message(
+      'Sign Up',
+      name: 'sign_up_heading',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Don't have an account? `
   String get no_account_text {
     return Intl.message(
