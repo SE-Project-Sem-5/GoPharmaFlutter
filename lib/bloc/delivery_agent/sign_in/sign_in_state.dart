@@ -12,12 +12,12 @@ class DeliveryAgentSignInState {
 
   static DeliveryAgentSignInState get initialState => DeliveryAgentSignInState(
         error: '',
-        isVisible: false,
+        isVisible: true,
       );
 
   DeliveryAgentSignInState clone({
     String error = '',
-    bool isVisible = false,
+    bool isVisible = true,
   }) {
     return DeliveryAgentSignInState(
       error: error,

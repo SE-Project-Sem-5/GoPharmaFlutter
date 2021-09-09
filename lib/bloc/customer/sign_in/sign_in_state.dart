@@ -12,12 +12,12 @@ class CustomerSignInState {
 
   static CustomerSignInState get initialState => CustomerSignInState(
         error: '',
-        isVisible: false,
+        isVisible: true,
       );
 
   CustomerSignInState clone({
     String error = '',
-    bool isVisible = false,
+    bool isVisible = true,
   }) {
     return CustomerSignInState(
       error: error,
