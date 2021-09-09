@@ -15,65 +15,62 @@ class DeliveryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DeliveryFullView(
-                  delivery: delivery,
-                ),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DeliveryFullView(
+                delivery: delivery,
               ),
-            );
-          },
-          child: Card(
-            child: Column(
-              children: [
-                ListTile(
-                  leading: Icon(
-                    Icons.article_rounded,
-                  ),
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(delivery.id),
-                      Text(
-                        "Rs. " + delivery.totalPrice.toStringAsFixed(2),
-                      ),
-                    ],
-                  ),
+            ),
+          );
+        },
+        child: Card(
+          child: Column(
+            children: [
+              ListTile(
+                leading: Icon(
+                  Icons.article_rounded,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(width: 8),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: BlocBuilder<DeliveryBloc, DeliveryState>(
-                        builder: (context, state) {
-                          print(delivery.deliveryStatus);
-                          return DeliveryStatusChip(
-                            text: delivery.deliveryStatus,
-                          );
-                        },
-                      ),
+                    Text(delivery.id),
+                    Text(
+                      "Rs. " + delivery.totalPrice.toStringAsFixed(2),
                     ),
-                    DeliveryStateButton(
-                      type: "Next",
-                      delivery: delivery,
-                    ),
-                    const SizedBox(width: 8),
-                    DeliveryStateButton(
-                      type: "Previous",
-                      delivery: delivery,
-                    ),
-                    const SizedBox(width: 8),
                   ],
                 ),
-              ],
-            ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const SizedBox(width: 8),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: BlocBuilder<DeliveryBloc, DeliveryState>(
+                      builder: (context, state) {
+                        print(delivery.deliveryStatus);
+                        return DeliveryStatusChip(
+                          text: delivery.deliveryStatus,
+                        );
+                      },
+                    ),
+                  ),
+                  DeliveryStateButton(
+                    type: "Next",
+                    delivery: delivery,
+                  ),
+                  const SizedBox(width: 8),
+                  // DeliveryStateButton(
+                  //   type: "Previous",
+                  //   delivery: delivery,
+                  // ),
+                  // const SizedBox(width: 8),
+                ],
+              ),
+            ],
           ),
         ),
       ),
