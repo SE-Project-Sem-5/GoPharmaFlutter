@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/text_field/text_field_bloc.dart';
-import 'package:go_pharma/bloc/text_field/text_field_state.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_bloc.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_state.dart';
 
-class TextFieldProvider extends BlocProvider<TextFieldBloc> {
-  TextFieldProvider({
+class SignInProvider extends BlocProvider<SignInBloc> {
+  SignInProvider({
     required Key key,
   }) : super(
           key: key,
-          create: (context) => TextFieldBloc(context),
+          create: (context) => SignInBloc(context),
           child: TestView(),
         );
 }
@@ -19,7 +19,7 @@ class TestView extends StatelessWidget {
     // ignore: close_sinks
 
     final scaffold = Scaffold(
-      body: BlocBuilder<TextFieldBloc, TextFieldState>(
+      body: BlocBuilder<SignInBloc, SignInState>(
         buildWhen: (pre, current) => true,
         builder: (context, state) {
           return Center(
@@ -31,7 +31,7 @@ class TestView extends StatelessWidget {
 
     return MultiBlocListener(
       listeners: [
-        BlocListener<TextFieldBloc, TextFieldState>(
+        BlocListener<SignInBloc, SignInState>(
           listenWhen: (pre, current) => pre.error != current.error,
           listener: (context, state) {
             if (state.error.isNotEmpty) print("ERROR: ${state.error}");

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class TextFieldEvent {}
+abstract class SignInEvent {}
 
-class ErrorEvent extends TextFieldEvent {
+class ErrorEvent extends SignInEvent {
   final String error;
 
   ErrorEvent(this.error);
 }
 
-class ToggleVisibility extends TextFieldEvent {
+class ToggleVisibility extends SignInEvent {
   final bool isVisible;
   ToggleVisibility(this.isVisible);
 }

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class TextFieldState {
+class SignInState {
   final String error;
   final bool isVisible;
 
-  TextFieldState({
+  SignInState({
     required this.error,
     required this.isVisible,
   });
 
-  static TextFieldState get initialState => TextFieldState(
+  static SignInState get initialState => SignInState(
         error: '',
         isVisible: false,
       );
 
-  TextFieldState clone({
+  SignInState clone({
     String error = '',
     bool isVisible = false,
   }) {
-    return TextFieldState(
+    return SignInState(
       error: error,
       isVisible: isVisible,
     );

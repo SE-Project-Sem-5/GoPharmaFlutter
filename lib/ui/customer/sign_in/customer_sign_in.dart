@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/text_field/text_field_bloc.dart';
-import 'package:go_pharma/bloc/text_field/text_field_event.dart';
-import 'package:go_pharma/bloc/text_field/text_field_state.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_bloc.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_event.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_state.dart';
 import 'package:go_pharma/generated/l10n.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
@@ -23,7 +23,7 @@ class CustomerSignInStart extends StatelessWidget {
     String title = S.of(context).sign_in_heading;
 
     return BlocProvider(
-      create: (context) => TextFieldBloc(context),
+      create: (context) => SignInBloc(context),
       child: CommonSkeleton(
         title: title,
         child: Container(
@@ -74,9 +74,9 @@ class CustomerSignInStart extends StatelessWidget {
                     ),
                   ),
                 ),
-                BlocBuilder<TextFieldBloc, TextFieldState>(
+                BlocBuilder<SignInBloc, SignInState>(
                   builder: (context, state) {
-                    final bloc = BlocProvider.of<TextFieldBloc>(context);
+                    final bloc = BlocProvider.of<SignInBloc>(context);
                     return TextFieldContainer(
                       child: TextFormField(
                         controller: passwordController,

@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'text_field_event.dart';
-import 'text_field_state.dart';
+import 'sign_in_event.dart';
+import 'sign_in_state.dart';
 
-class TextFieldBloc extends Bloc<TextFieldEvent, TextFieldState> {
-  TextFieldBloc(BuildContext context) : super(TextFieldState.initialState);
+class SignInBloc extends Bloc<SignInEvent, SignInState> {
+  SignInBloc(BuildContext context) : super(SignInState.initialState);
 
   @override
-  Stream<TextFieldState> mapEventToState(TextFieldEvent event) async* {
+  Stream<SignInState> mapEventToState(SignInEvent event) async* {
     switch (event.runtimeType) {
       case ErrorEvent:
         final error = (event as ErrorEvent).error;
