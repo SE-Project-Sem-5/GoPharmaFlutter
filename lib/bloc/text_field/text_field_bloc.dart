@@ -17,6 +17,10 @@ class TextFieldBloc extends Bloc<TextFieldEvent, TextFieldState> {
         yield state.clone(error: "");
         yield state.clone(error: error);
         break;
+      case ToggleVisibility:
+        final isVisible = (event as ToggleVisibility).isVisible;
+        yield state.clone(isVisible: isVisible);
+        break;
     }
   }
 

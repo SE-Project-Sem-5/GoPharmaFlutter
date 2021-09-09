@@ -8,3 +8,8 @@ class ErrorEvent extends TextFieldEvent {
 
   ErrorEvent(this.error);
 }
+
+class ToggleVisibility extends TextFieldEvent {
+  final bool isVisible;
+  ToggleVisibility(this.isVisible);
+}
