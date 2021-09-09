@@ -6,11 +6,14 @@ import 'package:flutter/material.dart';
 import 'sign_in_event.dart';
 import 'sign_in_state.dart';
 
-class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc(BuildContext context) : super(SignInState.initialState);
+class CustomerSignInBloc
+    extends Bloc<CustomerSignInEvent, CustomerSignInState> {
+  CustomerSignInBloc(BuildContext context)
+      : super(CustomerSignInState.initialState);
 
   @override
-  Stream<SignInState> mapEventToState(SignInEvent event) async* {
+  Stream<CustomerSignInState> mapEventToState(
+      CustomerSignInEvent event) async* {
     switch (event.runtimeType) {
       case ErrorEvent:
         final error = (event as ErrorEvent).error;

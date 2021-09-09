@@ -23,7 +23,7 @@ class CustomerSignInStart extends StatelessWidget {
     String title = S.of(context).sign_in_heading;
 
     return BlocProvider(
-      create: (context) => SignInBloc(context),
+      create: (context) => CustomerSignInBloc(context),
       child: CommonSkeleton(
         title: title,
         child: Container(
@@ -74,9 +74,9 @@ class CustomerSignInStart extends StatelessWidget {
                     ),
                   ),
                 ),
-                BlocBuilder<SignInBloc, SignInState>(
+                BlocBuilder<CustomerSignInBloc, CustomerSignInState>(
                   builder: (context, state) {
-                    final bloc = BlocProvider.of<SignInBloc>(context);
+                    final bloc = BlocProvider.of<CustomerSignInBloc>(context);
                     return TextFieldContainer(
                       child: TextFormField(
                         controller: passwordController,
