@@ -1,19 +1,17 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-
 import 'sign_in_event.dart';
 import 'sign_in_state.dart';
 
-class CustomerSignInBloc
-    extends Bloc<CustomerSignInEvent, CustomerSignInState> {
-  CustomerSignInBloc(BuildContext context)
-      : super(CustomerSignInState.initialState);
+class DeliveryAgentSignInBloc
+    extends Bloc<DeliveryAgentSignInEvent, DeliveryAgentSignInState> {
+  DeliveryAgentSignInBloc(BuildContext context)
+      : super(DeliveryAgentSignInState.initialState);
 
   @override
-  Stream<CustomerSignInState> mapEventToState(
-      CustomerSignInEvent event) async* {
+  Stream<DeliveryAgentSignInState> mapEventToState(
+      DeliveryAgentSignInEvent event) async* {
     switch (event.runtimeType) {
       case ErrorEvent:
         final error = (event as ErrorEvent).error;

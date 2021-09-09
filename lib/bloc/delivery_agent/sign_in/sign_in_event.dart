@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class CustomerSignInEvent {}
+abstract class DeliveryAgentSignInEvent {}
 
-class ErrorEvent extends CustomerSignInEvent {
+class ErrorEvent extends DeliveryAgentSignInEvent {
   final String error;
 
   ErrorEvent(this.error);
 }
 
-class ToggleVisibility extends CustomerSignInEvent {
+class ToggleVisibility extends DeliveryAgentSignInEvent {
   final bool isVisible;
   ToggleVisibility(this.isVisible);
 }
