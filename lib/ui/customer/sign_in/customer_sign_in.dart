@@ -135,7 +135,7 @@ class CustomerSignInStart extends StatelessWidget {
                     ),
                     GestureDetector(
                       child: Text(
-                        S.of(context).sign_up_text,
+                        "SIGN IN",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: GoPharmaColors.PrimaryColor,

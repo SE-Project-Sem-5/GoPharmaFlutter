@@ -17,4 +17,20 @@ List<Delivery> dummyDeliveries = [
     totalPrice: 1500,
     products: [],
   ),
+  Delivery(
+    id: "53sdgfdg",
+    deliveryStatus: 'Paid',
+    destination: '',
+    deliveryCharge: 0,
+    totalPrice: 1500,
+    products: [],
+  ),
+  Delivery(
+    id: "53454dfgdfg",
+    deliveryStatus: 'Delivered',
+    destination: '',
+    deliveryCharge: 0,
+    totalPrice: 1500,
+    products: [],
+  ),
 ];

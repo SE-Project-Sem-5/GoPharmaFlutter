@@ -89,7 +89,7 @@ class CheckoutReceipt extends StatelessWidget {
                         PaymentGateway.pay(
                             getProductNames(state.productListPrescriptionless +
                                 state.productListNeedPrescriptions),
-                            100,
+                            state.productListTotal,
                             //TODO: pass customer name, pass order ID
                             "orderID");
                       },

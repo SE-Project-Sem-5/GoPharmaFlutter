@@ -173,7 +173,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                       // if (_form.currentState!.validate()) {
                       Navigator.pushNamed(
                         context,
-                        DeliveriesPage.id,
+                        DeliveryAgentHomePage.id,
                       );
                       // }
                     },

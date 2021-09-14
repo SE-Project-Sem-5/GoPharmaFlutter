@@ -5,7 +5,6 @@ import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_state.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'package:go_pharma/ui/delivery_agent/components/delivery_state_button.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/delivery_full_view.dart';
-
 import 'delivery_status_chip.dart';
 
 class DeliveryCard extends StatelessWidget {
@@ -50,6 +49,7 @@ class DeliveryCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: BlocBuilder<DeliveryBloc, DeliveryState>(
+                      buildWhen: (previous, current) => previous != current,
                       builder: (context, state) {
                         print(delivery.deliveryStatus);
                         return DeliveryStatusChip(
@@ -63,11 +63,11 @@ class DeliveryCard extends StatelessWidget {
                     delivery: delivery,
                   ),
                   const SizedBox(width: 8),
-                  // DeliveryStateButton(
-                  //   type: "Previous",
-                  //   delivery: delivery,
-                  // ),
-                  // const SizedBox(width: 8),
+                  DeliveryStateButton(
+                    type: "Previous",
+                    delivery: delivery,
+                  ),
+                  const SizedBox(width: 8),
                 ],
               ),
             ],
