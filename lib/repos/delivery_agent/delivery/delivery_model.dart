@@ -35,5 +35,6 @@ class Delivery {
       deliveryStatusIndex -= 1;
     }
     deliveryStatus = deliveryStates[deliveryStatusIndex];
+    print(deliveryStatus);
   }
 }
