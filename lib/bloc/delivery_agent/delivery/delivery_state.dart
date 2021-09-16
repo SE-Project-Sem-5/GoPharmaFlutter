@@ -14,9 +14,9 @@ class DeliveryState {
   final String state;
 
   DeliveryState({
-    required this.error,
-    required this.orderTransitionState,
-    required this.state,
+    @required this.error,
+    @required this.orderTransitionState,
+    @required this.state,
   });
 
   static DeliveryState get initialState => DeliveryState(

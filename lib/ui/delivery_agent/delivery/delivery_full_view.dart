@@ -4,7 +4,7 @@ import 'package:go_pharma/ui/common/colors.dart';
 
 class DeliveryFullView extends StatelessWidget {
   final Delivery delivery;
-  const DeliveryFullView({required this.delivery});
+  const DeliveryFullView({@required this.delivery});
   final String bullet = "\u2022 ";
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
@@ -145,9 +145,9 @@ class DeliveryFullView extends StatelessWidget {
 
 class HorizontalLine extends StatelessWidget {
   const HorizontalLine({
-    Key? key,
-    required this.leftPadding,
-    required this.rightPadding,
+    Key key,
+    @required this.leftPadding,
+    @required this.rightPadding,
   }) : super(key: key);
 
   final double leftPadding;
@@ -169,8 +169,8 @@ class HorizontalLine extends StatelessWidget {
 
 class DeliveryTitleText extends StatelessWidget {
   const DeliveryTitleText({
-    Key? key,
-    required this.text,
+    Key key,
+    @required this.text,
   }) : super(key: key);
 
   final String text;

@@ -9,7 +9,7 @@ import 'package:go_pharma/ui/common/colors.dart';
 
 class CheckoutReceipt extends StatelessWidget {
   static final String id = "checkout_receipt";
-  const CheckoutReceipt({Key? key}) : super(key: key);
+  const CheckoutReceipt({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -125,8 +125,8 @@ class CheckoutReceipt extends StatelessWidget {
 class CheckoutReceiptProductList extends StatelessWidget {
   final List<Product> productList;
   const CheckoutReceiptProductList({
-    required this.productList,
-    Key? key,
+    this.productList,
+    Key key,
   }) : super(key: key);
 
   @override
@@ -161,7 +161,7 @@ class CheckoutReceiptProductList extends StatelessWidget {
 
 class ProductReceiptText extends StatelessWidget {
   final String text;
-  const ProductReceiptText({Key? key, required this.text}) : super(key: key);
+  const ProductReceiptText({Key key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

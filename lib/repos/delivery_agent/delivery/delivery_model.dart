@@ -10,15 +10,15 @@ class Delivery {
   double totalPrice;
   String deliveryStatus;
   double deliveryCharge;
-  late int deliveryStatusIndex;
+  int deliveryStatusIndex;
 
   Delivery({
-    required this.id,
-    required this.destination,
-    required this.products,
-    required this.deliveryStatus,
-    required this.totalPrice,
-    required this.deliveryCharge,
+    this.id,
+    this.destination,
+    this.products,
+    this.deliveryStatus,
+    this.totalPrice,
+    this.deliveryCharge,
   }) {
     deliveryStatusIndex = deliveryStates.indexOf(deliveryStatus);
   }

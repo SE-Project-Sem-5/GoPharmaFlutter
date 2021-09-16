@@ -16,7 +16,7 @@ class ProductFullView extends StatelessWidget {
   static final String id = "product_full_view";
   final Product product;
   const ProductFullView({
-    required this.product,
+      this.product,
   });
 
   @override

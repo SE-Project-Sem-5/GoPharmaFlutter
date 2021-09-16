@@ -82,14 +82,14 @@ class SelectPhotoScreen extends StatelessWidget {
               onTapped: () async {
                 PermissionStatus status = await Permission.storage.request();
                 var storageStatus = await Permission.storage.status;
-                XFile? image;
+                XFile image;
                 if (storageStatus.isGranted) {
                   image = await imagePicker.pickImage(
                     source: ImageSource.gallery,
                   );
                   if (image != null) {
                     bloc.add(
-                      UploadPrescriptionFromGallery(
+                      UploadPrescriptionFromGalleryEvent(
                         localPhotoPaths: [image.path],
                       ),
                     );
@@ -109,12 +109,12 @@ class SelectPhotoScreen extends StatelessWidget {
                 var cameraStatus = await Permission.camera.status;
 
                 if (cameraStatus.isGranted) {
-                  XFile? image = await imagePicker.pickImage(
+                  XFile image = await imagePicker.pickImage(
                     source: ImageSource.camera,
                   );
                   if (image != null) {
                     bloc.add(
-                      UploadPrescriptionFromGallery(
+                      UploadPrescriptionFromGalleryEvent(
                         localPhotoPaths: [image.path],
                       ),
                     );
@@ -127,7 +127,7 @@ class SelectPhotoScreen extends StatelessWidget {
             RoundedButtonFilled(
               fillColor: GoPharmaColors.PrimaryColor,
               textColor: GoPharmaColors.WhiteColor,
-              title: "Select a Pharmacy",
+              title: "Select a District",
               size: size,
               onTapped: () async {},
             ),
@@ -140,8 +140,8 @@ class SelectPhotoScreen extends StatelessWidget {
 
 class CarouselImageArea extends StatelessWidget {
   const CarouselImageArea({
-    Key? key,
-    required this.photos,
+    Key key,
+    this.photos,
   }) : super(key: key);
 
   final List<String> photos;

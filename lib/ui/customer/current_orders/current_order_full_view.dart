@@ -7,7 +7,7 @@ class CurrentOrderFullView extends StatelessWidget {
   final CurrentOrder order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
-  const CurrentOrderFullView({Key? key, required this.order}) : super(key: key);
+  const CurrentOrderFullView({Key key, this.order}) : super(key: key);
   final String bullet = "\u2022 ";
   @override
   Widget build(BuildContext context) {
@@ -171,9 +171,9 @@ class CurrentOrderFullView extends StatelessWidget {
 
 class HorizontalLine extends StatelessWidget {
   const HorizontalLine({
-    Key? key,
-    required this.leftPadding,
-    required this.rightPadding,
+    Key key,
+    this.leftPadding,
+    this.rightPadding,
   }) : super(key: key);
 
   final double leftPadding;
@@ -195,8 +195,8 @@ class HorizontalLine extends StatelessWidget {
 
 class PastOrderTitleText extends StatelessWidget {
   const PastOrderTitleText({
-    Key? key,
-    required this.text,
+    Key key,
+    this.text,
   }) : super(key: key);
 
   final String text;

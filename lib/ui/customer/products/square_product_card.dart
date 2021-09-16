@@ -13,7 +13,7 @@ import 'package:go_pharma/ui/customer/products/product_full_view.dart';
 class SquareProductCard extends StatelessWidget {
   final Product product;
 
-  const SquareProductCard({required this.product});
+  const SquareProductCard({  this.product});
 
   @override
   Widget build(BuildContext context) {

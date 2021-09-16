@@ -12,7 +12,7 @@ import 'package:go_pharma/ui/customer/products/product_full_view.dart';
 class ShoppingCartPageProductCard extends StatelessWidget {
   final Product product;
 
-  const ShoppingCartPageProductCard({required this.product});
+  const ShoppingCartPageProductCard({this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -167,8 +167,8 @@ class ButtonText extends StatelessWidget {
   final FontWeight fontWeight;
   final Color color;
   const ButtonText({
-    Key? key,
-    required this.text,
+    Key key,
+    this.text,
     this.fontStyle = FontStyle.normal,
     this.color = GoPharmaColors.PrimaryColor,
     this.fontWeight = FontWeight.w600,
@@ -192,9 +192,9 @@ class ProductActionIcon extends StatelessWidget {
   final VoidCallback onPressed;
 
   const ProductActionIcon({
-    Key? key,
-    required this.icon,
-    required this.onPressed,
+    Key key,
+    this.icon,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -222,8 +222,8 @@ class ProductCardImage extends StatelessWidget {
   final double width;
 
   const ProductCardImage({
-    Key? key,
-    required this.imageURL,
+    Key key,
+    this.imageURL,
     this.height = 125.0,
     this.width = 125.0,
   }) : super(key: key);

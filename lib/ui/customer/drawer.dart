@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/customer/camera/select_photo_screen.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
+import 'package:go_pharma/ui/customer/prescription_order/other_pages/select_photo_screen.dart';
 import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 import 'package:go_pharma/ui/customer/settings/settings.dart';
@@ -10,7 +10,7 @@ import 'current_orders/current_orders_page.dart';
 
 class CustomerDrawer extends StatelessWidget {
   const CustomerDrawer({
-    Key? key,
+    Key key,
   }) : super(key: key);
 
   @override
@@ -129,10 +129,10 @@ class DrawerTile extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
   const DrawerTile({
-    Key? key,
-    required this.text,
-    required this.icon,
-    required this.onTap,
+    Key key,
+    this.text,
+    this.icon,
+    this.onTap,
   }) : super(key: key);
 
   @override

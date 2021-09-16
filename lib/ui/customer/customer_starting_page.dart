@@ -6,7 +6,7 @@ import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
 
 class CustomerStartingPage extends StatelessWidget {
   static const String id = "customer_starting_page";
-  const CustomerStartingPage({Key? key}) : super(key: key);
+  const CustomerStartingPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

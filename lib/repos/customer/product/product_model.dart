@@ -13,14 +13,14 @@ class Product {
   Product({
     //TODO: get all info from database
     this.unitOfMeasure = "unit",
-    required this.id,
-    required this.name,
+      this.id,
+      this.name,
     this.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
         "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-    required this.supplier,
-    required this.inStock,
-    required this.price,
-    required this.prescriptionRequired,
+      this.supplier,
+      this.inStock,
+      this.price,
+      this.prescriptionRequired,
     this.imageURL = "images/pills.png",
     this.amountOrdered = 0,
   });

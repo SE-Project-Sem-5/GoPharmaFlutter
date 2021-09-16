@@ -3,13 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_state.dart';
-import 'package:go_pharma/generated/l10n.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
-import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
 
 import '../delivery_agent_home_page.dart';
 
@@ -21,7 +19,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
   static final GlobalKey<FormState> _form = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    String title = S.of(context).sign_in_heading;
+    String title = "Sign In";
 
     return BlocProvider(
       create: (context) => DeliveryAgentSignInBloc(context),
@@ -47,7 +45,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                 children: [
                   Spacer(),
                   Text(
-                    S.of(context).sign_in_to_your_account,
+                    "Sign in to your account",
                     style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
@@ -64,6 +62,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                             emailController.text)) {
                           return ("Please type in a valid email address");
                         }
+                        return '';
                       },
                       style: TextStyle(
                         fontSize: 18.0,
@@ -76,7 +75,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                           Icons.person,
                           color: GoPharmaColors.PrimaryColor,
                         ),
-                        hintText: S.of(context).your_email,
+                        hintText: "Your email",
                         hintStyle: TextStyle(
                           color: GoPharmaColors.hintTextColor,
                           fontSize: 18.0,
@@ -97,6 +96,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                             if (value == null || value.isEmpty) {
                               return ("Please type in your password.");
                             }
+                            return '';
                           },
                           style: TextStyle(
                             fontSize: 18.0,
@@ -110,7 +110,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                               Icons.lock,
                               color: GoPharmaColors.PrimaryColor,
                             ),
-                            hintText: S.of(context).password,
+                            hintText: "Password",
                             hintStyle: TextStyle(
                               color: GoPharmaColors.hintTextColor,
                               fontSize: 18.0,
@@ -141,14 +141,14 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        S.of(context).no_account_text,
+                        "Don't have an account?",
                         style: TextStyle(
                           color: GoPharmaColors.PrimaryColor,
                         ),
                       ),
                       GestureDetector(
                         child: Text(
-                          S.of(context).sign_up_text,
+                          "Sign Up.",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: GoPharmaColors.PrimaryColor,
@@ -165,7 +165,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                   ),
                   Spacer(),
                   RoundedButtonFilled(
-                    title: S.of(context).sign_up_button,
+                    title: "SIGN UP.",
                     size: MediaQuery.of(context).size,
                     fillColor: GoPharmaColors.PrimaryColor,
                     textColor: GoPharmaColors.WhiteColor,

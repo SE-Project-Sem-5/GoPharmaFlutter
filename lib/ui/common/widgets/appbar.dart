@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/generated/l10n.dart';
 
 class CommonAppBar extends StatelessWidget {
   const CommonAppBar({
-    Key? key,
+    Key key,
   }) : super(key: key);
 
   @override
@@ -15,7 +14,7 @@ class CommonAppBar extends StatelessWidget {
             height: 40,
           ),
           Text(
-            S.of(context).app_name,
+            "GoPharma",
           ),
         ],
       ),

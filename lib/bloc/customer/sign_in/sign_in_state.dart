@@ -6,8 +6,8 @@ class CustomerSignInState {
   final bool isVisible;
 
   CustomerSignInState({
-    required this.error,
-    required this.isVisible,
+      this.error,
+      this.isVisible,
   });
 
   static CustomerSignInState get initialState => CustomerSignInState(

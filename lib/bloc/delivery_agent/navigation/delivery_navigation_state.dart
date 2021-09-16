@@ -7,9 +7,9 @@ class DeliveryNavigationState {
   final int index;
 
   DeliveryNavigationState({
-    required this.error,
-    required this.index,
-    required this.title,
+      this.error,
+      this.index,
+      this.title,
   });
 
   static DeliveryNavigationState get initialState => DeliveryNavigationState(
@@ -21,7 +21,7 @@ class DeliveryNavigationState {
   DeliveryNavigationState clone({
     String error = '',
     String title = "Deliveries",
-    required int index,
+      int index,
   }) {
     return DeliveryNavigationState(
       error: error,

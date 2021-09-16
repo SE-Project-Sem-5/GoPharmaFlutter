@@ -11,7 +11,7 @@ import '../horizontal_product_card.dart';
 class SpecificCategoryPage extends StatelessWidget {
   static final String id = "specific_category_page";
   String category;
-  SpecificCategoryPage({required this.category});
+  SpecificCategoryPage({  this.category});
   //TODO: backend call to get the products for this category
   @override
   Widget build(BuildContext context) {

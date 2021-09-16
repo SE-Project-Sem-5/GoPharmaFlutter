@@ -5,8 +5,7 @@ import 'package:go_pharma/ui/customer/products/product_categories/specific_categ
 
 class ProductCategoryCard extends StatelessWidget {
   final String category;
-  const ProductCategoryCard({Key? key, required this.category})
-      : super(key: key);
+  const ProductCategoryCard({Key key, this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

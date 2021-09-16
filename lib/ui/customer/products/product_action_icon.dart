@@ -8,9 +8,9 @@ class ProductActionIcon extends StatelessWidget {
   final VoidCallback onPressed;
 
   const ProductActionIcon({
-    Key? key,
-    required this.icon,
-    required this.onPressed,
+    Key key,
+    this.icon,
+    this.onPressed,
   }) : super(key: key);
 
   @override

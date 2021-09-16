@@ -5,7 +5,7 @@ import '../colors.dart';
 class CustomBackButton extends StatelessWidget {
   final Color color;
   const CustomBackButton({
-    Key? key,
+    Key key,
     this.color = GoPharmaColors.PrimaryColor,
   }) : super(key: key);
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CheckoutStart extends StatelessWidget {
   static final String id = "checkout_start";
-  const CheckoutStart({Key? key}) : super(key: key);
+  const CheckoutStart({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

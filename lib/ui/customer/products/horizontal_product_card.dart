@@ -12,7 +12,7 @@ import 'package:go_pharma/ui/customer/products/product_full_view.dart';
 class HorizontalProductCard extends StatelessWidget {
   final Product product;
 
-  const HorizontalProductCard({required this.product});
+  const HorizontalProductCard({@required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -152,8 +152,8 @@ class ButtonText extends StatelessWidget {
   final FontWeight fontWeight;
   final Color color;
   const ButtonText({
-    Key? key,
-    required this.text,
+    Key key,
+    @required this.text,
     this.fontStyle = FontStyle.normal,
     this.color = GoPharmaColors.PrimaryColor,
     this.fontWeight = FontWeight.w600,

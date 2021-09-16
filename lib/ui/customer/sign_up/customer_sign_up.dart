@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_bloc.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_event.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_state.dart';
-import 'package:go_pharma/generated/l10n.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
@@ -21,7 +20,7 @@ class CustomerSignUpStart extends StatelessWidget {
   TextEditingController passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    String title = S.of(context).sign_up_heading;
+    String title = "Sign Up";
 
     return BlocProvider(
       create: (context) => CustomerSignUpBloc(context),
@@ -56,7 +55,7 @@ class CustomerSignUpStart extends StatelessWidget {
                       Icons.person,
                       color: GoPharmaColors.PrimaryColor,
                     ),
-                    hintText: S.of(context).your_email,
+                    hintText: "Your Email",
                     hintStyle: TextStyle(
                       color: GoPharmaColors.hintTextColor,
                       fontSize: 18.0,
@@ -88,7 +87,7 @@ class CustomerSignUpStart extends StatelessWidget {
                           Icons.lock,
                           color: GoPharmaColors.PrimaryColor,
                         ),
-                        hintText: S.of(context).password,
+                        hintText: "Password",
                         hintStyle: TextStyle(
                           color: GoPharmaColors.hintTextColor,
                           fontSize: 18.0,
@@ -143,7 +142,7 @@ class CustomerSignUpStart extends StatelessWidget {
               ),
               Spacer(),
               RoundedButtonFilled(
-                title: S.of(context).sign_up_button,
+                title: "Sign Up",
                 size: MediaQuery.of(context).size,
                 fillColor: GoPharmaColors.PrimaryColor,
                 textColor: GoPharmaColors.WhiteColor,

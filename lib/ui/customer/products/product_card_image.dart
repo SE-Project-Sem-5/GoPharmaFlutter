@@ -7,8 +7,8 @@ class ProductCardImage extends StatelessWidget {
   final double padding;
 
   const ProductCardImage({
-    Key? key,
-    required this.imageURL,
+    Key key,
+    this.imageURL,
     this.height = 125.0,
     this.width = 125.0,
     this.padding = 10,

@@ -6,7 +6,7 @@ import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_state.dart';
 class DeliveryAgentSignInProvider
     extends BlocProvider<DeliveryAgentSignInBloc> {
   DeliveryAgentSignInProvider({
-    required Key key,
+    @required Key key,
   }) : super(
           key: key,
           create: (context) => DeliveryAgentSignInBloc(context),

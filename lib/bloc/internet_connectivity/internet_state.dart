@@ -7,8 +7,8 @@ class InternetState {
   final Connection connection;
 
   InternetState({
-    required this.connection,
-    required this.error,
+      this.connection,
+      this.error,
   });
 
   static InternetState get initialState =>

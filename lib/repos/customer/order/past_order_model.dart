@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class PastOrder {
   final String orderId;
   final DateTime orderedDate;
@@ -5,9 +7,9 @@ class PastOrder {
   final double price;
   //TODO: add products ordered
   PastOrder({
-    required this.orderedDate,
-    required this.completedDate,
-    required this.price,
-    required this.orderId,
+    @required this.orderedDate,
+    @required this.completedDate,
+    @required this.price,
+    @required this.orderId,
   });
 }

@@ -6,9 +6,9 @@ class CurrentOrder {
   //TODO: make status an enum?
   //TODO: add products ordered
   CurrentOrder({
-    required this.orderedDate,
-    required this.price,
-    required this.orderId,
-    required this.status,
+      this.orderedDate,
+      this.price,
+      this.orderId,
+      this.status,
   });
 }

@@ -6,7 +6,7 @@ import 'package:go_pharma/ui/delivery_agent/sign_up/delivery_agent_sign_up.dart'
 
 class DeliveryAgentStartingPage extends StatelessWidget {
   static const String id = "delivery_agent_starting_page";
-  const DeliveryAgentStartingPage({Key? key}) : super(key: key);
+  const DeliveryAgentStartingPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

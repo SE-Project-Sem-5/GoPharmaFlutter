@@ -11,7 +11,7 @@ import 'current_order_full_view.dart';
 
 class CurrentOrderCard extends StatelessWidget {
   final CurrentOrder order;
-  const CurrentOrderCard({Key? key, required this.order}) : super(key: key);
+  const CurrentOrderCard({Key key, this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ Map<String, Color> orderStatusColorMapping = {
 
 class CurrentOrderStatusChip extends StatelessWidget {
   final String text;
-  CurrentOrderStatusChip({required this.text});
+  CurrentOrderStatusChip({this.text});
 
   @override
   Widget build(BuildContext context) {
