@@ -68,7 +68,7 @@ class CheckoutUploadPrescription extends StatelessWidget {
                         PermissionStatus status =
                             await Permission.storage.request();
                         var storageStatus = await Permission.storage.status;
-                        XFile? image;
+                        XFile image;
                         if (storageStatus.isGranted) {
                           image = await imagePicker.pickImage(
                             source: ImageSource.gallery,
@@ -97,7 +97,7 @@ class CheckoutUploadPrescription extends StatelessWidget {
                     var cameraStatus = await Permission.camera.status;
 
                     if (cameraStatus.isGranted) {
-                      XFile? image = await imagePicker.pickImage(
+                      XFile image = await imagePicker.pickImage(
                         source: ImageSource.camera,
                       );
                       if (image != null) {
@@ -123,8 +123,8 @@ class CheckoutUploadPrescription extends StatelessWidget {
 
 class CarouselImageArea extends StatelessWidget {
   const CarouselImageArea({
-    Key? key,
-    required this.photos,
+    Key key,
+    @required this.photos,
   }) : super(key: key);
 
   final List<String> photos;

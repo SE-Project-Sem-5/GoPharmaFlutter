@@ -6,7 +6,7 @@ class TextFieldContainer extends StatelessWidget {
   final Widget child;
 
   const TextFieldContainer({
-    required this.child,
+    @required this.child,
   });
 
   @override
@@ -31,13 +31,13 @@ class TextFieldContainer extends StatelessWidget {
 class RoundedInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
-  final IconData? suffixIcon;
+  final IconData suffixIcon;
   final ValueChanged<String> onChanged;
   final bool hideText;
   RoundedInputField({
-    required this.hintText,
+    @required this.hintText,
     this.icon = Icons.person,
-    required this.onChanged,
+    @required this.onChanged,
     this.suffixIcon,
     this.hideText = false,
   });

@@ -6,7 +6,7 @@ import 'dummy_values.dart';
 
 class CurrentOrdersPage extends StatelessWidget {
   static final String id = "current_orders_page";
-  const CurrentOrdersPage({Key? key}) : super(key: key);
+  const CurrentOrdersPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

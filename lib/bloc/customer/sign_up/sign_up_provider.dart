@@ -5,7 +5,7 @@ import 'package:go_pharma/bloc/customer/sign_up/sign_up_state.dart';
 
 class CustomerSignUpProvider extends BlocProvider<CustomerSignUpBloc> {
   CustomerSignUpProvider({
-    required Key key,
+      Key key,
   }) : super(
           key: key,
           create: (context) => CustomerSignUpBloc(context),

@@ -6,8 +6,8 @@ class DeliveryAgentSignInState {
   final bool isVisible;
 
   DeliveryAgentSignInState({
-    required this.error,
-    required this.isVisible,
+      this.error,
+      this.isVisible,
   });
 
   static DeliveryAgentSignInState get initialState => DeliveryAgentSignInState(

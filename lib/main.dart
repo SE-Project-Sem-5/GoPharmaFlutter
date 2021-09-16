@@ -7,11 +7,9 @@ import 'package:go_pharma/bloc/internet_connectivity/internet_bloc.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'bloc/customer/checkout/checkout_bloc.dart';
 import 'config/routes.dart';
 import 'config/theme.dart';
-import 'generated/l10n.dart';
 
 main() async {
   // SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -27,7 +25,7 @@ class GoPharmaApp extends StatelessWidget {
   bool isLoggedIn = false;
   Connectivity connectivity = Connectivity();
   // This widget is the root of your application.
-  GoPharmaApp({required this.isLoggedIn});
+  GoPharmaApp({this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +49,7 @@ class GoPharmaApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         builder: (context, widget) => ResponsiveWrapper.builder(
-          BouncingScrollWrapper.builder(context, widget!),
+          BouncingScrollWrapper.builder(context, widget),
           maxWidth: 1200,
           minWidth: 450,
           defaultScale: true,
@@ -67,13 +65,7 @@ class GoPharmaApp extends StatelessWidget {
         // email.compareTo("Not logged in") == 0 ? SignInStart.id : HomePage.id,
         routes: routes,
         theme: buildThemeData(context),
-        localizationsDelegates: [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate
-        ],
-        supportedLocales: S.delegate.supportedLocales,
+        // supportedLocales: S.delegate.supportedLocales,
       ),
     );
   }

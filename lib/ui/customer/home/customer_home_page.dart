@@ -5,7 +5,7 @@ import '../drawer.dart';
 class CustomerHomePage extends StatelessWidget {
   static const String id = "customer_home_page";
 
-  const CustomerHomePage({Key? key}) : super(key: key);
+  const CustomerHomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'test_state.dart';
 
 class TestProvider extends BlocProvider<TestBloc> {
   TestProvider({
-    required Key key,
+      Key key,
   }) : super(
           key: key,
           create: (context) => TestBloc(context),

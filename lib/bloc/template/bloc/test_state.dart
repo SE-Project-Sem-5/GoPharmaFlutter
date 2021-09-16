@@ -5,7 +5,7 @@ class TestState {
   final String error;
 
   TestState({
-    required this.error,
+      this.error,
   });
 
   static TestState get initialState => TestState(

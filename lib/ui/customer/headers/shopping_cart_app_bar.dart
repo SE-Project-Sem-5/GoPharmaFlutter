@@ -8,7 +8,7 @@ import 'package:go_pharma/ui/customer/products/components/shopping_cart.dart';
 class ShoppingCartAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   const ShoppingCartAppBar({
-    Key? key,
+    Key key,
   }) : super(key: key);
 
   @override

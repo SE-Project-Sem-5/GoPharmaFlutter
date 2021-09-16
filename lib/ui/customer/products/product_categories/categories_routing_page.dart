@@ -11,7 +11,7 @@ import 'category_card.dart';
 
 class ProductCategoriesPage extends StatelessWidget {
   static final String id = "product_categories_page";
-  const ProductCategoriesPage({Key? key}) : super(key: key);
+  const ProductCategoriesPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

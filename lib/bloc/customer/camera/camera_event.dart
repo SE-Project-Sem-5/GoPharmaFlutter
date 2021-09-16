@@ -11,7 +11,7 @@ class ErrorEvent extends CameraEvent {
 
 class UploadImageFromGallery extends CameraEvent {
   final List<String> localPhotoPaths;
-  UploadImageFromGallery({required this.localPhotoPaths});
+  UploadImageFromGallery({@required this.localPhotoPaths});
 }
 
 class CameraStoppedEvent extends CameraEvent {}

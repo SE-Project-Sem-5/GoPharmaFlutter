@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_state.dart';
 
 @immutable
 abstract class PrescriptionOrderEvent {}
@@ -9,7 +10,24 @@ class ErrorEvent extends PrescriptionOrderEvent {
   ErrorEvent(this.error);
 }
 
-class UploadPrescriptionFromGallery extends PrescriptionOrderEvent {
+class UploadPrescriptionFromGalleryEvent extends PrescriptionOrderEvent {
   final List<String> localPhotoPaths;
-  UploadPrescriptionFromGallery({required this.localPhotoPaths});
+  UploadPrescriptionFromGalleryEvent({  this.localPhotoPaths});
+}
+
+class SelectDistrictEvent extends PrescriptionOrderEvent {
+  final List<String> districts;
+
+  SelectDistrictEvent({  this.districts});
+}
+
+class NextStepEvent extends PrescriptionOrderEvent {
+  final PrescriptionOrderStep currentStep;
+  NextStepEvent({  this.currentStep});
+}
+
+class PreviousStepEvent extends PrescriptionOrderEvent {
+  final PrescriptionOrderStep currentStep;
+  final BuildContext context;
+  PreviousStepEvent({  this.currentStep,   this.context});
 }

@@ -9,7 +9,7 @@ import 'delivery_status_chip.dart';
 
 class DeliveryCard extends StatelessWidget {
   final Delivery delivery;
-  const DeliveryCard({required this.delivery});
+  const DeliveryCard({  this.delivery});
 
   @override
   Widget build(BuildContext context) {

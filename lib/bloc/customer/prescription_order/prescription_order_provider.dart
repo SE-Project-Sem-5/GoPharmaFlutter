@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/ui/customer/prescription_order/prescription_order.dart';
 
 import 'prescription_order_bloc.dart';
 import 'prescription_order_state.dart';
 
 class PrescriptionOrderProvider extends BlocProvider<PrescriptionOrderBloc> {
   PrescriptionOrderProvider({
-    required Key key,
+    @required Key key,
   }) : super(
           key: key,
           create: (context) => PrescriptionOrderBloc(context),
@@ -17,18 +18,6 @@ class PrescriptionOrderProvider extends BlocProvider<PrescriptionOrderBloc> {
 class TestView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // ignore: close_sinks
-    final scaffold = Scaffold(
-      body: BlocBuilder<PrescriptionOrderBloc, PrescriptionOrderState>(
-        buildWhen: (pre, current) => true,
-        builder: (context, state) {
-          return Center(
-            child: Text("Hi...Welcome to BLoC"),
-          );
-        },
-      ),
-    );
-
     return MultiBlocListener(
       listeners: [
         BlocListener<PrescriptionOrderBloc, PrescriptionOrderState>(
@@ -38,7 +27,7 @@ class TestView extends StatelessWidget {
           },
         ),
       ],
-      child: scaffold,
+      child: PrescriptionOrderPage(),
     );
   }
 }

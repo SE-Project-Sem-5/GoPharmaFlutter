@@ -4,7 +4,7 @@ import 'package:go_pharma/bloc/delivery_agent/navigation/delivery_navigation_blo
 import 'package:go_pharma/ui/common/colors.dart';
 
 class DeliveryAgentBottomNavigationBar extends StatelessWidget {
-  const DeliveryAgentBottomNavigationBar({Key? key}) : super(key: key);
+  const DeliveryAgentBottomNavigationBar({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

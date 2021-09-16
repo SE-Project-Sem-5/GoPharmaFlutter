@@ -11,7 +11,7 @@ import 'horizontal_product_card.dart';
 class ProductHomePage extends StatelessWidget {
   static final String id = "product_home_page";
   //Rough skeleton for how all product pages would appear
-  const ProductHomePage({Key? key}) : super(key: key);
+  const ProductHomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

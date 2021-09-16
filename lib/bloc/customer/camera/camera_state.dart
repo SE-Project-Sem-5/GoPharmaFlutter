@@ -12,11 +12,11 @@ class CameraState {
   // List<GalleryItem> galleryItems;
 
   CameraState({
-    required this.error,
-    required this.localPhotoPaths,
-    // required this.photos,
-    // required this.photosUrls,
-    // required this.galleryItems,
+      this.error,
+      this.localPhotoPaths,
+    //   this.photos,
+    //   this.photosUrls,
+    //   this.galleryItems,
   });
 
   static CameraState get initialState => CameraState(
@@ -29,11 +29,11 @@ class CameraState {
 
   CameraState clone({
     String error = '',
-    required List<String> localPhotoPaths,
+      List<String> localPhotoPaths,
 
-    // required List<File> photos,
-    // required List<String> photosUrls,
-    // required List<GalleryItem> galleryItems,
+    //   List<File> photos,
+    //   List<String> photosUrls,
+    //   List<GalleryItem> galleryItems,
   }) {
     return CameraState(
       error: error,

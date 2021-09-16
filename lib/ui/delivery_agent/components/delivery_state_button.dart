@@ -8,7 +8,7 @@ import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 class DeliveryStateButton extends StatelessWidget {
   final String type;
   final Delivery delivery;
-  const DeliveryStateButton({required this.type, required this.delivery});
+  const DeliveryStateButton({  this.type,   this.delivery});
 
   @override
   Widget build(BuildContext context) {

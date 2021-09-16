@@ -1,10 +1,10 @@
 class Customer {
-  String? firstName;
-  String? lastName;
-  DateTime? birthDate;
-  String? email;
-  String? password;
-  String? city;
+  String firstName;
+  String lastName;
+  DateTime birthDate;
+  String email;
+  String password;
+  String city;
   String country;
 
   Customer({

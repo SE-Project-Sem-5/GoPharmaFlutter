@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/ui/customer/camera/select_photo_screen.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_start.dart';
 import 'package:go_pharma/ui/customer/current_orders/current_orders_page.dart';
 import 'package:go_pharma/ui/customer/customer_starting_page.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
+import 'package:go_pharma/ui/customer/prescription_order/other_pages/select_photo_screen.dart';
 import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';

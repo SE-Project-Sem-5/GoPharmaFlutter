@@ -9,10 +9,10 @@ class CheckoutState {
   final double productListTotal;
 
   CheckoutState({
-    required this.error,
-    required this.productListPrescriptionless,
-    required this.productListTotal,
-    required this.productListNeedPrescriptions,
+      this.error,
+      this.productListPrescriptionless,
+      this.productListTotal,
+      this.productListNeedPrescriptions,
   });
 
   static CheckoutState get initialState => CheckoutState(
@@ -24,8 +24,8 @@ class CheckoutState {
 
   CheckoutState clone({
     String error = '',
-    required List<Product> productListNeedPrescriptions,
-    required List<Product> productListPrescriptionless,
+      List<Product> productListNeedPrescriptions,
+      List<Product> productListPrescriptionless,
     productListTotal = 0.0,
   }) {
     return CheckoutState(

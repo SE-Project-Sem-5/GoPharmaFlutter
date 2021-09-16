@@ -7,7 +7,7 @@ import 'dart:async';
 
 class InternetBloc extends Bloc<InternetEvent, InternetState> {
   final Connectivity connectivity;
-  StreamSubscription? connectivityStreamSubscription;
+  StreamSubscription connectivityStreamSubscription;
   InternetBloc(BuildContext context, this.connectivity)
       : super(InternetState.initialState) {
     connectivityStreamSubscription =
@@ -50,7 +50,7 @@ class InternetBloc extends Bloc<InternetEvent, InternetState> {
 
   @override
   Future<void> close() async {
-    connectivityStreamSubscription!.cancel();
+    connectivityStreamSubscription.cancel();
     await super.close();
   }
 

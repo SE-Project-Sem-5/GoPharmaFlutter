@@ -11,7 +11,7 @@ import 'package:go_pharma/ui/customer/products/shopping_cart_page_product_card.d
 class ShoppingCartPage extends StatelessWidget {
   static final String id = "shopping_cart";
 
-  const ShoppingCartPage({Key? key}) : super(key: key);
+  const ShoppingCartPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

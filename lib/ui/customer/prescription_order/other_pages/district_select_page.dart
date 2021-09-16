@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DeliveryAgentSettingsPage extends StatelessWidget {
-  const DeliveryAgentSettingsPage({Key key}) : super(key: key);
+class DistrictSelectionPage extends StatelessWidget {
+  const DistrictSelectionPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

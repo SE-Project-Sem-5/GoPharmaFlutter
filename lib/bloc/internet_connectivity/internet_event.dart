@@ -7,7 +7,7 @@ abstract class InternetEvent {}
 
 class ConnectionEvent extends InternetEvent {
   final Connection connection;
-  ConnectionEvent({required this.connection});
+  ConnectionEvent({  this.connection});
 }
 
 class ErrorEvent extends InternetEvent {

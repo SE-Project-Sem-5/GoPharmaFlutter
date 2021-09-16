@@ -5,7 +5,7 @@ import 'drawer.dart';
 class CommonSkeleton extends StatelessWidget {
   final Widget child;
   final String title;
-  CommonSkeleton({required this.child, required this.title});
+  CommonSkeleton({  this.child,   this.title});
 
   @override
   Widget build(BuildContext context) {

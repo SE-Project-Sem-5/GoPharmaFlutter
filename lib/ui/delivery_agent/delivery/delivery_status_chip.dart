@@ -3,7 +3,7 @@ import 'package:go_pharma/ui/delivery_agent/delivery/state_mappings/color_mappin
 
 class DeliveryStatusChip extends StatelessWidget {
   final String text;
-  DeliveryStatusChip({required this.text});
+  DeliveryStatusChip({  this.text});
 
   @override
   Widget build(BuildContext context) {

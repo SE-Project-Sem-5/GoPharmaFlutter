@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class PastOrderCard extends StatelessWidget {
   final PastOrder order;
 
-  const PastOrderCard({Key? key, required this.order}) : super(key: key);
+  const PastOrderCard({Key key, this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
