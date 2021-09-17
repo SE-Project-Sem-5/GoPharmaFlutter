@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_bloc.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_event.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_state.dart';
+import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 
 import '../drawer.dart';
 import 'other_pages/district_select_page.dart';
@@ -48,6 +50,24 @@ class PrescriptionOrderPage extends StatelessWidget {
                   ],
                 ),
               ),
+              bottomNavigationBar:
+                  state.step == PrescriptionOrderStep.PRESCRIPTIONORDER_DISTRICT
+                      ? Container(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0,
+                              vertical: 20.0,
+                            ),
+                            child: RoundedButtonFilled(
+                              size: MediaQuery.of(context).size,
+                              onTapped: () {},
+                              fillColor: GoPharmaColors.PrimaryColor,
+                              textColor: GoPharmaColors.WhiteColor,
+                              title: "Confirm Prescription Order",
+                            ),
+                          ),
+                        )
+                      : null,
             ),
           ),
         );
