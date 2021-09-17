@@ -65,11 +65,14 @@ class CustomerSignUpStart extends StatelessWidget {
                 ),
               ),
               BlocBuilder<CustomerSignUpBloc, CustomerSignUpState>(
+                buildWhen: (previous, current) =>
+                    previous.isVisible != current.isVisible,
                 builder: (context, state) {
                   final bloc = BlocProvider.of<CustomerSignUpBloc>(context);
                   return TextFieldContainer(
                     child: TextFormField(
                       controller: passwordController,
+                      // ignore: missing_return
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return ("Please type in your password.");

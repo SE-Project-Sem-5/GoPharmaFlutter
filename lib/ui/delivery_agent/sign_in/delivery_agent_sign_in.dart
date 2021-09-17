@@ -86,6 +86,8 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                   ),
                   BlocBuilder<DeliveryAgentSignInBloc,
                       DeliveryAgentSignInState>(
+                    buildWhen: (previous, current) =>
+                        previous.isVisible != current.isVisible,
                     builder: (context, state) {
                       final bloc =
                           BlocProvider.of<DeliveryAgentSignInBloc>(context);

@@ -8,7 +8,6 @@ import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
-import 'package:go_pharma/ui/customer/common_skeleton.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
 
@@ -27,7 +26,7 @@ class CustomerSignInStart extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Sign In"),
+            title: Text(title),
           ),
           body: Container(
             width: MediaQuery.of(context).size.width,
@@ -49,6 +48,7 @@ class CustomerSignInStart extends StatelessWidget {
                   TextFieldContainer(
                     child: TextFormField(
                       controller: emailController,
+                      // ignore: missing_return
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return ("Please type in your email address.");
@@ -78,6 +78,8 @@ class CustomerSignInStart extends StatelessWidget {
                     ),
                   ),
                   BlocBuilder<CustomerSignInBloc, CustomerSignInState>(
+                    buildWhen: (previous, current) =>
+                        previous.isVisible != current.isVisible,
                     builder: (context, state) {
                       final bloc = BlocProvider.of<CustomerSignInBloc>(context);
                       return TextFieldContainer(
