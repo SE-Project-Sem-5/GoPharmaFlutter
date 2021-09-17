@@ -44,6 +44,7 @@ class PrescriptionOrderBloc
         );
         break;
       case SelectDistrictEvent:
+        //TODO: Add a select all option
         final String selectedDistrict =
             (event as SelectDistrictEvent).selectedDistrict;
         List<String> selectedDistricts = state.selectedDistricts;
@@ -55,6 +56,7 @@ class PrescriptionOrderBloc
         yield state.clone(
           selectedDistricts: selectedDistricts,
         );
+
         break;
       case LoadDistrictsEvent:
         yield state.clone(
@@ -62,6 +64,7 @@ class PrescriptionOrderBloc
         );
         try {
           List<String> districts = await locationApiProvider.getDistricts();
+          districts.sort();
           if (districts != []) {
             yield state.clone(
               districts: districts,
