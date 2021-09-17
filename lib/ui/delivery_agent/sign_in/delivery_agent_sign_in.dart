@@ -171,6 +171,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                     textColor: GoPharmaColors.WhiteColor,
                     onTapped: () {
                       // if (_form.currentState!.validate()) {
+
                       Navigator.pushNamed(
                         context,
                         DeliveryAgentHomePage.id,

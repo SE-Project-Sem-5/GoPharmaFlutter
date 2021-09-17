@@ -12,22 +12,28 @@ class ErrorEvent extends PrescriptionOrderEvent {
 
 class UploadPrescriptionFromGalleryEvent extends PrescriptionOrderEvent {
   final List<String> localPhotoPaths;
-  UploadPrescriptionFromGalleryEvent({  this.localPhotoPaths});
+  UploadPrescriptionFromGalleryEvent({this.localPhotoPaths});
 }
 
 class SelectDistrictEvent extends PrescriptionOrderEvent {
   final List<String> districts;
 
-  SelectDistrictEvent({  this.districts});
+  SelectDistrictEvent({this.districts});
+}
+
+class LoadDistrictsEvent extends PrescriptionOrderEvent {
+  final List<String> districts;
+  final bool isLoadingDistricts;
+  LoadDistrictsEvent({this.districts, this.isLoadingDistricts});
 }
 
 class NextStepEvent extends PrescriptionOrderEvent {
   final PrescriptionOrderStep currentStep;
-  NextStepEvent({  this.currentStep});
+  NextStepEvent({this.currentStep});
 }
 
 class PreviousStepEvent extends PrescriptionOrderEvent {
   final PrescriptionOrderStep currentStep;
   final BuildContext context;
-  PreviousStepEvent({  this.currentStep,   this.context});
+  PreviousStepEvent({this.currentStep, this.context});
 }

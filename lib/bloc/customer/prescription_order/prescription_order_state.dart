@@ -12,12 +12,14 @@ class PrescriptionOrderState {
   //TODO: if it says all, it means all districts? check implementation
   final List<String> districts;
   final PrescriptionOrderStep step;
+  final bool isDistrictsLoading;
 
   PrescriptionOrderState({
-    @required this.error,
-    @required this.localPhotoPaths,
-    @required this.districts,
-    @required this.step,
+    this.error,
+    this.localPhotoPaths,
+    this.districts,
+    this.step,
+    this.isDistrictsLoading,
   });
 
   static PrescriptionOrderState get initialState => PrescriptionOrderState(
@@ -25,19 +27,22 @@ class PrescriptionOrderState {
         localPhotoPaths: [],
         districts: [],
         step: PrescriptionOrderStep.PRESCRIPTIONORDER_PHOTO,
+        isDistrictsLoading: true,
       );
 
   PrescriptionOrderState clone({
     String error = '',
-    @required List<String> localPhotoPaths,
-    @required List<String> districts,
-    @required PrescriptionOrderStep step,
+    List<String> localPhotoPaths,
+    List<String> districts,
+    PrescriptionOrderStep step,
+    bool isDistrictsLoading,
   }) {
     return PrescriptionOrderState(
-      error: error,
-      localPhotoPaths: localPhotoPaths,
-      districts: districts,
-      step: step,
+      error: error ?? this.error,
+      localPhotoPaths: localPhotoPaths ?? this.localPhotoPaths,
+      districts: districts ?? this.districts,
+      step: step ?? this.step,
+      isDistrictsLoading: isDistrictsLoading ?? this.isDistrictsLoading,
     );
   }
 }

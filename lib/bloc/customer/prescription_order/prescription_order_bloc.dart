@@ -2,12 +2,15 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_pharma/repos/customer/location/location_api_provider.dart';
 
 import 'prescription_order_event.dart';
 import 'prescription_order_state.dart';
 
 class PrescriptionOrderBloc
     extends Bloc<PrescriptionOrderEvent, PrescriptionOrderState> {
+  final LocationApiProvider locationApiProvider = LocationApiProvider();
+
   static List<PrescriptionOrderStep> stepOrder = [
     PrescriptionOrderStep.PRESCRIPTIONORDER_PHOTO,
     PrescriptionOrderStep.PRESCRIPTIONORDER_DISTRICT,
@@ -24,15 +27,9 @@ class PrescriptionOrderBloc
         final error = (event as ErrorEvent).error;
         yield state.clone(
           error: "",
-          localPhotoPaths: [],
-          districts: [],
-          step: state.step,
         );
         yield state.clone(
           error: error,
-          localPhotoPaths: [],
-          districts: [],
-          step: state.step,
         );
         break;
       case UploadPrescriptionFromGalleryEvent:
@@ -44,17 +41,41 @@ class PrescriptionOrderBloc
         }
         yield state.clone(
           localPhotoPaths: newLocalPhotoPaths,
-          districts: [],
-          step: state.step,
         );
         break;
       case SelectDistrictEvent:
         final List<String> districts = (event as SelectDistrictEvent).districts;
         yield state.clone(
-          localPhotoPaths: state.localPhotoPaths,
           districts: districts,
-          step: state.step,
         );
+        break;
+      case LoadDistrictsEvent:
+        print("Districts");
+        yield state.clone(
+          isDistrictsLoading: true,
+        );
+        try {
+          List<String> districts = await locationApiProvider.getDistricts();
+          print("Districts");
+          print(districts);
+          if (districts != []) {
+            yield state.clone(
+              districts: districts,
+              isDistrictsLoading: false,
+            );
+          } else {
+            print("Error");
+            yield state.clone(
+              error: "Error occured",
+              isDistrictsLoading: true,
+            );
+          }
+        } catch (error, stacktrace) {
+          print("Exception occured: $error stackTrace: $stacktrace");
+          yield state.clone(
+            error: error,
+          );
+        }
         break;
       case NextStepEvent:
         final currentStep = (event as NextStepEvent).currentStep;
@@ -62,8 +83,6 @@ class PrescriptionOrderBloc
         if (nextIndex < stepOrder.length) {
           yield state.clone(
             step: stepOrder[nextIndex],
-            localPhotoPaths: state.localPhotoPaths,
-            districts: state.districts,
           );
         } else {
           //TODO: Event to do something after the flow ends
@@ -77,8 +96,6 @@ class PrescriptionOrderBloc
         if (prevIndex >= 0) {
           yield state.clone(
             step: stepOrder[prevIndex],
-            localPhotoPaths: state.localPhotoPaths,
-            districts: state.districts,
           );
         } else {
           Navigator.pop(context);
