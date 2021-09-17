@@ -27,7 +27,7 @@ class PrescriptionOrderState {
   static PrescriptionOrderState get initialState => PrescriptionOrderState(
         error: '',
         localPhotoPaths: [],
-        districts: [],
+        districts: ["All"],
         step: PrescriptionOrderStep.PRESCRIPTIONORDER_PHOTO,
         isDistrictsLoading: true,
         selectedDistricts: [],
