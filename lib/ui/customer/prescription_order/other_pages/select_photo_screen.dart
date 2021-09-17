@@ -7,11 +7,8 @@ import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_ev
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
-import 'package:go_pharma/ui/customer/common_skeleton.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import 'district_select_page.dart';
 
 class SelectPhotoScreen extends StatelessWidget {
   static final String id = "select_photo_screen";
@@ -39,108 +36,106 @@ class SelectPhotoScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     var bloc = BlocProvider.of<PrescriptionOrderBloc>(context);
-    return CommonSkeleton(
-      title: "Upload Prescription",
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            BlocBuilder<PrescriptionOrderBloc, PrescriptionOrderState>(
-              builder: (context, state) {
-                List<String> photoLocations = state.localPhotoPaths;
-                List<Widget> images = setImages(photoLocations);
-                return images.length > 0
-                    ? Container(
-                        height: MediaQuery.of(context).size.width * 0.7,
-                        child: PageView(
-                          physics: ClampingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          children: images,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
+          BlocBuilder<PrescriptionOrderBloc, PrescriptionOrderState>(
+            builder: (context, state) {
+              List<String> photoLocations = state.localPhotoPaths;
+              List<Widget> images = setImages(photoLocations);
+              return images.length > 0
+                  ? Container(
+                      height: MediaQuery.of(context).size.width * 0.7,
+                      child: PageView(
+                        physics: ClampingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: images,
+                      ),
+                    )
+                  : Container(
+                      height: MediaQuery.of(context).size.width * 0.7,
+                      child: Center(
+                        child: Text(
+                          "No Images Uploaded",
+                          style: TextStyle(fontSize: 20),
                         ),
-                      )
-                    : Container(
-                        height: MediaQuery.of(context).size.width * 0.7,
-                        child: Center(
-                          child: Text(
-                            "No Images Uploaded",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ));
-                // return CarouselImageArea(photos: photos);
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            RoundedButtonFilled(
-              fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
-              textColor: GoPharmaColors.BlackColor,
-              title: "Upload From Gallery",
-              size: size,
-              onTapped: () async {
-                PermissionStatus status = await Permission.storage.request();
-                var storageStatus = await Permission.storage.status;
-                XFile image;
-                if (storageStatus.isGranted) {
-                  image = await imagePicker.pickImage(
-                    source: ImageSource.gallery,
-                  );
-                  if (image != null) {
-                    bloc.add(
-                      UploadPrescriptionFromGalleryEvent(
-                        localPhotoPaths: [image.path],
-                      ),
-                    );
-                  }
-                } else if (storageStatus == PermissionStatus.denied) {
-                  //  TODO: do something
-                }
-              },
-            ),
-            RoundedButtonFilled(
-              fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
-              textColor: GoPharmaColors.BlackColor,
-              title: "Take Photo",
-              size: size,
-              onTapped: () async {
-                PermissionStatus status = await Permission.camera.request();
-                var cameraStatus = await Permission.camera.status;
-
-                if (cameraStatus.isGranted) {
-                  XFile image = await imagePicker.pickImage(
-                    source: ImageSource.camera,
-                  );
-                  if (image != null) {
-                    bloc.add(
-                      UploadPrescriptionFromGalleryEvent(
-                        localPhotoPaths: [image.path],
-                      ),
-                    );
-                  }
-                } else if (cameraStatus.isDenied) {
-                  //  TODO: do something
-                }
-              },
-            ),
-            RoundedButtonFilled(
-              fillColor: GoPharmaColors.PrimaryColor,
-              textColor: GoPharmaColors.WhiteColor,
-              title: "Select a District",
-              size: size,
-              onTapped: () async {
-                bloc.add(LoadDistrictsEvent());
-                Navigator.pushNamed(
-                  context,
-                  DistrictSelectionPage.id,
+                      ));
+              // return CarouselImageArea(photos: photos);
+            },
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          RoundedButtonFilled(
+            fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
+            textColor: GoPharmaColors.BlackColor,
+            title: "Upload From Gallery",
+            size: size,
+            onTapped: () async {
+              PermissionStatus status = await Permission.storage.request();
+              var storageStatus = await Permission.storage.status;
+              XFile image;
+              if (storageStatus.isGranted) {
+                image = await imagePicker.pickImage(
+                  source: ImageSource.gallery,
                 );
-              },
-            ),
-          ],
-        ),
+                if (image != null) {
+                  bloc.add(
+                    UploadPrescriptionFromGalleryEvent(
+                      localPhotoPaths: [image.path],
+                    ),
+                  );
+                }
+              } else if (storageStatus == PermissionStatus.denied) {
+                //  TODO: do something
+              }
+            },
+          ),
+          RoundedButtonFilled(
+            fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
+            textColor: GoPharmaColors.BlackColor,
+            title: "Take Photo",
+            size: size,
+            onTapped: () async {
+              PermissionStatus status = await Permission.camera.request();
+              var cameraStatus = await Permission.camera.status;
+
+              if (cameraStatus.isGranted) {
+                XFile image = await imagePicker.pickImage(
+                  source: ImageSource.camera,
+                );
+                if (image != null) {
+                  bloc.add(
+                    UploadPrescriptionFromGalleryEvent(
+                      localPhotoPaths: [image.path],
+                    ),
+                  );
+                }
+              } else if (cameraStatus.isDenied) {
+                //  TODO: do something
+              }
+            },
+          ),
+          BlocBuilder<PrescriptionOrderBloc, PrescriptionOrderState>(
+            builder: (context, state) {
+              return RoundedButtonFilled(
+                fillColor: GoPharmaColors.PrimaryColor,
+                textColor: GoPharmaColors.WhiteColor,
+                title: "Select a District",
+                size: size,
+                onTapped: () async {
+                  bloc.add(LoadDistrictsEvent());
+                  bloc.add(NextStepEvent(currentStep: state.step));
+                },
+              );
+            },
+          ),
+        ],
       ),
     );
   }

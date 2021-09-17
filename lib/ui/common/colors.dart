@@ -9,6 +9,7 @@ class GoPharmaColors {
   static Color lighterSecondaryColor = PrimaryColor.withOpacity(0.1);
   static Color hintTextColor = PrimaryColor.withOpacity(0.4);
   static Color textBoxColor = PrimaryColor.withOpacity(0.7);
+  static const SelectionColor = Color.fromRGBO(120, 30, 80, 1);
 
   static const BlackColor = Colors.black;
   static const WhiteColor = Colors.white;
