@@ -11,6 +11,8 @@ import 'package:go_pharma/ui/customer/common_skeleton.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'district_select_page.dart';
+
 class SelectPhotoScreen extends StatelessWidget {
   static final String id = "select_photo_screen";
   final ImagePicker imagePicker = new ImagePicker();
@@ -129,7 +131,13 @@ class SelectPhotoScreen extends StatelessWidget {
               textColor: GoPharmaColors.WhiteColor,
               title: "Select a District",
               size: size,
-              onTapped: () async {},
+              onTapped: () async {
+                bloc.add(LoadDistrictsEvent());
+                Navigator.pushNamed(
+                  context,
+                  DistrictSelectionPage.id,
+                );
+              },
             ),
           ],
         ),
