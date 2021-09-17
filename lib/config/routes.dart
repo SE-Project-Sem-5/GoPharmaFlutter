@@ -7,6 +7,7 @@ import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/prescription_order/other_pages/district_select_page.dart';
 import 'package:go_pharma/ui/customer/prescription_order/other_pages/select_photo_screen.dart';
+import 'package:go_pharma/ui/customer/prescription_order/prescription_order.dart';
 import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
@@ -41,6 +42,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   PastOrdersPage.id: (context) => PastOrdersPage(),
   CurrentOrdersPage.id: (context) => CurrentOrdersPage(),
   DistrictSelectionPage.id: (context) => DistrictSelectionPage(),
+  PrescriptionOrderPage.id: (context) => PrescriptionOrderPage(),
 
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),

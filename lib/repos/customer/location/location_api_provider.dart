@@ -10,8 +10,6 @@ class LocationApiProvider {
   Future<List<String>> getDistricts() async {
     try {
       Response response = await _dio.get(_districtsEndpoint);
-      print("DATA");
-      print(response.data['data']);
       return Location.fromJson(response.data['data']).districts;
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");

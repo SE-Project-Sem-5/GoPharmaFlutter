@@ -16,9 +16,9 @@ class UploadPrescriptionFromGalleryEvent extends PrescriptionOrderEvent {
 }
 
 class SelectDistrictEvent extends PrescriptionOrderEvent {
-  final List<String> districts;
+  final String selectedDistrict;
 
-  SelectDistrictEvent({this.districts});
+  SelectDistrictEvent({this.selectedDistrict});
 }
 
 class LoadDistrictsEvent extends PrescriptionOrderEvent {
