@@ -44,20 +44,24 @@ class PrescriptionOrderBloc
         );
         break;
       case SelectDistrictEvent:
-        final List<String> districts = (event as SelectDistrictEvent).districts;
+        final String selectedDistrict =
+            (event as SelectDistrictEvent).selectedDistrict;
+        List<String> selectedDistricts = state.selectedDistricts;
+        if (selectedDistricts.contains(selectedDistrict)) {
+          selectedDistricts.remove(selectedDistrict);
+        } else {
+          selectedDistricts.add(selectedDistrict);
+        }
         yield state.clone(
-          districts: districts,
+          selectedDistricts: selectedDistricts,
         );
         break;
       case LoadDistrictsEvent:
-        print("Districts");
         yield state.clone(
           isDistrictsLoading: true,
         );
         try {
           List<String> districts = await locationApiProvider.getDistricts();
-          print("Districts");
-          print(districts);
           if (districts != []) {
             yield state.clone(
               districts: districts,

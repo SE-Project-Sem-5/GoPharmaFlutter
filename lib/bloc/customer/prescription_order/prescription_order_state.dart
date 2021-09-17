@@ -13,6 +13,7 @@ class PrescriptionOrderState {
   final List<String> districts;
   final PrescriptionOrderStep step;
   final bool isDistrictsLoading;
+  final List<String> selectedDistricts;
 
   PrescriptionOrderState({
     this.error,
@@ -20,6 +21,7 @@ class PrescriptionOrderState {
     this.districts,
     this.step,
     this.isDistrictsLoading,
+    this.selectedDistricts,
   });
 
   static PrescriptionOrderState get initialState => PrescriptionOrderState(
@@ -28,6 +30,7 @@ class PrescriptionOrderState {
         districts: [],
         step: PrescriptionOrderStep.PRESCRIPTIONORDER_PHOTO,
         isDistrictsLoading: true,
+        selectedDistricts: [],
       );
 
   PrescriptionOrderState clone({
@@ -36,6 +39,7 @@ class PrescriptionOrderState {
     List<String> districts,
     PrescriptionOrderStep step,
     bool isDistrictsLoading,
+    List<String> selectedDistricts,
   }) {
     return PrescriptionOrderState(
       error: error ?? this.error,
@@ -43,6 +47,7 @@ class PrescriptionOrderState {
       districts: districts ?? this.districts,
       step: step ?? this.step,
       isDistrictsLoading: isDistrictsLoading ?? this.isDistrictsLoading,
+      selectedDistricts: selectedDistricts ?? this.selectedDistricts,
     );
   }
 }
