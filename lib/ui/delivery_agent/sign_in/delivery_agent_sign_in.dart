@@ -47,9 +47,10 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                   Text(
                     "Sign in to your account",
                     style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: GoPharmaColors.PrimaryColor),
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: GoPharmaColors.PrimaryColor,
+                    ),
                   ),
                   Spacer(),
                   TextFieldContainer(
@@ -157,7 +158,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pushNamed(
+                          Navigator.pushReplacementNamed(
                             context,
                             DeliveryAgentHomePage.id,
                           );
@@ -174,7 +175,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                     onTapped: () {
                       // if (_form.currentState!.validate()) {
 
-                      Navigator.pushNamed(
+                      Navigator.pushReplacementNamed(
                         context,
                         DeliveryAgentHomePage.id,
                       );

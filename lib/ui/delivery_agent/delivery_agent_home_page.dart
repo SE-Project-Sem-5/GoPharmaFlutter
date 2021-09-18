@@ -24,35 +24,63 @@ class DeliveryAgentHomePage extends StatelessWidget {
           create: (_) => DeliveryBloc(_),
         ),
       ],
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            leading: Container(),
-            title: Row(
-              children: [
-                BlocBuilder<DeliveryNavigationBloc, DeliveryNavigationState>(
-                  builder: (context, state) {
-                    return Text(
-                      state.title,
-                    );
+      child: WillPopScope(
+        onWillPop: () async {
+          bool willLeave = false;
+          // show the confirm dialog
+          await showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: Text(
+                'Are you sure want to leave?',
+              ),
+              actions: [
+                ElevatedButton(
+                  child: Text('Yes'),
+                  onPressed: () {
+                    willLeave = true;
+                    Navigator.of(context).pop();
                   },
+                ),
+                TextButton(
+                  child: Text('No'),
+                  onPressed: () => Navigator.of(context).pop(),
                 ),
               ],
             ),
-          ),
-          body: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                BlocBuilder<DeliveryNavigationBloc, DeliveryNavigationState>(
-                  builder: (context, state) {
-                    return _stackedContainers(state.index);
-                  },
-                ),
-              ],
+          );
+          return willLeave;
+        },
+        child: SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              leading: Container(),
+              title: Row(
+                children: [
+                  BlocBuilder<DeliveryNavigationBloc, DeliveryNavigationState>(
+                    builder: (context, state) {
+                      return Text(
+                        state.title,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
+            body: Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  BlocBuilder<DeliveryNavigationBloc, DeliveryNavigationState>(
+                    builder: (context, state) {
+                      return _stackedContainers(state.index);
+                    },
+                  ),
+                ],
+              ),
+            ),
+            bottomNavigationBar: DeliveryAgentBottomNavigationBar(),
           ),
-          bottomNavigationBar: DeliveryAgentBottomNavigationBar(),
         ),
       ),
     );

@@ -148,7 +148,7 @@ class CustomerSignInStart extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pushNamed(
+                          Navigator.pushReplacementNamed(
                             context,
                             CustomerSignUpStart.id,
                           );
@@ -164,7 +164,7 @@ class CustomerSignInStart extends StatelessWidget {
                     textColor: GoPharmaColors.WhiteColor,
                     onTapped: () {
                       // if (_form.currentState!.validate()) {
-                      Navigator.pushNamed(
+                      Navigator.pushReplacementNamed(
                         context,
                         CustomerHomePage.id,
                       );

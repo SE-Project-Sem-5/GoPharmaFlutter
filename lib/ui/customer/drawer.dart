@@ -3,8 +3,8 @@ import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/prescription_order/prescription_order.dart';
 import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
+import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
-import 'package:go_pharma/ui/customer/settings/settings.dart';
 
 import 'current_orders/current_orders_page.dart';
 
@@ -56,7 +56,7 @@ class CustomerDrawer extends StatelessWidget {
               icon: Icons.search,
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(
+                Navigator.pushReplacementNamed(
                   context,
                   SearchPage.id,
                 );
@@ -67,7 +67,7 @@ class CustomerDrawer extends StatelessWidget {
               icon: Icons.category,
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(
+                Navigator.pushReplacementNamed(
                   context,
                   ProductCategoriesPage.id,
                 );
@@ -78,7 +78,7 @@ class CustomerDrawer extends StatelessWidget {
               icon: Icons.add_photo_alternate,
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(
+                Navigator.pushReplacementNamed(
                   context,
                   PrescriptionOrderPage.id,
                 );
@@ -89,7 +89,7 @@ class CustomerDrawer extends StatelessWidget {
               icon: Icons.shopping_cart,
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(
+                Navigator.pushReplacementNamed(
                   context,
                   CurrentOrdersPage.id,
                 );
@@ -100,7 +100,7 @@ class CustomerDrawer extends StatelessWidget {
               icon: Icons.history,
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(
+                Navigator.pushReplacementNamed(
                   context,
                   PastOrdersPage.id,
                 );
@@ -111,7 +111,7 @@ class CustomerDrawer extends StatelessWidget {
               icon: Icons.settings,
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(
+                Navigator.pushReplacementNamed(
                   context,
                   SettingsPage.id,
                 );

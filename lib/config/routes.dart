@@ -11,7 +11,7 @@ import 'package:go_pharma/ui/customer/prescription_order/prescription_order.dart
 import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
-import 'package:go_pharma/ui/customer/settings/settings.dart';
+import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
