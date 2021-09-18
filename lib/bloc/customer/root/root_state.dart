@@ -13,12 +13,14 @@ class RootState {
   final Customer customer;
   final RootSignInState signInState;
   final bool initializing;
+  final bool isEditable;
 
   RootState({
     @required this.error,
     @required this.customer,
     @required this.signInState,
     @required this.initializing,
+    @required this.isEditable,
   });
 
   static RootState get initialState => RootState(
@@ -26,6 +28,7 @@ class RootState {
         customer: null,
         signInState: RootSignInState.INITIALIZING,
         initializing: false,
+        isEditable: false,
       );
 
   RootState clone({
@@ -33,11 +36,14 @@ class RootState {
     Customer customer,
     RootSignInState signInState,
     bool initializing,
+    bool isEditable,
   }) {
     return RootState(
-        error: error ?? this.error,
-        customer: customer ?? this.customer,
-        signInState: signInState ?? this.signInState,
-        initializing: initializing ?? this.initializing);
+      error: error ?? this.error,
+      customer: customer ?? this.customer,
+      signInState: signInState ?? this.signInState,
+      initializing: initializing ?? this.initializing,
+      isEditable: isEditable ?? this.isEditable,
+    );
   }
 }

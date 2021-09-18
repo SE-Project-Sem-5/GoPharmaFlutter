@@ -135,7 +135,7 @@ class CustomerSignUpStart extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pushNamed(
+                      Navigator.pushReplacementNamed(
                         context,
                         CustomerSignInStart.id,
                       );
@@ -153,7 +153,7 @@ class CustomerSignUpStart extends StatelessWidget {
                   final bool isValid =
                       EmailValidator.validate(emailController.text);
                   print(isValid);
-                  Navigator.pushNamed(
+                  Navigator.pushReplacementNamed(
                     context,
                     CustomerHomePage.id,
                   );

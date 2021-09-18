@@ -14,23 +14,26 @@ class CustomerHomePage extends StatelessWidget {
         bool willLeave = false;
         // show the confirm dialog
         await showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-                  title: Text('Are you sure want to leave?'),
-                  actions: [
-                    ElevatedButton(
-                      child: Text('Yes'),
-                      onPressed: () {
-                        willLeave = true;
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    TextButton(
-                      child: Text('No'),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                  ],
-                ));
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text(
+              'Are you sure want to leave? Any unsaved data will be lost.',
+            ),
+            actions: [
+              ElevatedButton(
+                child: Text('Yes'),
+                onPressed: () {
+                  willLeave = true;
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('No'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
         return willLeave;
       },
       child: SafeArea(

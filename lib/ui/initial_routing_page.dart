@@ -50,7 +50,7 @@ class InitialRoutingPage extends StatelessWidget {
                 RoundedButtonFilled(
                   title: "CUSTOMER",
                   size: size,
-                  onTapped: () => Navigator.pushNamed(
+                  onTapped: () => Navigator.pushReplacementNamed(
                     context,
                     CustomerStartingPage.id,
                   ),
@@ -60,7 +60,7 @@ class InitialRoutingPage extends StatelessWidget {
                   size: size,
                   fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
                   textColor: GoPharmaColors.BlackColor,
-                  onTapped: () => Navigator.pushNamed(
+                  onTapped: () => Navigator.pushReplacementNamed(
                     context,
                     DeliveryAgentStartingPage.id,
                   ),

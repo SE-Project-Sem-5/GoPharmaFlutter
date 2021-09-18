@@ -27,7 +27,7 @@ class CustomerStartingPage extends StatelessWidget {
               RoundedButtonFilled(
                 title: "LOGIN",
                 size: size,
-                onTapped: () => Navigator.pushNamed(
+                onTapped: () => Navigator.pushReplacementNamed(
                   context,
                   CustomerSignInStart.id,
                 ),
@@ -37,7 +37,7 @@ class CustomerStartingPage extends StatelessWidget {
                 size: size,
                 fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
                 textColor: GoPharmaColors.BlackColor,
-                onTapped: () => Navigator.pushNamed(
+                onTapped: () => Navigator.pushReplacementNamed(
                   context,
                   CustomerSignUpStart.id,
                 ),
