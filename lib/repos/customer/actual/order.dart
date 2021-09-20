@@ -1,4 +1,5 @@
-import 'package:go_pharma/repos/customer/actual/order/order_product.dart';
+import 'package:go_pharma/repos/customer/actual/addressDetails.dart';
+import 'package:go_pharma/repos/customer/actual/orderProduct.dart';
 
 class Order {
   int id;
@@ -11,6 +12,7 @@ class Order {
   int destinationAddressID;
   int customer;
   List<OrderProducts> orderProducts;
+  AddressDetail addressDetail;
 
   Order(
       {this.id,
@@ -22,7 +24,8 @@ class Order {
       this.deliveryCharge,
       this.destinationAddressID,
       this.customer,
-      this.orderProducts});
+      this.orderProducts,
+      this.addressDetail});
 
   Order.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -40,23 +43,8 @@ class Order {
         orderProducts.add(new OrderProducts.fromJson(v));
       });
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['orderedDate'] = this.orderedDate;
-    data['totalPrice'] = this.totalPrice;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['orderType'] = this.orderType;
-    data['deliveryCharge'] = this.deliveryCharge;
-    data['destinationAddressID'] = this.destinationAddressID;
-    data['customer'] = this.customer;
-    if (this.orderProducts != null) {
-      data['OrderProducts'] =
-          this.orderProducts.map((v) => v.toJson()).toList();
-    }
-    return data;
+    addressDetail = json['AddressDetail'] != null
+        ? new AddressDetail.fromJson(json['AddressDetail'])
+        : null;
   }
 }

@@ -1,3 +1,7 @@
+import 'package:go_pharma/repos/customer/actual/category.dart';
+import 'package:go_pharma/repos/customer/actual/productSize.dart';
+import 'package:go_pharma/repos/customer/actual/supplier.dart';
+
 class Product {
   int id;
   String productName;
@@ -15,6 +19,9 @@ class Product {
   int categoryID;
   int supplierID;
   int size;
+  Category category;
+  ProductSize productSize;
+  Supplier supplier;
 
   Product(
       {this.id,
@@ -32,7 +39,10 @@ class Product {
       this.brandName,
       this.categoryID,
       this.supplierID,
-      this.size});
+      this.size,
+      this.category,
+      this.productSize,
+      this.supplier});
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -51,6 +61,15 @@ class Product {
     categoryID = json['categoryID'];
     supplierID = json['supplierID'];
     size = json['size'];
+    category = json['Category'] != null
+        ? new Category.fromJson(json['Category'])
+        : null;
+    productSize = json['ProductSize'] != null
+        ? new ProductSize.fromJson(json['ProductSize'])
+        : null;
+    supplier = json['Supplier'] != null
+        ? new Supplier.fromJson(json['Supplier'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -71,6 +90,15 @@ class Product {
     data['categoryID'] = this.categoryID;
     data['supplierID'] = this.supplierID;
     data['size'] = this.size;
+    if (this.category != null) {
+      data['Category'] = this.category.toJson();
+    }
+    if (this.productSize != null) {
+      data['ProductSize'] = this.productSize.toJson();
+    }
+    if (this.supplier != null) {
+      data['Supplier'] = this.supplier.toJson();
+    }
     return data;
   }
 }

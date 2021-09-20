@@ -1,4 +1,4 @@
-import 'package:go_pharma/repos/customer/actual/order/product.dart';
+import 'package:go_pharma/repos/customer/actual/product.dart';
 
 class OrderProducts {
   int id;
