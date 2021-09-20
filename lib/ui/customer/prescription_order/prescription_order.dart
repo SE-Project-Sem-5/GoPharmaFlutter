@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_bloc.dart';
-import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_event.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
@@ -21,54 +20,46 @@ class PrescriptionOrderPage extends StatelessWidget {
     return BlocBuilder<PrescriptionOrderBloc, PrescriptionOrderState>(
       buildWhen: (previous, current) => previous.step != current.step,
       builder: (context, state) {
-        return WillPopScope(
-          // ignore: missing_return
-          onWillPop: () {
-            prescriptionOrderBloc.add(
-                PreviousStepEvent(currentStep: state.step, context: context));
-          },
-          child: SafeArea(
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text(
-                  titles[state.step],
-                ),
+        return SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                titles[state.step],
               ),
-              drawer:
-                  state.step == PrescriptionOrderStep.PRESCRIPTIONORDER_PHOTO
-                      ? CustomerDrawer()
-                      : null,
-              body: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    pageSwitcher(state.step),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                  ],
-                ),
-              ),
-              bottomNavigationBar:
-                  state.step == PrescriptionOrderStep.PRESCRIPTIONORDER_DISTRICT
-                      ? Container(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0,
-                              vertical: 20.0,
-                            ),
-                            child: RoundedButtonFilled(
-                              size: MediaQuery.of(context).size,
-                              onTapped: () {},
-                              fillColor: GoPharmaColors.PrimaryColor,
-                              textColor: GoPharmaColors.WhiteColor,
-                              title: "Confirm Prescription Order",
-                            ),
-                          ),
-                        )
-                      : null,
             ),
+            drawer: state.step == PrescriptionOrderStep.PRESCRIPTIONORDER_PHOTO
+                ? CustomerDrawer()
+                : null,
+            body: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  pageSwitcher(state.step),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                ],
+              ),
+            ),
+            bottomNavigationBar:
+                state.step == PrescriptionOrderStep.PRESCRIPTIONORDER_DISTRICT
+                    ? Container(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0,
+                            vertical: 20.0,
+                          ),
+                          child: RoundedButtonFilled(
+                            size: MediaQuery.of(context).size,
+                            onTapped: () {},
+                            fillColor: GoPharmaColors.PrimaryColor,
+                            textColor: GoPharmaColors.WhiteColor,
+                            title: "Confirm Prescription Order",
+                          ),
+                        ),
+                      )
+                    : null,
           ),
         );
       },

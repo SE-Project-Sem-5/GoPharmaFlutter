@@ -8,6 +8,7 @@ import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_up/delivery_agent_sign_up.dart';
 
 import '../delivery_agent_home_page.dart';
 
@@ -160,7 +161,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                         onTap: () {
                           Navigator.pushReplacementNamed(
                             context,
-                            DeliveryAgentHomePage.id,
+                            DeliveryAgentSignUpStart.id,
                           );
                         },
                       ),
@@ -174,8 +175,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                     textColor: GoPharmaColors.WhiteColor,
                     onTapped: () {
                       // if (_form.currentState!.validate()) {
-
-                      Navigator.pushReplacementNamed(
+                      Navigator.pushNamed(
                         context,
                         DeliveryAgentHomePage.id,
                       );

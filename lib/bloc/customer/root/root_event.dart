@@ -30,6 +30,10 @@ class RootSignInEvent extends RootEvent {
   RootSignInEvent({this.email, this.password});
 }
 
+class ToggleEditableEvent extends RootEvent {
+  ToggleEditableEvent();
+}
+
 class SignOutEvent extends RootEvent {}
 
 class StartInitCheckEvent extends RootEvent {}
