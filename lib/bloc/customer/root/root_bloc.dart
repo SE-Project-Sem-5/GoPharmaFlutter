@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/customer/user_customer/customer_model.dart';
+
 import 'root_event.dart';
 import 'root_state.dart';
 
@@ -36,6 +37,10 @@ class RootBloc extends Bloc<RootEvent, RootState> {
       case SignOutEvent:
         yield state.clone(signInState: RootSignInState.SIGNED_OUT);
         //TODO: Logic to sign out user
+        break;
+
+      case ToggleEditableEvent:
+        yield state.clone(isEditable: !state.isEditable);
         break;
 
       case RootSignInEvent:
