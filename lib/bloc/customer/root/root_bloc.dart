@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/user_customer/customer_model.dart';
+import 'package:go_pharma/repos/customer/dummy/user_customer/customer_model.dart';
 
 import 'root_event.dart';
 import 'root_state.dart';

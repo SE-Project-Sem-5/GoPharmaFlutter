@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:go_pharma/repos/customer/location/location_model.dart';
+import 'package:go_pharma/repos/customer/dummy/location/location_model.dart';
 
 class LocationApiProvider {
   final Dio _dio = Dio();

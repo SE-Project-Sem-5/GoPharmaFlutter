@@ -16,6 +16,10 @@ class Product {
   String unitOfMeasure;
 
   Product({
+    this.brandName,
+    this.category,
+    this.categoryName,
+    this.supplierID,
     //TODO: get all info from database
     this.unitOfMeasure = "unit",
     this.id,

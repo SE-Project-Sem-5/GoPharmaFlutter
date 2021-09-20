@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/product/product_model.dart';
+import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 
 @immutable
 class CheckoutState {
@@ -9,10 +9,10 @@ class CheckoutState {
   final double productListTotal;
 
   CheckoutState({
-      this.error,
-      this.productListPrescriptionless,
-      this.productListTotal,
-      this.productListNeedPrescriptions,
+    this.error,
+    this.productListPrescriptionless,
+    this.productListTotal,
+    this.productListNeedPrescriptions,
   });
 
   static CheckoutState get initialState => CheckoutState(
@@ -24,8 +24,8 @@ class CheckoutState {
 
   CheckoutState clone({
     String error = '',
-      List<Product> productListNeedPrescriptions,
-      List<Product> productListPrescriptionless,
+    List<Product> productListNeedPrescriptions,
+    List<Product> productListPrescriptionless,
     productListTotal = 0.0,
   }) {
     return CheckoutState(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/user_customer/customer_model.dart';
+import 'package:go_pharma/repos/customer/dummy/user_customer/customer_model.dart';
 
 enum RootSignInState {
   INITIALIZING,
