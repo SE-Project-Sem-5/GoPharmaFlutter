@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/order/past_order_model.dart';
+import 'package:go_pharma/repos/customer/dummy/order/past_order_model.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_order_full_view.dart';
 import 'package:intl/intl.dart';
 

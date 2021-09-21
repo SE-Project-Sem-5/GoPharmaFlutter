@@ -13,6 +13,15 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var firstNameController = TextEditingController();
+    var lastNameController = TextEditingController();
+    var emailController = TextEditingController();
+    var contactNumberController = TextEditingController();
+    var addressController = TextEditingController();
+    var districtController = TextEditingController();
+    var provinceController = TextEditingController();
+    var cityController = TextEditingController();
+
     var bloc = BlocProvider.of<RootBloc>(context);
     return Scaffold(
       appBar: AppBar(
@@ -26,11 +35,11 @@ class SettingsPage extends StatelessWidget {
         builder: (context, state) {
           return Padding(
             padding: EdgeInsets.only(
-              bottom: 25.0,
               left: 25.0,
               right: 25.0,
             ),
             child: ListView(
+              physics: ClampingScrollPhysics(),
               children: <Widget>[
                 BoldText(
                   text: 'Personal Information',
@@ -48,38 +57,8 @@ class SettingsPage extends StatelessWidget {
                         enabled: true,
                         autofocus: true,
                       )
-                    : Text(
-                        state.customer.firstName ?? "Customer First Name",
-                      ),
-                BoldText(
-                  text: 'Last Name',
-                  fontSize: 16.0,
-                ),
-                state.isEditable
-                    ? TextField(
-                        decoration: InputDecoration(
-                          hintText: "Enter Your Last Name",
-                        ),
-                        enabled: true,
-                        autofocus: true,
-                      )
-                    : Text(
-                        state.customer.lastName ?? "Customer Last Name",
-                      ),
-                BoldText(
-                  text: 'Last Name',
-                  fontSize: 16.0,
-                ),
-                state.isEditable
-                    ? TextField(
-                        decoration: InputDecoration(
-                          hintText: "Enter Your Last Name",
-                        ),
-                        enabled: true,
-                        autofocus: true,
-                      )
-                    : Text(
-                        state.customer.lastName ?? "Customer Last Name",
+                    : InformationText(
+                        "Customer First Name",
                       ),
                 BoldText(
                   text: 'Email Address',
@@ -92,7 +71,9 @@ class SettingsPage extends StatelessWidget {
                         ),
                         enabled: true,
                       )
-                    : Text(state.customer.email ?? "Customer Email"),
+                    : InformationText(
+                        "Customer Email",
+                      ),
                 BoldText(
                   text: 'Mobile Number',
                   fontSize: 16.0,
@@ -102,14 +83,55 @@ class SettingsPage extends StatelessWidget {
                         decoration: InputDecoration(
                           hintText: "Enter Mobile Number",
                         ),
-                        enabled: false,
+                        enabled: true,
                       )
-                    : Text(
-                        state.customer.phoneNumber ?? "Customer Mobile Number",
+                    : InformationText(
+                        "Customer Phone Number",
                       ),
-                SizedBox(
-                  height: 50.0,
+                BoldText(
+                  text: 'Address',
+                  fontSize: 16.0,
                 ),
+                state.isEditable
+                    ? TextField(
+                        decoration: InputDecoration(
+                          hintText: "Enter Mobile Number",
+                        ),
+                        enabled: true,
+                      )
+                    : InformationText(
+                        "Customer Street Number",
+                      ),
+                state.isEditable
+                    ? TextField(
+                        decoration: InputDecoration(
+                          hintText: "City",
+                        ),
+                        enabled: true,
+                      )
+                    : InformationText(
+                        "Customer City",
+                      ),
+                state.isEditable
+                    ? TextField(
+                        decoration: InputDecoration(
+                          hintText: "District",
+                        ),
+                        enabled: true,
+                      )
+                    : InformationText(
+                        "Customer District",
+                      ),
+                state.isEditable
+                    ? TextField(
+                        decoration: InputDecoration(
+                          hintText: "Province",
+                        ),
+                        enabled: true,
+                      )
+                    : InformationText(
+                        "Customer Province",
+                      ),
                 state.isEditable
                     ? Row(
                         children: [
@@ -159,6 +181,25 @@ class SettingsPage extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class InformationText extends StatelessWidget {
+  final String text;
+
+  const InformationText(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 16.0,
+        ),
       ),
     );
   }

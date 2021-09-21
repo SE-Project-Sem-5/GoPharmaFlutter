@@ -3,12 +3,13 @@ class CurrentOrder {
   final DateTime orderedDate;
   final double price;
   final String status;
+
   //TODO: make status an enum?
   //TODO: add products ordered
   CurrentOrder({
-      this.orderedDate,
-      this.price,
-      this.orderId,
-      this.status,
+    this.orderedDate,
+    this.price,
+    this.orderId,
+    this.status,
   });
 }
