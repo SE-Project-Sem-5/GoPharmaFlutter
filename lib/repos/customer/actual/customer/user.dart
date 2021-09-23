@@ -1,42 +1,45 @@
 import 'package:go_pharma/repos/customer/actual/addressDetails.dart';
+import 'package:go_pharma/repos/customer/actual/customer/customer.dart';
 
-class Customer {
+class User {
   int id;
   String firstName;
   String lastName;
+  int homeAddressID;
   String dateOfBirth;
   String gender;
   String contactNumber;
-  String joinedDate;
   String createdAt;
   String updatedAt;
-  int homeAddressID;
+  Customer customer;
   AddressDetail addressDetail;
 
-  Customer(
+  User(
       {this.id,
       this.firstName,
       this.lastName,
+      this.homeAddressID,
       this.dateOfBirth,
       this.gender,
       this.contactNumber,
-      this.joinedDate,
       this.createdAt,
       this.updatedAt,
-      this.homeAddressID,
+      this.customer,
       this.addressDetail});
 
-  Customer.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     firstName = json['firstName'];
     lastName = json['lastName'];
+    homeAddressID = json['homeAddressID'];
     dateOfBirth = json['dateOfBirth'];
     gender = json['gender'];
     contactNumber = json['contactNumber'];
-    joinedDate = json['joinedDate'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    homeAddressID = json['homeAddressID'];
+    customer = json['Customer'] != null
+        ? new Customer.fromJson(json['Customer'])
+        : null;
     addressDetail = json['AddressDetail'] != null
         ? new AddressDetail.fromJson(json['AddressDetail'])
         : null;
@@ -47,13 +50,15 @@ class Customer {
     data['id'] = this.id;
     data['firstName'] = this.firstName;
     data['lastName'] = this.lastName;
+    data['homeAddressID'] = this.homeAddressID;
     data['dateOfBirth'] = this.dateOfBirth;
     data['gender'] = this.gender;
     data['contactNumber'] = this.contactNumber;
-    data['joinedDate'] = this.joinedDate;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
-    data['homeAddressID'] = this.homeAddressID;
+    if (this.customer != null) {
+      data['Customer'] = this.customer.toJson();
+    }
     if (this.addressDetail != null) {
       data['AddressDetail'] = this.addressDetail.toJson();
     }

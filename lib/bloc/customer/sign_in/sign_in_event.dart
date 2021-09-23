@@ -13,3 +13,7 @@ class ToggleVisibility extends CustomerSignInEvent {
   final bool isVisible;
   ToggleVisibility(this.isVisible);
 }
+
+class SignInCustomer extends CustomerSignInEvent {
+  SignInCustomer();
+}

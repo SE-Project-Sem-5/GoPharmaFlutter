@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_pharma/repos/customer/actual/customer/customerAPIProvider.dart';
+import 'package:go_pharma/repos/customer/actual/customer/user.dart';
 
 import 'sign_in_event.dart';
 import 'sign_in_state.dart';
@@ -10,6 +12,8 @@ class CustomerSignInBloc
     extends Bloc<CustomerSignInEvent, CustomerSignInState> {
   CustomerSignInBloc(BuildContext context)
       : super(CustomerSignInState.initialState);
+
+  final UserAPIProvider _userAPIProvider = UserAPIProvider();
 
   @override
   Stream<CustomerSignInState> mapEventToState(
@@ -23,6 +27,11 @@ class CustomerSignInBloc
       case ToggleVisibility:
         final isVisible = (event as ToggleVisibility).isVisible;
         yield state.clone(isVisible: isVisible);
+        break;
+      case SignInCustomer:
+        User user = await _userAPIProvider.getUser();
+        print(user.firstName);
+        print(user.lastName);
         break;
     }
   }

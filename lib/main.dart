@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_bloc.dart';
 import 'package:go_pharma/bloc/customer/root/root_bloc.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_bloc.dart';
 import 'package:go_pharma/bloc/internet_connectivity/internet_bloc.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -25,7 +26,6 @@ main() async {
 class GoPharmaApp extends StatelessWidget {
   bool isLoggedIn = false;
   Connectivity connectivity = Connectivity();
-  // This widget is the root of your application.
   GoPharmaApp({this.isLoggedIn});
 
   @override
@@ -42,6 +42,9 @@ class GoPharmaApp extends StatelessWidget {
         ),
         BlocProvider<CheckoutBloc>(
           create: (context) => CheckoutBloc(context),
+        ),
+        BlocProvider<CustomerSignInBloc>(
+          create: (context) => CustomerSignInBloc(context),
         ),
         BlocProvider<RootBloc>(
           create: (context) => RootBloc(context),
