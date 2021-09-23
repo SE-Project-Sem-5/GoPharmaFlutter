@@ -1,53 +1,55 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 enum PrescriptionOrderStep {
   PRESCRIPTIONORDER_PHOTO,
-  PRESCRIPTIONORDER_DISTRICT,
+  PRESCRIPTIONORDER_ZONE,
+  PRESCRIPTIONORDER_SUMMARY
 }
 
 @immutable
 class PrescriptionOrderState {
   final String error;
   final List<String> localPhotoPaths;
-  //TODO: if it says all, it means all districts? check implementation
-  final List<String> districts;
+  final String zone;
   final PrescriptionOrderStep step;
-  final bool isDistrictsLoading;
-  final List<String> selectedDistricts;
+  final List<File> photos;
+  final bool orderLoading;
 
   PrescriptionOrderState({
+    this.orderLoading = false,
+    this.photos,
     this.error,
     this.localPhotoPaths,
-    this.districts,
+    this.zone = "city",
     this.step,
-    this.isDistrictsLoading,
-    this.selectedDistricts,
   });
 
   static PrescriptionOrderState get initialState => PrescriptionOrderState(
         error: '',
         localPhotoPaths: [],
-        districts: ["All"],
+        zone: "city",
         step: PrescriptionOrderStep.PRESCRIPTIONORDER_PHOTO,
-        isDistrictsLoading: true,
-        selectedDistricts: [],
+        photos: [],
+        orderLoading: false,
       );
 
   PrescriptionOrderState clone({
     String error = '',
     List<String> localPhotoPaths,
-    List<String> districts,
+    List<File> photos,
+    String zone,
     PrescriptionOrderStep step,
-    bool isDistrictsLoading,
-    List<String> selectedDistricts,
+    bool orderLoading,
   }) {
     return PrescriptionOrderState(
       error: error ?? this.error,
       localPhotoPaths: localPhotoPaths ?? this.localPhotoPaths,
-      districts: districts ?? this.districts,
+      zone: zone ?? this.zone,
       step: step ?? this.step,
-      isDistrictsLoading: isDistrictsLoading ?? this.isDistrictsLoading,
-      selectedDistricts: selectedDistricts ?? this.selectedDistricts,
+      photos: photos ?? this.photos,
+      orderLoading: orderLoading ?? this.orderLoading,
     );
   }
 }

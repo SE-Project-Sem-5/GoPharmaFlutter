@@ -160,8 +160,6 @@ class CustomerSignInStart extends StatelessWidget {
                   textColor: GoPharmaColors.WhiteColor,
                   onTapped: () {
                     final bloc = BlocProvider.of<CustomerSignInBloc>(context);
-                    bloc.add(SignInCustomer());
-                    // if (_form.currentState!.validate()) {
                     Navigator.pushReplacementNamed(
                       context,
                       CustomerHomePage.id,

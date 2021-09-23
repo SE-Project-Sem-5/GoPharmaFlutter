@@ -46,14 +46,37 @@ class CheckoutReceipt extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ProductReceiptText(
+                            text: "Product",
+                            fontWeight: FontWeight.bold,
+                          ),
+                          ProductReceiptText(
+                            text: "Final Price",
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
+                    ),
                     CheckoutReceiptProductList(
-                      productList: state.productListPrescriptionless,
+                      productList: state.productListPrescriptionless +
+                          state.productListNeedPrescriptions,
                     ),
                     state.productListNeedPrescriptions.length > 0
-                        ? ProductReceiptText(
-                            text: "These items need prescriptions.")
+                        ? Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ProductReceiptText(
+                              text: "Note: These items need prescriptions.",
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
                         : Text(""),
                     CheckoutReceiptProductList(
+                      showPrice: false,
                       productList: state.productListNeedPrescriptions,
                     ),
                   ],
@@ -123,10 +146,12 @@ class CheckoutReceipt extends StatelessWidget {
 }
 
 class CheckoutReceiptProductList extends StatelessWidget {
+  final bool showPrice;
   final List<Product> productList;
   const CheckoutReceiptProductList({
     this.productList,
     Key key,
+    this.showPrice = true,
   }) : super(key: key);
 
   @override
@@ -147,11 +172,13 @@ class CheckoutReceiptProductList extends StatelessWidget {
                   " x" +
                   productList[index].amountOrdered.toString(),
             ),
-            ProductReceiptText(
-              text:
-                  (productList[index].price * productList[index].amountOrdered)
-                      .toString(),
-            ),
+            showPrice
+                ? ProductReceiptText(
+                    text: (productList[index].price *
+                            productList[index].amountOrdered)
+                        .toString(),
+                  )
+                : Container(),
           ],
         ),
       ),
@@ -161,14 +188,18 @@ class CheckoutReceiptProductList extends StatelessWidget {
 
 class ProductReceiptText extends StatelessWidget {
   final String text;
-  const ProductReceiptText({Key key, this.text}) : super(key: key);
+  final FontWeight fontWeight;
+  const ProductReceiptText(
+      {Key key, this.text, this.fontWeight = FontWeight.normal})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: 16,
+        fontWeight: this.fontWeight,
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,8 @@ class PrescriptionOrderBloc
 
   static List<PrescriptionOrderStep> stepOrder = [
     PrescriptionOrderStep.PRESCRIPTIONORDER_PHOTO,
-    PrescriptionOrderStep.PRESCRIPTIONORDER_DISTRICT,
+    PrescriptionOrderStep.PRESCRIPTIONORDER_ZONE,
+    PrescriptionOrderStep.PRESCRIPTIONORDER_SUMMARY,
   ];
 
   PrescriptionOrderBloc(BuildContext context)
@@ -32,57 +34,38 @@ class PrescriptionOrderBloc
           error: error,
         );
         break;
-      case UploadPrescriptionFromGalleryEvent:
-        final List<String> localPhotoPaths =
-            (event as UploadPrescriptionFromGalleryEvent).localPhotoPaths;
+      case UploadPrescriptionEvent:
+        final String image = (event as UploadPrescriptionEvent).image;
         final List<String> newLocalPhotoPaths = state.localPhotoPaths;
-        for (String i in localPhotoPaths) {
-          newLocalPhotoPaths.insert(0, i);
-        }
+        final List<File> photos = state.photos;
+        newLocalPhotoPaths.add(image);
+        photos.add(File(image));
         yield state.clone(
           localPhotoPaths: newLocalPhotoPaths,
+          photos: photos,
         );
         break;
-      case SelectDistrictEvent:
-        //TODO: Add a select all option
-        final String selectedDistrict =
-            (event as SelectDistrictEvent).selectedDistrict;
-        List<String> selectedDistricts = state.selectedDistricts;
-        if (selectedDistricts.contains(selectedDistrict)) {
-          selectedDistricts.remove(selectedDistrict);
-        } else {
-          selectedDistricts.add(selectedDistrict);
-        }
+      case SelectZoneEvent:
+        final String zone = (event as SelectZoneEvent).zone;
         yield state.clone(
-          selectedDistricts: selectedDistricts,
+          zone: zone,
         );
-
         break;
-      case LoadDistrictsEvent:
+      case RemoveImageEvent:
+        final String image = (event as RemoveImageEvent).image;
+        final List<String> localPhotoPaths = state.localPhotoPaths;
+        final List<File> photos = state.photos;
+        photos.remove(File(image));
+        localPhotoPaths.remove(image);
         yield state.clone(
-          isDistrictsLoading: true,
+          localPhotoPaths: localPhotoPaths,
+          photos: photos,
         );
-        try {
-          List<String> districts = await locationApiProvider.getDistricts();
-          districts.sort();
-          if (districts != []) {
-            yield state.clone(
-              districts: districts,
-              isDistrictsLoading: false,
-            );
-          } else {
-            print("Error");
-            yield state.clone(
-              error: "Error occured",
-              isDistrictsLoading: true,
-            );
-          }
-        } catch (error, stacktrace) {
-          print("Exception occured: $error stackTrace: $stacktrace");
-          yield state.clone(
-            error: error,
-          );
-        }
+        break;
+      case ConfirmOrderEvent:
+        yield state.clone(orderLoading: true);
+        //TODO: call endpoint to upload images
+        yield state.clone(orderLoading: false);
         break;
       case NextStepEvent:
         final currentStep = (event as NextStepEvent).currentStep;
