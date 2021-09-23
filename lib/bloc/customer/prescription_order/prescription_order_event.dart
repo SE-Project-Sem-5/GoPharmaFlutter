@@ -6,25 +6,27 @@ abstract class PrescriptionOrderEvent {}
 
 class ErrorEvent extends PrescriptionOrderEvent {
   final String error;
-
   ErrorEvent(this.error);
 }
 
-class UploadPrescriptionFromGalleryEvent extends PrescriptionOrderEvent {
-  final List<String> localPhotoPaths;
-  UploadPrescriptionFromGalleryEvent({this.localPhotoPaths});
+class UploadPrescriptionEvent extends PrescriptionOrderEvent {
+  final String image;
+  UploadPrescriptionEvent({this.image});
 }
 
-class SelectDistrictEvent extends PrescriptionOrderEvent {
-  final String selectedDistrict;
-
-  SelectDistrictEvent({this.selectedDistrict});
+class ConfirmOrderEvent extends PrescriptionOrderEvent {
+  ConfirmOrderEvent();
 }
 
-class LoadDistrictsEvent extends PrescriptionOrderEvent {
-  final List<String> districts;
-  final bool isLoadingDistricts;
-  LoadDistrictsEvent({this.districts, this.isLoadingDistricts});
+class RemoveImageEvent extends PrescriptionOrderEvent {
+  final String image;
+  RemoveImageEvent({this.image});
+}
+
+class SelectZoneEvent extends PrescriptionOrderEvent {
+  final String zone;
+
+  SelectZoneEvent({this.zone});
 }
 
 class NextStepEvent extends PrescriptionOrderEvent {
