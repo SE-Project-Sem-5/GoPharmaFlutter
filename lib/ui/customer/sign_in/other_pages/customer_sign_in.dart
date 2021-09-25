@@ -1,25 +1,24 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/customer/sign_in/sign_in_provider.dart';
-import 'package:go_pharma/bloc/customer/sign_up/sign_up_bloc.dart';
-import 'package:go_pharma/bloc/customer/sign_up/sign_up_event.dart';
-import 'package:go_pharma/bloc/customer/sign_up/sign_up_state.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_bloc.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_event.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_state.dart';
+import 'package:go_pharma/bloc/customer/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
+import 'dart:core';
+import 'package:email_validator/email_validator.dart';
 
-class SignUpStart extends StatelessWidget {
-  static const String id = "customer_sign_up";
+class CustomerSignInStart extends StatelessWidget {
+  static const String id = "customer_sign_in";
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-  TextEditingController reenteredPasswordController =
-      new TextEditingController();
-  final GlobalKey<FormState> _form = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _form = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    String title = "Enter your email and password";
-    final bloc = BlocProvider.of<CustomerSignUpBloc>(context);
+    final customerSignInBloc = BlocProvider.of<CustomerSignInBloc>(context);
 
     return Form(
       key: _form,
@@ -29,25 +28,24 @@ class SignUpStart extends StatelessWidget {
         children: [
           Spacer(),
           Text(
-            title,
+            "Sign in to your account.",
             style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
                 color: GoPharmaColors.PrimaryColor),
           ),
-          SizedBox(
-            height: 30,
-          ),
+          Spacer(),
           TextFieldContainer(
             child: TextFormField(
-              validator: (val) {
-                final bool isValid =
-                    EmailValidator.validate(emailController.text);
-                if (!isValid) return "Invalid email";
-                if (val.isEmpty) return 'Empty';
-                return null;
-              },
               controller: emailController,
+              // ignore: missing_return
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return ("Please type in your email address.");
+                } else if (!EmailValidator.validate(emailController.text)) {
+                  return ("Please type in a valid email address");
+                }
+              },
               style: TextStyle(
                 fontSize: 18.0,
                 color: Colors.black,
@@ -59,7 +57,7 @@ class SignUpStart extends StatelessWidget {
                   Icons.person,
                   color: GoPharmaColors.PrimaryColor,
                 ),
-                hintText: "Your Email",
+                hintText: "Your email",
                 hintStyle: TextStyle(
                   color: GoPharmaColors.hintTextColor,
                   fontSize: 18.0,
@@ -68,10 +66,11 @@ class SignUpStart extends StatelessWidget {
               ),
             ),
           ),
-          BlocBuilder<CustomerSignUpBloc, CustomerSignUpState>(
+          BlocBuilder<CustomerSignInBloc, CustomerSignInState>(
             buildWhen: (previous, current) =>
                 previous.isVisible != current.isVisible,
             builder: (context, state) {
+              final bloc = BlocProvider.of<CustomerSignInBloc>(context);
               return TextFieldContainer(
                 child: TextFormField(
                   controller: passwordController,
@@ -79,6 +78,7 @@ class SignUpStart extends StatelessWidget {
                     if (value == null || value.isEmpty) {
                       return ("Please type in your password.");
                     }
+                    return '';
                   },
                   style: TextStyle(
                     fontSize: 18.0,
@@ -106,57 +106,11 @@ class SignUpStart extends StatelessWidget {
                         color: GoPharmaColors.PrimaryColor,
                       ),
                       onTap: () {
-                        bloc.add(ToggleVisibility());
-                      },
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-          BlocBuilder<CustomerSignUpBloc, CustomerSignUpState>(
-            buildWhen: (previous, current) =>
-                previous.isVisible != current.isVisible,
-            builder: (context, state) {
-              return TextFieldContainer(
-                child: TextFormField(
-                  controller: reenteredPasswordController,
-                  // ignore: missing_return
-                  validator: (value) {
-                    if (value != passwordController.text) {
-                      return "Your passwords don't match.";
-                    }
-                    if (value == null || value.isEmpty) {
-                      return ("Please reenter your password.");
-                    }
-                  },
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.black,
-                  ),
-                  obscureText: state.isVisible,
-                  onChanged: (String value) {},
-                  cursorColor: GoPharmaColors.PrimaryColor,
-                  decoration: InputDecoration(
-                    icon: Icon(
-                      Icons.lock,
-                      color: GoPharmaColors.PrimaryColor,
-                    ),
-                    hintText: "Confirm Password",
-                    hintStyle: TextStyle(
-                      color: GoPharmaColors.hintTextColor,
-                      fontSize: 18.0,
-                    ),
-                    border: InputBorder.none,
-                    suffixIcon: GestureDetector(
-                      child: Icon(
-                        state.isVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: GoPharmaColors.PrimaryColor,
-                      ),
-                      onTap: () {
-                        bloc.add(ToggleVisibility());
+                        bloc.add(
+                          ToggleVisibility(
+                            !state.isVisible,
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -169,7 +123,7 @@ class SignUpStart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Already have an account?",
+                "Don't have an account? ",
                 style: TextStyle(
                   color: GoPharmaColors.PrimaryColor,
                   fontSize: 16.0,
@@ -177,7 +131,7 @@ class SignUpStart extends StatelessWidget {
               ),
               GestureDetector(
                 child: Text(
-                  " Sign in.",
+                  "Sign up.",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: GoPharmaColors.PrimaryColor,
@@ -187,14 +141,14 @@ class SignUpStart extends StatelessWidget {
                 onTap: () {
                   Navigator.pushReplacementNamed(
                     context,
-                    CustomerSignInProvider.id,
+                    CustomerSignUpProvider.id,
                   );
                 },
               ),
             ],
           ),
           Spacer(),
-          BlocBuilder<CustomerSignUpBloc, CustomerSignUpState>(
+          BlocBuilder<CustomerSignInBloc, CustomerSignInState>(
             builder: (context, state) {
               return RoundedButtonFilled(
                 title: "Next",
@@ -203,13 +157,11 @@ class SignUpStart extends StatelessWidget {
                 textColor: GoPharmaColors.WhiteColor,
                 onTapped: () {
                   _form.currentState.validate();
-                  //TODO: backend call
-                  bloc.add(
-                    NextStepEvent(
-                      currentStep: state.step,
-                      context: context,
-                    ),
-                  );
+                  customerSignInBloc.add(NextStepEvent(
+                    currentStep: state.step,
+                    context: context,
+                  ));
+                  // }
                 },
               );
             },
