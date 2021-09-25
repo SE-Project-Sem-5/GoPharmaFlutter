@@ -214,7 +214,9 @@ class SignUpStart extends StatelessWidget {
               );
             },
           ),
-          Spacer(),
+          SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );

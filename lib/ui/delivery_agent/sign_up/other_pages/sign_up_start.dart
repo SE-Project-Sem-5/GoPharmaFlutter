@@ -7,7 +7,7 @@ import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
-import 'package:go_pharma/ui/delivery_agent/sign_in/delivery_agent_sign_in.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_in/other_pages/delivery_agent_sign_in.dart';
 
 class SignUpStart extends StatelessWidget {
   static const String id = "customer_sign_up";

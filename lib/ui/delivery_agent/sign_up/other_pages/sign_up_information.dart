@@ -49,6 +49,41 @@ class SignUpInformation extends StatelessWidget {
             ),
             enabled: true,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Gender: ",
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+              Radio(
+                activeColor: Theme.of(context).primaryColor,
+                value: "male",
+                groupValue: "Gender",
+                onChanged: (value) {},
+              ),
+              Text(
+                "Male",
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+              Radio(
+                activeColor: Theme.of(context).primaryColor,
+                value: "female",
+                groupValue: "Gender",
+                onChanged: (value) {},
+              ),
+              Text(
+                "Female",
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
           TextField(
             controller: contactNumberController,
             decoration: InputDecoration(

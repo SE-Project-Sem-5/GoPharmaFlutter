@@ -5,6 +5,7 @@ import 'package:go_pharma/bloc/customer/sign_up/sign_up_event.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
+import 'package:intl/intl.dart';
 
 class SignUpInformation extends StatelessWidget {
   @override
@@ -13,6 +14,7 @@ class SignUpInformation extends StatelessWidget {
     var firstNameController = TextEditingController();
     var lastNameController = TextEditingController();
     var contactNumberController = TextEditingController();
+    var birthdayController = TextEditingController();
     var addressController = TextEditingController();
     var cityController = TextEditingController();
     var districtController = TextEditingController();
@@ -45,6 +47,62 @@ class SignUpInformation extends StatelessWidget {
             controller: lastNameController,
             decoration: InputDecoration(
               hintText: "Last Name",
+            ),
+            enabled: true,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Gender: ",
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+              Radio(
+                activeColor: Theme.of(context).primaryColor,
+                value: "male",
+                groupValue: "Gender",
+                onChanged: (value) {},
+              ),
+              Text(
+                "Male",
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+              Radio(
+                activeColor: Theme.of(context).primaryColor,
+                value: "female",
+                groupValue: "Gender",
+                onChanged: (value) {},
+              ),
+              Text(
+                "Female",
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+          TextField(
+            controller: birthdayController,
+            decoration: InputDecoration(
+              hintText: "Date of Birth",
+              suffixIcon: GestureDetector(
+                child: new Icon(Icons.calendar_today),
+                onTap: () async {
+                  final datePick = await showDatePicker(
+                      context: context,
+                      initialDate: new DateTime.now(),
+                      firstDate: new DateTime(1900),
+                      lastDate: new DateTime(2100));
+                  if (datePick != null) {
+                    birthdayController.text =
+                        DateFormat("dd-MM-yyyy").format(datePick).toString();
+                  }
+                },
+              ),
             ),
             enabled: true,
           ),
@@ -95,6 +153,9 @@ class SignUpInformation extends StatelessWidget {
                 },
               );
             },
+          ),
+          SizedBox(
+            height: 20,
           ),
         ],
       ),
