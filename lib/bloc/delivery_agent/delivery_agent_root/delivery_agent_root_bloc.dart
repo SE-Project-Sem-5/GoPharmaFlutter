@@ -2,18 +2,20 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/dummy/user_customer/customer_model.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_event.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_state.dart';
+import 'package:go_pharma/repos/delivery_agent/user_delivery_agent/delivery_agent_model.dart';
 
-import 'root_event.dart';
-import 'root_state.dart';
-
-class RootBloc extends Bloc<RootEvent, RootState> {
-  RootBloc(BuildContext context) : super(RootState.initialState) {
+class DeliveryAgentRootBloc
+    extends Bloc<DeliveryAgentRootEvent, DeliveryAgentRootState> {
+  DeliveryAgentRootBloc(BuildContext context)
+      : super(DeliveryAgentRootState.initialState) {
     _init();
   }
 
   @override
-  Stream<RootState> mapEventToState(RootEvent event) async* {
+  Stream<DeliveryAgentRootState> mapEventToState(
+      DeliveryAgentRootEvent event) async* {
     switch (event.runtimeType) {
       case RootErrorEvent:
         final error = (event as RootErrorEvent).error;
@@ -21,8 +23,8 @@ class RootBloc extends Bloc<RootEvent, RootState> {
         yield state.clone(error: error);
         break;
       case UpdateUserEvent:
-        final customer = (event as UpdateUserEvent).customer;
-        yield state.clone(customer: customer);
+        final deliveryAgent = (event as UpdateUserEvent).deliveryAgent;
+        yield state.clone(deliveryAgent: deliveryAgent);
         break;
 
       case StartInitCheckEvent:
@@ -35,7 +37,7 @@ class RootBloc extends Bloc<RootEvent, RootState> {
         break;
 
       case SignOutEvent:
-        yield state.clone(signInState: RootSignInState.SIGNED_OUT);
+        yield state.clone(signInState: DeliveryAgentRootSignInState.SIGNED_OUT);
         //TODO: Logic to sign out user
         break;
 
@@ -46,14 +48,10 @@ class RootBloc extends Bloc<RootEvent, RootState> {
       case RootSignInEvent:
         final email = (event as RootSignInEvent).email;
         final password = (event as RootSignInEvent).password;
-
-        // TODO: Logic to sign in user
-        // final auth = locator<AuthService>();
-        // User user = await auth.createUserWithEmailAndPassword(email, password);
-        Customer customer = new Customer();
+        DeliveryAgent deliveryAgent = new DeliveryAgent();
         yield state.clone(
-          signInState: RootSignInState.SIGNED_IN,
-          customer: customer,
+          signInState: DeliveryAgentRootSignInState.SIGNED_IN,
+          deliveryAgent: deliveryAgent,
         );
         break;
     }
@@ -65,8 +63,8 @@ class RootBloc extends Bloc<RootEvent, RootState> {
     // Get email and password from shared prefs?
     // final auth = locator<AuthService>();
     // User user = await auth.createUserWithEmailAndPassword(email, password);
-    add(UpdateUserEvent(new Customer()));
-    add(ChangeSignInStateEvent(RootSignInState.SIGNED_OUT));
+    add(UpdateUserEvent(new DeliveryAgent()));
+    add(ChangeSignInStateEvent(DeliveryAgentRootSignInState.SIGNED_OUT));
   }
 
   @override

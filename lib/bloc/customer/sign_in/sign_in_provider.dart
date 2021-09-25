@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/customer/root/root_bloc.dart';
-import 'package:go_pharma/bloc/customer/root/root_state.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_bloc.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_state.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
@@ -30,11 +30,11 @@ class CustomerSignInView extends StatelessWidget {
               print("ERROR: ${state.error}");
           },
         ),
-        BlocListener<RootBloc, RootState>(
+        BlocListener<CustomerRootBloc, CustomerRootState>(
           listenWhen: (previous, current) =>
               previous.signInState != current.signInState,
           listener: (context, state) {
-            if (state.signInState == RootSignInState.SIGNED_IN)
+            if (state.signInState == CustomerRootSignInState.SIGNED_IN)
               Navigator.pushReplacementNamed(context, ProductHomePage.id);
           },
         ),
