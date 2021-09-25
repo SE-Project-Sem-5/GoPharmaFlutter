@@ -5,20 +5,20 @@ import 'package:go_pharma/bloc/customer/root/root_state.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_bloc.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_state.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
-import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
+import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 
-class SignInProvider extends BlocProvider<CustomerSignInBloc> {
-  static final String id = '/sign_in';
-  SignInProvider({
+class CustomerSignInProvider extends BlocProvider<CustomerSignInBloc> {
+  static final String id = '/customer_sign_in';
+  CustomerSignInProvider({
     Key key,
   }) : super(
           key: key,
           create: (context) => CustomerSignInBloc(context),
-          child: SignInView(),
+          child: CustomerSignInView(),
         );
 }
 
-class SignInView extends StatelessWidget {
+class CustomerSignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
@@ -39,7 +39,7 @@ class SignInView extends StatelessWidget {
           },
         ),
       ],
-      child: CustomerSignUpPage(),
+      child: CustomerSignInStart(),
     );
   }
 }

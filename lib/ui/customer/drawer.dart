@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/customer/current_orders/current_orders_page.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
-import 'package:go_pharma/ui/customer/prescription_order/prescription_order.dart';
 import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
-
-import 'current_orders/current_orders_page.dart';
 
 class CustomerDrawer extends StatelessWidget {
   const CustomerDrawer({
@@ -55,7 +54,7 @@ class CustomerDrawer extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.pushNamed(
                   context,
-                  PrescriptionOrderPage.id,
+                  PrescriptionOrderProvider.id,
                 );
               },
             ),

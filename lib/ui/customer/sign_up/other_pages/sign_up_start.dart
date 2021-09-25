@@ -1,13 +1,13 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_provider.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_bloc.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_event.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
-import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 
 class SignUpStart extends StatelessWidget {
   static const String id = "customer_sign_up";
@@ -172,6 +172,7 @@ class SignUpStart extends StatelessWidget {
                 "Already have an account?",
                 style: TextStyle(
                   color: GoPharmaColors.PrimaryColor,
+                  fontSize: 16.0,
                 ),
               ),
               GestureDetector(
@@ -180,12 +181,13 @@ class SignUpStart extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: GoPharmaColors.PrimaryColor,
+                    fontSize: 16.0,
                   ),
                 ),
                 onTap: () {
                   Navigator.pushReplacementNamed(
                     context,
-                    CustomerSignInStart.id,
+                    CustomerSignInProvider.id,
                   );
                 },
               ),

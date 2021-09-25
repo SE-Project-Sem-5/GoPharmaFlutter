@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_bloc.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_event.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_state.dart';
+import 'package:go_pharma/bloc/customer/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
-import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
 
 class CustomerSignInStart extends StatelessWidget {
   static const String id = "customer_sign_in";
@@ -134,20 +134,22 @@ class CustomerSignInStart extends StatelessWidget {
                       "Don't have an account? ",
                       style: TextStyle(
                         color: GoPharmaColors.PrimaryColor,
+                        fontSize: 16.0,
                       ),
                     ),
                     GestureDetector(
                       child: Text(
-                        "Sign Up.",
+                        "Sign up.",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: GoPharmaColors.PrimaryColor,
+                          fontSize: 16.0,
                         ),
                       ),
                       onTap: () {
                         Navigator.pushReplacementNamed(
                           context,
-                          CustomerSignUpPage.id,
+                          CustomerSignUpProvider.id,
                         );
                       },
                     ),
