@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/customer/root/root_bloc.dart';
-import 'package:go_pharma/bloc/customer/root/root_event.dart';
-import 'package:go_pharma/bloc/customer/root/root_state.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/customer/profile/bold_text.dart';
@@ -22,7 +22,7 @@ class SettingsPage extends StatelessWidget {
     var provinceController = TextEditingController();
     var cityController = TextEditingController();
 
-    var bloc = BlocProvider.of<RootBloc>(context);
+    var bloc = BlocProvider.of<CustomerRootBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: BoldText(
@@ -31,7 +31,7 @@ class SettingsPage extends StatelessWidget {
           padding: 0,
         ),
       ),
-      body: BlocBuilder<RootBloc, RootState>(
+      body: BlocBuilder<CustomerRootBloc, CustomerRootState>(
         builder: (context, state) {
           return Padding(
             padding: EdgeInsets.only(
