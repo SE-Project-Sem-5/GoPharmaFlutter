@@ -30,6 +30,12 @@ class CustomerSignUpBloc
         final isVisible = state.isVisible;
         yield state.clone(isVisible: !isVisible);
         break;
+      case UpdateTwoFA:
+        final twoFA = (event as UpdateTwoFA).twoFA;
+        yield state.clone(
+          twoFA: twoFA,
+        );
+        break;
       case NextStepEvent:
         final currentStep = (event as NextStepEvent).currentStep;
         final nextIndex = stepOrder.indexOf(currentStep) + 1;

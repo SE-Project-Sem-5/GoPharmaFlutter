@@ -24,3 +24,8 @@ class PreviousStepEvent extends CustomerSignUpEvent {
   final BuildContext context;
   PreviousStepEvent({this.currentStep, this.context});
 }
+
+class UpdateTwoFA extends CustomerSignUpEvent {
+  final String twoFA;
+  UpdateTwoFA({this.twoFA});
+}
