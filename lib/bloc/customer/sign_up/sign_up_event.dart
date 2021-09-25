@@ -16,7 +16,9 @@ class ToggleVisibility extends CustomerSignUpEvent {
 
 class NextStepEvent extends CustomerSignUpEvent {
   final CustomerSignUpStep currentStep;
-  NextStepEvent({this.currentStep});
+  final BuildContext context;
+
+  NextStepEvent({this.currentStep, this.context});
 }
 
 class PreviousStepEvent extends CustomerSignUpEvent {

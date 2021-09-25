@@ -86,7 +86,10 @@ class SignUp2FA extends StatelessWidget {
                       _formKey.currentState.validate();
                       //TODO: backend call - get twoFA value and compare
                       bloc.add(UpdateTwoFA(twoFA: _twoFAController.text));
-                      bloc.add(NextStepEvent(currentStep: state.step));
+                      bloc.add(NextStepEvent(
+                        currentStep: state.step,
+                        context: context,
+                      ));
                     },
                   );
                 },

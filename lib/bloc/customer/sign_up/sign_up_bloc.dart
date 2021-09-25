@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 
 import 'sign_up_event.dart';
 import 'sign_up_state.dart';
@@ -38,14 +39,18 @@ class CustomerSignUpBloc
         break;
       case NextStepEvent:
         final currentStep = (event as NextStepEvent).currentStep;
+        final context = (event as NextStepEvent).context;
         final nextIndex = stepOrder.indexOf(currentStep) + 1;
         if (nextIndex < stepOrder.length) {
           yield state.clone(
             step: stepOrder[nextIndex],
           );
         } else {
-          //TODO: Event to do something after the flow ends
-          //add();
+          //  TODO: adjust
+          Navigator.pushReplacementNamed(
+            context,
+            CustomerHomePage.id,
+          );
         }
         break;
       case PreviousStepEvent:
