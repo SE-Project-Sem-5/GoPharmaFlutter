@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_state.dart';
+import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
-import 'package:go_pharma/ui/delivery_agent/sign_up/delivery_agent_sign_up.dart';
 
 import '../delivery_agent_home_page.dart';
 
@@ -161,7 +161,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                         onTap: () {
                           Navigator.pushReplacementNamed(
                             context,
-                            DeliveryAgentSignUpStart.id,
+                            DeliveryAgentSignUpProvider.id,
                           );
                         },
                       ),

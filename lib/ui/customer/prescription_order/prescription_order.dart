@@ -23,9 +23,10 @@ class PrescriptionOrderPage extends StatelessWidget {
       buildWhen: (previous, current) => previous.step != current.step,
       builder: (context, state) {
         return WillPopScope(
+          // ignore: missing_return
           onWillPop: () {
-            prescriptionOrderBloc
-                .add(PreviousStepEvent(currentStep: state.step));
+            prescriptionOrderBloc.add(
+                PreviousStepEvent(currentStep: state.step, context: context));
           },
           child: SafeArea(
             child: Scaffold(

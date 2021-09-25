@@ -16,6 +16,7 @@ class CustomerSignInStart extends StatelessWidget {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   static final GlobalKey<FormState> _form = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     String title = "Sign In";
@@ -146,7 +147,7 @@ class CustomerSignInStart extends StatelessWidget {
                       onTap: () {
                         Navigator.pushReplacementNamed(
                           context,
-                          CustomerSignUpStart.id,
+                          CustomerSignUpPage.id,
                         );
                       },
                     ),
@@ -159,7 +160,6 @@ class CustomerSignInStart extends StatelessWidget {
                   fillColor: GoPharmaColors.PrimaryColor,
                   textColor: GoPharmaColors.WhiteColor,
                   onTapped: () {
-                    final bloc = BlocProvider.of<CustomerSignInBloc>(context);
                     Navigator.pushReplacementNamed(
                       context,
                       CustomerHomePage.id,
