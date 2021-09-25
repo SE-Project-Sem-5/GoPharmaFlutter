@@ -21,9 +21,14 @@ class CustomerSignUpPage extends StatelessWidget {
         buildWhen: (previous, current) => previous.step != current.step,
         builder: (context, state) {
           return WillPopScope(
+            // ignore: missing_return
             onWillPop: () {
-              customerSignUpBloc
-                  .add(PreviousStepEvent(currentStep: state.step));
+              customerSignUpBloc.add(
+                PreviousStepEvent(
+                  currentStep: state.step,
+                  context: context,
+                ),
+              );
             },
             child: SafeArea(
               child: Scaffold(
