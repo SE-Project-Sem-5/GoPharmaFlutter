@@ -17,10 +17,3 @@ class NextDeliveryStatusEvent extends DeliveryEvent {
 
   NextDeliveryStatusEvent(this.currentState, this.delivery);
 }
-
-class PreviousDeliveryStatusEvent extends DeliveryEvent {
-  final DeliveryTransitionState currentState;
-  final Delivery delivery;
-
-  PreviousDeliveryStatusEvent(this.currentState, this.delivery);
-}

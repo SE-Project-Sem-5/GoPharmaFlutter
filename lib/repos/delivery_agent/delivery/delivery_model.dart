@@ -1,7 +1,13 @@
 import 'package:go_pharma/repos/delivery_agent/product/product_model.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/delivery_states.dart';
 
 //TODO:skip the paid state if the order has been paid for online
+List<String> deliveryStates = [
+  "confirmed",
+  "collected",
+  "transient",
+  "shipped",
+  "delivered",
+];
 
 class Delivery {
   String id;
@@ -26,13 +32,6 @@ class Delivery {
   nextDeliveryStatus() {
     if (deliveryStatusIndex < deliveryStates.length - 1) {
       deliveryStatusIndex += 1;
-    }
-    deliveryStatus = deliveryStates[deliveryStatusIndex];
-  }
-
-  previousDeliveryStatus() {
-    if (deliveryStatusIndex > 0) {
-      deliveryStatusIndex -= 1;
     }
     deliveryStatus = deliveryStates[deliveryStatusIndex];
     print(deliveryStatus);

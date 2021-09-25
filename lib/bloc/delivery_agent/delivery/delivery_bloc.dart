@@ -8,10 +8,11 @@ import 'delivery_event.dart';
 
 class DeliveryBloc extends Bloc<DeliveryEvent, DeliveryState> {
   static List<DeliveryTransitionState> deliveryStates = [
-    DeliveryTransitionState.SCHEDULED,
-    DeliveryTransitionState.IN_TRANSIT,
+    DeliveryTransitionState.CONFIRMED,
+    DeliveryTransitionState.COLLECTED,
+    DeliveryTransitionState.TRANSIENT,
+    DeliveryTransitionState.SHIPPED,
     DeliveryTransitionState.DELIVERED,
-    DeliveryTransitionState.PAID,
     //  TODO: need to differentiate between cash on delivery and online
   ];
   DeliveryBloc(BuildContext context) : super(DeliveryState.initialState);
@@ -25,30 +26,12 @@ class DeliveryBloc extends Bloc<DeliveryEvent, DeliveryState> {
         yield state.clone(error: error);
         break;
       case NextDeliveryStatusEvent:
-        final currentState = (event as NextDeliveryStatusEvent).currentState;
         final delivery = (event as NextDeliveryStatusEvent).delivery;
         delivery.nextDeliveryStatus();
-        final nextStateIndex = deliveryStates.indexOf(currentState) + 1;
+        final nextStateIndex = delivery.deliveryStatusIndex;
         if (nextStateIndex < deliveryStates.length) {
           yield state.clone(
-            error: '',
             orderTransitionState: deliveryStates[nextStateIndex],
-            state: delivery.deliveryStatus,
-          );
-        } else {
-          //  TODO: figure something out
-        }
-        break;
-      case PreviousDeliveryStatusEvent:
-        final currentState =
-            (event as PreviousDeliveryStatusEvent).currentState;
-        final delivery = (event as NextDeliveryStatusEvent).delivery;
-        delivery.previousDeliveryStatus();
-        final previousStateIndex = deliveryStates.indexOf(currentState) - 1;
-        if (previousStateIndex >= 0) {
-          yield state.clone(
-            error: '',
-            orderTransitionState: deliveryStates[previousStateIndex],
             state: delivery.deliveryStatus,
           );
         } else {

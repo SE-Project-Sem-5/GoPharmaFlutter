@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_event.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_state.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
@@ -10,6 +14,7 @@ class DeliveryFullView extends StatelessWidget {
   final double rightPadding = 30.0;
   @override
   Widget build(BuildContext context) {
+    var deliveryBloc = BlocProvider.of<DeliveryBloc>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -109,26 +114,55 @@ class DeliveryFullView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Spacer(),
-                      HorizontalLine(
-                        leftPadding: leftPadding,
-                        rightPadding: rightPadding,
-                      ),
                       Padding(
-                        padding: EdgeInsets.only(
-                          left: leftPadding,
-                          right: rightPadding,
-                          bottom: 100.0,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 30.0,
+                          horizontal: rightPadding,
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            DeliveryTitleText(text: "Total Price"),
-                            DeliveryTitleText(
-                              text: "Rs. " +
-                                  delivery.totalPrice.toStringAsFixed(2),
+                            Text(
+                              "Current Status: ",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            Text(
+                              delivery.deliveryStatus[0].toUpperCase() +
+                                  delivery.deliveryStatus.substring(1),
+                              style: TextStyle(
+                                fontSize: 16.0,
+                              ),
                             ),
                           ],
+                        ),
+                      ),
+                      Center(
+                        child: BlocBuilder<DeliveryBloc, DeliveryState>(
+                          builder: (context, state) {
+                            return TextButton(
+                              child: Text(
+                                state.state != "delivered"
+                                    ? deliveryAgentButtonMapping[
+                                        delivery.deliveryStatus]
+                                    : "This delivery has been completed.",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              onPressed: () {
+                                print(state.state);
+                                state.state != "delivered"
+                                    ? deliveryBloc.add(
+                                        NextDeliveryStatusEvent(
+                                          state.orderTransitionState,
+                                          delivery,
+                                        ),
+                                      )
+                                    : null;
+                              },
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -186,3 +220,12 @@ class DeliveryTitleText extends StatelessWidget {
     );
   }
 }
+
+const Map<String, String> deliveryAgentButtonMapping = {
+  //mapping is from previous state, and the value is what the next state will be
+  "confirmed": "Confirm Collection",
+  "collected": "Confirm Transition",
+  "transient": "Confirm Shipping",
+  "shipped": "Confirm Delivery",
+  "delivered": "This delivery has been completed.",
+};
