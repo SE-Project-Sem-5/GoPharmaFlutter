@@ -22,12 +22,21 @@ class SignUp2FA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<CustomerSignUpBloc>(context);
-
+    String title = "Please enter your 5 digit code";
     return Form(
       key: _formKey,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          Spacer(),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+              color: GoPharmaColors.PrimaryColor,
+            ),
+          ),
           Spacer(),
           BlocBuilder<CustomerSignUpBloc, CustomerSignUpState>(
             builder: (context, state) {
