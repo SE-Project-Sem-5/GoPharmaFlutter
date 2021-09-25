@@ -5,6 +5,7 @@ import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_state.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/delivery_agent/delivery/delivery_status_chip.dart';
 
 class DeliveryFullView extends StatelessWidget {
   final Delivery delivery;
@@ -127,12 +128,14 @@ class DeliveryFullView extends StatelessWidget {
                                 fontSize: 16.0,
                               ),
                             ),
-                            Text(
-                              delivery.deliveryStatus[0].toUpperCase() +
-                                  delivery.deliveryStatus.substring(1),
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
+                            BlocBuilder<DeliveryBloc, DeliveryState>(
+                              builder: (context, state) {
+                                return DeliveryStatusChip(
+                                  text:
+                                      delivery.deliveryStatus[0].toUpperCase() +
+                                          delivery.deliveryStatus.substring(1),
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -140,28 +143,34 @@ class DeliveryFullView extends StatelessWidget {
                       Center(
                         child: BlocBuilder<DeliveryBloc, DeliveryState>(
                           builder: (context, state) {
-                            return TextButton(
-                              child: Text(
-                                state.state != "delivered"
-                                    ? deliveryAgentButtonMapping[
-                                        delivery.deliveryStatus]
-                                    : "This delivery has been completed.",
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              onPressed: () {
-                                print(state.state);
-                                state.state != "delivered"
-                                    ? deliveryBloc.add(
+                            return state.delivery.deliveryStatus ==
+                                        "delivered" ||
+                                    delivery.deliveryStatus == "delivered"
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "This delivery has been completed.",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                  )
+                                : TextButton(
+                                    child: Text(
+                                      deliveryAgentButtonMapping[
+                                          delivery.deliveryStatus],
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      deliveryBloc.add(
                                         NextDeliveryStatusEvent(
-                                          state.orderTransitionState,
                                           delivery,
                                         ),
-                                      )
-                                    : null;
-                              },
-                            );
+                                      );
+                                    },
+                                  );
                           },
                         ),
                       ),
