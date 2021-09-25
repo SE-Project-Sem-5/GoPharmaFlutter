@@ -11,13 +11,13 @@ List<CurrentOrder> currentOrders = [
     orderId: "#abcd2345",
     price: 500.00,
     orderedDate: DateTime.now(),
-    status: "Packing",
+    status: "Confirmed",
   ),
   new CurrentOrder(
     orderId: "#abcd3456",
     price: 1000.00,
     orderedDate: DateTime.now(),
-    status: "Delivered",
+    status: "Shipped",
   ),
   new CurrentOrder(
     orderId: "#abcd3456",
