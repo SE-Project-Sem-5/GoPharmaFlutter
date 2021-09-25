@@ -2,18 +2,18 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/repos/customer/dummy/user_customer/customer_model.dart';
 
-import 'root_event.dart';
-import 'root_state.dart';
-
-class RootBloc extends Bloc<RootEvent, RootState> {
-  RootBloc(BuildContext context) : super(RootState.initialState) {
+class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
+  CustomerRootBloc(BuildContext context)
+      : super(CustomerRootState.initialState) {
     _init();
   }
 
   @override
-  Stream<RootState> mapEventToState(RootEvent event) async* {
+  Stream<CustomerRootState> mapEventToState(CustomerRootEvent event) async* {
     switch (event.runtimeType) {
       case RootErrorEvent:
         final error = (event as RootErrorEvent).error;
@@ -35,7 +35,7 @@ class RootBloc extends Bloc<RootEvent, RootState> {
         break;
 
       case SignOutEvent:
-        yield state.clone(signInState: RootSignInState.SIGNED_OUT);
+        yield state.clone(signInState: CustomerRootSignInState.SIGNED_OUT);
         //TODO: Logic to sign out user
         break;
 
@@ -52,7 +52,7 @@ class RootBloc extends Bloc<RootEvent, RootState> {
         // User user = await auth.createUserWithEmailAndPassword(email, password);
         Customer customer = new Customer();
         yield state.clone(
-          signInState: RootSignInState.SIGNED_IN,
+          signInState: CustomerRootSignInState.SIGNED_IN,
           customer: customer,
         );
         break;
@@ -66,7 +66,7 @@ class RootBloc extends Bloc<RootEvent, RootState> {
     // final auth = locator<AuthService>();
     // User user = await auth.createUserWithEmailAndPassword(email, password);
     add(UpdateUserEvent(new Customer()));
-    add(ChangeSignInStateEvent(RootSignInState.SIGNED_OUT));
+    add(ChangeSignInStateEvent(CustomerRootSignInState.SIGNED_OUT));
   }
 
   @override

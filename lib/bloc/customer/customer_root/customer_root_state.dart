@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/customer/dummy/user_customer/customer_model.dart';
 
-enum RootSignInState {
+enum CustomerRootSignInState {
   INITIALIZING,
   SIGNED_IN,
   SIGNED_OUT,
 }
 
 @immutable
-class RootState {
+class CustomerRootState {
   final String error;
   final Customer customer;
-  final RootSignInState signInState;
+  final CustomerRootSignInState signInState;
   final bool initializing;
   final bool isEditable;
 
-  RootState({
+  CustomerRootState({
     @required this.error,
     @required this.customer,
     @required this.signInState,
@@ -23,22 +23,22 @@ class RootState {
     @required this.isEditable,
   });
 
-  static RootState get initialState => RootState(
+  static CustomerRootState get initialState => CustomerRootState(
         error: '',
         customer: null,
-        signInState: RootSignInState.INITIALIZING,
+        signInState: CustomerRootSignInState.INITIALIZING,
         initializing: false,
         isEditable: false,
       );
 
-  RootState clone({
+  CustomerRootState clone({
     String error,
     Customer customer,
-    RootSignInState signInState,
+    CustomerRootSignInState signInState,
     bool initializing,
     bool isEditable,
   }) {
-    return RootState(
+    return CustomerRootState(
       error: error ?? this.error,
       customer: customer ?? this.customer,
       signInState: signInState ?? this.signInState,
