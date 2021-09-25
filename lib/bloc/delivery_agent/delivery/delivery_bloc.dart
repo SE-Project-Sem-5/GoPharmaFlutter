@@ -31,8 +31,7 @@ class DeliveryBloc extends Bloc<DeliveryEvent, DeliveryState> {
         final nextStateIndex = delivery.deliveryStatusIndex;
         if (nextStateIndex < deliveryStates.length) {
           yield state.clone(
-            orderTransitionState: deliveryStates[nextStateIndex],
-            state: delivery.deliveryStatus,
+            delivery: delivery,
           );
         } else {
           //  TODO: figure something out

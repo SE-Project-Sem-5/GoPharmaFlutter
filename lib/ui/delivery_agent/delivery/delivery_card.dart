@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_bloc.dart';
-import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_state.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/delivery_full_view.dart';
-import 'delivery_status_chip.dart';
 
 class DeliveryCard extends StatelessWidget {
   final Delivery delivery;
@@ -46,17 +44,6 @@ class DeliveryCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const SizedBox(width: 8),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: BlocBuilder<DeliveryBloc, DeliveryState>(
-                      builder: (context, state) {
-                        print(delivery.deliveryStatus);
-                        return DeliveryStatusChip(
-                          text: delivery.deliveryStatus,
-                        );
-                      },
-                    ),
-                  ),
                   TextButton(
                     child: const Text('View Delivery Details'),
                     onPressed: () {

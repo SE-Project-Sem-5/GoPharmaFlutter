@@ -10,7 +10,7 @@ class DeliveryStatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      backgroundColor: deliveryStatusColorMapping[text],
+      backgroundColor: deliveryStatusColorMapping[text.toLowerCase()],
       label: Container(
         width: 75,
         child: Center(

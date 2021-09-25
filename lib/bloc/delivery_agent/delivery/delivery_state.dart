@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 
 enum DeliveryTransitionState {
   CONFIRMED,
@@ -11,30 +12,25 @@ enum DeliveryTransitionState {
 @immutable
 class DeliveryState {
   final String error;
-  final DeliveryTransitionState orderTransitionState;
-  final String state;
+  final Delivery delivery;
 
   DeliveryState({
     @required this.error,
-    @required this.orderTransitionState,
-    @required this.state,
+    @required this.delivery,
   });
 
   static DeliveryState get initialState => DeliveryState(
         error: '',
-        orderTransitionState: DeliveryTransitionState.CONFIRMED,
-        state: 'confirmed',
+        delivery: Delivery(),
       );
 
   DeliveryState clone({
     String error,
-    DeliveryTransitionState orderTransitionState,
-    String state,
+    Delivery delivery,
   }) {
     return DeliveryState(
       error: error ?? this.error,
-      orderTransitionState: orderTransitionState ?? this.orderTransitionState,
-      state: state ?? this.state,
+      delivery: delivery ?? this.delivery,
     );
   }
 }
