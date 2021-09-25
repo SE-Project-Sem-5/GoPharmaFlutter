@@ -47,7 +47,7 @@ dependencies:
   dio: ^4.0.0
   url_launcher: ^6.0.9
   material_floating_search_bar: ^0.3.4
-
+  pinput: ^1.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
