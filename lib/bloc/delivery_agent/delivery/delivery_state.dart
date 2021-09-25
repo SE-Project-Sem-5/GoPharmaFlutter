@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 enum DeliveryTransitionState {
-  SCHEDULED,
-  IN_TRANSIT,
+  CONFIRMED,
+  COLLECTED,
+  TRANSIENT,
+  SHIPPED,
   DELIVERED,
-  PAID,
 }
 
 @immutable
@@ -21,20 +22,19 @@ class DeliveryState {
 
   static DeliveryState get initialState => DeliveryState(
         error: '',
-        orderTransitionState: DeliveryTransitionState.SCHEDULED,
-        state: 'Scheduled',
+        orderTransitionState: DeliveryTransitionState.CONFIRMED,
+        state: 'confirmed',
       );
 
   DeliveryState clone({
-    String error = '',
-    DeliveryTransitionState orderTransitionState =
-        DeliveryTransitionState.SCHEDULED,
-    String state = '',
+    String error,
+    DeliveryTransitionState orderTransitionState,
+    String state,
   }) {
     return DeliveryState(
-      error: error,
-      orderTransitionState: orderTransitionState,
-      state: state,
+      error: error ?? this.error,
+      orderTransitionState: orderTransitionState ?? this.orderTransitionState,
+      state: state ?? this.state,
     );
   }
 }

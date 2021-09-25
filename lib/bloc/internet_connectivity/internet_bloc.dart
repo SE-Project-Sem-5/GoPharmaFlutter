@@ -39,6 +39,13 @@ class InternetBloc extends Bloc<InternetEvent, InternetState> {
           connection: connection,
         );
         break;
+      case DisconnectionEvent:
+        final connection = (event as ConnectionEvent).connection;
+        yield state.clone(
+          error: '',
+          connection: connection,
+        );
+        break;
     }
   }
 

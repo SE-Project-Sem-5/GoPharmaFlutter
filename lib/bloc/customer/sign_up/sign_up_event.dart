@@ -16,11 +16,18 @@ class ToggleVisibility extends CustomerSignUpEvent {
 
 class NextStepEvent extends CustomerSignUpEvent {
   final CustomerSignUpStep currentStep;
-  NextStepEvent({this.currentStep});
+  final BuildContext context;
+
+  NextStepEvent({this.currentStep, this.context});
 }
 
 class PreviousStepEvent extends CustomerSignUpEvent {
   final CustomerSignUpStep currentStep;
   final BuildContext context;
   PreviousStepEvent({this.currentStep, this.context});
+}
+
+class UpdateTwoFA extends CustomerSignUpEvent {
+  final String twoFA;
+  UpdateTwoFA({this.twoFA});
 }

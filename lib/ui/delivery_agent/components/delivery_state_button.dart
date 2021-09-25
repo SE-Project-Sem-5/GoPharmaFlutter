@@ -8,7 +8,7 @@ import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 class DeliveryStateButton extends StatelessWidget {
   final String type;
   final Delivery delivery;
-  const DeliveryStateButton({  this.type,   this.delivery});
+  const DeliveryStateButton({this.type, this.delivery});
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +26,12 @@ class DeliveryStateButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            if (this.type == "Next") {
-              bloc.add(
-                NextDeliveryStatusEvent(
-                  state.orderTransitionState,
-                  delivery,
-                ),
-              );
-            } else {
-              bloc.add(
-                PreviousDeliveryStatusEvent(
-                  state.orderTransitionState,
-                  delivery,
-                ),
-              );
-            }
+            bloc.add(
+              NextDeliveryStatusEvent(
+                state.orderTransitionState,
+                delivery,
+              ),
+            );
           },
           child: Text(
             this.type,

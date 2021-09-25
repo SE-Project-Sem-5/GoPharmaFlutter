@@ -39,7 +39,7 @@ class CustomerSignInView extends StatelessWidget {
           },
         ),
       ],
-      child: CustomerSignInStart(),
+      child: CustomerSignInPage(),
     );
   }
 }

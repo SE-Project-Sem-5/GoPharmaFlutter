@@ -6,6 +6,10 @@ import 'sign_in_state.dart';
 
 class DeliveryAgentSignInBloc
     extends Bloc<DeliveryAgentSignInEvent, DeliveryAgentSignInState> {
+  static List<DeliveryAgentSignInStep> stepOrder = [
+    DeliveryAgentSignInStep.DELIVERYAGENTSIGNINSTEP_START,
+    DeliveryAgentSignInStep.DELIVERYAGENTSIGNINSTEP_2FA,
+  ];
   DeliveryAgentSignInBloc(BuildContext context)
       : super(DeliveryAgentSignInState.initialState);
 
@@ -21,6 +25,28 @@ class DeliveryAgentSignInBloc
       case ToggleVisibility:
         final isVisible = (event as ToggleVisibility).isVisible;
         yield state.clone(isVisible: isVisible);
+        break;
+      case NextStepEvent:
+        final currentStep = (event as NextStepEvent).currentStep;
+        final context = (event as NextStepEvent).context;
+        final nextIndex = stepOrder.indexOf(currentStep) + 1;
+        if (nextIndex < stepOrder.length) {
+          yield state.clone(
+            step: stepOrder[nextIndex],
+          );
+        } else {}
+        break;
+      case PreviousStepEvent:
+        final currentStep = (event as PreviousStepEvent).currentStep;
+        final context = (event as PreviousStepEvent).context;
+        final prevIndex = stepOrder.indexOf(currentStep) - 1;
+        if (prevIndex >= 0) {
+          yield state.clone(
+            step: stepOrder[prevIndex],
+          );
+        } else {
+          Navigator.pop(context);
+        }
         break;
     }
   }

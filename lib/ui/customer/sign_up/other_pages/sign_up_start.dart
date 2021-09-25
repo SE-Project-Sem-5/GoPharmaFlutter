@@ -204,12 +204,19 @@ class SignUpStart extends StatelessWidget {
                 onTapped: () {
                   _form.currentState.validate();
                   //TODO: backend call
-                  bloc.add(NextStepEvent(currentStep: state.step));
+                  bloc.add(
+                    NextStepEvent(
+                      currentStep: state.step,
+                      context: context,
+                    ),
+                  );
                 },
               );
             },
           ),
-          Spacer(),
+          SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );

@@ -2,14 +2,18 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_event.dart';
+import 'package:go_pharma/bloc/customer/sign_in/sign_in_state.dart';
 import 'package:go_pharma/repos/customer/actual/customer/customerAPIProvider.dart';
 import 'package:go_pharma/repos/customer/actual/customer/user.dart';
-
-import 'sign_in_event.dart';
-import 'sign_in_state.dart';
+import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 
 class CustomerSignInBloc
     extends Bloc<CustomerSignInEvent, CustomerSignInState> {
+  static List<CustomerSignInStep> stepOrder = [
+    CustomerSignInStep.CUSTOMERSIGNINSTEP_START,
+    CustomerSignInStep.CUSTOMERSIGNINSTEP_2FA,
+  ];
   CustomerSignInBloc(BuildContext context)
       : super(CustomerSignInState.initialState);
 
@@ -32,6 +36,40 @@ class CustomerSignInBloc
         User user = await _userAPIProvider.getUser();
         print(user.firstName);
         print(user.lastName);
+        break;
+      case UpdateTwoFA:
+        final twoFA = (event as UpdateTwoFA).twoFA;
+        yield state.clone(
+          twoFA: twoFA,
+        );
+        break;
+      case NextStepEvent:
+        final currentStep = (event as NextStepEvent).currentStep;
+        final context = (event as NextStepEvent).context;
+        final nextIndex = stepOrder.indexOf(currentStep) + 1;
+        if (nextIndex < stepOrder.length) {
+          yield state.clone(
+            step: stepOrder[nextIndex],
+          );
+        } else {
+          //  TODO: adjust
+          Navigator.pushReplacementNamed(
+            context,
+            CustomerHomePage.id,
+          );
+        }
+        break;
+      case PreviousStepEvent:
+        final currentStep = (event as PreviousStepEvent).currentStep;
+        final context = (event as PreviousStepEvent).context;
+        final prevIndex = stepOrder.indexOf(currentStep) - 1;
+        if (prevIndex >= 0) {
+          yield state.clone(
+            step: stepOrder[prevIndex],
+          );
+        } else {
+          Navigator.pop(context);
+        }
         break;
     }
   }

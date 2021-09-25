@@ -16,11 +16,18 @@ class ToggleVisibility extends DeliveryAgentSignUpEvent {
 
 class NextStepEvent extends DeliveryAgentSignUpEvent {
   final DeliveryAgentSignUpStep currentStep;
-  NextStepEvent({this.currentStep});
+  final BuildContext context;
+
+  NextStepEvent({this.context, this.currentStep});
 }
 
 class PreviousStepEvent extends DeliveryAgentSignUpEvent {
   final DeliveryAgentSignUpStep currentStep;
   final BuildContext context;
   PreviousStepEvent({this.currentStep, this.context});
+}
+
+class UpdateTwoFA extends DeliveryAgentSignUpEvent {
+  final String twoFA;
+  UpdateTwoFA({this.twoFA});
 }

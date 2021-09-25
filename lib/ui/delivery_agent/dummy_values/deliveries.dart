@@ -3,7 +3,7 @@ import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 List<Delivery> dummyDeliveries = [
   Delivery(
     id: "ldksfnl",
-    deliveryStatus: 'Scheduled',
+    deliveryStatus: 'collected',
     destination: '',
     deliveryCharge: 0,
     totalPrice: 1293,
@@ -11,7 +11,7 @@ List<Delivery> dummyDeliveries = [
   ),
   Delivery(
     id: "123UWQ",
-    deliveryStatus: 'In Transit',
+    deliveryStatus: 'transient',
     destination: '',
     deliveryCharge: 0,
     totalPrice: 1500,
@@ -19,7 +19,7 @@ List<Delivery> dummyDeliveries = [
   ),
   Delivery(
     id: "53sdgfdg",
-    deliveryStatus: 'Paid',
+    deliveryStatus: 'shipped',
     destination: '',
     deliveryCharge: 0,
     totalPrice: 1500,
@@ -27,7 +27,7 @@ List<Delivery> dummyDeliveries = [
   ),
   Delivery(
     id: "53454dfgdfg",
-    deliveryStatus: 'Delivered',
+    deliveryStatus: 'collected',
     destination: '',
     deliveryCharge: 0,
     totalPrice: 1500,

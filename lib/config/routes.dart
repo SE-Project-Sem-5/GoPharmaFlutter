@@ -19,7 +19,7 @@ import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_starting_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
-import 'package:go_pharma/ui/delivery_agent/sign_in/delivery_agent_sign_in.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_in/other_pages/delivery_agent_sign_in.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 
 Map<String, Widget Function(BuildContext context)> routes = {
