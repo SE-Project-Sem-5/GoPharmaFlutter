@@ -2,9 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_bloc.dart';
 import 'package:go_pharma/bloc/customer/root/root_bloc.dart';
-import 'package:go_pharma/bloc/customer/sign_in/sign_in_bloc.dart';
 import 'package:go_pharma/bloc/internet_connectivity/internet_bloc.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -43,14 +41,8 @@ class GoPharmaApp extends StatelessWidget {
         BlocProvider<CheckoutBloc>(
           create: (context) => CheckoutBloc(context),
         ),
-        BlocProvider<CustomerSignInBloc>(
-          create: (context) => CustomerSignInBloc(context),
-        ),
         BlocProvider<RootBloc>(
           create: (context) => RootBloc(context),
-        ),
-        BlocProvider<PrescriptionOrderBloc>(
-          create: (context) => PrescriptionOrderBloc(context),
         ),
       ],
       child: MaterialApp(
