@@ -6,16 +6,15 @@ import 'prescription_order_bloc.dart';
 import 'prescription_order_state.dart';
 
 class PrescriptionOrderProvider extends BlocProvider<PrescriptionOrderBloc> {
-  PrescriptionOrderProvider({
-    @required Key key,
-  }) : super(
-          key: key,
+  static final String id = "/prescription_order";
+  PrescriptionOrderProvider()
+      : super(
           create: (context) => PrescriptionOrderBloc(context),
-          child: TestView(),
+          child: PrescriptionOrderView(),
         );
 }
 
-class TestView extends StatelessWidget {
+class PrescriptionOrderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
