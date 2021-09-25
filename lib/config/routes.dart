@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/bloc/customer/sign_up/sign_up_provider.dart';
+import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_start.dart';
 import 'package:go_pharma/ui/customer/current_orders/current_orders_page.dart';
@@ -19,7 +21,6 @@ import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_starting_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
 import 'package:go_pharma/ui/delivery_agent/sign_in/delivery_agent_sign_in.dart';
-import 'package:go_pharma/ui/delivery_agent/sign_up/delivery_agent_sign_up.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 
 Map<String, Widget Function(BuildContext context)> routes = {
@@ -29,7 +30,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   //customer pages
   CustomerStartingPage.id: (context) => CustomerStartingPage(),
   CustomerSignInStart.id: (context) => CustomerSignInStart(),
-  CustomerSignUpStart.id: (context) => CustomerSignUpStart(),
+  CustomerSignUpPage.id: (context) => CustomerSignUpPage(),
   CustomerHomePage.id: (context) => CustomerHomePage(),
   ProductHomePage.id: (context) => ProductHomePage(),
   ShoppingCartPage.id: (context) => ShoppingCartPage(),
@@ -43,10 +44,11 @@ Map<String, Widget Function(BuildContext context)> routes = {
   CurrentOrdersPage.id: (context) => CurrentOrdersPage(),
   ZoneSelectionPage.id: (context) => ZoneSelectionPage(),
   PrescriptionOrderPage.id: (context) => PrescriptionOrderPage(),
+  CustomerSignUpProvider.id: (contest) => CustomerSignUpProvider(),
 
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
-  DeliveryAgentSignUpStart.id: (context) => DeliveryAgentSignUpStart(),
+  DeliveryAgentSignUpProvider.id: (context) => DeliveryAgentSignUpProvider(),
   DeliveryAgentSignInStart.id: (context) => DeliveryAgentSignInStart(),
   DeliveryAgentHomePage.id: (context) => DeliveryAgentHomePage(),
   DeliveriesPage.id: (context) => DeliveriesPage(),

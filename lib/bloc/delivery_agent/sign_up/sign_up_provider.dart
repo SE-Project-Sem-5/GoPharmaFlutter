@@ -6,30 +6,31 @@ import 'package:go_pharma/ui/delivery_agent/sign_up/delivery_agent_sign_up.dart'
 
 class DeliveryAgentSignUpProvider
     extends BlocProvider<DeliveryAgentSignUpBloc> {
+  static const String id = '/delivery_agent_sign_up';
+
   DeliveryAgentSignUpProvider({
-      Key key,
+    Key key,
   }) : super(
           key: key,
           create: (context) => DeliveryAgentSignUpBloc(context),
-          child: DeliveryAgentView(),
+          child: SignUpView(),
         );
 }
 
-class DeliveryAgentView extends StatelessWidget {
+class SignUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // ignore: close_sinks
-
     return MultiBlocListener(
       listeners: [
         BlocListener<DeliveryAgentSignUpBloc, DeliveryAgentSignUpState>(
           listenWhen: (pre, current) => pre.error != current.error,
           listener: (context, state) {
-            if (state.error.isNotEmpty) print("ERROR: ${state.error}");
+            if (state.error?.isNotEmpty ?? false)
+              print("ERROR: ${state.error}");
           },
         ),
       ],
-      child: DeliveryAgentSignUpStart(),
+      child: DeliveryAgentSignUpPage(),
     );
   }
 }

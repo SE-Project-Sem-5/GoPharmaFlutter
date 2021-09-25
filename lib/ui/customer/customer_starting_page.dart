@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/bloc/customer/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
-import 'package:go_pharma/ui/customer/sign_up/customer_sign_up.dart';
 
 class CustomerStartingPage extends StatelessWidget {
   static const String id = "customer_starting_page";
@@ -27,7 +27,7 @@ class CustomerStartingPage extends StatelessWidget {
               RoundedButtonFilled(
                 title: "LOGIN",
                 size: size,
-                onTapped: () => Navigator.pushReplacementNamed(
+                onTapped: () => Navigator.pushNamed(
                   context,
                   CustomerSignInStart.id,
                 ),
@@ -37,9 +37,9 @@ class CustomerStartingPage extends StatelessWidget {
                 size: size,
                 fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
                 textColor: GoPharmaColors.BlackColor,
-                onTapped: () => Navigator.pushReplacementNamed(
+                onTapped: () => Navigator.pushNamed(
                   context,
-                  CustomerSignUpStart.id,
+                  CustomerSignUpProvider.id,
                 ),
               ),
             ],
