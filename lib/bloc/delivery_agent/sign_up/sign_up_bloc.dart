@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
 
 import 'sign_up_event.dart';
 import 'sign_up_state.dart';
@@ -30,16 +31,25 @@ class DeliveryAgentSignUpBloc
         final isVisible = state.isVisible;
         yield state.clone(isVisible: !isVisible);
         break;
+      case UpdateTwoFA:
+        final twoFA = (event as UpdateTwoFA).twoFA;
+        yield state.clone(
+          twoFA: twoFA,
+        );
+        break;
       case NextStepEvent:
         final currentStep = (event as NextStepEvent).currentStep;
+        final context = (event as NextStepEvent).context;
         final nextIndex = stepOrder.indexOf(currentStep) + 1;
         if (nextIndex < stepOrder.length) {
           yield state.clone(
             step: stepOrder[nextIndex],
           );
         } else {
-          //TODO: Event to do something after the flow ends
-          //add();
+          Navigator.pushReplacementNamed(
+            context,
+            DeliveryAgentHomePage.id,
+          );
         }
         break;
       case PreviousStepEvent:
