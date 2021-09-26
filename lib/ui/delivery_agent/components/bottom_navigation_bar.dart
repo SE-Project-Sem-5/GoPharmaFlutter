@@ -28,6 +28,10 @@ class DeliveryAgentBottomNavigationBar extends StatelessWidget {
           },
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
+              icon: Icon(Icons.pending),
+              label: 'Pending Orders',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.delivery_dining),
               label: 'Orders',
             ),

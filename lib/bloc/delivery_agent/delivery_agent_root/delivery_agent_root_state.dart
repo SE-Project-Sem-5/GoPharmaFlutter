@@ -13,14 +13,18 @@ class DeliveryAgentRootState {
   final DeliveryAgent deliveryAgent;
   final DeliveryAgentRootSignInState signInState;
   final bool initializing;
-  final bool isEditable;
+  final bool isGeneralInformationEditable;
+  final bool isPasswordEditable;
+  final bool isVisible;
 
   DeliveryAgentRootState({
     @required this.error,
+    this.isPasswordEditable,
+    @required this.isVisible,
     @required this.deliveryAgent,
     @required this.signInState,
     @required this.initializing,
-    @required this.isEditable,
+    @required this.isGeneralInformationEditable,
   });
 
   static DeliveryAgentRootState get initialState => DeliveryAgentRootState(
@@ -28,7 +32,9 @@ class DeliveryAgentRootState {
         deliveryAgent: null,
         signInState: DeliveryAgentRootSignInState.INITIALIZING,
         initializing: false,
-        isEditable: false,
+        isGeneralInformationEditable: false,
+        isPasswordEditable: false,
+        isVisible: false,
       );
 
   DeliveryAgentRootState clone({
@@ -36,14 +42,19 @@ class DeliveryAgentRootState {
     DeliveryAgent deliveryAgent,
     DeliveryAgentRootSignInState signInState,
     bool initializing,
-    bool isEditable,
+    bool isGeneralInformationEditable,
+    bool isPasswordEditable,
+    bool isVisible,
   }) {
     return DeliveryAgentRootState(
       error: error ?? this.error,
       deliveryAgent: deliveryAgent ?? this.deliveryAgent,
       signInState: signInState ?? this.signInState,
       initializing: initializing ?? this.initializing,
-      isEditable: isEditable ?? this.isEditable,
+      isGeneralInformationEditable:
+          isGeneralInformationEditable ?? this.isGeneralInformationEditable,
+      isPasswordEditable: isPasswordEditable ?? this.isPasswordEditable,
+      isVisible: isVisible ?? this.isVisible,
     );
   }
 }

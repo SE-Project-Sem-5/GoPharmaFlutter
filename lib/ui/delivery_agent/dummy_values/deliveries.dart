@@ -34,3 +34,30 @@ List<Delivery> dummyDeliveries = [
     products: [],
   ),
 ];
+
+List<Delivery> dummyPendingDeliveries = [
+  Delivery(
+    id: "ldksfnl",
+    deliveryStatus: 'collected',
+    destination: '',
+    deliveryCharge: 0,
+    totalPrice: 1293,
+    products: [],
+  ),
+  Delivery(
+    id: "53sdgfdg",
+    deliveryStatus: 'shipped',
+    destination: '',
+    deliveryCharge: 0,
+    totalPrice: 1500,
+    products: [],
+  ),
+  Delivery(
+    id: "53454dfgdfg",
+    deliveryStatus: 'collected',
+    destination: '',
+    deliveryCharge: 0,
+    totalPrice: 1500,
+    products: [],
+  ),
+];
