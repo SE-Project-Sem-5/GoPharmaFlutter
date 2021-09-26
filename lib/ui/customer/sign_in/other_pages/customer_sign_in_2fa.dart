@@ -78,24 +78,25 @@ class CustomerSignIn2FA extends StatelessWidget {
               BlocBuilder<CustomerSignInBloc, CustomerSignInState>(
                 builder: (context, state) {
                   return RoundedButtonFilled(
-                    title: "Next",
+                    title: "Sign In",
                     size: MediaQuery.of(context).size,
                     fillColor: GoPharmaColors.PrimaryColor,
                     textColor: GoPharmaColors.WhiteColor,
                     onTapped: () {
-                      _formKey.currentState.validate();
-                      //TODO: backend call - get twoFA value and compare
-                      bloc.add(
-                        UpdateTwoFA(
-                          twoFA: _twoFAController.text,
-                        ),
-                      );
-                      bloc.add(
-                        NextStepEvent(
-                          currentStep: state.step,
-                          context: context,
-                        ),
-                      );
+                      if (_formKey.currentState.validate()) {
+                        //TODO: backend call - get twoFA value and compare
+                        bloc.add(
+                          UpdateTwoFA(
+                            twoFA: _twoFAController.text,
+                          ),
+                        );
+                        bloc.add(
+                          NextStepEvent(
+                            currentStep: state.step,
+                            context: context,
+                          ),
+                        );
+                      }
                     },
                   );
                 },

@@ -14,7 +14,7 @@ class CustomerSignInStart extends StatelessWidget {
   static const String id = "customer_sign_in";
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-  static final GlobalKey<FormState> _form = GlobalKey<FormState>();
+  final _form = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,6 @@ class CustomerSignInStart extends StatelessWidget {
                     if (value == null || value.isEmpty) {
                       return ("Please type in your password.");
                     }
-                    return '';
                   },
                   style: TextStyle(
                     fontSize: 18.0,
@@ -156,11 +155,13 @@ class CustomerSignInStart extends StatelessWidget {
                 fillColor: GoPharmaColors.PrimaryColor,
                 textColor: GoPharmaColors.WhiteColor,
                 onTapped: () {
-                  _form.currentState.validate();
-                  customerSignInBloc.add(NextStepEvent(
-                    currentStep: state.step,
-                    context: context,
-                  ));
+                  if (_form.currentState.validate()) {
+                    customerSignInBloc.add(NextStepEvent(
+                      currentStep: state.step,
+                      context: context,
+                    ));
+                  }
+
                   // }
                 },
               );
