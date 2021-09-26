@@ -1,28 +1,52 @@
 import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:go_pharma/bloc/customer/camera/camera_event.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/customer/camera/camera_bloc.dart';
-import 'package:go_pharma/bloc/customer/camera/camera_state.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
+import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
+import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class CheckoutUploadPrescription extends StatelessWidget {
-  static final String id = "checkout_upload_prescription";
+class SelectOrderPrescriptionScreen extends StatelessWidget {
+  static final String id = "select_order_prescription_screen";
   final ImagePicker imagePicker = new ImagePicker();
   final PageController controller = PageController(initialPage: 0);
 
-  List<Widget> setImages(List<String> photoLocations) {
+  List<Widget> setImages(List<String> photoLocations, CheckoutBloc bloc) {
     List<Widget> images = [];
-    for (String location in photoLocations) {
+    print(photoLocations);
+    for (String fileLocation in photoLocations) {
       images.add(
-        Image.file(
-          File(
-            location,
+        Container(
+          color: Colors.black,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.file(
+                File(
+                  fileLocation,
+                ),
+                fit: BoxFit.contain,
+              ),
+              Positioned(
+                right: 10,
+                top: 10,
+                child: GestureDetector(
+                  onTap: () {
+                    bloc.add(RemoveImageEvent(image: fileLocation));
+                  },
+                  child: Icon(
+                    Icons.close,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            ],
           ),
-          fit: BoxFit.contain,
         ),
       );
     }
@@ -31,68 +55,90 @@ class CheckoutUploadPrescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var bloc = BlocProvider.of<CameraBloc>(context);
+    Size size = MediaQuery.of(context).size;
+
+    var bloc = BlocProvider.of<CheckoutBloc>(context);
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("Upload Prescription"),
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              BlocBuilder<CameraBloc, CameraState>(
+              SizedBox(
+                height: 20,
+              ),
+              BlocBuilder<CheckoutBloc, CheckoutState>(
                 builder: (context, state) {
                   List<String> photoLocations = state.localPhotoPaths;
-                  List<Widget> images = setImages(photoLocations);
-                  return Container(
-                    height: MediaQuery.of(context).size.width * 0.7,
-                    width: MediaQuery.of(context).size.width,
-                    child: PageView(
-                      physics: ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      children: images,
-                    ),
-                  );
+                  List<Widget> images = setImages(photoLocations, bloc);
+                  return images.length > 0
+                      ? Container(
+                          height: MediaQuery.of(context).size.width * 0.7,
+                          child: PageView(
+                            physics: ClampingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            children: images,
+                          ),
+                        )
+                      : Container(
+                          height: MediaQuery.of(context).size.width * 0.7,
+                          child: Center(
+                            child: Text(
+                              "No Images Uploaded",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ));
                   // return CarouselImageArea(photos: photos);
                 },
               ),
-              BlocBuilder<CameraBloc, CameraState>(
-                buildWhen: (previous, current) =>
-                    previous.localPhotoPaths.length !=
-                    current.localPhotoPaths.length,
-                builder: (context, state) {
-                  return Container(
-                    margin: EdgeInsets.all(16),
-                    child: OutlinedButton(
-                      child: Text('Upload From Gallery'),
-                      onPressed: () async {
-                        PermissionStatus status =
-                            await Permission.storage.request();
-                        var storageStatus = await Permission.storage.status;
-                        XFile image;
-                        if (storageStatus.isGranted) {
-                          image = await imagePicker.pickImage(
-                            source: ImageSource.gallery,
-                          );
-                          if (image != null) {
-                            bloc.add(
-                              UploadImageFromGallery(
-                                localPhotoPaths: [image.path],
-                              ),
-                            );
-                          }
-                        } else if (storageStatus == PermissionStatus.denied) {
-                          //  TODO: do something
-                        }
-                      },
-                    ),
-                  );
-                },
+              SizedBox(
+                height: 50,
               ),
-              Container(
-                margin: EdgeInsets.all(16),
-                child: OutlinedButton(
-                  child: Text('Take Photo'),
-                  onPressed: () async {
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                ),
+                child: RoundedButtonFilled(
+                  fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
+                  textColor: GoPharmaColors.BlackColor,
+                  title: "Upload From Gallery",
+                  size: size,
+                  onTapped: () async {
+                    PermissionStatus status =
+                        await Permission.storage.request();
+                    var storageStatus = await Permission.storage.status;
+                    XFile image;
+                    if (storageStatus.isGranted) {
+                      image = await imagePicker.pickImage(
+                        source: ImageSource.gallery,
+                      );
+                      if (image != null) {
+                        bloc.add(
+                          UploadPrescriptionEvent(
+                            image: image.path,
+                          ),
+                        );
+                      }
+                    } else if (storageStatus == PermissionStatus.denied) {
+                      //  TODO: do something
+                    }
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                ),
+                child: RoundedButtonFilled(
+                  fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
+                  textColor: GoPharmaColors.BlackColor,
+                  title: "Take Photo",
+                  size: size,
+                  onTapped: () async {
                     PermissionStatus status = await Permission.camera.request();
                     var cameraStatus = await Permission.camera.status;
 
@@ -102,8 +148,8 @@ class CheckoutUploadPrescription extends StatelessWidget {
                       );
                       if (image != null) {
                         bloc.add(
-                          UploadImageFromGallery(
-                            localPhotoPaths: [image.path],
+                          UploadPrescriptionEvent(
+                            image: image.path,
                           ),
                         );
                       }
@@ -113,6 +159,29 @@ class CheckoutUploadPrescription extends StatelessWidget {
                   },
                 ),
               ),
+              BlocBuilder<CheckoutBloc, CheckoutState>(
+                builder: (context, state) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                    ),
+                    child: RoundedButtonFilled(
+                      size: MediaQuery.of(context).size,
+                      onTapped: () {
+                        state.localPhotoPaths.length > 0
+                            ? Navigator.pushNamed(
+                                context, PaymentSelectionPage.id)
+                            : null;
+                      },
+                      fillColor: GoPharmaColors.PrimaryColor,
+                      textColor: GoPharmaColors.WhiteColor,
+                      title: state.localPhotoPaths.length > 0
+                          ? "Proceed to Payment"
+                          : "Select an Image",
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),
@@ -124,7 +193,7 @@ class CheckoutUploadPrescription extends StatelessWidget {
 class CarouselImageArea extends StatelessWidget {
   const CarouselImageArea({
     Key key,
-    @required this.photos,
+    this.photos,
   }) : super(key: key);
 
   final List<String> photos;
@@ -155,13 +224,3 @@ class CarouselImageArea extends StatelessWidget {
     );
   }
 }
-
-// return Container(
-// height: 300,
-// width: 300,
-// child: Image.file(
-// File(
-// state.localPhotoPaths[index],
-// ),
-// ),
-// );

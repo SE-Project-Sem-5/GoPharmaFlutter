@@ -30,8 +30,13 @@ class RootSignInEvent extends CustomerRootEvent {
   RootSignInEvent({this.email, this.password});
 }
 
-class ToggleEditableEvent extends CustomerRootEvent {
-  ToggleEditableEvent();
+class ToggleGeneralInformationEditableEvent extends CustomerRootEvent {
+  ToggleGeneralInformationEditableEvent();
+}
+
+class ToggleVisibility extends CustomerRootEvent {
+  final bool isVisible;
+  ToggleVisibility(this.isVisible);
 }
 
 class SignOutEvent extends CustomerRootEvent {}

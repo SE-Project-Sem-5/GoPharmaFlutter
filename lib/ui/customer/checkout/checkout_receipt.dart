@@ -6,6 +6,7 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/payment_gateway/payment.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/customer/checkout/checkout_upload_prescription.dart';
 
 class CheckoutReceipt extends StatelessWidget {
   static final String id = "checkout_receipt";
@@ -56,12 +57,13 @@ class CheckoutReceipt extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           ProductReceiptText(
-                            text: "Final Price",
+                            text: "Final Price (Rs.)",
                             fontWeight: FontWeight.bold,
                           ),
                         ],
                       ),
                     ),
+                    //TODO: add prescription uploading
                     CheckoutReceiptProductList(
                       productList: state.productListPrescriptionless +
                           state.productListNeedPrescriptions,
@@ -109,12 +111,18 @@ class CheckoutReceipt extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        PaymentGateway.pay(
-                            getProductNames(state.productListPrescriptionless +
-                                state.productListNeedPrescriptions),
-                            state.productListTotal,
-                            //TODO: pass customer name, pass order ID
-                            "orderID");
+                        state.productListNeedPrescriptions.length > 0
+                            ? Navigator.pushNamed(
+                                context,
+                                SelectOrderPrescriptionScreen.id,
+                              )
+                            : PaymentGateway.pay(
+                                getProductNames(
+                                    state.productListPrescriptionless +
+                                        state.productListNeedPrescriptions),
+                                state.productListTotal,
+                                //TODO: pass customer name, pass order ID
+                                "orderID");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: GoPharmaColors.PrimaryColor,
@@ -128,7 +136,9 @@ class CheckoutReceipt extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        "Proceed to Payment",
+                        state.productListNeedPrescriptions.length > 0
+                            ? "Upload Prescription"
+                            : "Proceed to Payment",
                         style: TextStyle(
                           fontSize: 18.0,
                         ),

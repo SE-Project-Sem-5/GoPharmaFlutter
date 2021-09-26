@@ -19,6 +19,13 @@ class CurrentOrderCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Card(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: GoPharmaColors.GreyColor,
+              width: 2.0,
+            ),
+            borderRadius: BorderRadius.circular(4.0),
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -74,13 +81,6 @@ class CurrentOrderCard extends StatelessWidget {
   }
 }
 
-Map<String, Color> orderStatusColorMapping = {
-  "Processing": Colors.blueAccent.withOpacity(0.2),
-  "Packing": Colors.orange.withOpacity(0.2),
-  "In Transit": GoPharmaColors.PrimaryColor.withOpacity(0.2),
-  "Delivered": Colors.green.withOpacity(0.2),
-};
-
 class CurrentOrderStatusChip extends StatelessWidget {
   final String text;
   CurrentOrderStatusChip({this.text});
@@ -89,7 +89,6 @@ class CurrentOrderStatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      backgroundColor: orderStatusColorMapping[text],
       label: Container(
         width: 75,
         child: Center(

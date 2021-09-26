@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/customer/dummy/order/past_order_model.dart';
+import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_order_full_view.dart';
 import 'package:intl/intl.dart';
 
@@ -14,6 +15,13 @@ class PastOrderCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Card(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: GoPharmaColors.GreyColor,
+              width: 2.0,
+            ),
+            borderRadius: BorderRadius.circular(4.0),
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[

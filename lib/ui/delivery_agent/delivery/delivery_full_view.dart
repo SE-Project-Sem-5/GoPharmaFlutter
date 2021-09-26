@@ -147,29 +147,28 @@ class DeliveryFullView extends StatelessWidget {
                                         "delivered" ||
                                     delivery.deliveryStatus == "delivered"
                                 ? Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      "This delivery has been completed.",
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                      ),
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: DeliveryStatusChip(
+                                      width: 230,
+                                      text: "This delivery has been completed.",
                                     ),
                                   )
-                                : TextButton(
-                                    child: Text(
-                                      deliveryAgentButtonMapping[
+                                : Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: ChangeDeliveryStatusButton(
+                                      onClick: () {
+                                        deliveryBloc.add(
+                                          NextDeliveryStatusEvent(
+                                            delivery,
+                                          ),
+                                        );
+                                      },
+                                      status: state.delivery.deliveryStatus ??
+                                          delivery.deliveryStatus,
+                                      width: 230,
+                                      text: deliveryAgentButtonMapping[
                                           delivery.deliveryStatus],
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                      ),
                                     ),
-                                    onPressed: () {
-                                      deliveryBloc.add(
-                                        NextDeliveryStatusEvent(
-                                          delivery,
-                                        ),
-                                      );
-                                    },
                                   );
                           },
                         ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
@@ -20,6 +22,17 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           productListPrescriptionless: [],
           productListTotal: 0,
           productListNeedPrescriptions: [],
+        );
+        break;
+      case UploadPrescriptionEvent:
+        final String image = (event as UploadPrescriptionEvent).image;
+        final List<String> newLocalPhotoPaths = state.localPhotoPaths;
+        final List<File> photos = state.photos;
+        newLocalPhotoPaths.add(image);
+        photos.add(File(image));
+        yield state.clone(
+          localPhotoPaths: newLocalPhotoPaths,
+          photos: photos,
         );
         break;
       case UpdateProductListEvent:
@@ -57,6 +70,22 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           productListNeedPrescriptions: state.productListNeedPrescriptions,
           productListPrescriptionless: productListPrescriptionless,
         );
+        break;
+      case RemoveImageEvent:
+        final String image = (event as RemoveImageEvent).image;
+        final List<String> localPhotoPaths = state.localPhotoPaths;
+        final List<File> photos = state.photos;
+        photos.remove(File(image));
+        localPhotoPaths.remove(image);
+        yield state.clone(
+          localPhotoPaths: localPhotoPaths,
+          photos: photos,
+        );
+        break;
+      case ConfirmOrderEvent:
+        yield state.clone(orderLoading: true);
+        //TODO: call endpoint to upload images
+        yield state.clone(orderLoading: false);
         break;
       case UpdateProductAmountEvent:
         double tempTotal = 0;

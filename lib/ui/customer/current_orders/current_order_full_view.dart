@@ -62,20 +62,6 @@ class CurrentOrderFullView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: leftPadding,
-                          top: 10,
-                          bottom: 10.0,
-                        ),
-                        child: Text(
-                          'Completed: ',
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.6),
-                            fontSize: 16.0,
-                          ),
-                        ),
-                      ),
                       SizedBox(
                         height: 10,
                       ),
