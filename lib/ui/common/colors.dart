@@ -10,6 +10,8 @@ class GoPharmaColors {
   static Color hintTextColor = PrimaryColor.withOpacity(0.4);
   static Color textBoxColor = PrimaryColor.withOpacity(0.7);
   static const SelectionColor = Color.fromRGBO(120, 30, 80, 1);
+  static const FacebookBlueColor = Color.fromRGBO(63, 108, 166, 1);
+  static const GoogleBlueColor = Color.fromRGBO(66, 132, 242, 1);
 
   static const BlackColor = Colors.black;
   static const WhiteColor = Colors.white;

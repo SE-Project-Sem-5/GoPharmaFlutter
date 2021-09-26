@@ -2,33 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_state.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_in/delivery_agent_sign_in.dart';
 
 class DeliveryAgentSignInProvider
     extends BlocProvider<DeliveryAgentSignInBloc> {
-  DeliveryAgentSignInProvider({
-    @required Key key,
-  }) : super(
-          key: key,
+  static final String id = "/delivery_agent_sign_in";
+  DeliveryAgentSignInProvider()
+      : super(
           create: (context) => DeliveryAgentSignInBloc(context),
-          child: TestView(),
+          child: DeliveryAgentSignInView(),
         );
 }
 
-class TestView extends StatelessWidget {
+class DeliveryAgentSignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-
-    final scaffold = Scaffold(
-      body: BlocBuilder<DeliveryAgentSignInBloc, DeliveryAgentSignInState>(
-        buildWhen: (pre, current) => true,
-        builder: (context, state) {
-          return Center(
-            child: Text("Hi...Welcome to BLoC"),
-          );
-        },
-      ),
-    );
 
     return MultiBlocListener(
       listeners: [
@@ -39,7 +28,7 @@ class TestView extends StatelessWidget {
           },
         ),
       ],
-      child: scaffold,
+      child: DeliveryAgentSignInPage(),
     );
   }
 }

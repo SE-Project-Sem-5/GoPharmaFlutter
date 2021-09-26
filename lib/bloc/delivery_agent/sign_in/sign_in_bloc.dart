@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
 import 'sign_in_event.dart';
 import 'sign_in_state.dart';
 
@@ -34,7 +35,12 @@ class DeliveryAgentSignInBloc
           yield state.clone(
             step: stepOrder[nextIndex],
           );
-        } else {}
+        } else {
+          Navigator.pushReplacementNamed(
+            context,
+            DeliveryAgentHomePage.id,
+          );
+        }
         break;
       case PreviousStepEvent:
         final currentStep = (event as PreviousStepEvent).currentStep;

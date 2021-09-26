@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_provider.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_provider.dart';
+import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_provider.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_start.dart';
@@ -19,7 +20,6 @@ import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_starting_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
-import 'package:go_pharma/ui/delivery_agent/sign_in/other_pages/delivery_agent_sign_in.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 
 Map<String, Widget Function(BuildContext context)> routes = {
@@ -48,7 +48,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
   DeliveryAgentSignUpProvider.id: (context) => DeliveryAgentSignUpProvider(),
-  DeliveryAgentSignInStart.id: (context) => DeliveryAgentSignInStart(),
+  DeliveryAgentSignInProvider.id: (context) => DeliveryAgentSignInProvider(),
   DeliveryAgentHomePage.id: (context) => DeliveryAgentHomePage(),
   DeliveriesPage.id: (context) => DeliveriesPage(),
 };

@@ -4,7 +4,7 @@ import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
+import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 class SignIn2FA extends StatelessWidget {
@@ -78,18 +78,19 @@ class SignIn2FA extends StatelessWidget {
               BlocBuilder<DeliveryAgentSignInBloc, DeliveryAgentSignInState>(
                 builder: (context, state) {
                   return RoundedButtonFilled(
-                    title: "Next",
+                    title: "Sign In",
                     size: MediaQuery.of(context).size,
                     fillColor: GoPharmaColors.PrimaryColor,
                     textColor: GoPharmaColors.WhiteColor,
                     onTapped: () {
-                      _formKey.currentState.validate();
+                      if (_formKey.currentState.validate()) {
+                        bloc.add(UpdateTwoFA(twoFA: _twoFAController.text));
+                        bloc.add(NextStepEvent(
+                          currentStep: state.step,
+                          context: context,
+                        ));
+                      }
                       //TODO: backend call - get twoFA value and compare
-                      bloc.add(UpdateTwoFA(twoFA: _twoFAController.text));
-                      bloc.add(NextStepEvent(
-                        currentStep: state.step,
-                        context: context,
-                      ));
                     },
                   );
                 },

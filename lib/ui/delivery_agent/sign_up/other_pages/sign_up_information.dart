@@ -4,7 +4,7 @@ import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
+import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 
 class SignUpInformation extends StatelessWidget {
   @override
