@@ -18,7 +18,7 @@ class FacebookButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RoundedButton(
-      buttonH: 65,
+      buttonH: 50,
       buttonW: size.width * 0.8,
       iconWidget: Padding(
         padding: const EdgeInsets.only(right: 20.0),

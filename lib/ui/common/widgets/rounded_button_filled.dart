@@ -7,7 +7,7 @@ class RoundedButtonFilled extends StatelessWidget {
     this.size,
     this.fillColor = GoPharmaColors.PrimaryColor,
     this.textColor = Colors.white,
-    this.height = 60.0,
+    this.height = 50.0,
     this.widthMultiplier = 0.8,
     this.hPadding = 20.0,
     this.vPadding = 10.0,

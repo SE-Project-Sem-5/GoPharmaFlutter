@@ -13,14 +13,18 @@ class CustomerRootState {
   final Customer customer;
   final CustomerRootSignInState signInState;
   final bool initializing;
-  final bool isEditable;
+  final bool isGeneralInformationEditable;
+  final bool isPasswordEditable;
+  final bool isVisible;
 
   CustomerRootState({
+    this.isPasswordEditable,
     @required this.error,
     @required this.customer,
     @required this.signInState,
     @required this.initializing,
-    @required this.isEditable,
+    @required this.isVisible,
+    @required this.isGeneralInformationEditable,
   });
 
   static CustomerRootState get initialState => CustomerRootState(
@@ -28,7 +32,9 @@ class CustomerRootState {
         customer: null,
         signInState: CustomerRootSignInState.INITIALIZING,
         initializing: false,
-        isEditable: false,
+        isGeneralInformationEditable: false,
+        isPasswordEditable: false,
+        isVisible: false,
       );
 
   CustomerRootState clone({
@@ -36,14 +42,19 @@ class CustomerRootState {
     Customer customer,
     CustomerRootSignInState signInState,
     bool initializing,
-    bool isEditable,
+    bool isGeneralInformationEditable,
+    bool isPasswordEditable,
+    bool isVisible,
   }) {
     return CustomerRootState(
       error: error ?? this.error,
       customer: customer ?? this.customer,
       signInState: signInState ?? this.signInState,
       initializing: initializing ?? this.initializing,
-      isEditable: isEditable ?? this.isEditable,
+      isGeneralInformationEditable:
+          isGeneralInformationEditable ?? this.isGeneralInformationEditable,
+      isPasswordEditable: isPasswordEditable ?? this.isPasswordEditable,
+      isVisible: isVisible ?? this.isVisible,
     );
   }
 }

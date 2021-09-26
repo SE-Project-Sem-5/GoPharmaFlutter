@@ -175,8 +175,6 @@ class CustomerSignInStart extends StatelessWidget {
                           context: context,
                         ));
                       }
-
-                      // }
                     },
                   );
                 },
@@ -188,18 +186,12 @@ class CustomerSignInStart extends StatelessWidget {
                 textColor: GoPharmaColors.BlackColor,
                 onTapped: () {},
               ),
-              SizedBox(
-                height: 15,
-              ),
               Text(
                 "OR",
                 style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                     color: GoPharmaColors.PrimaryColor),
-              ),
-              SizedBox(
-                height: 15,
               ),
             ],
           ),

@@ -20,4 +20,16 @@ class UpdateProductAmountEvent extends CheckoutEvent {
   UpdateProductAmountEvent();
 }
 
-class UploadPrescriptionEvent extends CheckoutEvent {}
+class UploadPrescriptionEvent extends CheckoutEvent {
+  final String image;
+  UploadPrescriptionEvent({this.image});
+}
+
+class ConfirmOrderEvent extends CheckoutEvent {
+  ConfirmOrderEvent();
+}
+
+class RemoveImageEvent extends CheckoutEvent {
+  final String image;
+  RemoveImageEvent({this.image});
+}

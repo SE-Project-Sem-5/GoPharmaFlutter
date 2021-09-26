@@ -19,7 +19,7 @@ class GoogleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RoundedButton(
       buttonW: size.width * 0.8,
-      buttonH: 65,
+      buttonH: 50,
       iconWidget: Padding(
         padding: const EdgeInsets.only(right: 20.0),
         child: Icon(
