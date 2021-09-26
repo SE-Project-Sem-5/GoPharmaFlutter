@@ -4,7 +4,7 @@ import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_bl
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_event.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
+import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/customer/drawer.dart';
 import 'package:go_pharma/ui/customer/prescription_order/other_pages/order_summary_page.dart';
 import 'other_pages/zone_select_page.dart';

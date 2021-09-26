@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_provider.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
+import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 
 class DeliveryAgentStartingPage extends StatelessWidget {
   static const String id = "delivery_agent_starting_page";

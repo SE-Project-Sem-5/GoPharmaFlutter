@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_provider.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
+import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 
 class CustomerStartingPage extends StatelessWidget {
   static const String id = "customer_starting_page";

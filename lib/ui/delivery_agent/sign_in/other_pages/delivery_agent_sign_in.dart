@@ -5,7 +5,7 @@ import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_state.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/common/widgets/rounded_button.dart';
+import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
@@ -124,7 +124,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Don't have an account?",
+                "Don't have an account? ",
                 style: TextStyle(
                   color: GoPharmaColors.PrimaryColor,
                 ),
@@ -166,6 +166,13 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                 },
               );
             },
+          ),
+          RoundedButtonFilled(
+            title: "Forgot Password?",
+            size: MediaQuery.of(context).size,
+            fillColor: GoPharmaColors.GreyColor,
+            textColor: GoPharmaColors.BlackColor,
+            onTapped: () {},
           ),
           Spacer(),
         ],
