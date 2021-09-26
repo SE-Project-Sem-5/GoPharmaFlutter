@@ -18,7 +18,9 @@ class DeliveryNavigationBloc
     switch (event.runtimeType) {
       case ErrorEvent:
         final error = (event as ErrorEvent).error;
-        yield state.clone(error: error, index: 0);
+        yield state.clone(
+          error: error,
+        );
         break;
       case ChangeIndexEvent:
         final index = (event as ChangeIndexEvent).index;
@@ -33,6 +35,7 @@ class DeliveryNavigationBloc
 }
 
 List<String> titles = [
+  "Pending Orders",
   "Deliveries",
   "User Settings",
 ];
