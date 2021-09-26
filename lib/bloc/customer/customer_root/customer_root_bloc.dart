@@ -24,33 +24,20 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final customer = (event as UpdateUserEvent).customer;
         yield state.clone(customer: customer);
         break;
-      case ToggleVisibility:
-        final isVisible = (event as ToggleVisibility).isVisible;
-        yield state.clone(isVisible: isVisible);
-        break;
       case StartInitCheckEvent:
         yield state.clone(initializing: true);
         break;
-
       case ChangeSignInStateEvent:
         final signInState = (event as ChangeSignInStateEvent).state;
         yield state.clone(signInState: signInState);
         break;
-
       case SignOutEvent:
         yield state.clone(signInState: CustomerRootSignInState.SIGNED_OUT);
         //TODO: Logic to sign out user
         break;
-
-      case ToggleGeneralInformationEditableEvent:
-        yield state.clone(
-            isGeneralInformationEditable: !state.isGeneralInformationEditable);
-        break;
-
       case RootSignInEvent:
         final email = (event as RootSignInEvent).email;
         final password = (event as RootSignInEvent).password;
-
         // TODO: Logic to sign in user
         // final auth = locator<AuthService>();
         // User user = await auth.createUserWithEmailAndPassword(email, password);
@@ -58,6 +45,15 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         yield state.clone(
           signInState: CustomerRootSignInState.SIGNED_IN,
           customer: customer,
+        );
+        break;
+      case ToggleVisibility:
+        final isVisible = (event as ToggleVisibility).isVisible;
+        yield state.clone(isVisible: isVisible);
+        break;
+      case ToggleGeneralInformationEditableEvent:
+        yield state.clone(
+          isGeneralInformationEditable: !state.isGeneralInformationEditable,
         );
         break;
     }

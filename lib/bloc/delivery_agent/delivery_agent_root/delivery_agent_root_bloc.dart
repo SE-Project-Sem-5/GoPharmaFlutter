@@ -26,25 +26,21 @@ class DeliveryAgentRootBloc
         final deliveryAgent = (event as UpdateUserEvent).deliveryAgent;
         yield state.clone(deliveryAgent: deliveryAgent);
         break;
-
       case StartInitCheckEvent:
         yield state.clone(initializing: true);
         break;
-
       case ChangeSignInStateEvent:
         final signInState = (event as ChangeSignInStateEvent).state;
         yield state.clone(signInState: signInState);
         break;
-
       case SignOutEvent:
         yield state.clone(signInState: DeliveryAgentRootSignInState.SIGNED_OUT);
         //TODO: Logic to sign out user
         break;
-
       case ToggleEditableEvent:
-        yield state.clone(isEditable: !state.isEditable);
+        yield state.clone(
+            isGeneralInformationEditable: !state.isGeneralInformationEditable);
         break;
-
       case RootSignInEvent:
         final email = (event as RootSignInEvent).email;
         final password = (event as RootSignInEvent).password;
@@ -52,6 +48,15 @@ class DeliveryAgentRootBloc
         yield state.clone(
           signInState: DeliveryAgentRootSignInState.SIGNED_IN,
           deliveryAgent: deliveryAgent,
+        );
+        break;
+      case ToggleVisibility:
+        final isVisible = (event as ToggleVisibility).isVisible;
+        yield state.clone(isVisible: isVisible);
+        break;
+      case ToggleGeneralInformationEditableEvent:
+        yield state.clone(
+          isGeneralInformationEditable: !state.isGeneralInformationEditable,
         );
         break;
     }

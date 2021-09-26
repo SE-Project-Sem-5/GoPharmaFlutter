@@ -37,3 +37,12 @@ class ToggleEditableEvent extends DeliveryAgentRootEvent {
 class SignOutEvent extends DeliveryAgentRootEvent {}
 
 class StartInitCheckEvent extends DeliveryAgentRootEvent {}
+
+class ToggleGeneralInformationEditableEvent extends DeliveryAgentRootEvent {
+  ToggleGeneralInformationEditableEvent();
+}
+
+class ToggleVisibility extends DeliveryAgentRootEvent {
+  final bool isVisible;
+  ToggleVisibility(this.isVisible);
+}
