@@ -16,6 +16,9 @@ class GoPharmaColors {
   static const BlackColor = Colors.black;
   static const WhiteColor = Colors.white;
 
+  static const HomeProductCategoriesColor = Color.fromRGBO(15, 185, 182, 1);
+  static const HomePrescriptionColor = Color.fromRGBO(144, 199, 193, 1);
+
   static const MaterialColor PrimaryMaterialColorScheme = MaterialColor(
     0xFFB13BC8,
     {

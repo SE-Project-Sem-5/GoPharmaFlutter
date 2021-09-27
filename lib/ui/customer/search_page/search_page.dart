@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/drawer.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
@@ -8,15 +9,20 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // This is handled by the search bar itself.
-      drawer: CustomerDrawer(),
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          buildFloatingSearchBar(context),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        drawer: CustomerDrawer(),
+        backgroundColor: GoPharmaColors.GreyColor,
+        resizeToAvoidBottomInset: false,
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: buildFloatingSearchBar(context),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -61,16 +67,57 @@ class SearchPage extends StatelessWidget {
             child: Material(
               color: Colors.white,
               elevation: 4.0,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: Colors.accents.map((color) {
-                  //TODO: map the search results here
-                  return Container(height: 112, color: color);
-                }).toList(),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: searchResults,
+                ),
               ),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+List<Widget> searchResults = [
+  SearchBarResult(
+    text: "Search Result 1",
+  ),
+  SearchBarResult(
+    text: "Search Result 2",
+  ),
+  SearchBarResult(
+    text: "Search Result 3",
+  ),
+  SearchBarResult(
+    text: "Search Result 4",
+  ),
+];
+
+class SearchBarResult extends StatelessWidget {
+  final String text;
+
+  const SearchBarResult({Key key, this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Row(
+        children: [
+          Icon(Icons.search),
+          SizedBox(
+            width: 10,
+          ),
+          Text(
+            text,
+          ),
+        ],
       ),
     );
   }
