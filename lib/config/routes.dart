@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/bloc/customer/category/category_provider.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_provider.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_provider.dart';
@@ -14,7 +15,6 @@ import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/prescription_order/other_pages/zone_select_page.dart';
 import 'package:go_pharma/ui/customer/prescription_order/other_pages/select_photo_screen.dart';
-import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
@@ -40,7 +40,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   SettingsPage.id: (context) => SettingsPage(),
   CheckoutStart.id: (context) => CheckoutStart(),
   CheckoutReceipt.id: (context) => CheckoutReceipt(),
-  ProductCategoriesPage.id: (context) => ProductCategoriesPage(),
+  CategoryProvider.id: (context) => CategoryProvider(),
   SearchPage.id: (context) => SearchPage(),
   PastOrdersPage.id: (context) => PastOrdersPage(),
   CurrentOrdersPage.id: (context) => CurrentOrdersPage(),
@@ -52,6 +52,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   SelectOrderPrescriptionScreen.id: (context) =>
       SelectOrderPrescriptionScreen(),
   PaymentSelectionPage.id: (context) => PaymentSelectionPage(),
+
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
   DeliveryAgentSignUpProvider.id: (context) => DeliveryAgentSignUpProvider(),

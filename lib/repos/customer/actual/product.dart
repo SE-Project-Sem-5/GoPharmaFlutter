@@ -1,4 +1,4 @@
-import 'package:go_pharma/repos/customer/actual/category.dart';
+import 'package:go_pharma/repos/customer/actual/category/category.dart';
 import 'package:go_pharma/repos/customer/actual/productSize.dart';
 import 'package:go_pharma/repos/customer/actual/supplier.dart';
 
