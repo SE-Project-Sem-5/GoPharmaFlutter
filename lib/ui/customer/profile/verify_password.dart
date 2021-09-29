@@ -49,7 +49,7 @@ class VerifyPassword extends StatelessWidget {
                           fontSize: 18.0,
                           color: Colors.black,
                         ),
-                        obscureText: state.isVisible,
+                        obscureText: !state.isVisible,
                         onChanged: (String value) {},
                         cursorColor: GoPharmaColors.PrimaryColor,
                         decoration: InputDecoration(

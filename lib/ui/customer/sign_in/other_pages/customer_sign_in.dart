@@ -32,7 +32,7 @@ class CustomerSignInStart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 50,
+                height: 70,
               ),
               Text(
                 "Sign in to your account.",
@@ -128,7 +128,7 @@ class CustomerSignInStart extends StatelessWidget {
                 },
               ),
               SizedBox(
-                height: 5,
+                height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +159,7 @@ class CustomerSignInStart extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 15,
+                height: 70,
               ),
               BlocBuilder<CustomerSignInBloc, CustomerSignInState>(
                 builder: (context, state) {
@@ -179,12 +179,18 @@ class CustomerSignInStart extends StatelessWidget {
                   );
                 },
               ),
+              SizedBox(
+                height: 30,
+              ),
               RoundedButtonFilled(
                 title: "Forgot Password?",
                 size: MediaQuery.of(context).size,
                 fillColor: GoPharmaColors.GreyColor,
                 textColor: GoPharmaColors.BlackColor,
                 onTapped: () {},
+              ),
+              SizedBox(
+                height: 30,
               ),
               Text(
                 "OR",
@@ -193,6 +199,9 @@ class CustomerSignInStart extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: GoPharmaColors.PrimaryColor),
               ),
+              SizedBox(
+                height: 30,
+              ),
             ],
           ),
         ),
@@ -200,6 +209,9 @@ class CustomerSignInStart extends StatelessWidget {
           size: size,
           onClick: () {},
           title: 'Sign in with Google',
+        ),
+        SizedBox(
+          height: 20,
         ),
         FacebookButton(
           size: size,
