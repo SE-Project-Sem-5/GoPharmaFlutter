@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/repos/customer/actual/category/category.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
 import 'package:go_pharma/ui/customer/products/product_categories/specific_category_page.dart';
 
 class ProductCategoryCard extends StatelessWidget {
-  final String category;
+  final Category category;
   const ProductCategoryCard({Key key, this.category}) : super(key: key);
 
   @override
@@ -15,7 +16,7 @@ class ProductCategoryCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => SpecificCategoryPage(
-              category: category,
+              category: category.categoryName,
             ),
           ),
         );
@@ -35,7 +36,7 @@ class ProductCategoryCard extends StatelessWidget {
         ),
         child: Center(
           child: ProductReceiptText(
-            text: category,
+            text: category.categoryName,
           ),
         ),
       ),

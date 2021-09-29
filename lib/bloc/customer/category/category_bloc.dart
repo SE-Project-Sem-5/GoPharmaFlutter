@@ -19,9 +19,14 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         yield state.clone(error: error);
         break;
       case LoadAllCategories:
+        yield state.clone(isLoading: true);
         CategoriesList categoriesList =
             await _categoryAPIProvider.getAllCategories();
-        yield state.clone(categories: categoriesList.categoriesList);
+        print(categoriesList.categoriesList);
+        yield state.clone(
+          categories: categoriesList.categoriesList,
+          isLoading: false,
+        );
         break;
     }
   }

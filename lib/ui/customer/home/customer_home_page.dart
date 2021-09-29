@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_pharma/bloc/customer/category/category_provider.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/common_skeleton.dart';
 import 'package:go_pharma/ui/customer/current_orders/current_orders_page.dart';
-import 'package:go_pharma/ui/customer/products/dummy_values/products/products.dart';
-import 'package:go_pharma/ui/customer/products/horizontal_product_card.dart';
-import 'package:go_pharma/ui/customer/products/product_categories/categories_routing_page.dart';
 import 'package:go_pharma/ui/customer/profile/bold_text.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
-
-import '../drawer.dart';
 
 class CustomerHomePage extends StatelessWidget {
   static const String id = "customer_home_page";
@@ -64,7 +60,7 @@ class CustomerHomePage extends StatelessWidget {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 700,
+                height: 500,
                 child: GridView.count(
                   crossAxisCount: 2,
                   children: <Widget>[
@@ -73,7 +69,7 @@ class CustomerHomePage extends StatelessWidget {
                       onClick: () {
                         Navigator.pushNamed(
                           context,
-                          ProductCategoriesPage.id,
+                          CategoryProvider.id,
                         );
                       },
                       color: GoPharmaColors.HomeProductCategoriesColor,
