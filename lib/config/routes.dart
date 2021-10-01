@@ -3,6 +3,7 @@ import 'package:go_pharma/bloc/customer/category/category_provider.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_provider.dart';
 import 'package:go_pharma/bloc/customer/sign_up/sign_up_provider.dart';
+import 'package:go_pharma/bloc/delivery_agent/pending_delivery/pending_delivery_provider.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_provider.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
@@ -23,7 +24,6 @@ import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_starting_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
-import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/settings_page/view_profile.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 
@@ -59,6 +59,6 @@ Map<String, Widget Function(BuildContext context)> routes = {
   DeliveryAgentSignInProvider.id: (context) => DeliveryAgentSignInProvider(),
   DeliveryAgentHomePage.id: (context) => DeliveryAgentHomePage(),
   DeliveriesPage.id: (context) => DeliveriesPage(),
-  PendingDeliveriesPage.id: (context) => PendingDeliveriesPage(),
+  PendingDeliveriesProvider.id: (context) => PendingDeliveriesProvider(),
   DeliveryAgentSettingsPage.id: (context) => DeliveryAgentSettingsPage(),
 };

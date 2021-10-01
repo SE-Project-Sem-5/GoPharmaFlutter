@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/pending_delivery/pending_delivery_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/pending_delivery/pending_delivery_state.dart';
+import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
 
-class PendingOrderProvider extends BlocProvider<PendingOrderBloc> {
-  static final String id = "product_categories_page";
+class PendingDeliveriesProvider extends BlocProvider<PendingOrderBloc> {
+  static final String id = "pending_deliveries_page";
 
-  PendingOrderProvider({
+  PendingDeliveriesProvider({
     Key key,
   }) : super(
           key: key,
@@ -29,7 +30,7 @@ class CategoryView extends StatelessWidget {
           },
         ),
       ],
-      // child: ProductCategoriesPage(),
+      child: PendingDeliveriesPage(),
     );
   }
 }
