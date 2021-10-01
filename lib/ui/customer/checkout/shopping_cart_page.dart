@@ -11,8 +11,6 @@ import 'package:go_pharma/ui/customer/products/shopping_cart_page_product_card.d
 class ShoppingCartPage extends StatelessWidget {
   static final String id = "shopping_cart";
 
-  const ShoppingCartPage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,14 +22,16 @@ class ShoppingCartPage extends StatelessWidget {
         ),
         body: BlocBuilder<CheckoutBloc, CheckoutState>(
           builder: (context, state) {
-            List<Product> products = state.productListNeedPrescriptions +
-                state.productListPrescriptionless;
+            List<OrderProduct> orderProducts =
+                state.productListNeedPrescriptions +
+                    state.productListPrescriptionless;
             return Container(
               child: ListView.builder(
                 physics: ClampingScrollPhysics(),
-                itemCount: products.length,
+                itemCount: orderProducts.length,
                 itemBuilder: (context, index) => ShoppingCartPageProductCard(
-                  product: products[index],
+                  orderProduct: orderProducts[index],
+                  product: orderProducts[index].product,
                 ),
               ),
             );

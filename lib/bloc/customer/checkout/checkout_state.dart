@@ -6,16 +6,18 @@ import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 @immutable
 class CheckoutState {
   final String error;
-  final List<Product> productListPrescriptionless;
-  final List<Product> productListNeedPrescriptions;
+  final List<OrderProduct> productListPrescriptionless;
+  final List<OrderProduct> productListNeedPrescriptions;
   final double productListTotal;
   final List<String> localPhotoPaths;
+  final List<int> productIDs;
   final List<File> photos;
   final bool orderLoading;
 
   CheckoutState({
     this.orderLoading = false,
     this.localPhotoPaths,
+    this.productIDs,
     this.photos,
     this.error,
     this.productListPrescriptionless,
@@ -31,25 +33,28 @@ class CheckoutState {
         orderLoading: false,
         localPhotoPaths: [],
         photos: [],
+        productIDs: [],
       );
 
   CheckoutState clone({
     String error = '',
-    List<Product> productListNeedPrescriptions,
-    List<Product> productListPrescriptionless,
+    List<OrderProduct> productListNeedPrescriptions,
+    List<OrderProduct> productListPrescriptionless,
     List<String> localPhotoPaths,
+    List<int> productIDs,
     List<File> photos,
     bool orderLoading,
     productListTotal = 0.0,
   }) {
     return CheckoutState(
-      error: error,
+      error: error ?? this.error,
       productListPrescriptionless:
           productListPrescriptionless ?? this.productListPrescriptionless,
       productListTotal: productListTotal ?? this.productListTotal,
       orderLoading: orderLoading ?? this.orderLoading,
       localPhotoPaths: localPhotoPaths ?? this.localPhotoPaths,
       photos: photos ?? this.photos,
+      productIDs: productIDs ?? this.productIDs,
       productListNeedPrescriptions:
           productListNeedPrescriptions ?? this.productListNeedPrescriptions,
     );

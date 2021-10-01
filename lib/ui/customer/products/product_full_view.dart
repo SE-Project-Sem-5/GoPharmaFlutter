@@ -4,11 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
-import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
+import 'package:go_pharma/repos/customer/actual/product/product.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/back_button.dart';
 import 'package:go_pharma/ui/customer/products/product_card_image.dart';
-
 import 'components/shopping_cart.dart';
 import 'horizontal_product_card.dart';
 
@@ -56,7 +55,7 @@ class ProductFullView extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  product.name,
+                  product.productName,
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.w500,
@@ -73,7 +72,6 @@ class ProductFullView extends StatelessWidget {
                     color: Colors.black87.withOpacity(0.5),
                   ),
                 ),
-                //  TODO: add an option to edit the amount bought
               ],
             ),
           ),
@@ -87,7 +85,7 @@ class ProductFullView extends StatelessWidget {
             child: BlocBuilder<CheckoutBloc, CheckoutState>(
               builder: (context, state) {
                 return ElevatedButton(
-                  onPressed: product.inStock
+                  onPressed: product.stock > 0
                       ? () {
                           print(state.productListNeedPrescriptions);
                           bloc.add(

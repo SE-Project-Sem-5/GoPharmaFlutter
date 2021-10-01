@@ -12,3 +12,8 @@ class ErrorEvent extends CategoryEvent {
 class LoadAllCategories extends CategoryEvent {
   LoadAllCategories();
 }
+
+class LoadProductsPerCategory extends CategoryEvent {
+  final String category;
+  LoadProductsPerCategory({this.category});
+}

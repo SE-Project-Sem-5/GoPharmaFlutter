@@ -16,12 +16,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     switch (event.runtimeType) {
       case ErrorEvent:
         final error = (event as ErrorEvent).error;
-        // yield state.clone(error: "", productList: [], productListTotal: 0);
         yield state.clone(
           error: error,
-          productListPrescriptionless: [],
-          productListTotal: 0,
-          productListNeedPrescriptions: [],
         );
         break;
       case UploadPrescriptionEvent:
@@ -38,34 +34,54 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       case UpdateProductListEvent:
         final product = (event as UpdateProductListEvent).product;
 
-        final prescriptionNeeded = product.prescriptionRequired;
+        final prescriptionNeeded = product.prescriptionNeeded;
 
-        List<Product> productListPrescriptionless =
+        List<OrderProduct> productListPrescriptionless =
             state.productListPrescriptionless;
-        List<Product> productListNeedPrescriptions =
+        List<OrderProduct> productListNeedPrescriptions =
             state.productListNeedPrescriptions;
 
         double tempTotal = state.productListTotal;
+        int productID = product.id;
 
-        if (productListPrescriptionless.contains(product) ||
-            productListNeedPrescriptions.contains(product)) {
+        List<int> productIDs = state.productIDs;
+        if (productIDs.contains(productID)) {
           if (prescriptionNeeded) {
-            productListNeedPrescriptions.remove(product);
+            for (OrderProduct orderProduct in productListNeedPrescriptions) {
+              if (orderProduct.id == productID) {
+                tempTotal -= product.actualPrice * orderProduct.amountOrdered;
+                productListNeedPrescriptions.remove(orderProduct);
+                break;
+              }
+            }
           } else {
-            productListPrescriptionless.remove(product);
+            for (OrderProduct orderProduct in productListPrescriptionless) {
+              if (orderProduct.id == productID) {
+                tempTotal -= product.actualPrice * orderProduct.amountOrdered;
+                productListPrescriptionless.remove(orderProduct);
+                break;
+              }
+            }
           }
-          tempTotal -= product.price * product.amountOrdered;
-          product.amountOrdered = 0;
+          productIDs.remove(productID);
         } else {
-          product.incrementAmount();
-          if (prescriptionNeeded) {
-            productListNeedPrescriptions.add(product);
+          OrderProduct orderProduct = OrderProduct(
+            id: productID,
+            productName: product.productName,
+            actualPrice: product.actualPrice,
+            amountOrdered: 1,
+            product: product,
+          );
+          productIDs.add(productID);
+          if (product.prescriptionNeeded) {
+            productListNeedPrescriptions.add(orderProduct);
           } else {
-            productListPrescriptionless.add(product);
+            productListPrescriptionless.add(orderProduct);
           }
-          tempTotal += product.price;
+          tempTotal += product.actualPrice;
         }
         yield state.clone(
+          productIDs: productIDs,
           productListTotal: tempTotal,
           productListNeedPrescriptions: state.productListNeedPrescriptions,
           productListPrescriptionless: productListPrescriptionless,
@@ -84,22 +100,18 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
       case ConfirmOrderEvent:
         yield state.clone(orderLoading: true);
-        //TODO: call endpoint to upload images
         yield state.clone(orderLoading: false);
         break;
       case UpdateProductAmountEvent:
         double tempTotal = 0;
-        for (Product p in state.productListPrescriptionless) {
-          tempTotal += p.amountOrdered * p.price;
+        for (OrderProduct p in state.productListPrescriptionless) {
+          tempTotal += p.amountOrdered * p.actualPrice;
         }
-        for (Product p in state.productListNeedPrescriptions) {
-          tempTotal += p.amountOrdered * p.price;
+        for (OrderProduct p in state.productListNeedPrescriptions) {
+          tempTotal += p.amountOrdered * p.actualPrice;
         }
         yield state.clone(
-          error: '',
-          productListPrescriptionless: state.productListPrescriptionless,
           productListTotal: tempTotal,
-          productListNeedPrescriptions: state.productListNeedPrescriptions,
         );
         break;
     }

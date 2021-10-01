@@ -9,7 +9,6 @@ import 'package:go_pharma/repos/customer/actual/category/category.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/drawer.dart';
 import 'package:go_pharma/ui/customer/products/components/shopping_cart.dart';
-import 'package:go_pharma/ui/customer/products/dummy_values/categories/categories.dart';
 import 'category_card.dart';
 
 class ProductCategoriesPage extends StatelessWidget {

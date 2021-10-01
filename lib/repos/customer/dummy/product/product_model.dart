@@ -1,36 +1,19 @@
-class Product {
-  final String id;
-  final String name;
-  final String brandName;
-  final int category;
-  final String categoryName;
-  final String description;
-  final int supplierID;
+import 'package:go_pharma/repos/customer/actual/product/product.dart';
 
-  final String supplier;
-  final bool inStock;
-  final double price;
-  final bool prescriptionRequired;
-  final String imageURL;
+class OrderProduct {
+  final int id;
+  final String productName;
+  final double actualPrice;
   int amountOrdered;
   String unitOfMeasure;
+  final Product product;
 
-  Product({
-    this.brandName,
-    this.category,
-    this.categoryName,
-    this.supplierID,
-    //TODO: get all info from database
+  OrderProduct({
+    this.product,
     this.unitOfMeasure = "unit",
     this.id,
-    this.name,
-    this.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
-        "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-    this.supplier,
-    this.inStock,
-    this.price,
-    this.prescriptionRequired,
-    this.imageURL = "images/pills.png",
+    this.productName,
+    this.actualPrice,
     this.amountOrdered = 0,
   });
 

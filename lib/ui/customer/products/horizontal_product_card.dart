@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
-import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
+import 'package:go_pharma/repos/customer/actual/product/product.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/products/product_card_image.dart';
 import 'package:go_pharma/ui/customer/products/product_full_view.dart';
@@ -50,7 +50,7 @@ class HorizontalProductCard extends StatelessWidget {
                 Column(
                   children: [
                     ProductCardImage(
-                      imageURL: product.imageURL,
+                      imageURL: "images/pills.png",
                     ),
                   ],
                 ),
@@ -59,7 +59,7 @@ class HorizontalProductCard extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          product.name,
+                          product.productName,
                           style: TextStyle(
                             fontSize: 22.0,
                             fontWeight: FontWeight.w500,
@@ -70,7 +70,7 @@ class HorizontalProductCard extends StatelessWidget {
                           height: 10.0,
                         ),
                         Text(
-                          "Rs.${product.price.toStringAsFixed(2)}",
+                          "Rs.${product.actualPrice.toStringAsFixed(2)}",
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w600,
@@ -80,7 +80,7 @@ class HorizontalProductCard extends StatelessWidget {
                         SizedBox(
                           height: 10.0,
                         ),
-                        (!product.inStock)
+                        (product.stock <= 0)
                             ? Container(
                                 child: Padding(
                                   padding: const EdgeInsets.all(15.0),
@@ -108,10 +108,8 @@ class HorizontalProductCard extends StatelessWidget {
                                           color: GoPharmaColors.PrimaryColor,
                                         ),
                                       ),
-                                      onPressed: product.inStock
+                                      onPressed: product.stock > 0
                                           ? () {
-                                              print(state
-                                                  .productListNeedPrescriptions);
                                               bloc.add(
                                                 UpdateProductListEvent(
                                                   product,
@@ -119,10 +117,8 @@ class HorizontalProductCard extends StatelessWidget {
                                               );
                                             }
                                           : null,
-                                      child: (state.productListPrescriptionless
-                                                  .contains(product) ||
-                                              state.productListNeedPrescriptions
-                                                  .contains(product))
+                                      child: (state.productIDs
+                                              .contains(product.id))
                                           ? ButtonText(
                                               text: 'Remove from cart',
                                             )

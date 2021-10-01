@@ -78,7 +78,7 @@ class PaymentSelectionPage extends StatelessWidget {
 
 class CheckoutReceiptProductList extends StatelessWidget {
   final bool showPrice;
-  final List<Product> productList;
+  final List<OrderProduct> productList;
   const CheckoutReceiptProductList({
     this.productList,
     Key key,
@@ -99,13 +99,13 @@ class CheckoutReceiptProductList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ProductReceiptText(
-              text: productList[index].name +
+              text: productList[index].productName +
                   " x" +
                   productList[index].amountOrdered.toString(),
             ),
             showPrice
                 ? ProductReceiptText(
-                    text: (productList[index].price *
+                    text: (productList[index].actualPrice *
                             productList[index].amountOrdered)
                         .toString(),
                   )
@@ -136,10 +136,10 @@ class ProductReceiptText extends StatelessWidget {
   }
 }
 
-getProductNames(List<Product> products) {
+getProductNames(List<OrderProduct> products) {
   List<String> names = [];
-  for (Product i in products) {
-    names.add(i.name);
+  for (OrderProduct i in products) {
+    names.add(i.productName);
   }
   return names;
 }
