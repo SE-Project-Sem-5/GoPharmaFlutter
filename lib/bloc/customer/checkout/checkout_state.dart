@@ -15,12 +15,16 @@ class CheckoutState {
   final double deliveryCharge;
   final bool orderLoading;
   final int orderID;
+  final String streetAddress;
+  final String district;
 
   CheckoutState({
     this.orderLoading = false,
     this.localPhotoPaths,
     this.deliveryCharge,
     this.orderID,
+    this.streetAddress,
+    this.district,
     this.productIDs,
     this.photos,
     this.error,
@@ -31,6 +35,8 @@ class CheckoutState {
 
   static CheckoutState get initialState => CheckoutState(
         error: '',
+        streetAddress: '',
+        district: '',
         productListPrescriptionless: [],
         productListNeedPrescriptions: [],
         productListTotal: 0.0,
@@ -44,6 +50,8 @@ class CheckoutState {
 
   CheckoutState clone({
     String error = '',
+    String streetAddress = '',
+    String district = '',
     int orderID,
     List<OrderProduct> productListNeedPrescriptions,
     List<OrderProduct> productListPrescriptionless,
@@ -56,6 +64,8 @@ class CheckoutState {
   }) {
     return CheckoutState(
       error: error ?? this.error,
+      streetAddress: streetAddress ?? this.streetAddress,
+      district: district ?? this.district,
       orderID: orderID ?? this.orderID,
       productListPrescriptionless:
           productListPrescriptionless ?? this.productListPrescriptionless,
