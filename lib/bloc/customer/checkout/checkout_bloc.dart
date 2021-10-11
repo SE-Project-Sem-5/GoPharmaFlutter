@@ -81,6 +81,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
             productListPrescriptionless.add(orderProduct);
           }
           tempTotal += product.actualPrice;
+          print(tempTotal);
         }
         yield state.clone(
           productIDs: productIDs,
@@ -120,6 +121,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         );
         OrderPriceInformation orderPriceInformation =
             await orderAPIProvider.getDeliveryChargeForNormalOrder(delivery);
+        print(orderPriceInformation);
+        print(orderPriceInformation.deliveryCharge);
         yield state.clone(
           orderLoading: false,
           deliveryCharge: orderPriceInformation.deliveryCharge.toDouble(),
