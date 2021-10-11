@@ -35,7 +35,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
       case UpdateProductListEvent:
         final product = (event as UpdateProductListEvent).product;
-
         final prescriptionNeeded = product.prescriptionNeeded;
 
         List<OrderProduct> productListPrescriptionless =
@@ -126,6 +125,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         yield state.clone(
           orderLoading: false,
           deliveryCharge: orderPriceInformation.deliveryCharge.toDouble(),
+          productListTotal: orderPriceInformation.totalPrice.toDouble(),
         );
         break;
       case ConfirmOrderEvent:

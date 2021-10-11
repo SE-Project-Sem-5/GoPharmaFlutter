@@ -48,7 +48,7 @@ class CheckoutState {
     List<File> photos,
     bool orderLoading,
     double deliveryCharge = 0.0,
-    productListTotal = 0.0,
+    double productListTotal = 0.0,
   }) {
     return CheckoutState(
       error: error ?? this.error,
