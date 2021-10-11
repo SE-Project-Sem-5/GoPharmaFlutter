@@ -1,12 +1,14 @@
 class DeliveryDetails {
   int customerAddressID;
   String city;
+  String district;
   String streetAddress;
   List<DeliveryChargeProduct> products;
 
   DeliveryDetails({
     this.customerAddressID,
     this.city,
+    this.district,
     this.streetAddress,
     this.products,
   });
@@ -14,6 +16,7 @@ class DeliveryDetails {
   DeliveryDetails.fromJson(Map<String, dynamic> json) {
     customerAddressID = json['customerAddressID'];
     city = json['city'];
+    district = json['district'];
     streetAddress = json['streetAddress'];
     if (json['products'] != null) {
       products = [];
@@ -27,6 +30,7 @@ class DeliveryDetails {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['customerAddressID'] = this.customerAddressID;
     data['city'] = this.city;
+    data['district'] = this.district;
     data['streetAddress'] = this.streetAddress;
     if (this.products != null) {
       data['products'] = this.products.map((v) => v.toJson()).toList();

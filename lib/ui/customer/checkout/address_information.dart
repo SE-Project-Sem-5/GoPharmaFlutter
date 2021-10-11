@@ -114,6 +114,7 @@ class AddressInformationPage extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               if (_form.currentState.validate()) {
+                print(districtController.text);
                 bloc.add(AddAddressDetails(
                   streetAddress: addressController.text,
                   city: cityController.text,
