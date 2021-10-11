@@ -1,6 +1,6 @@
 import 'address.dart';
 
-class NormalOrder {
+class NormalPrescriptionlessOrder {
   int totalPrice;
   int deliveryCharge;
   int customerID;
@@ -10,7 +10,7 @@ class NormalOrder {
   Address address;
   Payment payment;
 
-  NormalOrder({
+  NormalPrescriptionlessOrder({
     this.totalPrice,
     this.deliveryCharge,
     this.customerID,
@@ -21,7 +21,7 @@ class NormalOrder {
     this.payment,
   });
 
-  NormalOrder.fromJson(Map<String, dynamic> json) {
+  NormalPrescriptionlessOrder.fromJson(Map<String, dynamic> json) {
     totalPrice = json['totalPrice'];
     deliveryCharge = json['deliveryCharge'];
     customerID = json['customerID'];
