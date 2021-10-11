@@ -41,7 +41,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
             state.productListPrescriptionless;
         List<OrderProduct> productListNeedPrescriptions =
             state.productListNeedPrescriptions;
-
         double tempTotal = state.productListTotal;
         int productID = product.id;
 
@@ -128,8 +127,9 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           productListTotal: orderPriceInformation.totalPrice.toDouble(),
         );
         break;
-      case ConfirmOrderEvent:
+      case ConfirmNormalCashOrder:
         yield state.clone(orderLoading: true);
+
         yield state.clone(orderLoading: false);
         break;
       case UpdateProductAmountEvent:

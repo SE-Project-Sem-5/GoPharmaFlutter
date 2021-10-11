@@ -37,3 +37,7 @@ class RemoveImageEvent extends CheckoutEvent {
 class GetDeliveryChargeForNormalOrder extends CheckoutEvent {
   GetDeliveryChargeForNormalOrder();
 }
+
+class ConfirmNormalCashOrder extends CheckoutEvent {
+  ConfirmNormalCashOrder();
+}

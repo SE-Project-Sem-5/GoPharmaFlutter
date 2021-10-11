@@ -6,7 +6,7 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_upload_prescription.dart';
-import 'package:go_pharma/ui/customer/checkout/delivery_charge.dart';
+import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
 
 class CheckoutReceipt extends StatelessWidget {
   static final String id = "checkout_receipt";
@@ -84,22 +84,13 @@ class CheckoutReceipt extends StatelessWidget {
                             showPrice: false,
                             productList: state.productListNeedPrescriptions,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ProductReceiptText(
-                                  text: "Total Delivery Charge",
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                ProductReceiptText(
-                                  text:
-                                      "Rs. ${state.deliveryCharge.toStringAsFixed(2)}",
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ],
-                            ),
+                          ReceiptInformationRow(
+                            text: "Total Product Value",
+                            value: state.productListTotal.toStringAsFixed(2),
+                          ),
+                          ReceiptInformationRow(
+                            text: "Total Delivery Charge",
+                            value: state.deliveryCharge.toStringAsFixed(2),
                           ),
                         ],
                       ),
@@ -159,7 +150,7 @@ class CheckoutReceipt extends StatelessWidget {
                             onPressed: () {
                               Navigator.pushNamed(
                                 context,
-                                DeliveryCharge.id,
+                                PaymentSelectionPage.id,
                               );
                             },
                             style: ElevatedButton.styleFrom(
@@ -186,6 +177,36 @@ class CheckoutReceipt extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class ReceiptInformationRow extends StatelessWidget {
+  final String value;
+  final String text;
+  const ReceiptInformationRow({
+    Key key,
+    this.value,
+    this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ProductReceiptText(
+            text: this.text,
+            fontWeight: FontWeight.bold,
+          ),
+          ProductReceiptText(
+            text: "Rs. ${this.value}",
+            fontWeight: FontWeight.bold,
+          ),
+        ],
       ),
     );
   }
