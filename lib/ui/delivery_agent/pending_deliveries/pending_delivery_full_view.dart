@@ -135,7 +135,7 @@ class PendingDeliveryFullView extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              "Confirm this order?",
+                              "Confirm this orderInProgress?",
                               style: TextStyle(
                                 fontSize: 20.0,
                               ),

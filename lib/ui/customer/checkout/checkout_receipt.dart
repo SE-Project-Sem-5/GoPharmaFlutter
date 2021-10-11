@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
-import 'package:go_pharma/payment_gateway/payment.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_upload_prescription.dart';
+import 'package:go_pharma/ui/customer/checkout/delivery_charge.dart';
 
 class CheckoutReceipt extends StatelessWidget {
   static final String id = "checkout_receipt";
@@ -116,13 +116,10 @@ class CheckoutReceipt extends StatelessWidget {
                                 context,
                                 SelectOrderPrescriptionScreen.id,
                               )
-                            : PaymentGateway.pay(
-                                getProductNames(
-                                    state.productListPrescriptionless +
-                                        state.productListNeedPrescriptions),
-                                state.productListTotal,
-                                //TODO: pass customer name, pass order ID
-                                "orderID");
+                            : Navigator.pushNamed(
+                                context,
+                                DeliveryCharge.id,
+                              );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: GoPharmaColors.PrimaryColor,
@@ -138,7 +135,7 @@ class CheckoutReceipt extends StatelessWidget {
                       child: Text(
                         state.productListNeedPrescriptions.length > 0
                             ? "Upload Prescription"
-                            : "Proceed to Payment",
+                            : "Get Delivery Charge",
                         style: TextStyle(
                           fontSize: 18.0,
                         ),
@@ -157,7 +154,7 @@ class CheckoutReceipt extends StatelessWidget {
 
 class CheckoutReceiptProductList extends StatelessWidget {
   final bool showPrice;
-  final List<Product> productList;
+  final List<OrderProduct> productList;
   const CheckoutReceiptProductList({
     this.productList,
     Key key,
@@ -178,13 +175,13 @@ class CheckoutReceiptProductList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ProductReceiptText(
-              text: productList[index].name +
+              text: productList[index].productName +
                   " x" +
                   productList[index].amountOrdered.toString(),
             ),
             showPrice
                 ? ProductReceiptText(
-                    text: (productList[index].price *
+                    text: (productList[index].actualPrice *
                             productList[index].amountOrdered)
                         .toString(),
                   )
@@ -215,10 +212,18 @@ class ProductReceiptText extends StatelessWidget {
   }
 }
 
-getProductNames(List<Product> products) {
+getProductNames(List<OrderProduct> products) {
   List<String> names = [];
-  for (Product i in products) {
-    names.add(i.name);
+  for (OrderProduct i in products) {
+    names.add(i.productName);
   }
   return names;
 }
+
+// PaymentGateway.pay(
+// getProductNames(
+// state.productListPrescriptionless +
+// state.productListNeedPrescriptions),
+// state.productListTotal,
+// //TODO: pass customer name, pass order ID
+// "orderID");

@@ -5,14 +5,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
+import 'package:go_pharma/repos/customer/actual/product/product.dart';
+import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/products/product_full_view.dart';
-import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 
 class ShoppingCartPageProductCard extends StatelessWidget {
+  final OrderProduct orderProduct;
   final Product product;
 
-  const ShoppingCartPageProductCard({this.product});
+  const ShoppingCartPageProductCard({this.product, this.orderProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class ShoppingCartPageProductCard extends StatelessWidget {
                     Column(
                       children: [
                         ProductCardImage(
-                          imageURL: product.imageURL,
+                          imageURL: "images/pills.png",
                         ),
                       ],
                     ),
@@ -61,7 +63,7 @@ class ShoppingCartPageProductCard extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              product.name,
+                              orderProduct.productName,
                               style: TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w500,
@@ -72,7 +74,7 @@ class ShoppingCartPageProductCard extends StatelessWidget {
                               height: 10.0,
                             ),
                             Text(
-                              "Rs.${product.price.toStringAsFixed(2)}",
+                              "Rs.${orderProduct.actualPrice.toStringAsFixed(2)}",
                               style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.w600,
@@ -84,14 +86,14 @@ class ShoppingCartPageProductCard extends StatelessWidget {
                             ),
                             BlocBuilder<CheckoutBloc, CheckoutState>(
                               builder: (context, state) {
-                                if (product.amountOrdered > 0) {
+                                if (orderProduct.amountOrdered > 0) {
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       ProductActionIcon(
                                         icon: Icons.remove,
                                         onPressed: () {
-                                          product.decrementAmount();
+                                          orderProduct.decrementAmount();
                                           bloc.add(UpdateProductAmountEvent());
                                         },
                                       ),
@@ -100,7 +102,7 @@ class ShoppingCartPageProductCard extends StatelessWidget {
                                           horizontal: 10.0,
                                         ),
                                         child: Text(
-                                          "${product.amountOrdered} ${product.unitOfMeasure}",
+                                          "${orderProduct.amountOrdered}",
                                           style: TextStyle(
                                             fontSize: 20.0,
                                           ),
@@ -109,7 +111,7 @@ class ShoppingCartPageProductCard extends StatelessWidget {
                                       ProductActionIcon(
                                         icon: Icons.add,
                                         onPressed: () {
-                                          product.incrementAmount();
+                                          orderProduct.incrementAmount();
                                           bloc.add(UpdateProductAmountEvent());
                                         },
                                       ),

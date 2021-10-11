@@ -3,23 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
-import 'package:go_pharma/payment_gateway/payment.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
-import 'package:go_pharma/ui/customer/profile/bold_text.dart';
+import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
 
-class PaymentSelectionPage extends StatelessWidget {
-  static final String id = "payment_selection";
+class DeliveryCharge extends StatelessWidget {
+  static final String id = "delivery_charge";
+  const DeliveryCharge({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<CheckoutBloc>(context);
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Payment Selection"),
+          title: Text("Delivery Information"),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
@@ -28,51 +25,64 @@ class PaymentSelectionPage extends StatelessWidget {
           ),
           child: BlocBuilder<CheckoutBloc, CheckoutState>(
             builder: (context, state) {
-              return Container(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 20.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: BoldText(
-                          text:
-                              "How would you like to pay for your orderInProgress?",
-                        ),
-                      ),
-                      RoundedButtonFilled(
-                        title: "Pay on Delivery",
-                        size: MediaQuery.of(context).size,
-                        fillColor: GoPharmaColors.PrimaryColor,
-                        textColor: GoPharmaColors.WhiteColor,
-                        onTapped: () {},
-                      ),
-                      RoundedButtonFilled(
-                        title: "Pay Online",
-                        size: MediaQuery.of(context).size,
-                        fillColor: GoPharmaColors.GreyColor,
-                        textColor: GoPharmaColors.BlackColor,
-                        onTapped: () {
-                          PaymentGateway.pay(
-                              getProductNames(
-                                  state.productListPrescriptionless +
-                                      state.productListNeedPrescriptions),
-                              state.productListTotal,
-                              //TODO: pass customer name, pass order ID
-                              "orderID");
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+              return Text(
+                state.deliveryCharge.toString(),
               );
             },
           ),
+        ),
+        bottomNavigationBar: BlocBuilder<CheckoutBloc, CheckoutState>(
+          builder: (context, state) {
+            return Container(
+              height: 150,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 20.0,
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "Your current total is Rs.${state.productListTotal.toStringAsFixed(2)}",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w400,
+                          color: GoPharmaColors.BlackColor,
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          PaymentSelectionPage.id,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: GoPharmaColors.PrimaryColor,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 50,
+                          vertical: 20,
+                        ),
+                        textStyle: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      child: Text(
+                        "Proceed to Payment",
+                        style: TextStyle(
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

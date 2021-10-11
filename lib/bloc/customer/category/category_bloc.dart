@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/category/category_event.dart';
 import 'package:go_pharma/bloc/customer/category/category_state.dart';
 import 'package:go_pharma/repos/customer/actual/category/categoriesList.dart';
+import 'package:go_pharma/repos/customer/actual/category/category.dart';
 import 'package:go_pharma/repos/customer/actual/category/categoryAPIProvider.dart';
+import 'package:go_pharma/repos/customer/actual/product/productAPIProvider.dart';
+import 'package:go_pharma/repos/customer/actual/product/productList.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc(BuildContext context) : super(CategoryState.initialState);
+  ProductAPIProvider _productAPIProvider = ProductAPIProvider();
   CategoryAPIProvider _categoryAPIProvider = CategoryAPIProvider();
 
   @override
@@ -23,9 +27,29 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         CategoriesList categoriesList =
             await _categoryAPIProvider.getAllCategories();
         print(categoriesList.categoriesList);
+        Map<String, ProductList> categoryProduct = state.categoryProduct;
+        for (Category i in categoriesList.categoriesList) {
+          categoryProduct[i.categoryName] = ProductList(products: []);
+        }
         yield state.clone(
+          categoryProduct: categoryProduct,
           categories: categoriesList.categoriesList,
           isLoading: false,
+        );
+        break;
+      case LoadProductsPerCategory:
+        yield state.clone(isLoading: true);
+        String category = (event as LoadProductsPerCategory).category;
+        print(category);
+        ProductList productList = await _productAPIProvider.getAllProducts(
+          category,
+        );
+        Map<String, ProductList> categoryProduct = state.categoryProduct;
+        categoryProduct[category] = productList;
+        print(categoryProduct);
+        yield state.clone(
+          isLoading: false,
+          categoryProduct: categoryProduct,
         );
         break;
     }

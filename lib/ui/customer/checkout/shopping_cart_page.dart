@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
@@ -11,10 +12,10 @@ import 'package:go_pharma/ui/customer/products/shopping_cart_page_product_card.d
 class ShoppingCartPage extends StatelessWidget {
   static final String id = "shopping_cart";
 
-  const ShoppingCartPage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    var bloc = BlocProvider.of<CheckoutBloc>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -24,14 +25,16 @@ class ShoppingCartPage extends StatelessWidget {
         ),
         body: BlocBuilder<CheckoutBloc, CheckoutState>(
           builder: (context, state) {
-            List<Product> products = state.productListNeedPrescriptions +
-                state.productListPrescriptionless;
+            List<OrderProduct> orderProducts =
+                state.productListNeedPrescriptions +
+                    state.productListPrescriptionless;
             return Container(
               child: ListView.builder(
                 physics: ClampingScrollPhysics(),
-                itemCount: products.length,
+                itemCount: orderProducts.length,
                 itemBuilder: (context, index) => ShoppingCartPageProductCard(
-                  product: products[index],
+                  orderProduct: orderProducts[index],
+                  product: orderProducts[index].product,
                 ),
               ),
             );
@@ -64,6 +67,11 @@ class ShoppingCartPage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: state.productListTotal > 0
                           ? () {
+                              state.productListNeedPrescriptions.length == 0
+                                  ? bloc.add(GetDeliveryChargeForNormalOrder())
+                                  : print(state.productListPrescriptionless);
+                              print(state.productListNeedPrescriptions);
+
                               Navigator.pushNamed(
                                 context,
                                 CheckoutReceipt.id,

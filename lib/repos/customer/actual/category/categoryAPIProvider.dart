@@ -8,8 +8,8 @@ class CategoryAPIProvider {
 
   Future<CategoriesList> getAllCategories() async {
     try {
-      Response response = await _dio.post("/customer/order/test");
-      return CategoriesList.fromJson(response.data['data']);
+      Response response = await _dio.post("customer/categories");
+      return CategoriesList.fromJson(response.data["data"]);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return CategoriesList();

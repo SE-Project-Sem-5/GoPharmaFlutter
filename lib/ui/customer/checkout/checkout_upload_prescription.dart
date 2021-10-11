@@ -7,7 +7,7 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
-import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
+import 'package:go_pharma/ui/customer/checkout/delivery_charge.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -165,20 +165,26 @@ class SelectOrderPrescriptionScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                       horizontal: 20.0,
                     ),
-                    child: RoundedButtonFilled(
-                      size: MediaQuery.of(context).size,
-                      onTapped: () {
-                        state.localPhotoPaths.length > 0
-                            ? Navigator.pushNamed(
-                                context, PaymentSelectionPage.id)
-                            : null;
-                      },
-                      fillColor: GoPharmaColors.PrimaryColor,
-                      textColor: GoPharmaColors.WhiteColor,
-                      title: state.localPhotoPaths.length > 0
-                          ? "Proceed to Payment"
-                          : "Select an Image",
-                    ),
+                    child: state.localPhotoPaths.length > 0
+                        ? RoundedButtonFilled(
+                            size: MediaQuery.of(context).size,
+                            onTapped: () {
+                              Navigator.pushNamed(
+                                context,
+                                DeliveryCharge.id,
+                              );
+                            },
+                            fillColor: GoPharmaColors.PrimaryColor,
+                            textColor: GoPharmaColors.WhiteColor,
+                            title: "Get Delivery Charge",
+                          )
+                        : RoundedButtonFilled(
+                            size: MediaQuery.of(context).size,
+                            onTapped: null,
+                            fillColor: GoPharmaColors.PrimaryColor,
+                            textColor: GoPharmaColors.WhiteColor,
+                            title: "Select an Image",
+                          ),
                   );
                 },
               )

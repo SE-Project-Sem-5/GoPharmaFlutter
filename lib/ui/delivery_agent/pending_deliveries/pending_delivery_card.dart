@@ -12,58 +12,46 @@ class PendingDeliveryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PendingDeliveryFullView(
-                delivery: delivery,
+      child: Card(
+        child: Column(
+          children: [
+            ListTile(
+              leading: Icon(
+                Icons.article_rounded,
               ),
-            ),
-          );
-        },
-        child: Card(
-          child: Column(
-            children: [
-              ListTile(
-                leading: Icon(
-                  Icons.article_rounded,
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(delivery.id),
-                    Text(
-                      "Rs. " + delivery.totalPrice.toStringAsFixed(2),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(width: 8),
-                  TextButton(
-                    child: const Text('View Delivery Details'),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BlocProvider(
-                            create: (context) => DeliveryBloc(context),
-                            child: PendingDeliveryFullView(
-                              delivery: delivery,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+                  Text(delivery.id),
+                  Text(
+                    "Rs. " + delivery.totalPrice.toStringAsFixed(2),
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const SizedBox(width: 8),
+                TextButton(
+                  child: const Text('View Delivery Details'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider(
+                          create: (context) => DeliveryBloc(context),
+                          child: PendingDeliveryFullView(
+                            delivery: delivery,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

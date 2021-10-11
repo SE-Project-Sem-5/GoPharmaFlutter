@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
+import 'package:go_pharma/repos/customer/actual/product/product.dart';
 
 @immutable
 abstract class CheckoutEvent {}
@@ -32,4 +32,8 @@ class ConfirmOrderEvent extends CheckoutEvent {
 class RemoveImageEvent extends CheckoutEvent {
   final String image;
   RemoveImageEvent({this.image});
+}
+
+class GetDeliveryChargeForNormalOrder extends CheckoutEvent {
+  GetDeliveryChargeForNormalOrder();
 }

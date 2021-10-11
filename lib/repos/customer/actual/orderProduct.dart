@@ -1,6 +1,6 @@
-import 'package:go_pharma/repos/customer/actual/product.dart';
+import 'package:go_pharma/repos/customer/actual/product/product.dart';
 
-class OrderProducts {
+class OrderProduct {
   int id;
   int quantity;
   int soldUnitPrice;
@@ -14,7 +14,7 @@ class OrderProducts {
   int productID;
   Product product;
 
-  OrderProducts(
+  OrderProduct(
       {this.id,
       this.quantity,
       this.soldUnitPrice,
@@ -28,7 +28,7 @@ class OrderProducts {
       this.productID,
       this.product});
 
-  OrderProducts.fromJson(Map<String, dynamic> json) {
+  OrderProduct.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     quantity = json['quantity'];
     soldUnitPrice = json['soldUnitPrice'];

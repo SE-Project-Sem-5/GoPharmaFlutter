@@ -8,6 +8,7 @@ import 'package:go_pharma/bloc/internet_connectivity/internet_bloc.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
+import 'bloc/customer/category/category_bloc.dart';
 import 'bloc/customer/checkout/checkout_bloc.dart';
 import 'config/routes.dart';
 import 'config/theme.dart';
@@ -41,6 +42,9 @@ class GoPharmaApp extends StatelessWidget {
         ),
         BlocProvider<CheckoutBloc>(
           create: (context) => CheckoutBloc(context),
+        ),
+        BlocProvider<CategoryBloc>(
+          create: (context) => CategoryBloc(context),
         ),
         BlocProvider<CustomerRootBloc>(
           create: (context) => CustomerRootBloc(context),

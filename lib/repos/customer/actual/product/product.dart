@@ -6,11 +6,13 @@ class Product {
   int id;
   String productName;
   String description;
+  String imageURL;
   bool prescriptionNeeded;
   bool returnable;
-  int unitPrice;
+  double unitPrice;
+  double actualPrice;
   String priceDescription;
-  int discount;
+  double discount;
   int stock;
   int reorderingLevel;
   String createdAt;
@@ -23,26 +25,28 @@ class Product {
   ProductSize productSize;
   Supplier supplier;
 
-  Product(
-      {this.id,
-      this.productName,
-      this.description,
-      this.prescriptionNeeded,
-      this.returnable,
-      this.unitPrice,
-      this.priceDescription,
-      this.discount,
-      this.stock,
-      this.reorderingLevel,
-      this.createdAt,
-      this.updatedAt,
-      this.brandName,
-      this.categoryID,
-      this.supplierID,
-      this.size,
-      this.category,
-      this.productSize,
-      this.supplier});
+  Product({
+    this.id,
+    this.productName,
+    this.description,
+    this.prescriptionNeeded,
+    this.returnable,
+    this.unitPrice,
+    this.priceDescription,
+    this.discount,
+    this.stock,
+    this.reorderingLevel,
+    this.createdAt,
+    this.updatedAt,
+    this.brandName,
+    this.categoryID,
+    this.supplierID,
+    this.size,
+    this.category,
+    this.productSize,
+    this.supplier,
+    this.imageURL = "images/pills.png",
+  });
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -50,9 +54,9 @@ class Product {
     description = json['description'];
     prescriptionNeeded = json['prescriptionNeeded'];
     returnable = json['returnable'];
-    unitPrice = json['unitPrice'];
+    unitPrice = json['unitPrice'].toDouble();
     priceDescription = json['priceDescription'];
-    discount = json['discount'];
+    discount = json['discount'].toDouble();
     stock = json['stock'];
     reorderingLevel = json['reorderingLevel'];
     createdAt = json['createdAt'];
@@ -70,6 +74,7 @@ class Product {
     supplier = json['Supplier'] != null
         ? new Supplier.fromJson(json['Supplier'])
         : null;
+    actualPrice = this.unitPrice - this.discount;
   }
 
   Map<String, dynamic> toJson() {
