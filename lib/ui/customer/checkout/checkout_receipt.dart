@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
-import 'package:go_pharma/payment_gateway/payment.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_upload_prescription.dart';
+import 'package:go_pharma/ui/customer/checkout/delivery_charge.dart';
 
 class CheckoutReceipt extends StatelessWidget {
   static final String id = "checkout_receipt";
@@ -116,13 +116,10 @@ class CheckoutReceipt extends StatelessWidget {
                                 context,
                                 SelectOrderPrescriptionScreen.id,
                               )
-                            : PaymentGateway.pay(
-                                getProductNames(
-                                    state.productListPrescriptionless +
-                                        state.productListNeedPrescriptions),
-                                state.productListTotal,
-                                //TODO: pass customer name, pass order ID
-                                "orderID");
+                            : Navigator.pushNamed(
+                                context,
+                                DeliveryCharge.id,
+                              );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: GoPharmaColors.PrimaryColor,
@@ -138,7 +135,7 @@ class CheckoutReceipt extends StatelessWidget {
                       child: Text(
                         state.productListNeedPrescriptions.length > 0
                             ? "Upload Prescription"
-                            : "Proceed to Payment",
+                            : "Get Delivery Charge",
                         style: TextStyle(
                           fontSize: 18.0,
                         ),
@@ -222,3 +219,11 @@ getProductNames(List<OrderProduct> products) {
   }
   return names;
 }
+
+// PaymentGateway.pay(
+// getProductNames(
+// state.productListPrescriptionless +
+// state.productListNeedPrescriptions),
+// state.productListTotal,
+// //TODO: pass customer name, pass order ID
+// "orderID");

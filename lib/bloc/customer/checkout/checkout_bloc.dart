@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/deliveryDetails.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/orderAPIProvider.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'dart:async';
 
@@ -10,7 +12,7 @@ import 'checkout_state.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   CheckoutBloc(BuildContext context) : super(CheckoutState.initialState);
-
+  OrderAPIProvider orderAPIProvider = new OrderAPIProvider();
   @override
   Stream<CheckoutState> mapEventToState(CheckoutEvent event) async* {
     switch (event.runtimeType) {
@@ -97,6 +99,27 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           localPhotoPaths: localPhotoPaths,
           photos: photos,
         );
+        break;
+      case GetDeliveryChargeForNormalOrder:
+        yield state.clone(orderLoading: true);
+        List<DeliveryChargeProduct> deliveryProducts = [];
+        for (OrderProduct p in state.productListPrescriptionless) {
+          DeliveryChargeProduct newDeliveryProduct = new DeliveryChargeProduct(
+            productID: p.id.toString(),
+            quantity: p.amountOrdered,
+            supplierID: p.product.supplierID,
+            soldUnitPrice: p.actualPrice,
+          );
+          deliveryProducts.add(newDeliveryProduct);
+        }
+        DeliveryDetails delivery = new DeliveryDetails(
+          customerAddressID: 2,
+          city: "Kalutara",
+          streetAddress: "12/SD/4, Floor 12, City Place",
+          products: deliveryProducts,
+        );
+        orderAPIProvider.getDeliveryChargeForNormalOrder(delivery);
+        yield state.clone(orderLoading: false);
         break;
       case ConfirmOrderEvent:
         yield state.clone(orderLoading: true);

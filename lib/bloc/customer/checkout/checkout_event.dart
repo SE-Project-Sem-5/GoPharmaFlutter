@@ -33,3 +33,7 @@ class RemoveImageEvent extends CheckoutEvent {
   final String image;
   RemoveImageEvent({this.image});
 }
+
+class GetDeliveryChargeForNormalOrder extends CheckoutEvent {
+  GetDeliveryChargeForNormalOrder();
+}
