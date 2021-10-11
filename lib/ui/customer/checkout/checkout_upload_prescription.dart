@@ -7,7 +7,7 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
-import 'package:go_pharma/ui/customer/checkout/delivery_charge.dart';
+import 'package:go_pharma/ui/customer/checkout/address_information.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -170,13 +170,11 @@ class SelectOrderPrescriptionScreen extends StatelessWidget {
                             size: MediaQuery.of(context).size,
                             onTapped: () {
                               Navigator.pushNamed(
-                                context,
-                                DeliveryCharge.id,
-                              );
+                                  context, AddressInformationPage.id);
                             },
                             fillColor: GoPharmaColors.PrimaryColor,
                             textColor: GoPharmaColors.WhiteColor,
-                            title: "Get Delivery Charge",
+                            title: "Enter Address Details",
                           )
                         : RoundedButtonFilled(
                             size: MediaQuery.of(context).size,

@@ -37,3 +37,35 @@ class RemoveImageEvent extends CheckoutEvent {
 class GetDeliveryChargeForNormalOrder extends CheckoutEvent {
   GetDeliveryChargeForNormalOrder();
 }
+
+class ConfirmNormalCashPrescriptionlessOrder extends CheckoutEvent {
+  BuildContext context;
+  ConfirmNormalCashPrescriptionlessOrder({this.context});
+}
+
+class ConfirmNormalOnlinePrescriptionlessOrder extends CheckoutEvent {
+  ConfirmNormalOnlinePrescriptionlessOrder();
+}
+
+class ConfirmNormalCashOrder extends CheckoutEvent {
+  ConfirmNormalCashOrder();
+}
+
+class ConfirmNormalOnlineOrder extends CheckoutEvent {
+  ConfirmNormalOnlineOrder();
+}
+
+class ConfirmPrescriptionOrder extends CheckoutEvent {
+  ConfirmPrescriptionOrder();
+}
+
+class AddAddressDetails extends CheckoutEvent {
+  final String streetAddress;
+  final String district;
+  final String city;
+  AddAddressDetails({
+    this.streetAddress,
+    this.city,
+    this.district,
+  });
+}

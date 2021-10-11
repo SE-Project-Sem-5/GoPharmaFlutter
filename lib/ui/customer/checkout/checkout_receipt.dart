@@ -6,7 +6,7 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_upload_prescription.dart';
-import 'package:go_pharma/ui/customer/checkout/delivery_charge.dart';
+import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
 
 class CheckoutReceipt extends StatelessWidget {
   static final String id = "checkout_receipt";
@@ -26,64 +26,75 @@ class CheckoutReceipt extends StatelessWidget {
           ),
           child: BlocBuilder<CheckoutBloc, CheckoutState>(
             builder: (context, state) {
-              return Container(
-                height: MediaQuery.of(context).size.height - 300,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 15.0,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: GoPharmaColors.PrimaryColor.withOpacity(0.1),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ProductReceiptText(
-                            text: "Product",
-                            fontWeight: FontWeight.bold,
-                          ),
-                          ProductReceiptText(
-                            text: "Final Price (Rs.)",
-                            fontWeight: FontWeight.bold,
+              return state.orderLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : Container(
+                      height: MediaQuery.of(context).size.height - 300,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 15.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: GoPharmaColors.PrimaryColor.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
                           ),
                         ],
                       ),
-                    ),
-                    //TODO: add prescription uploading
-                    CheckoutReceiptProductList(
-                      productList: state.productListPrescriptionless +
-                          state.productListNeedPrescriptions,
-                    ),
-                    state.productListNeedPrescriptions.length > 0
-                        ? Padding(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
                             padding: const EdgeInsets.all(5.0),
-                            child: ProductReceiptText(
-                              text: "Note: These items need prescriptions.",
-                              fontWeight: FontWeight.bold,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ProductReceiptText(
+                                  text: "Product",
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                ProductReceiptText(
+                                  text: "Final Price (Rs.)",
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ],
                             ),
-                          )
-                        : Text(""),
-                    CheckoutReceiptProductList(
-                      showPrice: false,
-                      productList: state.productListNeedPrescriptions,
-                    ),
-                  ],
-                ),
-              );
+                          ),
+                          //TODO: add prescription uploading
+                          CheckoutReceiptProductList(
+                            productList: state.productListPrescriptionless +
+                                state.productListNeedPrescriptions,
+                          ),
+                          state.productListNeedPrescriptions.length > 0
+                              ? Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: ProductReceiptText(
+                                    text:
+                                        "Note: These items need prescriptions.",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : Text(""),
+                          CheckoutReceiptProductList(
+                            showPrice: false,
+                            productList: state.productListNeedPrescriptions,
+                          ),
+                          ReceiptInformationRow(
+                            text: "Total Product Value",
+                            value: state.productListTotal.toStringAsFixed(2),
+                          ),
+                          ReceiptInformationRow(
+                            text: "Total Delivery Charge",
+                            value: state.deliveryCharge.toStringAsFixed(2),
+                          ),
+                        ],
+                      ),
+                    );
             },
           ),
         ),
@@ -101,7 +112,7 @@ class CheckoutReceipt extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        "Your current total is Rs.${state.productListTotal.toStringAsFixed(2)}",
+                        "Your current total is Rs.${(state.deliveryCharge + state.productListTotal).toStringAsFixed(2)}",
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.w400,
@@ -109,44 +120,93 @@ class CheckoutReceipt extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        state.productListNeedPrescriptions.length > 0
-                            ? Navigator.pushNamed(
+                    state.productListNeedPrescriptions.length > 0
+                        ? ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
                                 context,
                                 SelectOrderPrescriptionScreen.id,
-                              )
-                            : Navigator.pushNamed(
-                                context,
-                                DeliveryCharge.id,
                               );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: GoPharmaColors.PrimaryColor,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 50,
-                          vertical: 20,
-                        ),
-                        textStyle: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      child: Text(
-                        state.productListNeedPrescriptions.length > 0
-                            ? "Upload Prescription"
-                            : "Get Delivery Charge",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    ),
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: GoPharmaColors.PrimaryColor,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 50,
+                                vertical: 20,
+                              ),
+                              textStyle: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            child: Text(
+                              "Upload Prescription",
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                            ),
+                          )
+                        : ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                PaymentSelectionPage.id,
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: GoPharmaColors.PrimaryColor,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 50,
+                                vertical: 20,
+                              ),
+                              textStyle: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            child: Text(
+                              "Select Payment Option",
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class ReceiptInformationRow extends StatelessWidget {
+  final String value;
+  final String text;
+  const ReceiptInformationRow({
+    Key key,
+    this.value,
+    this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ProductReceiptText(
+            text: this.text,
+            fontWeight: FontWeight.bold,
+          ),
+          ProductReceiptText(
+            text: "Rs. ${this.value}",
+            fontWeight: FontWeight.bold,
+          ),
+        ],
       ),
     );
   }
@@ -183,7 +243,7 @@ class CheckoutReceiptProductList extends StatelessWidget {
                 ? ProductReceiptText(
                     text: (productList[index].actualPrice *
                             productList[index].amountOrdered)
-                        .toString(),
+                        .toStringAsFixed(2),
                   )
                 : Container(),
           ],

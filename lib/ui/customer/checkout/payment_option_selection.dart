@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/payment_gateway/payment.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
@@ -41,16 +42,19 @@ class PaymentSelectionPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: BoldText(
-                          text:
-                              "How would you like to pay for your orderInProgress?",
+                          text: "How would you like to pay for your order?",
                         ),
                       ),
                       RoundedButtonFilled(
-                        title: "Pay on Delivery",
+                        title: "Confirm Payment on Delivery",
                         size: MediaQuery.of(context).size,
                         fillColor: GoPharmaColors.PrimaryColor,
                         textColor: GoPharmaColors.WhiteColor,
-                        onTapped: () {},
+                        onTapped: () {
+                          //TODO: add prescription order
+                          bloc.add(ConfirmNormalCashPrescriptionlessOrder(
+                              context: context));
+                        },
                       ),
                       RoundedButtonFilled(
                         title: "Pay Online",
