@@ -47,7 +47,7 @@ class ProductFullView extends StatelessWidget {
               children: [
                 ProductCardImage(
                   padding: 0,
-                  imageURL: product.imageURL,
+                  imageURL: "images/pills.png",
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.width - 50,
                 ),
@@ -106,8 +106,7 @@ class ProductFullView extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  child: (state.productListPrescriptionless.contains(product) ||
-                          state.productListNeedPrescriptions.contains(product))
+                  child: (state.productIDs.contains(product.id))
                       ? ButtonText(
                           color: GoPharmaColors.WhiteColor,
                           text: 'Remove from cart',

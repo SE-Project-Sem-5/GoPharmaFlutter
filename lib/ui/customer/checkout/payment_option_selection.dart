@@ -42,7 +42,7 @@ class PaymentSelectionPage extends StatelessWidget {
                         padding: const EdgeInsets.all(20.0),
                         child: BoldText(
                           text:
-                              "How would you like to pay for your orderInProgress?",
+                              "How would you like to pay for your order in progress?",
                         ),
                       ),
                       RoundedButtonFilled(
