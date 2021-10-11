@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/deliveryDetails.dart';
-import 'package:go_pharma/repos/customer/actual/orderInProgress/normalCashOrder.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/normalPrescriptionlessOrder.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderPriceInformation.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 

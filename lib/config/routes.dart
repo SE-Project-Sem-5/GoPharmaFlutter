@@ -9,6 +9,7 @@ import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_start.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_upload_prescription.dart';
+import 'package:go_pharma/ui/customer/checkout/order_successful_page.dart';
 import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
 import 'package:go_pharma/ui/customer/current_orders/current_orders_page.dart';
 import 'package:go_pharma/ui/customer/customer_starting_page.dart';
@@ -52,6 +53,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   SelectOrderPrescriptionScreen.id: (context) =>
       SelectOrderPrescriptionScreen(),
   PaymentSelectionPage.id: (context) => PaymentSelectionPage(),
+  OrderSuccessfulPage.id: (context) => OrderSuccessfulPage(),
 
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),

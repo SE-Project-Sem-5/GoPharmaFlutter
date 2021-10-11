@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/sign_in/sign_in_event.dart';

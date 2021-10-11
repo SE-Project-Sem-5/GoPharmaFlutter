@@ -1,12 +1,12 @@
 import 'address.dart';
 
 class NormalPrescriptionlessOrder {
-  int totalPrice;
-  int deliveryCharge;
+  double totalPrice;
+  double deliveryCharge;
   int customerID;
   String customerEmail;
   String orderType;
-  List<Products> products;
+  List<OrderConfirmationProducts> products;
   Address address;
   Payment payment;
 
@@ -30,7 +30,7 @@ class NormalPrescriptionlessOrder {
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
-        products.add(new Products.fromJson(v));
+        products.add(new OrderConfirmationProducts.fromJson(v));
       });
     }
     address =
@@ -59,15 +59,15 @@ class NormalPrescriptionlessOrder {
   }
 }
 
-class Products {
+class OrderConfirmationProducts {
   String productID;
   int quantity;
-  int soldUnitPrice;
+  double soldUnitPrice;
   int supplierID;
   int addedChargePercentage;
   int addedCharge;
 
-  Products({
+  OrderConfirmationProducts({
     this.productID,
     this.quantity,
     this.soldUnitPrice,
@@ -76,7 +76,7 @@ class Products {
     this.addedCharge,
   });
 
-  Products.fromJson(Map<String, dynamic> json) {
+  OrderConfirmationProducts.fromJson(Map<String, dynamic> json) {
     productID = json['productID'];
     quantity = json['quantity'];
     soldUnitPrice = json['soldUnitPrice'];
