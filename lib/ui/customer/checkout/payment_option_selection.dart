@@ -46,7 +46,7 @@ class PaymentSelectionPage extends StatelessWidget {
                         ),
                       ),
                       RoundedButtonFilled(
-                        title: "Pay on Delivery",
+                        title: "Confirm Payment on Delivery",
                         size: MediaQuery.of(context).size,
                         fillColor: GoPharmaColors.PrimaryColor,
                         textColor: GoPharmaColors.WhiteColor,
