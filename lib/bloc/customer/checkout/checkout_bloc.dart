@@ -127,7 +127,27 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           productListTotal: orderPriceInformation.totalPrice.toDouble(),
         );
         break;
+      case ConfirmNormalCashPrescriptionlessOrder:
+        yield state.clone(orderLoading: true);
+
+        yield state.clone(orderLoading: false);
+        break;
+      case ConfirmNormalOnlinePrescriptionlessOrder:
+        yield state.clone(orderLoading: true);
+
+        yield state.clone(orderLoading: false);
+        break;
       case ConfirmNormalCashOrder:
+        yield state.clone(orderLoading: true);
+
+        yield state.clone(orderLoading: false);
+        break;
+      case ConfirmNormalOnlineOrder:
+        yield state.clone(orderLoading: true);
+
+        yield state.clone(orderLoading: false);
+        break;
+      case ConfirmPrescriptionOrder:
         yield state.clone(orderLoading: true);
 
         yield state.clone(orderLoading: false);
