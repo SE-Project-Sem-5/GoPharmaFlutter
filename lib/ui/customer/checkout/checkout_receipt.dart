@@ -5,8 +5,8 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/customer/checkout/address_information.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_upload_prescription.dart';
-import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
 
 class CheckoutReceipt extends StatelessWidget {
   static final String id = "checkout_receipt";
@@ -150,7 +150,7 @@ class CheckoutReceipt extends StatelessWidget {
                             onPressed: () {
                               Navigator.pushNamed(
                                 context,
-                                PaymentSelectionPage.id,
+                                AddressInformationPage.id,
                               );
                             },
                             style: ElevatedButton.styleFrom(
@@ -165,7 +165,7 @@ class CheckoutReceipt extends StatelessWidget {
                               ),
                             ),
                             child: Text(
-                              "Proceed to Payment",
+                              "Enter Delivery Address Details",
                               style: TextStyle(
                                 fontSize: 18.0,
                               ),
