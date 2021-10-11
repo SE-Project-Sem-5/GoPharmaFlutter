@@ -243,7 +243,7 @@ class CheckoutReceiptProductList extends StatelessWidget {
                 ? ProductReceiptText(
                     text: (productList[index].actualPrice *
                             productList[index].amountOrdered)
-                        .toString(),
+                        .toStringAsFixed(2),
                   )
                 : Container(),
           ],

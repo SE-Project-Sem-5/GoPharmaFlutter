@@ -39,7 +39,8 @@ class GetDeliveryChargeForNormalOrder extends CheckoutEvent {
 }
 
 class ConfirmNormalCashPrescriptionlessOrder extends CheckoutEvent {
-  ConfirmNormalCashPrescriptionlessOrder();
+  BuildContext context;
+  ConfirmNormalCashPrescriptionlessOrder({this.context});
 }
 
 class ConfirmNormalOnlinePrescriptionlessOrder extends CheckoutEvent {

@@ -14,11 +14,13 @@ class CheckoutState {
   final List<File> photos;
   final double deliveryCharge;
   final bool orderLoading;
+  final int orderID;
 
   CheckoutState({
     this.orderLoading = false,
     this.localPhotoPaths,
     this.deliveryCharge,
+    this.orderID,
     this.productIDs,
     this.photos,
     this.error,
@@ -33,6 +35,7 @@ class CheckoutState {
         productListNeedPrescriptions: [],
         productListTotal: 0.0,
         orderLoading: false,
+        orderID: -1,
         localPhotoPaths: [],
         photos: [],
         productIDs: [],
@@ -41,6 +44,7 @@ class CheckoutState {
 
   CheckoutState clone({
     String error = '',
+    int orderID,
     List<OrderProduct> productListNeedPrescriptions,
     List<OrderProduct> productListPrescriptionless,
     List<String> localPhotoPaths,
@@ -52,6 +56,7 @@ class CheckoutState {
   }) {
     return CheckoutState(
       error: error ?? this.error,
+      orderID: orderID ?? this.orderID,
       productListPrescriptionless:
           productListPrescriptionless ?? this.productListPrescriptionless,
       productListTotal: productListTotal ?? this.productListTotal,
