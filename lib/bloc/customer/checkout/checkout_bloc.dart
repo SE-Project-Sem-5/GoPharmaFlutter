@@ -1,14 +1,18 @@
 import 'dart:io';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/address.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/deliveryDetails.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/normalPrescriptionlessOrder.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderAPIProvider.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderPriceInformation.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'dart:async';
+
+import 'package:go_pharma/ui/customer/checkout/order_successful_page.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   CheckoutBloc(BuildContext context) : super(CheckoutState.initialState);
@@ -99,6 +103,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           photos: photos,
         );
         break;
+
       case GetDeliveryChargeForNormalOrder:
         yield state.clone(orderLoading: true);
         List<DeliveryChargeProduct> deliveryProducts = [];
@@ -128,14 +133,48 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         );
         break;
       case ConfirmNormalCashPrescriptionlessOrder:
+        final context =
+            (event as ConfirmNormalCashPrescriptionlessOrder).context;
         yield state.clone(orderLoading: true);
+        List<OrderConfirmationProducts> orderConfirmationProducts = [];
+        for (OrderProduct p in state.productListPrescriptionless) {
+          OrderConfirmationProducts newOrderConfirmationProduct =
+              new OrderConfirmationProducts(
+            productID: p.id.toString(),
+            quantity: p.amountOrdered,
+            supplierID: p.product.supplierID,
+            soldUnitPrice: p.actualPrice,
+            addedChargePercentage: 0,
+            addedCharge: 0,
+          );
+          orderConfirmationProducts.add(newOrderConfirmationProduct);
+        }
 
-        yield state.clone(orderLoading: false);
-        break;
-      case ConfirmNormalOnlinePrescriptionlessOrder:
-        yield state.clone(orderLoading: true);
-
-        yield state.clone(orderLoading: false);
+        NormalPrescriptionlessOrder order = new NormalPrescriptionlessOrder(
+          totalPrice: state.productListTotal,
+          deliveryCharge: state.deliveryCharge,
+          customerID: 2,
+          customerEmail: "sgayangi@gmail.com",
+          orderType: "normal",
+          products: orderConfirmationProducts,
+          address: new Address(
+            streetAddress: "12/SD/4, Floor 7, City Place",
+            city: "Matara",
+            district: "Matara",
+          ),
+        );
+        NormalOrderResponse response = await orderAPIProvider
+            .confirmNormalCashPrescriptionlessOrder(order);
+        if (response.orderID != null) {
+          yield state.clone(
+            orderLoading: false,
+            orderID: response.orderID,
+          );
+          Navigator.pushNamed(context, OrderSuccessfulPage.id);
+        }
+        yield state.clone(
+          error: "Order not confirmed. Please try again later.",
+        );
         break;
       case ConfirmNormalCashOrder:
         yield state.clone(orderLoading: true);
