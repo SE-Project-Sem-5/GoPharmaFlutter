@@ -45,7 +45,9 @@ class SpecificCategoryPage extends StatelessWidget {
             return state.isLoading ||
                     state.categoryProduct[category] == null ||
                     state.categoryProduct[category].products == null
-                ? CircularProgressIndicator()
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
                 : Container(
                     child: ListView.builder(
                       physics: ClampingScrollPhysics(),
