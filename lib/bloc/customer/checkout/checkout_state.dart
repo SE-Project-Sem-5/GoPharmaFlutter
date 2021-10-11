@@ -16,6 +16,7 @@ class CheckoutState {
   final bool orderLoading;
   final int orderID;
   final String streetAddress;
+  final String city;
   final String district;
 
   CheckoutState({
@@ -24,6 +25,7 @@ class CheckoutState {
     this.deliveryCharge,
     this.orderID,
     this.streetAddress,
+    this.city,
     this.district,
     this.productIDs,
     this.photos,
@@ -37,6 +39,7 @@ class CheckoutState {
         error: '',
         streetAddress: '',
         district: '',
+        city: '',
         productListPrescriptionless: [],
         productListNeedPrescriptions: [],
         productListTotal: 0.0,
@@ -52,6 +55,7 @@ class CheckoutState {
     String error = '',
     String streetAddress = '',
     String district = '',
+    String city = '',
     int orderID,
     List<OrderProduct> productListNeedPrescriptions,
     List<OrderProduct> productListPrescriptionless,
@@ -66,6 +70,7 @@ class CheckoutState {
       error: error ?? this.error,
       streetAddress: streetAddress ?? this.streetAddress,
       district: district ?? this.district,
+      city: city ?? this.city,
       orderID: orderID ?? this.orderID,
       productListPrescriptionless:
           productListPrescriptionless ?? this.productListPrescriptionless,

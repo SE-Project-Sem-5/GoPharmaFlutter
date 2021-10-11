@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
@@ -10,8 +11,11 @@ class AddressInformationPage extends StatelessWidget {
   final _form = GlobalKey<FormState>();
   TextEditingController addressController = new TextEditingController();
   TextEditingController cityController = new TextEditingController();
+  TextEditingController districtController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<CheckoutBloc>(context);
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -75,6 +79,27 @@ class AddressInformationPage extends StatelessWidget {
                         enabled: true,
                       ),
                     ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30.0,
+                      ),
+                      child: TextFormField(
+                        controller: districtController,
+                        // ignore: missing_return
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return ("Please pick a district");
+                          }
+                        },
+                        decoration: InputDecoration(
+                          hintText: "District",
+                        ),
+                        enabled: true,
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -89,6 +114,11 @@ class AddressInformationPage extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               if (_form.currentState.validate()) {
+                bloc.add(AddAddressDetails(
+                  streetAddress: addressController.text,
+                  city: cityController.text,
+                  district: districtController.text,
+                ));
                 Navigator.pushNamed(
                   context,
                   PaymentSelectionPage.id,

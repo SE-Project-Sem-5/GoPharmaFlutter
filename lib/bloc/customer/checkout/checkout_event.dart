@@ -58,3 +58,14 @@ class ConfirmNormalOnlineOrder extends CheckoutEvent {
 class ConfirmPrescriptionOrder extends CheckoutEvent {
   ConfirmPrescriptionOrder();
 }
+
+class AddAddressDetails extends CheckoutEvent {
+  final String streetAddress;
+  final String district;
+  final String city;
+  AddAddressDetails({
+    this.streetAddress,
+    this.city,
+    this.district,
+  });
+}

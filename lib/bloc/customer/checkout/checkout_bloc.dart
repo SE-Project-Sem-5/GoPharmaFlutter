@@ -203,6 +203,16 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           productListTotal: tempTotal,
         );
         break;
+      case AddAddressDetails:
+        var streetAddress = (event as AddAddressDetails).streetAddress;
+        var city = (event as AddAddressDetails).city;
+        var district = (event as AddAddressDetails).district;
+        yield state.clone(
+          streetAddress: streetAddress,
+          city: city,
+          district: district,
+        );
+        break;
     }
   }
 
