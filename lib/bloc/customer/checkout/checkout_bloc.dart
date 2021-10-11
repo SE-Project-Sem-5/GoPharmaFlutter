@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
+import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/deliveryDetails.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderAPIProvider.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/orderPriceInformation.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'dart:async';
-
-import 'checkout_event.dart';
-import 'checkout_state.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   CheckoutBloc(BuildContext context) : super(CheckoutState.initialState);
@@ -118,8 +118,12 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           streetAddress: "12/SD/4, Floor 12, City Place",
           products: deliveryProducts,
         );
-        orderAPIProvider.getDeliveryChargeForNormalOrder(delivery);
-        yield state.clone(orderLoading: false);
+        OrderPriceInformation orderPriceInformation =
+            await orderAPIProvider.getDeliveryChargeForNormalOrder(delivery);
+        yield state.clone(
+          orderLoading: false,
+          deliveryCharge: orderPriceInformation.deliveryCharge.toDouble(),
+        );
         break;
       case ConfirmOrderEvent:
         yield state.clone(orderLoading: true);

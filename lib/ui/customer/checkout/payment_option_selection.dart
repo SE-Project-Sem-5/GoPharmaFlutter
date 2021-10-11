@@ -14,6 +14,8 @@ class PaymentSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<CheckoutBloc>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -39,7 +41,8 @@ class PaymentSelectionPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: BoldText(
-                          text: "How would you like to pay for your order?",
+                          text:
+                              "How would you like to pay for your orderInProgress?",
                         ),
                       ),
                       RoundedButtonFilled(

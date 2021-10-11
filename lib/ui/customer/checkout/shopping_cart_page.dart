@@ -64,6 +64,8 @@ class ShoppingCartPage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: state.productListTotal > 0
                           ? () {
+                              print(state.productListNeedPrescriptions);
+                              print(state.productListPrescriptionless);
                               Navigator.pushNamed(
                                 context,
                                 CheckoutReceipt.id,

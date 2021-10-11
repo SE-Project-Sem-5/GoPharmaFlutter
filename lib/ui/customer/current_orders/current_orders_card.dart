@@ -7,7 +7,7 @@ import 'current_order_full_view.dart';
 
 //TODO: get the orders list for the customer ordered by the ordered date
 //TODO: group orders in terms of status?
-//TODO: add cancelling capability for the order
+//TODO: add cancelling capability for the orderInProgress
 
 class CurrentOrderCard extends StatelessWidget {
   final CurrentOrder order;
