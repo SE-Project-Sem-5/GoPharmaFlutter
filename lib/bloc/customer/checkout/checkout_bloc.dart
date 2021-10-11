@@ -149,7 +149,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           );
           orderConfirmationProducts.add(newOrderConfirmationProduct);
         }
-
         NormalPrescriptionlessOrder order = new NormalPrescriptionlessOrder(
           totalPrice: state.productListTotal,
           deliveryCharge: state.deliveryCharge,
@@ -158,9 +157,9 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           orderType: "normal",
           products: orderConfirmationProducts,
           address: new Address(
-            streetAddress: "12/SD/4, Floor 7, City Place",
-            city: "Matara",
-            district: "Matara",
+            streetAddress: state.streetAddress,
+            city: state.city,
+            district: state.district,
           ),
         );
         NormalOrderResponse response = await orderAPIProvider
