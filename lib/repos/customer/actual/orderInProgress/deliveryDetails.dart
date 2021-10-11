@@ -2,19 +2,23 @@ class DeliveryDetails {
   int customerAddressID;
   String city;
   String streetAddress;
-  List<Products> products;
+  List<DeliveryChargeProduct> products;
 
-  DeliveryDetails(
-      {this.customerAddressID, this.city, this.streetAddress, this.products});
+  DeliveryDetails({
+    this.customerAddressID,
+    this.city,
+    this.streetAddress,
+    this.products,
+  });
 
   DeliveryDetails.fromJson(Map<String, dynamic> json) {
     customerAddressID = json['customerAddressID'];
     city = json['city'];
     streetAddress = json['streetAddress'];
     if (json['products'] != null) {
-      products = new List<Products>();
+      products = [];
       json['products'].forEach((v) {
-        products.add(new Products.fromJson(v));
+        products.add(new DeliveryChargeProduct.fromJson(v));
       });
     }
   }
@@ -31,16 +35,20 @@ class DeliveryDetails {
   }
 }
 
-class Products {
+class DeliveryChargeProduct {
   String productID;
   int quantity;
-  int soldUnitPrice;
+  double soldUnitPrice;
   int supplierID;
 
-  Products(
-      {this.productID, this.quantity, this.soldUnitPrice, this.supplierID});
+  DeliveryChargeProduct({
+    this.productID,
+    this.quantity,
+    this.soldUnitPrice,
+    this.supplierID,
+  });
 
-  Products.fromJson(Map<String, dynamic> json) {
+  DeliveryChargeProduct.fromJson(Map<String, dynamic> json) {
     productID = json['productID'];
     quantity = json['quantity'];
     soldUnitPrice = json['soldUnitPrice'];
