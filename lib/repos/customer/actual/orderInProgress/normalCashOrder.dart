@@ -1,77 +1,60 @@
-class Order {
+import 'address.dart';
+
+class NormalOrder {
   int totalPrice;
   int deliveryCharge;
-  int totalToBePaid;
-  String orderType;
   int customerID;
-  Address address;
+  String customerEmail;
+  String orderType;
   List<Products> products;
-  String hasPrescriptions;
+  Address address;
+  Payment payment;
 
-  Order({
+  NormalOrder({
     this.totalPrice,
     this.deliveryCharge,
-    this.totalToBePaid,
-    this.orderType,
     this.customerID,
-    this.address,
+    this.customerEmail,
+    this.orderType,
     this.products,
-    this.hasPrescriptions,
+    this.address,
+    this.payment,
   });
 
-  Order.fromJson(Map<String, dynamic> json) {
+  NormalOrder.fromJson(Map<String, dynamic> json) {
     totalPrice = json['totalPrice'];
     deliveryCharge = json['deliveryCharge'];
-    totalToBePaid = json['totalToBePaid'];
-    orderType = json['orderType'];
     customerID = json['customerID'];
-    address =
-        json['address'] != null ? new Address.fromJson(json['address']) : null;
+    customerEmail = json['customerEmail'];
+    orderType = json['orderType'];
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
         products.add(new Products.fromJson(v));
       });
     }
-    hasPrescriptions = json['hasPrescriptions'];
+    address =
+        json['address'] != null ? new Address.fromJson(json['address']) : null;
+    payment =
+        json['payment'] != null ? new Payment.fromJson(json['payment']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['totalPrice'] = this.totalPrice;
     data['deliveryCharge'] = this.deliveryCharge;
-    data['totalToBePaid'] = this.totalToBePaid;
-    data['orderType'] = this.orderType;
     data['customerID'] = this.customerID;
-    if (this.address != null) {
-      data['address'] = this.address.toJson();
-    }
+    data['customerEmail'] = this.customerEmail;
+    data['orderType'] = this.orderType;
     if (this.products != null) {
       data['products'] = this.products.map((v) => v.toJson()).toList();
     }
-    data['hasPrescriptions'] = this.hasPrescriptions;
-    return data;
-  }
-}
-
-class Address {
-  String streetAddress;
-  String city;
-  String district;
-
-  Address({this.streetAddress, this.city, this.district});
-
-  Address.fromJson(Map<String, dynamic> json) {
-    streetAddress = json['streetAddress'];
-    city = json['city'];
-    district = json['district'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['streetAddress'] = this.streetAddress;
-    data['city'] = this.city;
-    data['district'] = this.district;
+    if (this.address != null) {
+      data['address'] = this.address.toJson();
+    }
+    if (this.payment != null) {
+      data['payment'] = this.payment.toJson();
+    }
     return data;
   }
 }
@@ -110,6 +93,35 @@ class Products {
     data['supplierID'] = this.supplierID;
     data['addedChargePercentage'] = this.addedChargePercentage;
     data['addedCharge'] = this.addedCharge;
+    return data;
+  }
+}
+
+class Payment {
+  int checkoutDiscount;
+  String payhereCurrency;
+  String method;
+  int paymentAmount;
+
+  Payment(
+      {this.checkoutDiscount,
+      this.payhereCurrency,
+      this.method,
+      this.paymentAmount});
+
+  Payment.fromJson(Map<String, dynamic> json) {
+    checkoutDiscount = json['checkout_discount'];
+    payhereCurrency = json['payhere_currency'];
+    method = json['method'];
+    paymentAmount = json['payment_amount'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['checkout_discount'] = this.checkoutDiscount;
+    data['payhere_currency'] = this.payhereCurrency;
+    data['method'] = this.method;
+    data['payment_amount'] = this.paymentAmount;
     return data;
   }
 }
