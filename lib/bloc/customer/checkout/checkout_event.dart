@@ -38,6 +38,22 @@ class GetDeliveryChargeForNormalOrder extends CheckoutEvent {
   GetDeliveryChargeForNormalOrder();
 }
 
+class ConfirmNormalCashPrescriptionlessOrder extends CheckoutEvent {
+  ConfirmNormalCashPrescriptionlessOrder();
+}
+
+class ConfirmNormalOnlinePrescriptionlessOrder extends CheckoutEvent {
+  ConfirmNormalOnlinePrescriptionlessOrder();
+}
+
 class ConfirmNormalCashOrder extends CheckoutEvent {
   ConfirmNormalCashOrder();
+}
+
+class ConfirmNormalOnlineOrder extends CheckoutEvent {
+  ConfirmNormalOnlineOrder();
+}
+
+class ConfirmPrescriptionOrder extends CheckoutEvent {
+  ConfirmPrescriptionOrder();
 }
