@@ -168,6 +168,16 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           yield state.clone(
             orderLoading: false,
             orderID: response.orderID,
+            localPhotoPaths: [],
+            deliveryCharge: 0.0,
+            streetAddress: "",
+            city: "",
+            district: "",
+            productIDs: [],
+            photos: [],
+            productListPrescriptionless: [],
+            productListTotal: 0,
+            productListNeedPrescriptions: [],
           );
           Navigator.pushNamed(context, OrderSuccessfulPage.id);
         }
