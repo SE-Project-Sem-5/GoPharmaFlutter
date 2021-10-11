@@ -53,9 +53,9 @@ class CheckoutState {
 
   CheckoutState clone({
     String error = '',
-    String streetAddress = '',
-    String district = '',
-    String city = '',
+    String streetAddress,
+    String district,
+    String city,
     int orderID,
     List<OrderProduct> productListNeedPrescriptions,
     List<OrderProduct> productListPrescriptionless,

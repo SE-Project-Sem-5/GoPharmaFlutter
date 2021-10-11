@@ -103,7 +103,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           photos: photos,
         );
         break;
-
       case GetDeliveryChargeForNormalOrder:
         yield state.clone(orderLoading: true);
         List<DeliveryChargeProduct> deliveryProducts = [];
@@ -118,8 +117,9 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         }
         DeliveryDetails delivery = new DeliveryDetails(
           customerAddressID: 2,
-          city: "Kalutara",
-          streetAddress: "12/SD/4, Floor 12, City Place",
+          city: state.city,
+          district: state.district,
+          streetAddress: state.streetAddress,
           products: deliveryProducts,
         );
         OrderPriceInformation orderPriceInformation =

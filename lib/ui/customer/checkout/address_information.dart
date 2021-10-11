@@ -115,11 +115,14 @@ class AddressInformationPage extends StatelessWidget {
             onPressed: () {
               if (_form.currentState.validate()) {
                 print(districtController.text);
-                bloc.add(AddAddressDetails(
-                  streetAddress: addressController.text,
-                  city: cityController.text,
-                  district: districtController.text,
-                ));
+                bloc.add(
+                  AddAddressDetails(
+                    streetAddress: addressController.text,
+                    city: cityController.text,
+                    district: districtController.text,
+                  ),
+                );
+                bloc.add(GetDeliveryChargeForNormalOrder());
                 Navigator.pushNamed(
                   context,
                   CheckoutReceipt.id,

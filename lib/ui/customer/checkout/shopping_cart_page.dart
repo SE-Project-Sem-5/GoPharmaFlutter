@@ -68,13 +68,12 @@ class ShoppingCartPage extends StatelessWidget {
                       onPressed: state.productListTotal > 0
                           ? () {
                               state.productListNeedPrescriptions.length == 0
-                                  ? bloc.add(GetDeliveryChargeForNormalOrder())
+                                  ? Navigator.pushNamed(
+                                      context,
+                                      AddressInformationPage.id,
+                                    )
                                   : print(state.productListPrescriptionless);
                               print(state.productListNeedPrescriptions);
-                              Navigator.pushNamed(
-                                context,
-                                AddressInformationPage.id,
-                              );
                             }
                           : null,
                       style: ElevatedButton.styleFrom(
