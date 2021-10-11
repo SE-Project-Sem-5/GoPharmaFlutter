@@ -4,7 +4,7 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
+import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
 
 class AddressInformationPage extends StatelessWidget {
   static final String id = "address_details_page";
@@ -121,7 +121,7 @@ class AddressInformationPage extends StatelessWidget {
                 ));
                 Navigator.pushNamed(
                   context,
-                  PaymentSelectionPage.id,
+                  CheckoutReceipt.id,
                 );
               }
             },
@@ -137,7 +137,7 @@ class AddressInformationPage extends StatelessWidget {
               ),
             ),
             child: Text(
-              "Proceed to Payment",
+              "View Delivery Charges",
               style: TextStyle(
                 fontSize: 18.0,
               ),

@@ -6,7 +6,7 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/back_button.dart';
-import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
+import 'package:go_pharma/ui/customer/checkout/address_information.dart';
 import 'package:go_pharma/ui/customer/products/shopping_cart_page_product_card.dart';
 
 class ShoppingCartPage extends StatelessWidget {
@@ -71,10 +71,9 @@ class ShoppingCartPage extends StatelessWidget {
                                   ? bloc.add(GetDeliveryChargeForNormalOrder())
                                   : print(state.productListPrescriptionless);
                               print(state.productListNeedPrescriptions);
-
                               Navigator.pushNamed(
                                 context,
-                                CheckoutReceipt.id,
+                                AddressInformationPage.id,
                               );
                             }
                           : null,
@@ -90,7 +89,7 @@ class ShoppingCartPage extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        "Proceed to Checkout",
+                        "Enter Address Information",
                         style: TextStyle(
                           fontSize: 18.0,
                         ),
