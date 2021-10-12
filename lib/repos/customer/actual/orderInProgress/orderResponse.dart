@@ -1,9 +1,9 @@
-class NormalOrderResponse {
+class OrderResponse {
   int orderID;
 
-  NormalOrderResponse({this.orderID});
+  OrderResponse({this.orderID});
 
-  NormalOrderResponse.fromJson(Map<String, dynamic> json) {
+  OrderResponse.fromJson(Map<String, dynamic> json) {
     orderID = json['orderID'];
   }
 
