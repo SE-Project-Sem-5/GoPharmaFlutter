@@ -14,7 +14,13 @@ class OrderSuccessfulPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Your order has been placed."),
+          title: BlocBuilder<CheckoutBloc, CheckoutState>(
+            builder: (context, state) {
+              return state.orderLoading
+                  ? Text("Your order is being processed...")
+                  : Text("Your order has been placed.");
+            },
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
@@ -25,13 +31,15 @@ class OrderSuccessfulPage extends StatelessWidget {
             builder: (context, state) {
               return Container(
                 child: Center(
-                  child: Text(
-                    "Your order has been confirmed. Your order ID is #${state.orderID.toString()}."
-                    " You may view the order progress from the My Orders tab.",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                    ),
-                  ),
+                  child: state.orderLoading
+                      ? CircularProgressIndicator()
+                      : Text(
+                          "Your order has been confirmed. Your order ID is #${state.orderID.toString()}."
+                          " You may view the order progress from the My Orders tab.",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                          ),
+                        ),
                 ),
               );
             },

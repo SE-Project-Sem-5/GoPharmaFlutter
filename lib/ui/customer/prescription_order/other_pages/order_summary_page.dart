@@ -8,19 +8,25 @@ class OrderSummaryPage extends StatelessWidget {
   const OrderSummaryPage({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final prescriptionOrderBloc =
-        BlocProvider.of<PrescriptionOrderBloc>(context);
-
     return BlocBuilder<PrescriptionOrderBloc, PrescriptionOrderState>(
       builder: (context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            state.orderLoading
-                ? CircularProgressIndicator()
-                : Text("Order loaded"),
-          ],
-        );
+        return state.orderLoading
+            ? Padding(
+                padding: EdgeInsets.only(
+                  left: (MediaQuery.of(context).size.width / 2) - 10,
+                ),
+                child: CircularProgressIndicator(),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  "Your order has been confirmed. Your order ID is #${state.orderID}."
+                  " You may view the order progress from the My Orders tab.",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              );
       },
     );
   }

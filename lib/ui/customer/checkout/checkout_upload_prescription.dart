@@ -7,7 +7,7 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
-import 'package:go_pharma/ui/customer/checkout/address_information.dart';
+import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -170,19 +170,15 @@ class SelectOrderPrescriptionScreen extends StatelessWidget {
                             size: MediaQuery.of(context).size,
                             onTapped: () {
                               Navigator.pushNamed(
-                                  context, AddressInformationPage.id);
+                                context,
+                                PaymentSelectionPage.id,
+                              );
                             },
                             fillColor: GoPharmaColors.PrimaryColor,
                             textColor: GoPharmaColors.WhiteColor,
-                            title: "Enter Address Details",
+                            title: "Select Payment Options",
                           )
-                        : RoundedButtonFilled(
-                            size: MediaQuery.of(context).size,
-                            onTapped: null,
-                            fillColor: GoPharmaColors.PrimaryColor,
-                            textColor: GoPharmaColors.WhiteColor,
-                            title: "Select an Image",
-                          ),
+                        : SizedBox(),
                   );
                 },
               )

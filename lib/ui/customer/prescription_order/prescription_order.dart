@@ -7,7 +7,7 @@ import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/customer/drawer.dart';
 import 'package:go_pharma/ui/customer/prescription_order/other_pages/order_summary_page.dart';
-import 'other_pages/zone_select_page.dart';
+import 'other_pages/select_zone_page.dart';
 import 'other_pages/select_photo_screen.dart';
 
 class PrescriptionOrderPage extends StatelessWidget {
@@ -25,13 +25,19 @@ class PrescriptionOrderPage extends StatelessWidget {
           // ignore: missing_return
           onWillPop: () {
             prescriptionOrderBloc.add(
-                PreviousStepEvent(currentStep: state.step, context: context));
+              PreviousStepEvent(
+                currentStep: state.step,
+                context: context,
+              ),
+            );
           },
           child: SafeArea(
             child: Scaffold(
                 appBar: AppBar(
                   title: Text(
-                    titles[state.step],
+                    state.orderLoading
+                        ? "Your order is being processed..."
+                        : titles[state.step],
                   ),
                 ),
                 drawer:
@@ -40,8 +46,8 @@ class PrescriptionOrderPage extends StatelessWidget {
                         : null,
                 body: Container(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       pageSwitcher(state.step),
                       SizedBox(
@@ -62,26 +68,56 @@ class PrescriptionOrderPage extends StatelessWidget {
                         return RoundedButtonFilled(
                           size: MediaQuery.of(context).size,
                           onTapped: () {
-                            state.step ==
-                                    PrescriptionOrderStep
-                                        .PRESCRIPTIONORDER_PHOTO
-                                ? state.localPhotoPaths.length > 0
-                                    ? prescriptionOrderBloc.add(
-                                        NextStepEvent(
-                                          currentStep: state.step,
-                                        ),
-                                      )
-                                    : null
-                                : prescriptionOrderBloc.add(
-                                    NextStepEvent(
-                                      currentStep: state.step,
-                                    ),
-                                  );
+                            if (state.step ==
+                                PrescriptionOrderStep.PRESCRIPTIONORDER_ZONE) {
+                              prescriptionOrderBloc.add(
+                                NextStepEvent(
+                                  currentStep: state.step,
+                                  context: context,
+                                ),
+                              );
+                              prescriptionOrderBloc.add(
+                                ConfirmOrderEvent(),
+                              );
+                            } else {
+                              state.step ==
+                                      PrescriptionOrderStep
+                                          .PRESCRIPTIONORDER_PHOTO
+                                  ? state.localPhotoPaths.length > 0
+                                      ? prescriptionOrderBloc.add(
+                                          NextStepEvent(
+                                            currentStep: state.step,
+                                            context: context,
+                                          ),
+                                        )
+                                      : null
+                                  : state.step ==
+                                          PrescriptionOrderStep
+                                              .PRESCRIPTIONORDER_SUMMARY
+                                      ? state.orderLoading
+                                          ? null
+                                          : prescriptionOrderBloc.add(
+                                              NextStepEvent(
+                                                currentStep: state.step,
+                                                context: context,
+                                              ),
+                                            )
+                                      : prescriptionOrderBloc.add(
+                                          NextStepEvent(
+                                            currentStep: state.step,
+                                            context: context,
+                                          ),
+                                        );
+                            }
                           },
                           fillColor: GoPharmaColors.PrimaryColor,
                           textColor: GoPharmaColors.WhiteColor,
                           title: state.localPhotoPaths.length > 0
-                              ? "Next"
+                              ? state.step ==
+                                      PrescriptionOrderStep
+                                          .PRESCRIPTIONORDER_SUMMARY
+                                  ? "Return to Home Page"
+                                  : "Next"
                               : "Select an Image",
                         );
                       },

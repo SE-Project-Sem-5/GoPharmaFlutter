@@ -3,14 +3,18 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/dummy/location/location_api_provider.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
+import 'package:go_pharma/repos/customer/actual/prescription_order/prescriptionOrder.dart';
+import 'package:go_pharma/repos/customer/actual/prescription_order/prescriptionOrderAPIProvider.dart';
+import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 
 import 'prescription_order_event.dart';
 import 'prescription_order_state.dart';
 
 class PrescriptionOrderBloc
     extends Bloc<PrescriptionOrderEvent, PrescriptionOrderState> {
-  final LocationApiProvider locationApiProvider = LocationApiProvider();
+  PrescriptionOrderAPIProvider prescriptionOrderAPIProvider =
+      new PrescriptionOrderAPIProvider();
 
   static List<PrescriptionOrderStep> stepOrder = [
     PrescriptionOrderStep.PRESCRIPTIONORDER_PHOTO,
@@ -64,19 +68,35 @@ class PrescriptionOrderBloc
         break;
       case ConfirmOrderEvent:
         yield state.clone(orderLoading: true);
-        //TODO: call endpoint to upload images
-        yield state.clone(orderLoading: false);
+        PrescriptionOrder prescriptionOrder = new PrescriptionOrder(
+          customerID: 2,
+          zone: state.zone.toLowerCase(),
+        );
+        print(state.localPhotoPaths);
+        OrderResponse response =
+            await prescriptionOrderAPIProvider.confirmPrescriptionOrder(
+          prescriptionOrder,
+          state.localPhotoPaths,
+        );
+        print(response);
+        print(response.orderID);
+        if (response.orderID != null) {
+          yield state.clone(
+            orderLoading: false,
+            orderID: response.orderID.toString(),
+          );
+        }
         break;
       case NextStepEvent:
         final currentStep = (event as NextStepEvent).currentStep;
+        final context = (event as NextStepEvent).context;
         final nextIndex = stepOrder.indexOf(currentStep) + 1;
         if (nextIndex < stepOrder.length) {
           yield state.clone(
             step: stepOrder[nextIndex],
           );
         } else {
-          //TODO: Event to do something after the flow ends
-          //add();
+          Navigator.pushReplacementNamed(context, CustomerHomePage.id);
         }
         break;
       case PreviousStepEvent:

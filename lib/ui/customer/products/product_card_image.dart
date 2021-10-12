@@ -9,8 +9,8 @@ class ProductCardImage extends StatelessWidget {
   const ProductCardImage({
     Key key,
     this.imageURL,
-    this.height = 125.0,
-    this.width = 125.0,
+    this.height = 150.0,
+    this.width = 150.0,
     this.padding = 10,
   }) : super(key: key);
 

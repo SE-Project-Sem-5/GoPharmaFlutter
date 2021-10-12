@@ -5,14 +5,12 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/address.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/deliveryDetails.dart';
-import 'package:go_pharma/repos/customer/actual/orderInProgress/normalPrescriptionlessOrder.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/normalOrder.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderAPIProvider.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderPriceInformation.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'dart:async';
-
-import 'package:go_pharma/ui/customer/checkout/order_successful_page.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   CheckoutBloc(BuildContext context) : super(CheckoutState.initialState);
@@ -26,6 +24,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           error: error,
         );
         break;
+
+      // =========== Upload prescription images ===========
       case UploadPrescriptionEvent:
         final String image = (event as UploadPrescriptionEvent).image;
         final List<String> newLocalPhotoPaths = state.localPhotoPaths;
@@ -37,6 +37,23 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           photos: photos,
         );
         break;
+
+      // =========== Remove a prescription image ===========
+
+      case RemoveImageEvent:
+        final String image = (event as RemoveImageEvent).image;
+        final List<String> localPhotoPaths = state.localPhotoPaths;
+        final List<File> photos = state.photos;
+        photos.remove(File(image));
+        localPhotoPaths.remove(image);
+        yield state.clone(
+          localPhotoPaths: localPhotoPaths,
+          photos: photos,
+        );
+        break;
+
+      // =========== Add/Remove/Update quantity of products ===========
+
       case UpdateProductListEvent:
         final product = (event as UpdateProductListEvent).product;
         final prescriptionNeeded = product.prescriptionNeeded;
@@ -92,17 +109,9 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           productListPrescriptionless: productListPrescriptionless,
         );
         break;
-      case RemoveImageEvent:
-        final String image = (event as RemoveImageEvent).image;
-        final List<String> localPhotoPaths = state.localPhotoPaths;
-        final List<File> photos = state.photos;
-        photos.remove(File(image));
-        localPhotoPaths.remove(image);
-        yield state.clone(
-          localPhotoPaths: localPhotoPaths,
-          photos: photos,
-        );
-        break;
+
+      //  Get delivery charge for normal order
+
       case GetDeliveryChargeForNormalOrder:
         yield state.clone(orderLoading: true);
         List<DeliveryChargeProduct> deliveryProducts = [];
@@ -113,6 +122,17 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
             supplierID: p.product.supplierID,
             soldUnitPrice: p.actualPrice,
           );
+          print(p.actualPrice);
+          deliveryProducts.add(newDeliveryProduct);
+        }
+        for (OrderProduct p in state.productListNeedPrescriptions) {
+          DeliveryChargeProduct newDeliveryProduct = new DeliveryChargeProduct(
+            productID: p.id.toString(),
+            quantity: p.amountOrdered,
+            supplierID: p.product.supplierID,
+            soldUnitPrice: p.actualPrice,
+          );
+          print(p.actualPrice);
           deliveryProducts.add(newDeliveryProduct);
         }
         DeliveryDetails delivery = new DeliveryDetails(
@@ -132,9 +152,10 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           productListTotal: orderPriceInformation.totalPrice.toDouble(),
         );
         break;
-      case ConfirmNormalCashPrescriptionlessOrder:
-        final context =
-            (event as ConfirmNormalCashPrescriptionlessOrder).context;
+
+      //  Confirm normal order
+
+      case ConfirmNormalCashOrder:
         yield state.clone(orderLoading: true);
         List<OrderConfirmationProducts> orderConfirmationProducts = [];
         for (OrderProduct p in state.productListPrescriptionless) {
@@ -149,10 +170,27 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           );
           orderConfirmationProducts.add(newOrderConfirmationProduct);
         }
-        NormalPrescriptionlessOrder order = new NormalPrescriptionlessOrder(
+
+        for (OrderProduct p in state.productListNeedPrescriptions) {
+          OrderConfirmationProducts newOrderConfirmationProduct =
+              new OrderConfirmationProducts(
+            productID: p.id.toString(),
+            quantity: p.amountOrdered,
+            supplierID: p.product.supplierID,
+            soldUnitPrice: p.actualPrice,
+            addedChargePercentage: 0,
+            addedCharge: 0,
+          );
+          orderConfirmationProducts.add(newOrderConfirmationProduct);
+        }
+        OrderResponse response;
+        print(state.productListTotal);
+        print(state.deliveryCharge);
+        NormalOrder order = new NormalOrder(
           totalPrice: state.productListTotal,
           deliveryCharge: state.deliveryCharge,
           customerID: 2,
+          //TODO: get from logged in user
           customerEmail: "sgayangi@gmail.com",
           orderType: "normal",
           products: orderConfirmationProducts,
@@ -162,8 +200,16 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
             district: state.district,
           ),
         );
-        NormalOrderResponse response = await orderAPIProvider
-            .confirmNormalCashPrescriptionlessOrder(order);
+        if (state.productListNeedPrescriptions.length == 0) {
+          response = await orderAPIProvider
+              .confirmNormalCashPrescriptionlessOrder(order);
+        } else {
+          order.hasPrescriptions = true;
+          response =
+              await orderAPIProvider.confirmNormalCashOrderWithPrescriptions(
+                  order, state.localPhotoPaths);
+        }
+
         if (response.orderID != null) {
           yield state.clone(
             orderLoading: false,
@@ -179,7 +225,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
             productListTotal: 0,
             productListNeedPrescriptions: [],
           );
-          Navigator.pushNamed(context, OrderSuccessfulPage.id);
         }
         yield state.clone(
           error: "Order not confirmed. Please try again later.",
