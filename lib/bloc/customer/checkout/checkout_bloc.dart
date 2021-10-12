@@ -183,7 +183,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           );
           orderConfirmationProducts.add(newOrderConfirmationProduct);
         }
-        NormalOrderResponse response;
+        OrderResponse response;
         print(state.productListTotal);
         print(state.deliveryCharge);
         NormalOrder order = new NormalOrder(
