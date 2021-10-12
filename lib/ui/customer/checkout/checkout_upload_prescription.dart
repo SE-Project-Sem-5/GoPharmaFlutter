@@ -178,13 +178,7 @@ class SelectOrderPrescriptionScreen extends StatelessWidget {
                             textColor: GoPharmaColors.WhiteColor,
                             title: "Select Payment Options",
                           )
-                        : RoundedButtonFilled(
-                            size: MediaQuery.of(context).size,
-                            onTapped: null,
-                            fillColor: GoPharmaColors.PrimaryColor,
-                            textColor: GoPharmaColors.WhiteColor,
-                            title: "Select an Image",
-                          ),
+                        : SizedBox(),
                   );
                 },
               )
