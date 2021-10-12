@@ -25,7 +25,7 @@ class OrderAPIProvider {
     }
   }
 
-  Future<NormalOrderResponse> confirmNormalCashPrescriptionlessOrder(
+  Future<OrderResponse> confirmNormalCashPrescriptionlessOrder(
       NormalOrder order) async {
     try {
       Response response = await _dio.post(
@@ -34,14 +34,14 @@ class OrderAPIProvider {
       );
       print(response);
       print(response.data["data"]);
-      return NormalOrderResponse.fromJson(response.data["data"]);
+      return OrderResponse.fromJson(response.data["data"]);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      return NormalOrderResponse();
+      return OrderResponse();
     }
   }
 
-  Future<NormalOrderResponse> confirmNormalCashOrderWithPrescriptions(
+  Future<OrderResponse> confirmNormalCashOrderWithPrescriptions(
       NormalOrder order, List<String> localPhotoPaths) async {
     var products = [];
     for (var product in order.products) {
@@ -75,14 +75,14 @@ class OrderAPIProvider {
       );
       print(response);
       print(response.data["data"]);
-      return NormalOrderResponse.fromJson(response.data["data"]);
+      return OrderResponse.fromJson(response.data["data"]);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      return NormalOrderResponse();
+      return OrderResponse();
     }
   }
 
-  Future<NormalOrderResponse> confirmNormalOnlinePrescriptionlessOrder(
+  Future<OrderResponse> confirmNormalOnlinePrescriptionlessOrder(
       NormalOrder order) async {
     print(order);
     try {
@@ -92,10 +92,10 @@ class OrderAPIProvider {
       );
       print(response);
       print(response.data["data"]);
-      return NormalOrderResponse.fromJson(response.data["data"]);
+      return OrderResponse.fromJson(response.data["data"]);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      return NormalOrderResponse();
+      return OrderResponse();
     }
   }
 
