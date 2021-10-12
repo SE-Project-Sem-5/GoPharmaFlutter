@@ -16,10 +16,12 @@ class PrescriptionOrderState {
   final PrescriptionOrderStep step;
   final List<File> photos;
   final bool orderLoading;
+  final String orderID;
 
   PrescriptionOrderState({
     this.orderLoading = false,
     this.photos,
+    this.orderID,
     this.error,
     this.localPhotoPaths,
     this.zone = "city",
@@ -33,6 +35,7 @@ class PrescriptionOrderState {
         step: PrescriptionOrderStep.PRESCRIPTIONORDER_PHOTO,
         photos: [],
         orderLoading: false,
+        orderID: "",
       );
 
   PrescriptionOrderState clone({
@@ -41,12 +44,14 @@ class PrescriptionOrderState {
     List<File> photos,
     String zone,
     PrescriptionOrderStep step,
+    String orderID,
     bool orderLoading,
   }) {
     return PrescriptionOrderState(
       error: error ?? this.error,
       localPhotoPaths: localPhotoPaths ?? this.localPhotoPaths,
       zone: zone ?? this.zone,
+      orderID: orderID ?? this.orderID,
       step: step ?? this.step,
       photos: photos ?? this.photos,
       orderLoading: orderLoading ?? this.orderLoading,
