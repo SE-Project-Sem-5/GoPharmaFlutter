@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/deliveryDetails.dart';
-import 'package:go_pharma/repos/customer/actual/orderInProgress/normalPrescriptionlessOrder.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/normalOrder.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderPriceInformation.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 
@@ -26,7 +26,7 @@ class OrderAPIProvider {
   }
 
   Future<NormalOrderResponse> confirmNormalCashPrescriptionlessOrder(
-      NormalPrescriptionlessOrder order) async {
+      NormalOrder order) async {
     try {
       Response response = await _dio.post(
         "customer/order/normal/cash/confirm",
@@ -41,8 +41,49 @@ class OrderAPIProvider {
     }
   }
 
+  Future<NormalOrderResponse> confirmNormalCashOrderWithPrescriptions(
+      NormalOrder order, List<String> localPhotoPaths) async {
+    var products = [];
+    for (var product in order.products) {
+      products.add(product.toJson());
+    }
+    print(products);
+    FormData formData = new FormData.fromMap({
+      "totalPrice": order.totalPrice.toString(),
+      "deliveryCharge": order.deliveryCharge.toString(),
+      "type": "mobile",
+      "totalToBePaid": (order.totalPrice + order.deliveryCharge).toString(),
+      "orderType": "normal",
+      "customerID": order.customerID,
+      "address": order.address.toJson(),
+      "products": products,
+      "hasPrescriptions": "true",
+    });
+
+    formData.files.addAll([
+      for (var file in localPhotoPaths)
+        ...{
+          MapEntry("prescriptions",
+              await MultipartFile.fromFile(file, filename: "file1"))
+        }.toList()
+    ]);
+
+    try {
+      Response response = await _dio.post(
+        "customer/order/normal/cash/confirm",
+        data: formData,
+      );
+      print(response);
+      print(response.data["data"]);
+      return NormalOrderResponse.fromJson(response.data["data"]);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return NormalOrderResponse();
+    }
+  }
+
   Future<NormalOrderResponse> confirmNormalOnlinePrescriptionlessOrder(
-      NormalPrescriptionlessOrder order) async {
+      NormalOrder order) async {
     print(order);
     try {
       Response response = await _dio.post(

@@ -8,6 +8,7 @@ import 'package:go_pharma/payment_gateway/payment.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
+import 'package:go_pharma/ui/customer/checkout/order_successful_page.dart';
 import 'package:go_pharma/ui/customer/profile/bold_text.dart';
 
 class PaymentSelectionPage extends StatelessWidget {
@@ -52,8 +53,15 @@ class PaymentSelectionPage extends StatelessWidget {
                         textColor: GoPharmaColors.WhiteColor,
                         onTapped: () {
                           //TODO: add prescription order
-                          bloc.add(ConfirmNormalCashPrescriptionlessOrder(
-                              context: context));
+                          bloc.add(
+                            ConfirmNormalCashOrder(
+                              context: context,
+                            ),
+                          );
+                          Navigator.pushReplacementNamed(
+                            context,
+                            OrderSuccessfulPage.id,
+                          );
                         },
                       ),
                       RoundedButtonFilled(

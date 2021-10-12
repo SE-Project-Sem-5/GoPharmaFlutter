@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
-import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
@@ -14,7 +13,6 @@ class ShoppingCartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var bloc = BlocProvider.of<CheckoutBloc>(context);
 
     return SafeArea(
       child: Scaffold(
@@ -67,13 +65,10 @@ class ShoppingCartPage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: state.productListTotal > 0
                           ? () {
-                              state.productListNeedPrescriptions.length == 0
-                                  ? Navigator.pushNamed(
-                                      context,
-                                      AddressInformationPage.id,
-                                    )
-                                  : print(state.productListPrescriptionless);
-                              print(state.productListNeedPrescriptions);
+                              Navigator.pushNamed(
+                                context,
+                                AddressInformationPage.id,
+                              );
                             }
                           : null,
                       style: ElevatedButton.styleFrom(
@@ -88,7 +83,7 @@ class ShoppingCartPage extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        "Enter Address Information",
+                        "Enter Address Details",
                         style: TextStyle(
                           fontSize: 18.0,
                         ),
