@@ -80,6 +80,16 @@ class HorizontalProductCard extends StatelessWidget {
                         SizedBox(
                           height: 10.0,
                         ),
+                        Text(
+                          product.productSize.sizeName,
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: GoPharmaColors.BlackColor,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
                         (product.stock <= 0)
                             ? Container(
                                 child: Padding(

@@ -84,6 +84,16 @@ class ShoppingCartPageProductCard extends StatelessWidget {
                             SizedBox(
                               height: 10.0,
                             ),
+                            Text(
+                              product.productSize.sizeName,
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: GoPharmaColors.BlackColor,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
                             BlocBuilder<CheckoutBloc, CheckoutState>(
                               builder: (context, state) {
                                 if (orderProduct.amountOrdered > 0) {
@@ -226,8 +236,8 @@ class ProductCardImage extends StatelessWidget {
   const ProductCardImage({
     Key key,
     this.imageURL,
-    this.height = 125.0,
-    this.width = 125.0,
+    this.height = 150.0,
+    this.width = 150.0,
   }) : super(key: key);
 
   final String imageURL;
