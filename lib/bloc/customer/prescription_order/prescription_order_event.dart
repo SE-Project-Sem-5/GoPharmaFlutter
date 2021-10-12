@@ -30,8 +30,9 @@ class SelectZoneEvent extends PrescriptionOrderEvent {
 }
 
 class NextStepEvent extends PrescriptionOrderEvent {
+  final BuildContext context;
   final PrescriptionOrderStep currentStep;
-  NextStepEvent({this.currentStep});
+  NextStepEvent({this.currentStep, this.context});
 }
 
 class PreviousStepEvent extends PrescriptionOrderEvent {
