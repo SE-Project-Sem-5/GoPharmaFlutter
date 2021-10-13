@@ -14,3 +14,12 @@ class GetOrderListByStatus extends OrderListEvent {
 
   GetOrderListByStatus({this.status});
 }
+// processing
+// cancelled
+// confirmed
+// reserved
+// collected
+// transient
+// transient-collected
+// shipped
+// delivered

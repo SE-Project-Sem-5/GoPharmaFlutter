@@ -16,6 +16,9 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         yield state.clone(error: "");
         yield state.clone(error: error);
         break;
+      case GetOrderListByStatus:
+        final status = (event as GetOrderListByStatus).status;
+        break;
     }
   }
 
