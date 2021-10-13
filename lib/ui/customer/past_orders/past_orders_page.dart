@@ -17,33 +17,43 @@ class PastOrdersPage extends StatelessWidget {
         buildWhen: (p, c) => p.isLoading != c.isLoading,
         builder: (context, state) {
           return Container(
-            child: state.isLoading
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : RefreshIndicator(
-                    //ignore: missing_return
-                    onRefresh: () {
-                      final bloc = BlocProvider.of<OrderListBloc>(context);
-                      bloc.add(
-                        GetOrderListByStatus(
-                          customerID: 2,
-                          status: "delivered",
-                        ),
-                      );
-                    },
-                    child: ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      itemCount: state.orderList["processing"].orders.length,
-                      itemBuilder: (context, index) => PastOrderCard(
-                        order: state.orderList["processing"].orders[index],
-                      ),
-                    ),
-                  ),
-          );
+              child: state.isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : RefreshIndicator(
+                      //ignore: missing_return
+                      onRefresh: () {
+                        final bloc = BlocProvider.of<OrderListBloc>(context);
+                        bloc.add(
+                          GetOrderListByStatus(
+                            customerID: 2,
+                            status: "delivered",
+                          ),
+                        );
+                      },
+                      child: state.orderList["delivered"].orders.length > 0
+                          ? ListView.builder(
+                              physics: AlwaysScrollableScrollPhysics(),
+                              itemCount:
+                                  state.orderList["delivered"].orders.length,
+                              itemBuilder: (context, index) => PastOrderCard(
+                                order:
+                                    state.orderList["delivered"].orders[index],
+                              ),
+                            )
+                          : Center(
+                              child: Text(
+                                "Nothing to see here. ",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                    ));
         },
       ),
-      title: "Past Orders",
+      title: "Completed Orders",
     );
   }
 }
