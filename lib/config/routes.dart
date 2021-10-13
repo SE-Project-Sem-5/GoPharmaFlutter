@@ -12,12 +12,12 @@ import 'package:go_pharma/ui/customer/checkout/checkout_upload_prescription.dart
 import 'package:go_pharma/ui/customer/checkout/order_successful_page.dart';
 import 'package:go_pharma/ui/customer/checkout/payment_option_selection.dart';
 import 'package:go_pharma/ui/customer/confirmed_orders/confirmed_orders_page.dart';
-import 'package:go_pharma/ui/customer/current_orders/current_orders_page.dart';
 import 'package:go_pharma/ui/customer/customer_starting_page.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/prescription_order/other_pages/select_zone_page.dart';
 import 'package:go_pharma/ui/customer/prescription_order/other_pages/select_photo_screen.dart';
+import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
@@ -44,7 +44,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   CategoryProvider.id: (context) => CategoryProvider(),
   SearchPage.id: (context) => SearchPage(),
   PastOrdersPage.id: (context) => PastOrdersPage(),
-  CurrentOrdersPage.id: (context) => CurrentOrdersPage(),
+  ProcessingOrdersPage.id: (context) => ProcessingOrdersPage(),
   ZoneSelectionPage.id: (context) => ZoneSelectionPage(),
   PrescriptionOrderProvider.id: (context) => PrescriptionOrderProvider(),
   ProfileSecuritySettings.id: (context) => ProfileSecuritySettings(),

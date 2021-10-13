@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
-import 'current_order_full_view.dart';
+import 'processing_order_full_view.dart';
 
-class CurrentOrderCard extends StatelessWidget {
+class ProcessingOrderCard extends StatelessWidget {
   final Orders order;
-  const CurrentOrderCard({Key key, this.order}) : super(key: key);
+  const ProcessingOrderCard({Key key, this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class CurrentOrderCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CurrentOrderStatusChip(
+                    child: ProcessingOrderStatusChip(
                       text: order.status.toUpperCase(),
                     ),
                   ),
@@ -57,7 +57,7 @@ class CurrentOrderCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CurrentOrderFullView(
+                          builder: (context) => ProcessingOrderFullView(
                             order: order,
                           ),
                         ),
@@ -75,13 +75,14 @@ class CurrentOrderCard extends StatelessWidget {
   }
 }
 
-class CurrentOrderStatusChip extends StatelessWidget {
+class ProcessingOrderStatusChip extends StatelessWidget {
   final String text;
-  CurrentOrderStatusChip({this.text});
+  ProcessingOrderStatusChip({this.text});
 
   @override
   Widget build(BuildContext context) {
     return Chip(
+      backgroundColor: Colors.greenAccent,
       padding: const EdgeInsets.symmetric(horizontal: 10),
       label: Container(
         width: 100,

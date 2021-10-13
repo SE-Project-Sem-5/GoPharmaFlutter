@@ -4,12 +4,12 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/ui/customer/common_skeleton.dart';
-import 'current_orders_card.dart';
+import 'processing_orders_card.dart';
 
-class CurrentOrdersPage extends StatelessWidget {
+class ProcessingOrdersPage extends StatelessWidget {
   static final String id = "current_orders_page";
 
-  const CurrentOrdersPage({Key key}) : super(key: key);
+  const ProcessingOrdersPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class CurrentOrdersPage extends StatelessWidget {
                     child: ListView.builder(
                       physics: AlwaysScrollableScrollPhysics(),
                       itemCount: state.orderList["processing"].orders.length,
-                      itemBuilder: (context, index) => CurrentOrderCard(
+                      itemBuilder: (context, index) => ProcessingOrderCard(
                         order: state.orderList["processing"].orders[index],
                       ),
                     ),
