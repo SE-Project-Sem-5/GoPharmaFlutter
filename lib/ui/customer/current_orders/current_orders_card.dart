@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/dummy/order/current_order_model.dart';
+import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:intl/intl.dart';
 
 import 'current_order_full_view.dart';
 
@@ -10,7 +9,7 @@ import 'current_order_full_view.dart';
 //TODO: add cancelling capability for the orderInProgress
 
 class CurrentOrderCard extends StatelessWidget {
-  final CurrentOrder order;
+  final Orders order;
   const CurrentOrderCard({Key key, this.order}) : super(key: key);
 
   @override
@@ -36,15 +35,14 @@ class CurrentOrderCard extends StatelessWidget {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(order.orderId),
+                    Text(order.id.toString()),
                     Text(
-                      "Rs. " + order.price.toStringAsFixed(2),
+                      "Rs. " + order.totalPrice.toStringAsFixed(2),
                     ),
                   ],
                 ),
                 subtitle: Text(
-                  "Ordered on: " +
-                      DateFormat.yMMMMd('en_US').format(order.orderedDate),
+                  "Ordered on: " + order.orderedDate,
                 ),
               ),
               Row(
