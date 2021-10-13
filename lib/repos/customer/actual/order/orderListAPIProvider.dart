@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 
 class OrderListAPIProvider {
   final Dio _dio = Client.init();
@@ -35,6 +36,24 @@ class OrderListAPIProvider {
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return OrderList();
+    }
+  }
+
+  Future<OrderResponse> cancelOrder(int customerID, int orderID) async {
+    try {
+      Response response = await _dio.post(
+        "customer/order/normal/cancel",
+        data: {
+          "customerID": customerID.toString(),
+          "orderID": orderID.toString(),
+        },
+      );
+      print(response);
+      print(response.data["data"]);
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
     }
   }
 }

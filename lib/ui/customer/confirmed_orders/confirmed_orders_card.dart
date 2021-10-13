@@ -81,6 +81,7 @@ class ConfirmedOrderCard extends StatelessWidget {
 
 class CurrentOrderStatusChip extends StatelessWidget {
   final String text;
+
   CurrentOrderStatusChip({this.text});
 
   @override

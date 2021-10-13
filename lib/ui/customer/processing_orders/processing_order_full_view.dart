@@ -7,7 +7,6 @@ class ProcessingOrderFullView extends StatelessWidget {
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
   const ProcessingOrderFullView({Key key, this.order}) : super(key: key);
-  final String bullet = "\u2022 ";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -108,7 +107,6 @@ class ProcessingOrderFullView extends StatelessWidget {
                           itemBuilder: (context, index) => OrderedItem(
                             orderProduct: order.orderProducts[index],
                             leftPadding: leftPadding,
-                            bullet: bullet,
                             rightPadding: rightPadding,
                           ),
                         ),
@@ -122,6 +120,23 @@ class ProcessingOrderFullView extends StatelessWidget {
                               text:
                                   "Rs. " + order.totalPrice.toStringAsFixed(2),
                             ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            isOrderCancellable(order)
+                                ? GestureDetector(
+                                    child: CurrentOrderStatusChip(
+                                      text: "Cancel Order",
+                                    ),
+                                  )
+                                : CurrentOrderStatusChip(
+                                    text: "You cannot cancel this order.",
+                                  )
                           ],
                         ),
                       ],
@@ -141,13 +156,11 @@ class OrderedItem extends StatelessWidget {
   const OrderedItem({
     Key key,
     @required this.orderProduct,
-    @required this.bullet,
     @required this.leftPadding,
     @required this.rightPadding,
   }) : super(key: key);
   final OrderProducts orderProduct;
   final double leftPadding;
-  final String bullet;
   final double rightPadding;
 
   @override
@@ -280,4 +293,33 @@ class PastOrderTitleText extends StatelessWidget {
       ),
     );
   }
+}
+
+class CurrentOrderStatusChip extends StatelessWidget {
+  final String text;
+
+  CurrentOrderStatusChip({this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      backgroundColor: GoPharmaColors.GreyColor,
+      label: Container(
+        width: 125,
+        child: Center(
+          child: Text(text.toUpperCase()),
+        ),
+      ),
+    );
+  }
+}
+
+bool isOrderCancellable(Orders order) {
+  for (var op in order.orderProducts) {
+    if (op.status != "processing") {
+      return false;
+    }
+  }
+  return true;
 }
