@@ -1,4 +1,27 @@
-class Order {
+class OrderList {
+  List<Orders> orders;
+
+  OrderList({this.orders});
+
+  OrderList.fromJson(Map<String, dynamic> json) {
+    if (json['orders'] != null) {
+      orders = [];
+      json['orders'].forEach((v) {
+        orders.add(new Orders.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.orders != null) {
+      data['orders'] = this.orders.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Orders {
   String orderedDate;
   int totalPrice;
   Null zone;
@@ -7,7 +30,7 @@ class Order {
   List<OrderProducts> orderProducts;
   AddressDetail addressDetail;
 
-  Order(
+  Orders(
       {this.orderedDate,
       this.totalPrice,
       this.zone,
@@ -16,7 +39,7 @@ class Order {
       this.orderProducts,
       this.addressDetail});
 
-  Order.fromJson(Map<String, dynamic> json) {
+  Orders.fromJson(Map<String, dynamic> json) {
     orderedDate = json['orderedDate'];
     totalPrice = json['totalPrice'];
     zone = json['zone'];

@@ -6,15 +6,16 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/address.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/deliveryDetails.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/normalOrder.dart';
-import 'package:go_pharma/repos/customer/actual/orderInProgress/orderAPIProvider.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/orderInProgressAPIProvider.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderPriceInformation.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
-import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
+import 'package:go_pharma/repos/customer/actual/product/orderProductModel.dart';
 import 'dart:async';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   CheckoutBloc(BuildContext context) : super(CheckoutState.initialState);
-  OrderAPIProvider orderAPIProvider = new OrderAPIProvider();
+  ProgressingOrderAPIProvider orderAPIProvider =
+      new ProgressingOrderAPIProvider();
   @override
   Stream<CheckoutState> mapEventToState(CheckoutEvent event) async* {
     switch (event.runtimeType) {
@@ -230,11 +231,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           error: "Order not confirmed. Please try again later.",
         );
         break;
-      case ConfirmNormalCashOrder:
-        yield state.clone(orderLoading: true);
 
-        yield state.clone(orderLoading: false);
-        break;
       case ConfirmNormalOnlineOrder:
         yield state.clone(orderLoading: true);
 
