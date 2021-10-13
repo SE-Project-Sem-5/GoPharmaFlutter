@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
+import 'package:go_pharma/repos/customer/actual/product/orderProductModel.dart';
 
 @immutable
 class CheckoutState {

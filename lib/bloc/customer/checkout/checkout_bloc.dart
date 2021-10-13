@@ -9,7 +9,7 @@ import 'package:go_pharma/repos/customer/actual/orderInProgress/normalOrder.dart
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderInProgressAPIProvider.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderPriceInformation.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
-import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
+import 'package:go_pharma/repos/customer/actual/product/orderProductModel.dart';
 import 'dart:async';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
