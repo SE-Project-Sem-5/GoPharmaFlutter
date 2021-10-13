@@ -22,25 +22,35 @@ class ProcessingOrdersPage extends StatelessWidget {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : RefreshIndicator(
-                    //ignore: missing_return
-                    onRefresh: () {
-                      final bloc = BlocProvider.of<OrderListBloc>(context);
-                      bloc.add(
-                        GetOrderListByStatus(
-                          customerID: 2,
-                          status: "processing",
+                : state.orderList["processing"].orders.length > 0
+                    ? RefreshIndicator(
+                        //ignore: missing_return
+                        onRefresh: () {
+                          final bloc = BlocProvider.of<OrderListBloc>(context);
+                          bloc.add(
+                            GetOrderListByStatus(
+                              customerID: 2,
+                              status: "processing",
+                            ),
+                          );
+                        },
+                        child: ListView.builder(
+                          physics: AlwaysScrollableScrollPhysics(),
+                          itemCount:
+                              state.orderList["processing"].orders.length,
+                          itemBuilder: (context, index) => ProcessingOrderCard(
+                            order: state.orderList["processing"].orders[index],
+                          ),
                         ),
-                      );
-                    },
-                    child: ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      itemCount: state.orderList["processing"].orders.length,
-                      itemBuilder: (context, index) => ProcessingOrderCard(
-                        order: state.orderList["processing"].orders[index],
+                      )
+                    : Center(
+                        child: Text(
+                          "Nothing to see here. ",
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
           );
         },
       ),

@@ -40,13 +40,22 @@ class ConfirmedOrdersPage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      itemCount: orders.length,
-                      itemBuilder: (context, index) => ConfirmedOrderCard(
-                        order: orders[index],
-                      ),
-                    ),
+                    child: orders.length > 0
+                        ? ListView.builder(
+                            physics: AlwaysScrollableScrollPhysics(),
+                            itemCount: orders.length,
+                            itemBuilder: (context, index) => ConfirmedOrderCard(
+                              order: orders[index],
+                            ),
+                          )
+                        : Center(
+                            child: Text(
+                              "Nothing to see here. ",
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
                   ),
           );
         },

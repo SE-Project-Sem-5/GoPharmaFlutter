@@ -19,6 +19,8 @@ class CustomerDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<OrderListBloc>(context);
+
     return Drawer(
       child: Container(
         color: GoPharmaColors.WhiteColor,
@@ -67,7 +69,6 @@ class CustomerDrawer extends StatelessWidget {
               text: "Processing Orders",
               icon: Icons.shopping_cart,
               onTap: () {
-                final bloc = BlocProvider.of<OrderListBloc>(context);
                 bloc.add(
                   GetAllOrders(
                     customerID: 2,
@@ -84,7 +85,6 @@ class CustomerDrawer extends StatelessWidget {
               text: "Confirmed Orders",
               icon: Icons.shopping_cart,
               onTap: () {
-                final bloc = BlocProvider.of<OrderListBloc>(context);
                 bloc.add(
                   GetAllOrders(
                     customerID: 2,
@@ -98,10 +98,15 @@ class CustomerDrawer extends StatelessWidget {
               },
             ),
             DrawerTile(
-              text: "Past Orders",
+              text: "Completed Orders",
               icon: Icons.history,
               onTap: () {
                 Navigator.pop(context);
+                bloc.add(
+                  GetAllOrders(
+                    customerID: 2,
+                  ),
+                );
                 Navigator.pushNamed(
                   context,
                   PastOrdersPage.id,

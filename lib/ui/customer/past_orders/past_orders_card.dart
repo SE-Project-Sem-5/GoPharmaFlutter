@@ -82,6 +82,7 @@ class CurrentOrderStatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       padding: const EdgeInsets.symmetric(horizontal: 10),
+      backgroundColor: GoPharmaColors.GreyColor.withOpacity(0.3),
       label: Container(
         width: 100,
         child: Center(
