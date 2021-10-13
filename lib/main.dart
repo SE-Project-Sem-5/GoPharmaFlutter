@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_bloc.dart';
 import 'package:go_pharma/bloc/internet_connectivity/internet_bloc.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
@@ -42,6 +43,9 @@ class GoPharmaApp extends StatelessWidget {
         ),
         BlocProvider<CheckoutBloc>(
           create: (context) => CheckoutBloc(context),
+        ),
+        BlocProvider<OrderListBloc>(
+          create: (context) => OrderListBloc(context),
         ),
         BlocProvider<CategoryBloc>(
           create: (context) => CategoryBloc(context),

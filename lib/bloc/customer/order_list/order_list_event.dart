@@ -16,7 +16,8 @@ class GetOrderListByStatus extends OrderListEvent {
 }
 
 class GetAllOrders extends OrderListEvent {
-  GetAllOrders();
+  final int customerID;
+  GetAllOrders({this.customerID});
 }
 // processing
 // cancelled

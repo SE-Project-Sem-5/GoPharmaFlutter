@@ -30,12 +30,14 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         );
         break;
       case GetAllOrders:
-        //TODO: replace by customerID
-        final OrderList orderListResponse =
-            await orderListAPIProvider.getAllOrders(2);
+        final customerID = (event as GetAllOrders).customerID;
+        var orderListResponse =
+            await orderListAPIProvider.getAllOrders(customerID);
+        print(orderListResponse);
         Map<String, OrderList> orderList = {};
         for (String status in statuses) {
           orderList[status] = new OrderList();
+          orderList[status].orders = [];
         }
         for (Orders order in orderListResponse.orders) {
           orderList[order.status].orders.add(order);

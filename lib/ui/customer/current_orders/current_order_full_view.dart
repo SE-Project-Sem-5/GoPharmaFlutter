@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/dummy/order/current_order_model.dart';
+import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:intl/intl.dart';
 
 class CurrentOrderFullView extends StatelessWidget {
-  final CurrentOrder order;
+  final Orders order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
   const CurrentOrderFullView({Key key, this.order}) : super(key: key);
@@ -42,7 +41,7 @@ class CurrentOrderFullView extends StatelessWidget {
                           horizontal: rightPadding,
                         ),
                         child: Text(
-                          "Order " + order.orderId,
+                          "Order " + order.id.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
@@ -53,9 +52,7 @@ class CurrentOrderFullView extends StatelessWidget {
                           horizontal: rightPadding,
                         ),
                         child: Text(
-                          "Ordered: " +
-                              DateFormat.yMMMMd('en_US')
-                                  .format(order.orderedDate),
+                          "Ordered: " + order.orderedDate,
                           style: TextStyle(
                             color: Colors.black.withOpacity(0.6),
                             fontSize: 16.0,
@@ -138,7 +135,8 @@ class CurrentOrderFullView extends StatelessWidget {
                           children: [
                             PastOrderTitleText(text: "Total Price"),
                             PastOrderTitleText(
-                              text: "Rs. " + order.price.toStringAsFixed(2),
+                              text:
+                                  "Rs. " + order.totalPrice.toStringAsFixed(2),
                             ),
                           ],
                         ),
