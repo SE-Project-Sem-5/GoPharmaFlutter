@@ -8,3 +8,9 @@ class ErrorEvent extends OrderListEvent {
 
   ErrorEvent(this.error);
 }
+
+class GetOrderListByStatus extends OrderListEvent {
+  final String status;
+
+  GetOrderListByStatus({this.status});
+}
