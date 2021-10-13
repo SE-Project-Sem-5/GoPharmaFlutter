@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
-import 'package:go_pharma/repos/customer/actual/order/order.dart';
+import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 
 class OrderAPIProvider {
   final Dio _dio = Client.init();
