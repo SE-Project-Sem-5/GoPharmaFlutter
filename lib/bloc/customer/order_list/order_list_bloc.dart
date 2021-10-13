@@ -30,6 +30,9 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         );
         break;
       case GetAllOrders:
+        yield state.clone(
+          isLoading: true,
+        );
         final customerID = (event as GetAllOrders).customerID;
         var orderListResponse =
             await orderListAPIProvider.getAllOrders(customerID);
@@ -44,6 +47,7 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         }
         print(orderList);
         yield state.clone(
+          isLoading: false,
           orderList: orderList,
         );
         break;
