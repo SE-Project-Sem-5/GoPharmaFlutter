@@ -27,11 +27,11 @@ class OrderListAPIProvider {
     try {
       Response response = await _dio.post(
         "customer/order/view",
-        data: {"customerID": customerID},
+        data: {"customerID": customerID.toString()},
       );
       print(response);
       print(response.data["data"]);
-      return OrderList.fromJson(response.data["data"]);
+      return OrderList.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return OrderList();
