@@ -69,9 +69,8 @@ class CustomerDrawer extends StatelessWidget {
               onTap: () {
                 final bloc = BlocProvider.of<OrderListBloc>(context);
                 bloc.add(
-                  GetOrderListByStatus(
+                  GetAllOrders(
                     customerID: 2,
-                    status: "processing",
                   ),
                 );
                 Navigator.pop(context);
@@ -87,9 +86,8 @@ class CustomerDrawer extends StatelessWidget {
               onTap: () {
                 final bloc = BlocProvider.of<OrderListBloc>(context);
                 bloc.add(
-                  GetOrderListByStatus(
+                  GetAllOrders(
                     customerID: 2,
-                    status: "confirmed",
                   ),
                 );
                 Navigator.pop(context);
