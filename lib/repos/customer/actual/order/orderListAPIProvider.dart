@@ -16,7 +16,7 @@ class OrderListAPIProvider {
       );
       print(response);
       print(response.data["data"]);
-      return OrderList.fromJson(response.data["data"]);
+      return OrderList.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return OrderList();

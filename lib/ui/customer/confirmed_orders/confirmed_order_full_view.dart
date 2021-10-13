@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
-class CurrentOrderFullView extends StatelessWidget {
+class ConfirmedOrderFullView extends StatelessWidget {
   final Orders order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
-  const CurrentOrderFullView({Key key, this.order}) : super(key: key);
+  const ConfirmedOrderFullView({Key key, this.order}) : super(key: key);
   final String bullet = "\u2022 ";
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/category/category_provider.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/current_orders/current_orders_page.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
+
+import 'confirmed_orders/confirmed_orders_page.dart';
 
 class CustomerDrawer extends StatelessWidget {
   const CustomerDrawer({
@@ -59,13 +64,38 @@ class CustomerDrawer extends StatelessWidget {
               },
             ),
             DrawerTile(
-              text: "Orders in Progress",
+              text: "Processing Orders",
               icon: Icons.shopping_cart,
               onTap: () {
+                final bloc = BlocProvider.of<OrderListBloc>(context);
+                bloc.add(
+                  GetOrderListByStatus(
+                    customerID: 2,
+                    status: "processing",
+                  ),
+                );
                 Navigator.pop(context);
                 Navigator.pushNamed(
                   context,
                   CurrentOrdersPage.id,
+                );
+              },
+            ),
+            DrawerTile(
+              text: "Confirmed Orders",
+              icon: Icons.shopping_cart,
+              onTap: () {
+                final bloc = BlocProvider.of<OrderListBloc>(context);
+                bloc.add(
+                  GetOrderListByStatus(
+                    customerID: 2,
+                    status: "confirmed",
+                  ),
+                );
+                Navigator.pop(context);
+                Navigator.pushNamed(
+                  context,
+                  ConfirmedOrdersPage.id,
                 );
               },
             ),

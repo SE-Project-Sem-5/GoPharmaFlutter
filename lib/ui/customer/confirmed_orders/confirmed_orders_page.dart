@@ -4,12 +4,12 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/ui/customer/common_skeleton.dart';
-import 'current_orders_card.dart';
+import 'confirmed_orders_card.dart';
 
-class CurrentOrdersPage extends StatelessWidget {
-  static final String id = "current_orders_page";
+class ConfirmedOrdersPage extends StatelessWidget {
+  static final String id = "confirmed_orders_page";
 
-  const CurrentOrdersPage({Key key}) : super(key: key);
+  const ConfirmedOrdersPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +29,22 @@ class CurrentOrdersPage extends StatelessWidget {
                       bloc.add(
                         GetOrderListByStatus(
                           customerID: 2,
-                          status: "processing",
+                          status: "confirmed",
                         ),
                       );
                     },
                     child: ListView.builder(
                       physics: AlwaysScrollableScrollPhysics(),
-                      itemCount: state.orderList["processing"].orders.length,
-                      itemBuilder: (context, index) => CurrentOrderCard(
-                        order: state.orderList["processing"].orders[index],
+                      itemCount: state.orderList["confirmed"].orders.length,
+                      itemBuilder: (context, index) => ConfirmedOrderCard(
+                        order: state.orderList["confirmed"].orders[index],
                       ),
                     ),
                   ),
           );
         },
       ),
-      title: "Current Orders",
+      title: "Confirmed Orders",
     );
   }
 }

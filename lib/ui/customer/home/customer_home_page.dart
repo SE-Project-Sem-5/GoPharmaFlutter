@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/category/category_provider.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/common_skeleton.dart';
@@ -89,6 +92,12 @@ class CustomerHomePage extends StatelessWidget {
                       title: "View Current Orders",
                       image: "images/delivery.jpg",
                       onClick: () {
+                        final bloc = BlocProvider.of<OrderListBloc>(context);
+                        bloc.add(
+                          GetAllOrders(
+                            customerID: 2,
+                          ),
+                        );
                         Navigator.pushNamed(
                           context,
                           CurrentOrdersPage.id,

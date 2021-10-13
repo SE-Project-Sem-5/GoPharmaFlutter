@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
-import 'current_order_full_view.dart';
+import 'confirmed_order_full_view.dart';
 
 //TODO: get the orders list for the customer ordered by the ordered date
 //TODO: group orders in terms of status?
 //TODO: add cancelling capability for the orderInProgress
 
-class CurrentOrderCard extends StatelessWidget {
+class ConfirmedOrderCard extends StatelessWidget {
   final Orders order;
-  const CurrentOrderCard({Key key, this.order}) : super(key: key);
+  const ConfirmedOrderCard({Key key, this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class CurrentOrderCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CurrentOrderFullView(
+                          builder: (context) => ConfirmedOrderFullView(
                             order: order,
                           ),
                         ),
