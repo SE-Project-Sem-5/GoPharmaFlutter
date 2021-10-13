@@ -4,9 +4,9 @@ class OrderList {
   OrderList({this.orders});
 
   OrderList.fromJson(Map<String, dynamic> json) {
-    if (json['orders'] != null) {
+    if (json['data'] != null) {
       orders = [];
-      json['orders'].forEach((v) {
+      json['data'].forEach((v) {
         orders.add(new Orders.fromJson(v));
       });
     }
@@ -25,6 +25,8 @@ class Orders {
   String orderedDate;
   int totalPrice;
   Null zone;
+  int id;
+
   String status;
   String orderType;
   List<OrderProducts> orderProducts;
@@ -34,6 +36,7 @@ class Orders {
       {this.orderedDate,
       this.totalPrice,
       this.zone,
+      this.id,
       this.status,
       this.orderType,
       this.orderProducts,
@@ -43,6 +46,7 @@ class Orders {
     orderedDate = json['orderedDate'];
     totalPrice = json['totalPrice'];
     zone = json['zone'];
+    id = json['id'];
     status = json['status'];
     orderType = json['orderType'];
     if (json['OrderProducts'] != null) {
@@ -61,6 +65,7 @@ class Orders {
     data['orderedDate'] = this.orderedDate;
     data['totalPrice'] = this.totalPrice;
     data['zone'] = this.zone;
+    data['id'] = this.id;
     data['status'] = this.status;
     data['orderType'] = this.orderType;
     if (this.orderProducts != null) {
