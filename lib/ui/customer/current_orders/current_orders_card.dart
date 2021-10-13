@@ -52,7 +52,7 @@ class CurrentOrderCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CurrentOrderStatusChip(
-                      text: order.status,
+                      text: order.status.toUpperCase(),
                     ),
                   ),
                   TextButton(
@@ -88,7 +88,7 @@ class CurrentOrderStatusChip extends StatelessWidget {
     return Chip(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       label: Container(
-        width: 75,
+        width: 100,
         child: Center(
           child: Text(text),
         ),

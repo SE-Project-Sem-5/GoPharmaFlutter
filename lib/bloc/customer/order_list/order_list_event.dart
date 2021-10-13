@@ -11,8 +11,9 @@ class ErrorEvent extends OrderListEvent {
 
 class GetOrderListByStatus extends OrderListEvent {
   final String status;
+  final int customerID;
 
-  GetOrderListByStatus({this.status});
+  GetOrderListByStatus({this.customerID, this.status});
 }
 
 class GetAllOrders extends OrderListEvent {

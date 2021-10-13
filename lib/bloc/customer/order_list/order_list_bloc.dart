@@ -19,13 +19,18 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         yield state.clone(error: error);
         break;
       case GetOrderListByStatus:
+        yield state.clone(
+          isLoading: true,
+        );
         final status = (event as GetOrderListByStatus).status;
+        final customerID = (event as GetOrderListByStatus).customerID;
         //TODO: replace by customerID
         final OrderList orderList =
-            await orderListAPIProvider.getOrderByStatus(2, status);
+            await orderListAPIProvider.getOrderByStatus(customerID, status);
         var orderMapping = state.orderList;
-        orderMapping["status"] = orderList;
+        orderMapping[status] = orderList;
         yield state.clone(
+          isLoading: false,
           orderList: orderMapping,
         );
         break;

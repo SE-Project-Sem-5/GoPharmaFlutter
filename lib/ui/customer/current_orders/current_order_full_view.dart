@@ -235,13 +235,7 @@ class OrderProductDescriptionRow extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  tag,
-                  style: TextStyle(
-                    fontSize: fontSize,
-                  ),
-                ),
-                Text(
-                  value,
+                  tag + " " + value,
                   style: TextStyle(
                     fontSize: fontSize,
                   ),
