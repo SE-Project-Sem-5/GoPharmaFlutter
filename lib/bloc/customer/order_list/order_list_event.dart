@@ -20,12 +20,9 @@ class GetAllOrders extends OrderListEvent {
   final int customerID;
   GetAllOrders({this.customerID});
 }
-// processing
-// cancelled
-// confirmed
-// reserved
-// collected
-// transient
-// transient-collected
-// shipped
-// delivered
+
+class CancelOrder extends OrderListEvent {
+  final int customerID;
+  final int orderID;
+  CancelOrder({this.customerID, this.orderID});
+}

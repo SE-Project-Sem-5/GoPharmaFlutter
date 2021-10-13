@@ -32,15 +32,16 @@ class Orders {
   List<OrderProducts> orderProducts;
   AddressDetail addressDetail;
 
-  Orders(
-      {this.orderedDate,
-      this.totalPrice,
-      this.zone,
-      this.id,
-      this.status,
-      this.orderType,
-      this.orderProducts,
-      this.addressDetail});
+  Orders({
+    this.orderedDate,
+    this.totalPrice,
+    this.zone,
+    this.id,
+    this.status,
+    this.orderType,
+    this.orderProducts,
+    this.addressDetail,
+  });
 
   Orders.fromJson(Map<String, dynamic> json) {
     orderedDate = json['orderedDate'];
