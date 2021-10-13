@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/dummy/order/past_order_model.dart';
+import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_order_full_view.dart';
-import 'package:intl/intl.dart';
 
 class PastOrderCard extends StatelessWidget {
-  final PastOrder order;
-
+  final Orders order;
   const PastOrderCard({Key key, this.order}) : super(key: key);
 
   @override
@@ -32,21 +30,26 @@ class PastOrderCard extends StatelessWidget {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(order.orderId),
+                    Text(order.id.toString()),
                     Text(
-                      "Rs. " + order.price.toStringAsFixed(2),
+                      "Rs. " + order.totalPrice.toStringAsFixed(2),
                     ),
                   ],
                 ),
                 subtitle: Text(
-                  "Ordered on: " +
-                      DateFormat.yMMMMd('en_US').format(order.orderedDate),
+                  "Ordered on: " + order.orderedDate,
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   const SizedBox(width: 8),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CurrentOrderStatusChip(
+                      text: order.status.toUpperCase(),
+                    ),
+                  ),
                   TextButton(
                     child: const Text('View Details'),
                     onPressed: () {
@@ -65,6 +68,24 @@ class PastOrderCard extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class CurrentOrderStatusChip extends StatelessWidget {
+  final String text;
+  CurrentOrderStatusChip({this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      label: Container(
+        width: 100,
+        child: Center(
+          child: Text(text),
         ),
       ),
     );

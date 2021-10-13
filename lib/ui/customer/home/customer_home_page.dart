@@ -6,7 +6,7 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/common_skeleton.dart';
-import 'package:go_pharma/ui/customer/current_orders/current_orders_page.dart';
+import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
 import 'package:go_pharma/ui/customer/profile/bold_text.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 
@@ -89,7 +89,7 @@ class CustomerHomePage extends StatelessWidget {
                       color: GoPharmaColors.HomePrescriptionColor,
                     ),
                     HomePageGrid(
-                      title: "View Current Orders",
+                      title: "View Processing Orders",
                       image: "images/delivery.jpg",
                       onClick: () {
                         final bloc = BlocProvider.of<OrderListBloc>(context);
@@ -100,7 +100,7 @@ class CustomerHomePage extends StatelessWidget {
                         );
                         Navigator.pushNamed(
                           context,
-                          CurrentOrdersPage.id,
+                          ProcessingOrdersPage.id,
                         );
                       },
                       color: Colors.black,

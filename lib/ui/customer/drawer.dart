@@ -5,8 +5,8 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/customer/current_orders/current_orders_page.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
+import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 
@@ -69,15 +69,14 @@ class CustomerDrawer extends StatelessWidget {
               onTap: () {
                 final bloc = BlocProvider.of<OrderListBloc>(context);
                 bloc.add(
-                  GetOrderListByStatus(
+                  GetAllOrders(
                     customerID: 2,
-                    status: "processing",
                   ),
                 );
                 Navigator.pop(context);
                 Navigator.pushNamed(
                   context,
-                  CurrentOrdersPage.id,
+                  ProcessingOrdersPage.id,
                 );
               },
             ),
@@ -87,9 +86,8 @@ class CustomerDrawer extends StatelessWidget {
               onTap: () {
                 final bloc = BlocProvider.of<OrderListBloc>(context);
                 bloc.add(
-                  GetOrderListByStatus(
+                  GetAllOrders(
                     customerID: 2,
-                    status: "confirmed",
                   ),
                 );
                 Navigator.pop(context);

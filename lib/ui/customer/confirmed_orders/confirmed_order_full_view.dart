@@ -196,14 +196,6 @@ class OrderedItem extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 5,
-        ),
-        OrderProductDescriptionRow(
-          rightPadding: rightPadding,
-          tag: "Status: ",
-          value: orderProduct.status.toUpperCase(),
-        ),
-        SizedBox(
           height: 10,
         ),
       ],

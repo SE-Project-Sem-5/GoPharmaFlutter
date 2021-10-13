@@ -52,7 +52,7 @@ class ConfirmedOrderCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CurrentOrderStatusChip(
-                      text: order.status.toUpperCase(),
+                      text: order.status,
                     ),
                   ),
                   TextButton(
@@ -87,12 +87,22 @@ class CurrentOrderStatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       padding: const EdgeInsets.symmetric(horizontal: 10),
+      backgroundColor: colorMapping[text],
       label: Container(
         width: 100,
         child: Center(
-          child: Text(text),
+          child: Text(text.toUpperCase()),
         ),
       ),
     );
   }
 }
+
+Map<String, Color> colorMapping = {
+  "confirmed": Colors.green.withOpacity(0.3),
+  "reserved": Colors.amberAccent.withOpacity(0.3),
+  "collected": Colors.blueAccent.withOpacity(0.3),
+  "transient": Colors.teal.withOpacity(0.3),
+  "transient-collected": Colors.deepOrangeAccent.withOpacity(0.3),
+  "shipped": Colors.lightGreenAccent.withOpacity(0.3),
+};
