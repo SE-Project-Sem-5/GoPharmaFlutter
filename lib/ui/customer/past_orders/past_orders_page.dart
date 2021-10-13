@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/ui/customer/common_skeleton.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_card.dart';
-
-import 'dummy_values.dart';
 
 class PastOrdersPage extends StatelessWidget {
   static final String id = "past_orders_page";
@@ -11,15 +13,37 @@ class PastOrdersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonSkeleton(
-        child: Container(
-          child: ListView.builder(
-            physics: ClampingScrollPhysics(),
-            itemCount: pastOrders.length,
-            itemBuilder: (context, index) => PastOrderCard(
-              order: pastOrders[index],
-            ),
-          ),
-        ),
-        title: "Past Orders");
+      child: BlocBuilder<OrderListBloc, OrderListState>(
+        buildWhen: (p, c) => p.isLoading != c.isLoading,
+        builder: (context, state) {
+          return Container(
+            child: state.isLoading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : RefreshIndicator(
+                    //ignore: missing_return
+                    onRefresh: () {
+                      final bloc = BlocProvider.of<OrderListBloc>(context);
+                      bloc.add(
+                        GetOrderListByStatus(
+                          customerID: 2,
+                          status: "delivered",
+                        ),
+                      );
+                    },
+                    child: ListView.builder(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      itemCount: state.orderList["processing"].orders.length,
+                      itemBuilder: (context, index) => PastOrderCard(
+                        order: state.orderList["processing"].orders[index],
+                      ),
+                    ),
+                  ),
+          );
+        },
+      ),
+      title: "Past Orders",
+    );
   }
 }

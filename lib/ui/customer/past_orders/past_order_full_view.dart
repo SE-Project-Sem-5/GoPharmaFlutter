@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/dummy/order/past_order_model.dart';
+import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:intl/intl.dart';
 
 class PastOrderFullView extends StatelessWidget {
-  final PastOrder order;
+  final Orders order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
   const PastOrderFullView({Key key, this.order}) : super(key: key);
@@ -23,9 +22,9 @@ class PastOrderFullView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                   boxShadow: [
-                    new BoxShadow(
+                    BoxShadow(
                       color: GoPharmaColors.PrimaryColor.withOpacity(0.2),
                       blurRadius: 15.0,
                     ),
@@ -33,133 +32,100 @@ class PastOrderFullView extends StatelessWidget {
                 ),
                 child: Card(
                   clipBehavior: Clip.antiAlias,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 30.0,
-                          horizontal: rightPadding,
-                        ),
-                        child: Text(
-                          "Order " + order.orderId,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 30.0,
+                      horizontal: 20.0,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Order #" + order.id.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: rightPadding,
+                        SizedBox(
+                          height: 10,
                         ),
-                        child: Text(
-                          "Ordered: " +
-                              DateFormat.yMMMMd('en_US')
-                                  .format(order.orderedDate),
+                        Text(
+                          "Ordered On: " + order.orderedDate.substring(0, 10),
                           style: TextStyle(
                             color: Colors.black.withOpacity(0.6),
                             fontSize: 16.0,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: leftPadding,
-                          top: 10,
-                          bottom: 10.0,
+                        SizedBox(
+                          height: 10,
                         ),
-                        child: Text(
-                          'Completed: ' +
-                              DateFormat.yMMMMd('en_US')
-                                  .format(order.completedDate),
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.6),
-                            fontSize: 16.0,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      HorizontalLine(
-                          leftPadding: leftPadding, rightPadding: rightPadding),
-                      Padding(
-                        padding: EdgeInsets.only(left: leftPadding),
-                        child: Text(
-                          'Products Ordered:',
+                        Text(
+                          "Status: " + order.status.toUpperCase(),
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
                         ),
-                      ),
-                      HorizontalLine(
-                          leftPadding: leftPadding, rightPadding: rightPadding),
-                      ListView.builder(
-                        physics: ClampingScrollPhysics(),
-                        itemCount: 5,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.only(left: leftPadding, top: 5),
-                          child: Row(
-                            children: [
-                              Text(
-                                bullet,
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        HorizontalLine(),
+                        Row(
+                          children: [
+                            Text(
+                              'Ordered Products',
+                              style: TextStyle(
+                                fontSize: 16.0,
                               ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 10.0,
-                                    right: rightPadding,
-                                  ),
-                                  child: Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Product name placeholder",
-                                          style: TextStyle(
-                                            fontSize: 16.0,
-                                          ),
-                                        ),
-                                        Text(
-                                          "Rs. 100.00",
-                                          style: TextStyle(
-                                            fontSize: 16.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                            ),
+                            Spacer(),
+                            Text(
+                              'Qty',
+                              style: TextStyle(
+                                fontSize: 16.0,
                               ),
-                            ],
+                            ),
+                            Spacer(),
+                            Text(
+                              'Unit Price',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              'Total Price',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        HorizontalLine(),
+                        ListView.builder(
+                          physics: ClampingScrollPhysics(),
+                          itemCount: order.orderProducts.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) => OrderedItem(
+                            orderProduct: order.orderProducts[index],
+                            leftPadding: leftPadding,
+                            bullet: bullet,
+                            rightPadding: rightPadding,
                           ),
                         ),
-                      ),
-                      Spacer(),
-                      HorizontalLine(
-                          leftPadding: leftPadding, rightPadding: rightPadding),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: leftPadding,
-                          right: rightPadding,
-                          bottom: 100.0,
-                        ),
-                        child: Row(
+                        Spacer(),
+                        HorizontalLine(),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             PastOrderTitleText(text: "Total Price"),
                             PastOrderTitleText(
-                              text: "Rs. " + order.price.toStringAsFixed(2),
+                              text:
+                                  "Rs. " + order.totalPrice.toStringAsFixed(2),
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -171,26 +137,127 @@ class PastOrderFullView extends StatelessWidget {
   }
 }
 
-class HorizontalLine extends StatelessWidget {
-  const HorizontalLine({
+class OrderedItem extends StatelessWidget {
+  const OrderedItem({
     Key key,
-    this.leftPadding,
-    this.rightPadding,
+    @required this.orderProduct,
+    @required this.bullet,
+    @required this.leftPadding,
+    @required this.rightPadding,
   }) : super(key: key);
-
+  final OrderProducts orderProduct;
   final double leftPadding;
+  final String bullet;
   final double rightPadding;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: leftPadding,
-        right: rightPadding,
-      ),
-      child: Divider(
-        color: Colors.black,
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Container(
+                child: Row(
+                  children: [
+                    Text(
+                      orderProduct.product.productName,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      orderProduct.quantity.toString(),
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      orderProduct.product.unitPrice.toStringAsFixed(2),
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      "Rs. " + orderProduct.totalPrice.toStringAsFixed(2),
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        OrderProductDescriptionRow(
+          rightPadding: rightPadding,
+          tag: "Status: ",
+          value: orderProduct.status.toUpperCase(),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+      ],
+    );
+  }
+}
+
+class OrderProductDescriptionRow extends StatelessWidget {
+  const OrderProductDescriptionRow({
+    Key key,
+    @required this.rightPadding,
+    @required this.tag,
+    @required this.value,
+    this.fontSize = 13.0,
+  }) : super(key: key);
+
+  final double rightPadding;
+  final String tag;
+  final String value;
+  final double fontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  tag + " " + value,
+                  style: TextStyle(
+                    fontSize: fontSize,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class HorizontalLine extends StatelessWidget {
+  const HorizontalLine({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      color: Colors.black,
     );
   }
 }

@@ -89,7 +89,7 @@ class CustomerHomePage extends StatelessWidget {
                       color: GoPharmaColors.HomePrescriptionColor,
                     ),
                     HomePageGrid(
-                      title: "View Current Orders",
+                      title: "View Processing Orders",
                       image: "images/delivery.jpg",
                       onClick: () {
                         final bloc = BlocProvider.of<OrderListBloc>(context);

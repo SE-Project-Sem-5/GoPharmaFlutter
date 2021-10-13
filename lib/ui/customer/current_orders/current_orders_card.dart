@@ -4,10 +4,6 @@ import 'package:go_pharma/ui/common/colors.dart';
 
 import 'current_order_full_view.dart';
 
-//TODO: get the orders list for the customer ordered by the ordered date
-//TODO: group orders in terms of status?
-//TODO: add cancelling capability for the orderInProgress
-
 class CurrentOrderCard extends StatelessWidget {
   final Orders order;
   const CurrentOrderCard({Key key, this.order}) : super(key: key);
@@ -35,7 +31,7 @@ class CurrentOrderCard extends StatelessWidget {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(order.id.toString()),
+                    Text("Order ID: #" + order.id.toString()),
                     Text(
                       "Rs. " + order.totalPrice.toStringAsFixed(2),
                     ),

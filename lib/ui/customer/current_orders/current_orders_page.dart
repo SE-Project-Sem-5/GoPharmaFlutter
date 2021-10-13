@@ -44,7 +44,7 @@ class CurrentOrdersPage extends StatelessWidget {
           );
         },
       ),
-      title: "Current Orders",
+      title: "Processing Orders",
     );
   }
 }
