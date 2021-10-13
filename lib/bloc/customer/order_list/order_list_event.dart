@@ -14,6 +14,10 @@ class GetOrderListByStatus extends OrderListEvent {
 
   GetOrderListByStatus({this.status});
 }
+
+class GetAllOrders extends OrderListEvent {
+  GetAllOrders();
+}
 // processing
 // cancelled
 // confirmed
