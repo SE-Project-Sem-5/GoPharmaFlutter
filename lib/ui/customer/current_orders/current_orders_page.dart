@@ -14,18 +14,27 @@ class CurrentOrdersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<OrderListBloc>(context);
-    bloc.add(GetAllOrders(customerID: 2));
+    bloc.add(
+      GetAllOrders(
+        customerID: 2,
+      ),
+    );
     return CommonSkeleton(
       child: BlocBuilder<OrderListBloc, OrderListState>(
+        buildWhen: (p, c) => p.isLoading != c.isLoading,
         builder: (context, state) {
           return Container(
-            child: ListView.builder(
-              physics: ClampingScrollPhysics(),
-              itemCount: state.orderList["processing"].orders.length,
-              itemBuilder: (context, index) => CurrentOrderCard(
-                order: state.orderList["processing"].orders[index],
-              ),
-            ),
+            child: state.isLoading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ListView.builder(
+                    physics: ClampingScrollPhysics(),
+                    itemCount: state.orderList["processing"].orders.length,
+                    itemBuilder: (context, index) => CurrentOrderCard(
+                      order: state.orderList["processing"].orders[index],
+                    ),
+                  ),
           );
         },
       ),
