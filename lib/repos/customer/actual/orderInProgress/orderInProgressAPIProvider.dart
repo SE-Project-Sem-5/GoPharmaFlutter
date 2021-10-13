@@ -5,7 +5,7 @@ import 'package:go_pharma/repos/customer/actual/orderInProgress/normalOrder.dart
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderPriceInformation.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 
-class OrderAPIProvider {
+class ProgressingOrderAPIProvider {
   final Dio _dio = Client.init();
 
   Future<OrderPriceInformation> getDeliveryChargeForNormalOrder(

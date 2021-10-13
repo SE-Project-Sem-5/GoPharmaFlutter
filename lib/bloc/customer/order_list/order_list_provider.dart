@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/customer/normal_order/normal_order_bloc.dart';
-import 'package:go_pharma/bloc/customer/normal_order/normal_order_state.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 
-class NormalOrderProvider extends BlocProvider<NormalOrderBloc> {
-  NormalOrderProvider({
+class OrderListProvider extends BlocProvider<OrderListBloc> {
+  OrderListProvider({
     Key key,
   }) : super(
           key: key,
-          create: (context) => NormalOrderBloc(context),
+          create: (context) => OrderListBloc(context),
           child: NormalOrderView(),
         );
 }
@@ -19,7 +19,7 @@ class NormalOrderView extends StatelessWidget {
     // ignore: close_sinks
 
     final scaffold = Scaffold(
-      body: BlocBuilder<NormalOrderBloc, NormalOrderState>(
+      body: BlocBuilder<OrderListBloc, OrderListState>(
         buildWhen: (pre, current) => true,
         builder: (context, state) {
           return Center(
@@ -31,7 +31,7 @@ class NormalOrderView extends StatelessWidget {
 
     return MultiBlocListener(
       listeners: [
-        BlocListener<NormalOrderBloc, NormalOrderState>(
+        BlocListener<OrderListBloc, OrderListState>(
           listenWhen: (pre, current) => pre.error != current.error,
           listener: (context, state) {
             if (state.error.isNotEmpty) print("ERROR: ${state.error}");

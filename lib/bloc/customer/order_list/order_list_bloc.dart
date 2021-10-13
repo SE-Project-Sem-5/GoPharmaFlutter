@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:go_pharma/bloc/customer/normal_order/normal_order_event.dart';
-import 'package:go_pharma/bloc/customer/normal_order/normal_order_state.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 
-class NormalOrderBloc extends Bloc<NormalOrderEvent, NormalOrderState> {
-  NormalOrderBloc(BuildContext context) : super(NormalOrderState.initialState);
+class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
+  OrderListBloc(BuildContext context) : super(OrderListState.initialState);
 
   @override
-  Stream<NormalOrderState> mapEventToState(NormalOrderEvent event) async* {
+  Stream<OrderListState> mapEventToState(OrderListEvent event) async* {
     switch (event.runtimeType) {
       case ErrorEvent:
         final error = (event as ErrorEvent).error;

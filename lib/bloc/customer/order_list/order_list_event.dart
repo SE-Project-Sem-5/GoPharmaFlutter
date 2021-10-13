@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class NormalOrderEvent {}
+abstract class OrderListEvent {}
 
-class ErrorEvent extends NormalOrderEvent {
+class ErrorEvent extends OrderListEvent {
   final String error;
 
   ErrorEvent(this.error);

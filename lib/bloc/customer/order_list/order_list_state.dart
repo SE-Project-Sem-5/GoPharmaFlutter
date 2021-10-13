@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class NormalOrderState {
+class OrderListState {
   final String error;
 
-  NormalOrderState({
+  OrderListState({
     this.error,
   });
 
-  static NormalOrderState get initialState => NormalOrderState(
+  static OrderListState get initialState => OrderListState(
         error: '',
       );
 
-  NormalOrderState clone({
+  OrderListState clone({
     String error = '',
   }) {
-    return NormalOrderState(
+    return OrderListState(
       error: error,
     );
   }
