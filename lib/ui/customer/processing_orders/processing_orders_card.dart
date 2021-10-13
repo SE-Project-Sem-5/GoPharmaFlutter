@@ -82,7 +82,7 @@ class ProcessingOrderStatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-      backgroundColor: Colors.greenAccent,
+      backgroundColor: Colors.greenAccent.withOpacity(0.3),
       padding: const EdgeInsets.symmetric(horizontal: 10),
       label: Container(
         width: 100,
