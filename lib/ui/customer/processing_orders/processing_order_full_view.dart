@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
@@ -130,6 +133,17 @@ class ProcessingOrderFullView extends StatelessWidget {
                           children: [
                             isOrderCancellable(order)
                                 ? GestureDetector(
+                                    onTap: () {
+                                      final bloc =
+                                          BlocProvider.of<OrderListBloc>(
+                                              context);
+                                      bloc.add(
+                                        CancelOrder(
+                                          customerID: 2,
+                                          orderID: order.id,
+                                        ),
+                                      );
+                                    },
                                     child: CurrentOrderStatusChip(
                                       text: "Cancel Order",
                                     ),
