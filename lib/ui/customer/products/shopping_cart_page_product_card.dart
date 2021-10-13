@@ -6,7 +6,7 @@ import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
 import 'package:go_pharma/repos/customer/actual/product/product.dart';
-import 'package:go_pharma/repos/customer/dummy/product/product_model.dart';
+import 'package:go_pharma/repos/customer/actual/product/orderProductModel.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/products/product_full_view.dart';
 
