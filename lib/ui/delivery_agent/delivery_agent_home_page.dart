@@ -3,7 +3,7 @@
 // import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
 // import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 // import 'package:go_pharma/bloc/delivery_agent/navigation/delivery_navigation_bloc.dart';
-// import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
+// import 'package:go_pharma/ui/delivery_agent/pending_deliveries/reserved_deliveries_page.dart';
 // import 'package:go_pharma/ui/delivery_agent/settings_page/view_profile.dart';
 //
 // import 'components/bottom_navigation_bar.dart';

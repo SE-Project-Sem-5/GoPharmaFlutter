@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_delivery_full_view.dart';
 
-class PendingDeliveryCard extends StatelessWidget {
+class TransientCollectedDeliveryCard extends StatelessWidget {
   final Delivery delivery;
 
-  const PendingDeliveryCard({this.delivery});
+  const TransientCollectedDeliveryCard({this.delivery});
 
   @override
   Widget build(BuildContext context) {
