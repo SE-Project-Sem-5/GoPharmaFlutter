@@ -22,7 +22,9 @@ class DeliveryAgentDrawer extends StatelessWidget {
             DrawerTile(
               text: "Pending Deliveries",
               icon: Icons.search,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
             DrawerTile(
               text: "Reserved Deliveries",

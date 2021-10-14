@@ -23,10 +23,16 @@ import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 import 'package:go_pharma/ui/customer/profile/view_security_settings.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
+import 'package:go_pharma/ui/delivery_agent/collected_deliveries/collected_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_starting_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
+import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/settings_page/view_profile.dart';
+import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/transient_collected_deliveries/transient_collected_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/transient_deliveries/transient_deliveries_page.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 
 Map<String, Widget Function(BuildContext context)> routes = {
@@ -61,8 +67,16 @@ Map<String, Widget Function(BuildContext context)> routes = {
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
   DeliveryAgentSignUpProvider.id: (context) => DeliveryAgentSignUpProvider(),
   DeliveryAgentSignInProvider.id: (context) => DeliveryAgentSignInProvider(),
-  // DeliveryAgentHomePage.id: (context) => DeliveryAgentHomePage(),
   DeliveriesPage.id: (context) => DeliveriesPage(),
+
+  PendingDeliveriesPage.id: (context) => PendingDeliveriesPage(),
+  ReservedDeliveriesPage.id: (context) => ReservedDeliveriesPage(),
+  CollectedDeliveriesPage.id: (context) => CollectedDeliveriesPage(),
+  TransientDeliveriesPage.id: (context) => TransientDeliveriesPage(),
+  TransientCollectedDeliveriesPage.id: (context) =>
+      TransientCollectedDeliveriesPage(),
+  ShippedDeliveriesPage.id: (context) => ShippedDeliveriesPage(),
+
   DeliveryListProvider.id: (context) => DeliveryListProvider(),
   DeliveryAgentSettingsPage.id: (context) => DeliveryAgentSettingsPage(),
 };
