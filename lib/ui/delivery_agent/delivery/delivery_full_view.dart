@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_bloc.dart';
-import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_event.dart';
-import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_state.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/delivery_status_chip.dart';
@@ -15,7 +11,6 @@ class DeliveryFullView extends StatelessWidget {
   final double rightPadding = 30.0;
   @override
   Widget build(BuildContext context) {
-    var deliveryBloc = BlocProvider.of<DeliveryBloc>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -128,51 +123,21 @@ class DeliveryFullView extends StatelessWidget {
                                 fontSize: 16.0,
                               ),
                             ),
-                            BlocBuilder<DeliveryBloc, DeliveryState>(
-                              builder: (context, state) {
-                                return DeliveryStatusChip(
-                                  text:
-                                      delivery.deliveryStatus[0].toUpperCase() +
-                                          delivery.deliveryStatus.substring(1),
-                                );
-                              },
+                            DeliveryStatusChip(
+                              text: delivery.deliveryStatus[0].toUpperCase() +
+                                  delivery.deliveryStatus.substring(1),
                             ),
                           ],
                         ),
                       ),
                       Center(
-                        child: BlocBuilder<DeliveryBloc, DeliveryState>(
-                          builder: (context, state) {
-                            return state.delivery.deliveryStatus ==
-                                        "delivered" ||
-                                    delivery.deliveryStatus == "delivered"
-                                ? Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: DeliveryStatusChip(
-                                      width: 230,
-                                      text: "This delivery has been completed.",
-                                    ),
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: ChangeDeliveryStatusButton(
-                                      onClick: () {
-                                        deliveryBloc.add(
-                                          NextDeliveryStatusEvent(
-                                            delivery,
-                                          ),
-                                        );
-                                      },
-                                      status: state.delivery.deliveryStatus ??
-                                          delivery.deliveryStatus,
-                                      width: 230,
-                                      text: deliveryAgentButtonMapping[
-                                          delivery.deliveryStatus],
-                                    ),
-                                  );
-                          },
+                          child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: DeliveryStatusChip(
+                          width: 230,
+                          text: "This delivery has been completed.",
                         ),
-                      ),
+                      )),
                     ],
                   ),
                 ),

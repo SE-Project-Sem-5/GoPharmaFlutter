@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/navigation/delivery_navigation_bloc.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'package:go_pharma/ui/delivery_agent/dummy_values/deliveries.dart';
@@ -20,9 +19,6 @@ class DeliveriesPage extends StatelessWidget {
           create: (context) => DeliveryNavigationBloc(
             context,
           ),
-        ),
-        BlocProvider<DeliveryBloc>(
-          create: (_) => DeliveryBloc(_),
         ),
       ],
       child: Container(

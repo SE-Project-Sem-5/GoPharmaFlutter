@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_bloc.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_delivery_full_view.dart';
 
@@ -39,11 +37,8 @@ class PendingDeliveryCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BlocProvider(
-                          create: (context) => DeliveryBloc(context),
-                          child: PendingDeliveryFullView(
-                            delivery: delivery,
-                          ),
+                        builder: (context) => PendingDeliveryFullView(
+                          delivery: delivery,
                         ),
                       ),
                     );
