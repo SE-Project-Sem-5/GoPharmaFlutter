@@ -203,7 +203,9 @@ class ProcessingOrderFullView extends StatelessWidget {
                                                           context: context,
                                                         ),
                                                       );
-                                                      Navigator.pop(context);
+                                                      Navigator.of(context)
+                                                          .popUntil((route) =>
+                                                              route.isFirst);
                                                       Navigator
                                                           .pushReplacementNamed(
                                                         context,

@@ -70,6 +70,7 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         yield state.clone(
           isLoading: false,
         );
+        Navigator.of(context).popUntil((route) => route.isFirst);
         Navigator.pushReplacementNamed(
           context,
           ProcessingOrdersPage.id,
