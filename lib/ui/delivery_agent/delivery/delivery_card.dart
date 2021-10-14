@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/delivery_full_view.dart';
 
 class DeliveryCard extends StatelessWidget {
@@ -20,7 +20,9 @@ class DeliveryCard extends StatelessWidget {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(delivery.id),
+                  Text(
+                    "# " + delivery.id.toString(),
+                  ),
                   Text(
                     "Rs. " + delivery.totalPrice.toStringAsFixed(2),
                   ),
