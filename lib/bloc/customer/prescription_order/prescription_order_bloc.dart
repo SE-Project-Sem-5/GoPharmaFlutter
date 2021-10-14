@@ -96,6 +96,7 @@ class PrescriptionOrderBloc
             step: stepOrder[nextIndex],
           );
         } else {
+          Navigator.of(context).popUntil((route) => route.isFirst);
           Navigator.pushReplacementNamed(context, CustomerHomePage.id);
         }
         break;
