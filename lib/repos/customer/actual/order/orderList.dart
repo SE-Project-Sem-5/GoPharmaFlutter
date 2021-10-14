@@ -82,19 +82,23 @@ class Orders {
 
 class OrderProducts {
   int quantity;
+  int id;
   int soldUnitPrice;
   String status;
   int totalPrice;
   Product product;
 
-  OrderProducts(
-      {this.quantity,
-      this.soldUnitPrice,
-      this.status,
-      this.totalPrice,
-      this.product});
+  OrderProducts({
+    this.id,
+    this.quantity,
+    this.soldUnitPrice,
+    this.status,
+    this.totalPrice,
+    this.product,
+  });
 
   OrderProducts.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     quantity = json['quantity'];
     soldUnitPrice = json['soldUnitPrice'];
     status = json['status'];
