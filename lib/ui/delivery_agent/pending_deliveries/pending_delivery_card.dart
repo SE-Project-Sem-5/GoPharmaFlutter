@@ -20,7 +20,7 @@ class PendingDeliveryCard extends StatelessWidget {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("# " + delivery.id.toString()),
+                  Text("#" + delivery.id.toString()),
                   Text(
                     "Rs. " + delivery.totalPrice.toStringAsFixed(2),
                   ),

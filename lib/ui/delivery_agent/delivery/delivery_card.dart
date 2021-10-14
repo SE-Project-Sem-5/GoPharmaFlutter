@@ -21,7 +21,7 @@ class DeliveryCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "# " + delivery.id.toString(),
+                    "#" + delivery.id.toString(),
                   ),
                   Text(
                     "Rs. " + delivery.totalPrice.toStringAsFixed(2),
