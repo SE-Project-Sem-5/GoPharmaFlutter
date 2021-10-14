@@ -4,9 +4,9 @@ class DeliveryList {
   DeliveryList({this.deliveries});
 
   DeliveryList.fromJson(Map<String, dynamic> json) {
-    if (json['delivery'] != null) {
+    if (json['data'] != null) {
       deliveries = [];
-      json['delivery'].forEach((v) {
+      json['data'].forEach((v) {
         deliveries.add(new Delivery.fromJson(v));
       });
     }

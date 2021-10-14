@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_state.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 import 'pending_delivery_card.dart';
 
 class PendingDeliveriesPage extends StatelessWidget {
@@ -16,16 +15,21 @@ class PendingDeliveriesPage extends StatelessWidget {
 
     return BlocBuilder<DeliveryListBloc, DeliveryListState>(
       builder: (context, state) {
-        List<Delivery> deliveries = state.confirmedOrders.deliveries;
-        return Container(
-          child: ListView.builder(
-            physics: ClampingScrollPhysics(),
-            itemCount: deliveries.length,
-            itemBuilder: (context, index) => PendingDeliveryCard(
-              delivery: deliveries[index],
-            ),
-          ),
-        );
+        return state.isLoading
+            ? Container(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : Container(
+                child: ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  itemCount: state.confirmedOrders.deliveries.length,
+                  itemBuilder: (context, index) => PendingDeliveryCard(
+                    delivery: state.confirmedOrders.deliveries[index],
+                  ),
+                ),
+              );
       },
     );
   }
