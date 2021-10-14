@@ -26,3 +26,9 @@ class CancelOrder extends OrderListEvent {
   final int orderID;
   CancelOrder({this.customerID, this.orderID});
 }
+
+class CancelOrderProduct extends OrderListEvent {
+  final int customerID;
+  final int orderProductID;
+  CancelOrderProduct({this.customerID, this.orderProductID});
+}

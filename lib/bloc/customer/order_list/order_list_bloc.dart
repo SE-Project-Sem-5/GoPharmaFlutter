@@ -69,6 +69,19 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
           isLoading: false,
         );
         break;
+      case CancelOrderProduct:
+        yield state.clone(
+          isLoading: true,
+        );
+        final customerID = (event as CancelOrderProduct).customerID;
+        final orderProductID = (event as CancelOrderProduct).orderProductID;
+        var orderResponse = await orderListAPIProvider.CancelOrderProduct(
+            customerID, orderProductID);
+        print(orderResponse);
+        yield state.clone(
+          isLoading: false,
+        );
+        break;
     }
   }
 

@@ -149,6 +149,7 @@ class ProcessingOrderFullView extends StatelessWidget {
                                     ),
                                   )
                                 : CurrentOrderStatusChip(
+                                    width: 300,
                                     text: "You cannot cancel this order.",
                                   )
                           ],
@@ -311,8 +312,8 @@ class PastOrderTitleText extends StatelessWidget {
 
 class CurrentOrderStatusChip extends StatelessWidget {
   final String text;
-
-  CurrentOrderStatusChip({this.text});
+  final double width;
+  CurrentOrderStatusChip({this.text, this.width = 125});
 
   @override
   Widget build(BuildContext context) {
@@ -320,7 +321,7 @@ class CurrentOrderStatusChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       backgroundColor: GoPharmaColors.GreyColor,
       label: Container(
-        width: 125,
+        width: width,
         child: Center(
           child: Text(text.toUpperCase()),
         ),
@@ -331,7 +332,7 @@ class CurrentOrderStatusChip extends StatelessWidget {
 
 bool isOrderCancellable(Orders order) {
   for (var op in order.orderProducts) {
-    if (op.status != "processing") {
+    if (op.status != "processing" || op.status != "cancelled") {
       return false;
     }
   }
