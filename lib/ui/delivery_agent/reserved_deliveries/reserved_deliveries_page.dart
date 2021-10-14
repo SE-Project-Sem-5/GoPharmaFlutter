@@ -5,7 +5,7 @@ import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_state.
 import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'reserved_delivery_card.dart';
 
-class PendingDeliveriesPage extends StatelessWidget {
+class ReservedDeliveriesPage extends StatelessWidget {
   static final String id = "reserved_deliveries_page";
   final String title = "Reserved Deliveries";
 
@@ -27,7 +27,7 @@ class PendingDeliveriesPage extends StatelessWidget {
                   child: ListView.builder(
                     physics: ClampingScrollPhysics(),
                     itemCount: state.confirmedOrders.deliveries.length,
-                    itemBuilder: (context, index) => PendingDeliveryCard(
+                    itemBuilder: (context, index) => ReservedDeliveryCard(
                       delivery: state.confirmedOrders.deliveries[index],
                     ),
                   ),
