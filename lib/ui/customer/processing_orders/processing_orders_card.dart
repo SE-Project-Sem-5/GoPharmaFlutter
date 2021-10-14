@@ -38,7 +38,7 @@ class ProcessingOrderCard extends StatelessWidget {
                   ],
                 ),
                 subtitle: Text(
-                  "Ordered on: " + order.orderedDate,
+                  "Ordered on: " + order.orderedDate.substring(0, 10),
                 ),
               ),
               Row(

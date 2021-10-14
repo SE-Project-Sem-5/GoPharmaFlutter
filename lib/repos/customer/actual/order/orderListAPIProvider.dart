@@ -56,4 +56,23 @@ class OrderListAPIProvider {
       return OrderResponse();
     }
   }
+
+  Future<OrderResponse> CancelOrderProduct(
+      int customerID, int orderProductID) async {
+    try {
+      Response response = await _dio.post(
+        "customer/order/normal/cancel",
+        data: {
+          "customerID": customerID.toString(),
+          "orderProductID": orderProductID.toString(),
+        },
+      );
+      print(response);
+      print(response.data["data"]);
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
 }

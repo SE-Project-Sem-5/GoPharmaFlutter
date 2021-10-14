@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
+import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
@@ -20,145 +21,157 @@ class ProcessingOrderFullView extends StatelessWidget {
           ),
         ),
         body: Container(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: GoPharmaColors.PrimaryColor.withOpacity(0.2),
-                      blurRadius: 15.0,
-                    ),
-                  ],
-                ),
-                child: Card(
-                  clipBehavior: Clip.antiAlias,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 30.0,
-                      horizontal: 20.0,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Order #" + order.id.toString(),
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Ordered On: " + order.orderedDate.substring(0, 10),
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.6),
-                            fontSize: 16.0,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Status: " + order.status.toUpperCase(),
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        HorizontalLine(),
-                        Row(
-                          children: [
-                            Text(
-                              'Ordered Products',
-                              style: TextStyle(
-                                fontSize: 16.0,
+          child: BlocBuilder<OrderListBloc, OrderListState>(
+            builder: (context, state) {
+              return Center(
+                child: state.isLoading
+                    ? CircularProgressIndicator()
+                    : Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: GoPharmaColors.PrimaryColor.withOpacity(
+                                    0.2),
+                                blurRadius: 15.0,
                               ),
-                            ),
-                            Spacer(),
-                            Text(
-                              'Qty',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              'Unit Price',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              'Total Price',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                        HorizontalLine(),
-                        ListView.builder(
-                          physics: ClampingScrollPhysics(),
-                          itemCount: order.orderProducts.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) => OrderedItem(
-                            orderProduct: order.orderProducts[index],
-                            leftPadding: leftPadding,
-                            rightPadding: rightPadding,
+                            ],
                           ),
-                        ),
-                        Spacer(),
-                        HorizontalLine(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            PastOrderTitleText(text: "Total Price"),
-                            PastOrderTitleText(
-                              text:
-                                  "Rs. " + order.totalPrice.toStringAsFixed(2),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            isOrderCancellable(order)
-                                ? GestureDetector(
-                                    onTap: () {
-                                      final bloc =
-                                          BlocProvider.of<OrderListBloc>(
-                                              context);
-                                      bloc.add(
-                                        CancelOrder(
-                                          customerID: 2,
-                                          orderID: order.id,
-                                        ),
-                                      );
-                                    },
-                                    child: CurrentOrderStatusChip(
-                                      text: "Cancel Order",
+                          child: Card(
+                            clipBehavior: Clip.antiAlias,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 30.0,
+                                horizontal: 20.0,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Order #" + order.id.toString(),
+                                    style: TextStyle(
+                                      fontSize: 20.0,
                                     ),
-                                  )
-                                : CurrentOrderStatusChip(
-                                    text: "You cannot cancel this order.",
-                                  )
-                          ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "Ordered On: " +
+                                        order.orderedDate.substring(0, 10),
+                                    style: TextStyle(
+                                      color: Colors.black.withOpacity(0.6),
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "Status: " + order.status.toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  HorizontalLine(),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Ordered Products',
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Text(
+                                        'Qty',
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Text(
+                                        'Unit Price',
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Text(
+                                        'Total Price',
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  HorizontalLine(),
+                                  ListView.builder(
+                                    physics: ClampingScrollPhysics(),
+                                    itemCount: order.orderProducts.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) =>
+                                        OrderedItem(
+                                      orderProduct: order.orderProducts[index],
+                                      leftPadding: leftPadding,
+                                      rightPadding: rightPadding,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  HorizontalLine(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      PastOrderTitleText(text: "Total Price"),
+                                      PastOrderTitleText(
+                                        text: "Rs. " +
+                                            order.totalPrice.toStringAsFixed(2),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      isOrderCancellable(order)
+                                          ? GestureDetector(
+                                              onTap: () {
+                                                final bloc = BlocProvider.of<
+                                                    OrderListBloc>(context);
+                                                bloc.add(
+                                                  CancelOrder(
+                                                    customerID: 2,
+                                                    orderID: order.id,
+                                                    context: context,
+                                                  ),
+                                                );
+                                              },
+                                              child: CurrentOrderStatusChip(
+                                                text: "Cancel Order",
+                                              ),
+                                            )
+                                          : CurrentOrderStatusChip(
+                                              width: 300,
+                                              text:
+                                                  "You cannot cancel this order.",
+                                            )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+                      ),
+              );
+            },
           ),
         ),
       ),
@@ -179,6 +192,7 @@ class OrderedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<OrderListBloc>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,6 +247,25 @@ class OrderedItem extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
+        orderProduct.status == "processing"
+            ? BlocBuilder<OrderListBloc, OrderListState>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () {
+                      bloc.add(
+                        CancelOrderProduct(
+                          customerID: 2,
+                          orderProductID: orderProduct.id,
+                        ),
+                      );
+                    },
+                    child: CurrentOrderStatusChip(
+                      text: "Cancel",
+                    ),
+                  );
+                },
+              )
+            : SizedBox(height: 1),
       ],
     );
   }
@@ -311,16 +344,16 @@ class PastOrderTitleText extends StatelessWidget {
 
 class CurrentOrderStatusChip extends StatelessWidget {
   final String text;
-
-  CurrentOrderStatusChip({this.text});
+  final double width;
+  CurrentOrderStatusChip({this.text, this.width = 125});
 
   @override
   Widget build(BuildContext context) {
     return Chip(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      backgroundColor: GoPharmaColors.GreyColor,
+      backgroundColor: GoPharmaColors.GreyColor.withOpacity(0.3),
       label: Container(
-        width: 125,
+        width: width,
         child: Center(
           child: Text(text.toUpperCase()),
         ),
@@ -331,7 +364,7 @@ class CurrentOrderStatusChip extends StatelessWidget {
 
 bool isOrderCancellable(Orders order) {
   for (var op in order.orderProducts) {
-    if (op.status != "processing") {
+    if (op.status != "processing" && op.status != "cancelled") {
       return false;
     }
   }

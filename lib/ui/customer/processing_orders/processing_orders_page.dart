@@ -13,6 +13,13 @@ class ProcessingOrdersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<OrderListBloc>(context);
+    bloc.add(
+      GetOrderListByStatus(
+        customerID: 2,
+        status: "processing",
+      ),
+    );
     return CommonSkeleton(
       child: BlocBuilder<OrderListBloc, OrderListState>(
         buildWhen: (p, c) => p.isLoading != c.isLoading,
@@ -26,7 +33,6 @@ class ProcessingOrdersPage extends StatelessWidget {
                     ? RefreshIndicator(
                         //ignore: missing_return
                         onRefresh: () {
-                          final bloc = BlocProvider.of<OrderListBloc>(context);
                           bloc.add(
                             GetOrderListByStatus(
                               customerID: 2,

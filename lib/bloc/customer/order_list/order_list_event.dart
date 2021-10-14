@@ -24,5 +24,12 @@ class GetAllOrders extends OrderListEvent {
 class CancelOrder extends OrderListEvent {
   final int customerID;
   final int orderID;
-  CancelOrder({this.customerID, this.orderID});
+  final BuildContext context;
+  CancelOrder({this.customerID, this.orderID, this.context});
+}
+
+class CancelOrderProduct extends OrderListEvent {
+  final int customerID;
+  final int orderProductID;
+  CancelOrderProduct({this.customerID, this.orderProductID});
 }

@@ -5,6 +5,7 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderListAPIProvider.dart';
+import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
 
 class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
   OrderListAPIProvider orderListAPIProvider = new OrderListAPIProvider();
@@ -61,9 +62,27 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
           isLoading: true,
         );
         final customerID = (event as CancelOrder).customerID;
+        final context = (event as CancelOrder).context;
         final orderID = (event as CancelOrder).orderID;
         var orderResponse =
             await orderListAPIProvider.cancelOrder(customerID, orderID);
+        print(orderResponse);
+        yield state.clone(
+          isLoading: false,
+        );
+        Navigator.pushReplacementNamed(
+          context,
+          ProcessingOrdersPage.id,
+        );
+        break;
+      case CancelOrderProduct:
+        yield state.clone(
+          isLoading: true,
+        );
+        final customerID = (event as CancelOrderProduct).customerID;
+        final orderProductID = (event as CancelOrderProduct).orderProductID;
+        var orderResponse = await orderListAPIProvider.CancelOrderProduct(
+            customerID, orderProductID);
         print(orderResponse);
         yield state.clone(
           isLoading: false,
