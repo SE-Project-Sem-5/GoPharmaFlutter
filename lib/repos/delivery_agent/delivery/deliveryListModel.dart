@@ -13,12 +13,4 @@ class PendingDeliveryList {
       });
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.deliveries != null) {
-      data['delivery'] = this.deliveries.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }

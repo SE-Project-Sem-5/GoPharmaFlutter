@@ -1,26 +1,17 @@
 import 'orderProduct.dart';
 
 class ReservedDeliveryList {
-  List<ReservedDelivery> reservedDelivery;
+  List<ReservedDelivery> deliveries;
 
-  ReservedDeliveryList({this.reservedDelivery});
+  ReservedDeliveryList({this.deliveries});
 
   ReservedDeliveryList.fromJson(Map<String, dynamic> json) {
-    if (json['reservedDelivery'] != null) {
-      reservedDelivery = [];
-      json['reservedDelivery'].forEach((v) {
-        reservedDelivery.add(new ReservedDelivery.fromJson(v));
+    if (json['data'] != null) {
+      deliveries = [];
+      json['data'].forEach((v) {
+        deliveries.add(new ReservedDelivery.fromJson(v));
       });
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.reservedDelivery != null) {
-      data['reservedDelivery'] =
-          this.reservedDelivery.map((v) => v.toJson()).toList();
-    }
-    return data;
   }
 }
 
