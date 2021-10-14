@@ -256,6 +256,7 @@ class OrderedItem extends StatelessWidget {
                         CancelOrderProduct(
                           customerID: 2,
                           orderProductID: orderProduct.id,
+                          context: context,
                         ),
                       );
                     },
@@ -327,7 +328,6 @@ class PastOrderTitleText extends StatelessWidget {
     Key key,
     this.text,
   }) : super(key: key);
-
   final String text;
 
   @override

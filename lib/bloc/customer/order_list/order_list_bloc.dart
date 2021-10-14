@@ -81,11 +81,18 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         );
         final customerID = (event as CancelOrderProduct).customerID;
         final orderProductID = (event as CancelOrderProduct).orderProductID;
+        final context = (event as CancelOrder).context;
         var orderResponse = await orderListAPIProvider.CancelOrderProduct(
-            customerID, orderProductID);
+          customerID,
+          orderProductID,
+        );
         print(orderResponse);
         yield state.clone(
           isLoading: false,
+        );
+        Navigator.pushReplacementNamed(
+          context,
+          ProcessingOrdersPage.id,
         );
         break;
     }
