@@ -4,7 +4,6 @@ import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 @immutable
 class DeliveryListState {
   final String error;
-  // final List<Category> categories;
   final bool isLoading;
   final DeliveryList confirmedOrders;
 

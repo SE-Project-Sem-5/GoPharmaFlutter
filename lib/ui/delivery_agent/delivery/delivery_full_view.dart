@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/delivery_status_chip.dart';
 
@@ -42,7 +42,7 @@ class DeliveryFullView extends StatelessWidget {
                           horizontal: rightPadding,
                         ),
                         child: Text(
-                          "Delivery " + delivery.id,
+                          "Delivery #" + delivery.id.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
@@ -124,8 +124,8 @@ class DeliveryFullView extends StatelessWidget {
                               ),
                             ),
                             DeliveryStatusChip(
-                              text: delivery.deliveryStatus[0].toUpperCase() +
-                                  delivery.deliveryStatus.substring(1),
+                              text: delivery.status[0].toUpperCase() +
+                                  delivery.status.substring(1),
                             ),
                           ],
                         ),
