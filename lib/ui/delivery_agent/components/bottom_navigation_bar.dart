@@ -8,7 +8,7 @@ class DeliveryAgentBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<DeliveryNavigationBloc>(context);
+    final navigationBloc = BlocProvider.of<DeliveryNavigationBloc>(context);
     return BlocBuilder<DeliveryNavigationBloc, DeliveryNavigationState>(
       builder: (context, state) {
         return BottomNavigationBar(
@@ -23,8 +23,7 @@ class DeliveryAgentBottomNavigationBar extends StatelessWidget {
             color: GoPharmaColors.GreyColor,
           ),
           onTap: (index) {
-            bloc.add(ChangeIndexEvent(index));
-            if (state.index == 1) {}
+            navigationBloc.add(ChangeIndexEvent(index));
           },
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(

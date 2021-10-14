@@ -52,14 +52,16 @@ class OrderSuccessfulPage extends StatelessWidget {
             child: BlocBuilder<CheckoutBloc, CheckoutState>(
               builder: (context, state) {
                 return ElevatedButton(
-                  onPressed: () {
-                    state.orderLoading
-                        ? null
-                        : Navigator.pushReplacementNamed(
+                  onPressed: state.orderLoading
+                      ? null
+                      : () {
+                          Navigator.of(context)
+                              .popUntil((route) => route.isFirst);
+                          Navigator.pushReplacementNamed(
                             context,
                             CustomerHomePage.id,
                           );
-                  },
+                        },
                   style: ElevatedButton.styleFrom(
                     primary: GoPharmaColors.PrimaryColor,
                     padding: EdgeInsets.symmetric(

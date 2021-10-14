@@ -135,13 +135,13 @@ class PendingDeliveryFullView extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              "Confirm this orderInProgress?",
+                              "Reserve this delivery?",
                               style: TextStyle(
                                 fontSize: 20.0,
                               ),
                             ),
                             SizedBox(
-                              width: 15,
+                              width: 7,
                             ),
                             ElevatedButton(
                               onPressed: () {},
@@ -156,7 +156,7 @@ class PendingDeliveryFullView extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 15,
+                              width: 7,
                             ),
                             ElevatedButton(
                               onPressed: () {},
