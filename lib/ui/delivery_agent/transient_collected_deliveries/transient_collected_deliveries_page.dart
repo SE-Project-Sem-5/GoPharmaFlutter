@@ -28,7 +28,8 @@ class TransientCollectedDeliveriesPage extends StatelessWidget {
                   child: ListView.builder(
                     physics: ClampingScrollPhysics(),
                     itemCount: state.confirmedOrders.deliveries.length,
-                    itemBuilder: (context, index) => TransientCollectedDeliveryCard(
+                    itemBuilder: (context, index) =>
+                        TransientCollectedDeliveryCard(
                       delivery: state.confirmedOrders.deliveries[index],
                     ),
                   ),
