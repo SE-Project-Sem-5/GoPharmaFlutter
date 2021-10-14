@@ -49,30 +49,36 @@ class OrderSuccessfulPage extends StatelessWidget {
           height: 150,
           child: Padding(
             padding: const EdgeInsets.all(40.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(
-                  context,
-                  CustomerHomePage.id,
+            child: BlocBuilder<CheckoutBloc, CheckoutState>(
+              builder: (context, state) {
+                return ElevatedButton(
+                  onPressed: () {
+                    state.orderLoading
+                        ? null
+                        : Navigator.pushReplacementNamed(
+                            context,
+                            CustomerHomePage.id,
+                          );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: GoPharmaColors.PrimaryColor,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 20,
+                    ),
+                    textStyle: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  child: Text(
+                    "Return to Home Page",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
+                  ),
                 );
               },
-              style: ElevatedButton.styleFrom(
-                primary: GoPharmaColors.PrimaryColor,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 20,
-                ),
-                textStyle: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              child: Text(
-                "Return to Home Page",
-                style: TextStyle(
-                  fontSize: 18.0,
-                ),
-              ),
             ),
           ),
         ),
