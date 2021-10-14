@@ -7,7 +7,7 @@ import 'shipped_delivery_card.dart';
 
 class ShippedDeliveriesPage extends StatelessWidget {
   //TODO:replace with the list gotten from the backend
-  static final String id = "pending_deliveries_page";
+  static final String id = "shipped_deliveries_page";
   final String title = "Shipped Deliveries";
 
   @override

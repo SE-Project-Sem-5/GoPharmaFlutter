@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/transient_collected_deliveries/transient_collected_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/transient_deliveries/transient_deliveries_page.dart';
+
+import 'collected_deliveries/collected_deliveries_page.dart';
 
 class DeliveryAgentDrawer extends StatelessWidget {
   const DeliveryAgentDrawer({
@@ -20,39 +27,67 @@ class DeliveryAgentDrawer extends StatelessWidget {
               ),
             ),
             DrawerTile(
-              text: "Pending Orders",
+              text: "Pending Deliveries",
               icon: Icons.search,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                    context, PendingDeliveriesPage.id);
+              },
             ),
             DrawerTile(
-              text: "Reserved Orders",
+              text: "Reserved Deliveries",
               icon: Icons.category,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                    context, ReservedDeliveriesPage.id);
+              },
             ),
             DrawerTile(
-              text: "Collected Orders",
+              text: "Collected Deliveries",
               icon: Icons.add_photo_alternate,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                    context, CollectedDeliveriesPage.id);
+              },
             ),
             DrawerTile(
-              text: "Transient Orders",
+              text: "Transient Deliveries",
               icon: Icons.shopping_cart,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                    context, TransientDeliveriesPage.id);
+              },
             ),
             DrawerTile(
-              text: "Transient-Collected Orders",
+              text: "Transient-Collected Deliveries",
               icon: Icons.shopping_cart,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                    context, TransientCollectedDeliveriesPage.id);
+              },
             ),
             DrawerTile(
-              text: "Shipped Orders",
+              text: "Shipped Deliveries",
               icon: Icons.history,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                    context, ShippedDeliveriesPage.id);
+              },
             ),
             DrawerTile(
               text: "Settings",
               icon: Icons.settings,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                    context, PendingDeliveriesPage.id);
+              },
             ),
           ],
         ),

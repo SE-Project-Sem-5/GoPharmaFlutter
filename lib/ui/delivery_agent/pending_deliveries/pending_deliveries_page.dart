@@ -15,7 +15,7 @@ class PendingDeliveriesPage extends StatelessWidget {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
 
     return CommonSkeleton(
-      title: "Pending Deliveries",
+      title: title,
       child: BlocBuilder<DeliveryListBloc, DeliveryListState>(
         builder: (context, state) {
           return state.isLoading
