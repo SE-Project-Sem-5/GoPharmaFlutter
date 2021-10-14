@@ -5,7 +5,6 @@ import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_state.dart';
 import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_delivery_full_view.dart';
-import 'pending_delivery_card.dart';
 
 class PendingDeliveriesPage extends StatelessWidget {
   //TODO:replace with the list gotten from the backend

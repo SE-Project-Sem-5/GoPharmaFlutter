@@ -5,7 +5,7 @@ import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 class DeliveryListState {
   final String error;
   final bool isLoading;
-  final DeliveryList confirmedOrders;
+  final PendingDeliveryList confirmedOrders;
 
   DeliveryListState({
     this.confirmedOrders,
@@ -16,7 +16,7 @@ class DeliveryListState {
   static DeliveryListState get initialState => DeliveryListState(
         error: '',
         isLoading: false,
-        confirmedOrders: new DeliveryList(
+        confirmedOrders: new PendingDeliveryList(
           deliveries: [],
         ),
       );
@@ -25,7 +25,7 @@ class DeliveryListState {
     String error = '',
     // List<Category> categories,
     bool isLoading,
-    DeliveryList confirmedOrders,
+    PendingDeliveryList confirmedOrders,
   }) {
     return DeliveryListState(
       error: error ?? this.error,

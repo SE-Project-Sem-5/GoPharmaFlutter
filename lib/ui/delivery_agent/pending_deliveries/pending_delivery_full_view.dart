@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/orderProduct.dart';
+
 import 'package:go_pharma/ui/common/colors.dart';
 
 class PendingDeliveryFullView extends StatelessWidget {
-  final Delivery delivery;
+  final OrderProduct delivery;
   const PendingDeliveryFullView({@required this.delivery});
   final double leftPadding = 20.0;
   final double rightPadding = 20.0;
