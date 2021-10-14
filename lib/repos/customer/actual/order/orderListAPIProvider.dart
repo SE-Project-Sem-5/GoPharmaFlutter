@@ -57,11 +57,11 @@ class OrderListAPIProvider {
     }
   }
 
-  Future<OrderResponse> CancelOrderProduct(
+  Future<OrderResponse> cancelOrderProduct(
       int customerID, int orderProductID) async {
     try {
       Response response = await _dio.post(
-        "customer/order/normal/cancel",
+        "customer/order/product/normal/cancel",
         data: {
           "customerID": customerID.toString(),
           "orderProductID": orderProductID.toString(),

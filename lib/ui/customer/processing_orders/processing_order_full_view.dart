@@ -5,6 +5,7 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
 
 class ProcessingOrderFullView extends StatelessWidget {
   final Orders order;
@@ -13,6 +14,8 @@ class ProcessingOrderFullView extends StatelessWidget {
   const ProcessingOrderFullView({Key key, this.order}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<OrderListBloc>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -114,11 +117,108 @@ class ProcessingOrderFullView extends StatelessWidget {
                                     physics: ClampingScrollPhysics(),
                                     itemCount: order.orderProducts.length,
                                     shrinkWrap: true,
-                                    itemBuilder: (context, index) =>
-                                        OrderedItem(
-                                      orderProduct: order.orderProducts[index],
-                                      leftPadding: leftPadding,
-                                      rightPadding: rightPadding,
+                                    itemBuilder: (context, index) => Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      order.orderProducts[index]
+                                                          .product.productName,
+                                                      style: TextStyle(
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                    Spacer(),
+                                                    Text(
+                                                      order.orderProducts[index]
+                                                          .quantity
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                    Spacer(),
+                                                    Text(
+                                                      order.orderProducts[index]
+                                                          .product.unitPrice
+                                                          .toStringAsFixed(2),
+                                                      style: TextStyle(
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                    Spacer(),
+                                                    Text(
+                                                      "Rs. " +
+                                                          order
+                                                              .orderProducts[
+                                                                  index]
+                                                              .totalPrice
+                                                              .toStringAsFixed(
+                                                                  2),
+                                                      style: TextStyle(
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        OrderProductDescriptionRow(
+                                          rightPadding: rightPadding,
+                                          tag: "Status: ",
+                                          value: order
+                                              .orderProducts[index].status
+                                              .toUpperCase(),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        order.orderProducts[index].status ==
+                                                "processing"
+                                            ? BlocBuilder<OrderListBloc,
+                                                OrderListState>(
+                                                builder: (context, state) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      bloc.add(
+                                                        CancelOrderProduct(
+                                                          customerID: 2,
+                                                          orderProductID: order
+                                                              .orderProducts[
+                                                                  index]
+                                                              .id,
+                                                          context: context,
+                                                        ),
+                                                      );
+                                                      Navigator.pop(context);
+                                                      Navigator
+                                                          .pushReplacementNamed(
+                                                        context,
+                                                        ProcessingOrdersPage.id,
+                                                      );
+                                                    },
+                                                    child:
+                                                        CurrentOrderStatusChip(
+                                                      text: "Cancel",
+                                                    ),
+                                                  );
+                                                },
+                                              )
+                                            : SizedBox(height: 1),
+                                      ],
                                     ),
                                   ),
                                   Spacer(),
@@ -185,10 +285,12 @@ class OrderedItem extends StatelessWidget {
     @required this.orderProduct,
     @required this.leftPadding,
     @required this.rightPadding,
+    @required this.parentContext,
   }) : super(key: key);
   final OrderProducts orderProduct;
   final double leftPadding;
   final double rightPadding;
+  final BuildContext parentContext;
 
   @override
   Widget build(BuildContext context) {
