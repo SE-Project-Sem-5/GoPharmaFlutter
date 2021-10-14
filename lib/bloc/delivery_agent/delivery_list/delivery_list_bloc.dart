@@ -23,11 +23,11 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(isLoading: true);
         final deliveryAgentID =
             (event as GetAllConfirmedOrders).deliveryAgentID;
-        final deliveryAgentAddressID =
-            (event as GetAllConfirmedOrders).deliveryAgentAddressID;
+        final deliveryAgentHomeAddressID =
+            (event as GetAllConfirmedOrders).deliveryAgentHomeAddressID;
         var confirmedOrders =
             await deliveryListAPIProvider.getConfirmedDeliveryOrders(
-                deliveryAgentID, deliveryAgentAddressID);
+                deliveryAgentID, deliveryAgentHomeAddressID);
         yield state.clone(
           isLoading: false,
           confirmedOrders: confirmedOrders,

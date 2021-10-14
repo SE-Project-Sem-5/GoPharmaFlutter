@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/delivery_agent/delivery/delivery_bloc.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
@@ -12,7 +10,6 @@ class PendingDeliveryFullView extends StatelessWidget {
   final double rightPadding = 30.0;
   @override
   Widget build(BuildContext context) {
-    var deliveryBloc = BlocProvider.of<DeliveryBloc>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
