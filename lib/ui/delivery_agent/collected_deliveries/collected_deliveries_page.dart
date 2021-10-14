@@ -7,15 +7,15 @@ import 'collected_delivery_card.dart';
 
 class CollectedDeliveriesPage extends StatelessWidget {
   //TODO:replace with the list gotten from the backend
-  static final String id = "pending_deliveries_page";
-  final String title = "Pending Deliveries";
+  static final String id = "collected_deliveries_page";
+  final String title = "Collected Deliveries";
 
   @override
   Widget build(BuildContext context) {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
 
     return CommonSkeleton(
-      title: "Pending Deliveries",
+      title: title,
       child: BlocBuilder<DeliveryListBloc, DeliveryListState>(
         builder: (context, state) {
           return state.isLoading

@@ -20,32 +20,32 @@ class DeliveryAgentDrawer extends StatelessWidget {
               ),
             ),
             DrawerTile(
-              text: "Pending Orders",
+              text: "Pending Deliveries",
               icon: Icons.search,
               onTap: () {},
             ),
             DrawerTile(
-              text: "Reserved Orders",
+              text: "Reserved Deliveries",
               icon: Icons.category,
               onTap: () {},
             ),
             DrawerTile(
-              text: "Collected Orders",
+              text: "Collected Deliveries",
               icon: Icons.add_photo_alternate,
               onTap: () {},
             ),
             DrawerTile(
-              text: "Transient Orders",
+              text: "Transient Deliveries",
               icon: Icons.shopping_cart,
               onTap: () {},
             ),
             DrawerTile(
-              text: "Transient-Collected Orders",
+              text: "Transient-Collected Deliveries",
               icon: Icons.shopping_cart,
               onTap: () {},
             ),
             DrawerTile(
-              text: "Shipped Orders",
+              text: "Shipped Deliveries",
               icon: Icons.history,
               onTap: () {},
             ),
