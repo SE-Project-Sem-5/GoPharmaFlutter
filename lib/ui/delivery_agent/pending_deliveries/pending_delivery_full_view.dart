@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/delivery_model.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
 class PendingDeliveryFullView extends StatelessWidget {
@@ -41,7 +41,7 @@ class PendingDeliveryFullView extends StatelessWidget {
                           horizontal: rightPadding,
                         ),
                         child: Text(
-                          "Delivery " + delivery.id,
+                          "Delivery " + delivery.id.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
