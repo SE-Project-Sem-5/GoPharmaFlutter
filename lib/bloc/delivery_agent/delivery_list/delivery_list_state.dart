@@ -4,7 +4,6 @@ import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 @immutable
 class DeliveryListState {
   final String error;
-  // final List<Category> categories;
   final bool isLoading;
   final DeliveryList confirmedOrders;
 
@@ -16,9 +15,10 @@ class DeliveryListState {
 
   static DeliveryListState get initialState => DeliveryListState(
         error: '',
-        // categories: [],
         isLoading: false,
-        confirmedOrders: null,
+        confirmedOrders: new DeliveryList(
+          deliveries: [],
+        ),
       );
 
   DeliveryListState clone({
@@ -29,7 +29,6 @@ class DeliveryListState {
   }) {
     return DeliveryListState(
       error: error ?? this.error,
-      // categories: categories ?? this.categories,
       isLoading: isLoading ?? this.isLoading,
       confirmedOrders: confirmedOrders ?? this.confirmedOrders,
     );

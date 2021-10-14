@@ -8,32 +8,3 @@ List<String> deliveryStates = [
   "shipped",
   "delivered",
 ];
-
-class Delivery {
-  String id;
-  String destination;
-  List<Product> products;
-  double totalPrice;
-  String deliveryStatus;
-  double deliveryCharge;
-  int deliveryStatusIndex;
-
-  Delivery({
-    this.id,
-    this.destination,
-    this.products,
-    this.deliveryStatus,
-    this.totalPrice,
-    this.deliveryCharge,
-  }) {
-    deliveryStatusIndex = deliveryStates.indexOf(deliveryStatus);
-  }
-
-  nextDeliveryStatus() {
-    if (deliveryStatusIndex < deliveryStates.length - 1) {
-      deliveryStatusIndex += 1;
-    }
-    deliveryStatus = deliveryStates[deliveryStatusIndex];
-    print(deliveryStatus);
-  }
-}

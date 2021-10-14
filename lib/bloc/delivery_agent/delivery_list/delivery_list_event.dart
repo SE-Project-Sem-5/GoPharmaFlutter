@@ -12,6 +12,8 @@ class ErrorEvent extends DeliveryListEvent {
 class GetAllConfirmedOrders extends DeliveryListEvent {
   final int deliveryAgentID;
   final int deliveryAgentHomeAddressID;
-  GetAllConfirmedOrders(
-      {this.deliveryAgentID, this.deliveryAgentHomeAddressID});
+  GetAllConfirmedOrders({
+    this.deliveryAgentID,
+    this.deliveryAgentHomeAddressID,
+  });
 }

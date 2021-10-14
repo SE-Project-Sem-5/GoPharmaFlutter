@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
+import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
 
 import 'sign_up_event.dart';
 import 'sign_up_state.dart';
@@ -48,7 +49,7 @@ class DeliveryAgentSignUpBloc
         } else {
           Navigator.pushReplacementNamed(
             context,
-            DeliveryAgentHomePage.id,
+            PendingDeliveriesPage.id,
           );
         }
         break;
