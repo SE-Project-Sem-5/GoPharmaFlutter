@@ -5,7 +5,7 @@ import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 class DeliveryListAPIProvider {
   final Dio _dio = Client.init();
 
-  Future<DeliveryList> getConfirmedDeliveryOrders(
+  Future<PendingDeliveryList> getConfirmedDeliveryOrders(
       int deliveryAgentID, int deliveryAgentHomeAddressID) async {
     try {
       Response response = await _dio.post(
@@ -18,10 +18,10 @@ class DeliveryListAPIProvider {
       print(response);
       print("==============");
       print(response.data["data"]);
-      return DeliveryList.fromJson(response.data);
+      return PendingDeliveryList.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      return DeliveryList();
+      return PendingDeliveryList();
     }
   }
 }

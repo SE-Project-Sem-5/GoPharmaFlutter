@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
@@ -15,6 +18,7 @@ class DeliveryAgentDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
     return Drawer(
       child: Container(
         color: GoPharmaColors.WhiteColor,
@@ -30,6 +34,12 @@ class DeliveryAgentDrawer extends StatelessWidget {
               text: "Pending Deliveries",
               icon: Icons.search,
               onTap: () {
+                deliveryListBloc.add(
+                  GetAllConfirmedOrders(
+                    deliveryAgentID: 10,
+                    deliveryAgentHomeAddressID: 3,
+                  ),
+                );
                 Navigator.pop(context);
                 Navigator.pushReplacementNamed(
                     context, PendingDeliveriesPage.id);
