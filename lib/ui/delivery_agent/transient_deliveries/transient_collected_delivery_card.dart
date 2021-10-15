@@ -22,6 +22,8 @@ class TransientDeliveryCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(4.0),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
                 leading: Icon(
@@ -37,6 +39,14 @@ class TransientDeliveryCard extends StatelessWidget {
                       "Rs. " + delivery.totalPrice.toStringAsFixed(2),
                     ),
                   ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 70,
+                ),
+                child: Text(
+                  "Destination District: " + delivery.destinationDistrict,
                 ),
               ),
               Row(
