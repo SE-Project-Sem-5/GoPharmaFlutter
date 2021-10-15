@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/collectedDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/transientDelivery.dart';
 
 @immutable
 class DeliveryListState {
@@ -10,11 +11,13 @@ class DeliveryListState {
   final PendingDeliveryList confirmedOrders;
   final ReservedDeliveryList reservedOrders;
   final CollectedDeliveryList collectedOrders;
+  final TransientDeliveryList transientOrders;
 
   DeliveryListState({
     this.confirmedOrders,
     this.reservedOrders,
     this.collectedOrders,
+    this.transientOrders,
     this.error,
     this.isLoading,
   });
@@ -31,6 +34,9 @@ class DeliveryListState {
         collectedOrders: new CollectedDeliveryList(
           deliveries: [],
         ),
+        transientOrders: new TransientDeliveryList(
+          deliveries: [],
+        ),
       );
 
   DeliveryListState clone({
@@ -40,6 +46,7 @@ class DeliveryListState {
     PendingDeliveryList confirmedOrders,
     ReservedDeliveryList reservedOrders,
     CollectedDeliveryList collectedOrders,
+    TransientDeliveryList transientOrders,
   }) {
     return DeliveryListState(
       error: error ?? this.error,
@@ -47,6 +54,7 @@ class DeliveryListState {
       confirmedOrders: confirmedOrders ?? this.confirmedOrders,
       reservedOrders: reservedOrders ?? this.reservedOrders,
       collectedOrders: collectedOrders ?? this.collectedOrders,
+      transientOrders: transientOrders ?? this.transientOrders,
     );
   }
 }
