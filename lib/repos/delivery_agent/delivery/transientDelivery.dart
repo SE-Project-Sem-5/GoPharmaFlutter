@@ -1,5 +1,5 @@
 class TransientDeliveryList {
-  List<Deliveries> deliveries;
+  List<TransientDelivery> deliveries;
 
   TransientDeliveryList({this.deliveries});
 
@@ -7,7 +7,7 @@ class TransientDeliveryList {
     if (json['data'] != null) {
       deliveries = [];
       json['data'].forEach((v) {
-        deliveries.add(new Deliveries.fromJson(v));
+        deliveries.add(new TransientDelivery.fromJson(v));
       });
     }
   }
@@ -21,20 +21,20 @@ class TransientDeliveryList {
   }
 }
 
-class Deliveries {
+class TransientDelivery {
   int orderID;
   int totalPrice;
   String destinationDistrict;
   List<Products> products;
 
-  Deliveries({
+  TransientDelivery({
     this.orderID,
     this.totalPrice,
     this.destinationDistrict,
     this.products,
   });
 
-  Deliveries.fromJson(Map<String, dynamic> json) {
+  TransientDelivery.fromJson(Map<String, dynamic> json) {
     orderID = json['orderID'];
     totalPrice = json['totalPrice'];
     destinationDistrict = json['destinationDistrict'];
