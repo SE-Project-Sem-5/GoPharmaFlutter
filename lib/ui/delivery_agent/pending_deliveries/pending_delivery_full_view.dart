@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
-
 import 'package:go_pharma/ui/common/colors.dart';
 
 class PendingDeliveryFullView extends StatelessWidget {
@@ -29,12 +28,14 @@ class PendingDeliveryFullView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: rightPadding,
+                    padding: EdgeInsets.only(
+                      top: 20.0,
+                      bottom: 10.0,
+                      right: rightPadding,
+                      left: rightPadding,
                     ),
                     child: Text(
-                      "Delivery " + delivery.id.toString(),
+                      "Delivery #" + delivery.id.toString(),
                       style: TextStyle(
                         fontSize: 20.0,
                       ),

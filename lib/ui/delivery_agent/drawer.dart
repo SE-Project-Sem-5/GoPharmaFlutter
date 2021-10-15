@@ -57,7 +57,7 @@ class DeliveryAgentDrawer extends StatelessWidget {
                     deliveryAgentID: 10,
                   ),
                 );
-                Navigator.pushNamed(
+                Navigator.pushReplacementNamed(
                   context,
                   ReservedDeliveriesPage.id,
                 );
