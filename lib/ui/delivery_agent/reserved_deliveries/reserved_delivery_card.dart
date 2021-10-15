@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/orderProduct.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 
 import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_delivery_full_view.dart';
 
 class ReservedDeliveryCard extends StatelessWidget {
-  final OrderProduct delivery;
+  final Delivery delivery;
 
   const ReservedDeliveryCard({this.delivery});
 

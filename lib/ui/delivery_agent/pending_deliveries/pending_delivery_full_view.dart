@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/orderProduct.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
 
 import 'package:go_pharma/ui/common/colors.dart';
 
 class PendingDeliveryFullView extends StatelessWidget {
-  final OrderProduct delivery;
+  final Delivery delivery;
   const PendingDeliveryFullView({@required this.delivery});
   final double leftPadding = 20.0;
   final double rightPadding = 20.0;
@@ -71,7 +71,7 @@ class PendingDeliveryFullView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Product: " + delivery.product.productName,
+                                  "Product: " + delivery.productName,
                                   style: TextStyle(
                                     fontSize: 16.0,
                                   ),
@@ -89,8 +89,7 @@ class PendingDeliveryFullView extends StatelessWidget {
                                   height: 5.0,
                                 ),
                                 Text(
-                                  "Supplier Name: " +
-                                      delivery.product.supplier.businessName,
+                                  "Supplier Name: " + delivery.supplierName,
                                   style: TextStyle(
                                     fontSize: 16.0,
                                   ),
@@ -99,15 +98,7 @@ class PendingDeliveryFullView extends StatelessWidget {
                                   height: 5.0,
                                 ),
                                 Text(
-                                  "Supplier Address: " +
-                                      delivery.product.supplier.addressDetail
-                                          .streetAddress +
-                                      ", " +
-                                      delivery.product.supplier.addressDetail
-                                          .provinceDistrictCity.city +
-                                      ", " +
-                                      delivery.product.supplier.addressDetail
-                                          .provinceDistrictCity.district,
+                                  "Supplier Address: " + delivery.address,
                                   style: TextStyle(
                                     fontSize: 16.0,
                                   ),

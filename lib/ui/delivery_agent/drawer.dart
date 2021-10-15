@@ -50,8 +50,15 @@ class DeliveryAgentDrawer extends StatelessWidget {
               icon: Icons.category,
               onTap: () {
                 Navigator.pop(context);
+                deliveryListBloc.add(
+                  GetAllReservedOrders(
+                    deliveryAgentID: 10,
+                  ),
+                );
                 Navigator.pushReplacementNamed(
-                    context, ReservedDeliveriesPage.id);
+                  context,
+                  ReservedDeliveriesPage.id,
+                );
               },
             ),
             DrawerTile(

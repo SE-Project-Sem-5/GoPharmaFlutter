@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_state.dart';
 import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
-import 'reserved_delivery_card.dart';
+import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_delivery_full_view.dart';
 
 class ReservedDeliveriesPage extends StatelessWidget {
   static final String id = "reserved_deliveries_page";
@@ -26,9 +26,9 @@ class ReservedDeliveriesPage extends StatelessWidget {
               : Container(
                   child: ListView.builder(
                     physics: ClampingScrollPhysics(),
-                    itemCount: state.confirmedOrders.deliveries.length,
-                    itemBuilder: (context, index) => ReservedDeliveryCard(
-                      delivery: state.confirmedOrders.deliveries[index],
+                    itemCount: state.reservedOrders.deliveries.length,
+                    itemBuilder: (context, index) => ReservedDeliveryFullView(
+                      delivery: state.reservedOrders.deliveries[index],
                     ),
                   ),
                 );
