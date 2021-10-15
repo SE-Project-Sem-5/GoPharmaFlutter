@@ -20,6 +20,7 @@ class ReservedDeliveryCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(4.0),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
               leading: Icon(
@@ -33,6 +34,25 @@ class ReservedDeliveryCard extends StatelessWidget {
                     "Rs. " + delivery.totalPrice.toStringAsFixed(2),
                   ),
                 ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 70,
+              ),
+              child: Text(
+                "Supplier Address: " + delivery.address,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 70,
+              ),
+              child: Text(
+                "Destination: " + delivery.district + " Warehouse",
               ),
             ),
             Row(
