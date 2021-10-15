@@ -42,3 +42,7 @@ class GetAllTransientCollectedOrders extends DeliveryListEvent {
     this.deliveryAgentHomeAddressID,
   });
 }
+
+class GetAllShippedOrders extends DeliveryListEvent {
+  GetAllShippedOrders();
+}

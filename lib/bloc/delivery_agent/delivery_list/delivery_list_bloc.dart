@@ -73,7 +73,26 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-
+        var collectedOrders =
+            await deliveryListAPIProvider.getAllTransientOrders();
+        yield state.clone(
+          isLoading: false,
+        );
+        break;
+      case GetAllTransientCollectedOrders:
+        yield state.clone(
+          isLoading: true,
+        );
+        var collectedOrders =
+            await deliveryListAPIProvider.getAllTransientOrders();
+        yield state.clone(
+          isLoading: false,
+        );
+        break;
+      case GetAllShippedOrders:
+        yield state.clone(
+          isLoading: true,
+        );
         var collectedOrders =
             await deliveryListAPIProvider.getAllTransientOrders();
         yield state.clone(
