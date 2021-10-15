@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/transientCollectedList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
 class TransientCollectedDeliveryFullView extends StatelessWidget {
-  final Delivery delivery;
+  final TransientCollectedDelivery delivery;
   const TransientCollectedDeliveryFullView({@required this.delivery});
   final String bullet = "\u2022 ";
   final double leftPadding = 30.0;
@@ -41,7 +41,7 @@ class TransientCollectedDeliveryFullView extends StatelessWidget {
                           horizontal: rightPadding,
                         ),
                         child: Text(
-                          "Delivery " + delivery.id.toString(),
+                          "Delivery #" + delivery.orderID.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
@@ -84,25 +84,31 @@ class TransientCollectedDeliveryFullView extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Product name placeholder",
+                                        "Product: " +
+                                            delivery
+                                                .products[index].productName,
                                         style: TextStyle(
                                           fontSize: 16.0,
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 5.0,
+                                      ),
                                       Text(
-                                        "Supplier Information",
+                                        "Quantity: " +
+                                            delivery.products[index].quantity
+                                                .toString(),
                                         style: TextStyle(
                                           fontSize: 16.0,
                                         ),
                                       ),
-                                      Text(
-                                        "Supplier Name",
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
+                                      SizedBox(
+                                        height: 5.0,
                                       ),
                                       Text(
-                                        "Supplier Address",
+                                        "Total Price: Rs." +
+                                            delivery.products[index].totalPrice
+                                                .toStringAsFixed(2),
                                         style: TextStyle(
                                           fontSize: 16.0,
                                         ),
