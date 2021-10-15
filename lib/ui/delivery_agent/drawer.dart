@@ -41,8 +41,10 @@ class DeliveryAgentDrawer extends StatelessWidget {
                   ),
                 );
                 Navigator.pop(context);
-                Navigator.pushReplacementNamed(
-                    context, PendingDeliveriesPage.id);
+                Navigator.pushNamed(
+                  context,
+                  PendingDeliveriesPage.id,
+                );
               },
             ),
             DrawerTile(
@@ -55,7 +57,7 @@ class DeliveryAgentDrawer extends StatelessWidget {
                     deliveryAgentID: 10,
                   ),
                 );
-                Navigator.pushReplacementNamed(
+                Navigator.pushNamed(
                   context,
                   ReservedDeliveriesPage.id,
                 );

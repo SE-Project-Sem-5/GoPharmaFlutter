@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
-
 import 'package:go_pharma/ui/common/colors.dart';
 
 class ReservedDeliveryFullView extends StatelessWidget {

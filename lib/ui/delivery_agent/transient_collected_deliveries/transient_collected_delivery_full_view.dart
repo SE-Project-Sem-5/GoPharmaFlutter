@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/orderProduct.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
 class TransientCollectedDeliveryFullView extends StatelessWidget {
-  final OrderProduct delivery;
+  final Delivery delivery;
   const TransientCollectedDeliveryFullView({@required this.delivery});
   final String bullet = "\u2022 ";
   final double leftPadding = 30.0;
