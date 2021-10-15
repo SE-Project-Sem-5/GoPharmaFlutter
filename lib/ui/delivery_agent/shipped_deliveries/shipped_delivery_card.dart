@@ -36,6 +36,14 @@ class ShippedDeliveryCard extends StatelessWidget {
               ),
             ),
             Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 70,
+              ),
+              child: Text(
+                "Customer Address: " + delivery.destinationAddress,
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,

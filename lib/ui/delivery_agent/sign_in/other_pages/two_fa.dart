@@ -85,10 +85,12 @@ class SignIn2FA extends StatelessWidget {
                     onTapped: () {
                       if (_formKey.currentState.validate()) {
                         bloc.add(UpdateTwoFA(twoFA: _twoFAController.text));
-                        bloc.add(NextStepEvent(
-                          currentStep: state.step,
-                          context: context,
-                        ));
+                        bloc.add(
+                          NextStepEvent(
+                            currentStep: state.step,
+                            context: context,
+                          ),
+                        );
                       }
                       //TODO: backend call - get twoFA value and compare
                     },
