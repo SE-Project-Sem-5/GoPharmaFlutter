@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/collectedDelivery.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/transientDelivery.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/delivery_agent/transient_deliveries/transient_delivery_full_view.dart';
 
-import 'collected_delivery_full_view.dart';
+class TransientDeliveryCard extends StatelessWidget {
+  final TransientDelivery delivery;
 
-class CollectedDeliveryCard extends StatelessWidget {
-  final CollectedDelivery delivery;
-
-  const CollectedDeliveryCard({this.delivery});
+  const TransientDeliveryCard({this.delivery});
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +22,6 @@ class CollectedDeliveryCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(4.0),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
                 leading: Icon(
@@ -33,20 +30,13 @@ class CollectedDeliveryCard extends StatelessWidget {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("#" + delivery.id.toString()),
+                    Text(
+                      "#" + delivery.orderID.toString(),
+                    ),
                     Text(
                       "Rs. " + delivery.totalPrice.toStringAsFixed(2),
                     ),
                   ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 70.0),
-                child: Text(
-                  "Destination: " + delivery.currentLocation,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                  ),
                 ),
               ),
               Row(
@@ -59,7 +49,7 @@ class CollectedDeliveryCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CollectedDeliveryFullView(
+                          builder: (context) => TransientDeliveryFullView(
                             delivery: delivery,
                           ),
                         ),

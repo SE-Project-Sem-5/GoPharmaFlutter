@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
+import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_delivery_full_view.dart';
 
 class ShippedDeliveryCard extends StatelessWidget {
@@ -11,6 +12,13 @@ class ShippedDeliveryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: GoPharmaColors.GreyColor,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(4.0),
+        ),
         child: Column(
           children: [
             ListTile(
