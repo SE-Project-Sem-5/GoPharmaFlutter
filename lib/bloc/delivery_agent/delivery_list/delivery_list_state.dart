@@ -60,7 +60,7 @@ class DeliveryListState {
     CollectedDeliveryList collectedOrders,
     TransientDeliveryList transientOrders,
     TransientCollectedList transientCollectedOrders,
-    TransientDeliveryList shippedOrders,
+    ShippedOrderList shippedOrders,
   }) {
     return DeliveryListState(
       error: error ?? this.error,
