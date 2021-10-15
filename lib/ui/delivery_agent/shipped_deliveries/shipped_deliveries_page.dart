@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_state.dart';
 import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'shipped_delivery_card.dart';
@@ -13,7 +14,9 @@ class ShippedDeliveriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
-
+    deliveryListBloc.add(
+      GetAllShippedOrders(),
+    );
     return CommonSkeleton(
       title: title,
       child: BlocBuilder<DeliveryListBloc, DeliveryListState>(
@@ -27,9 +30,9 @@ class ShippedDeliveriesPage extends StatelessWidget {
               : Container(
                   child: ListView.builder(
                     physics: ClampingScrollPhysics(),
-                    itemCount: state.confirmedOrders.deliveries.length,
+                    itemCount: state.shippedOrders.deliveries.length,
                     itemBuilder: (context, index) => ShippedDeliveryCard(
-                      delivery: state.confirmedOrders.deliveries[index],
+                      delivery: state.shippedOrders.deliveries[index],
                     ),
                   ),
                 );

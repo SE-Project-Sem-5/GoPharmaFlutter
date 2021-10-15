@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
-
+import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
 class ShippedDeliveryFullView extends StatelessWidget {
-  final Delivery delivery;
+  final ShippedDelivery delivery;
   const ShippedDeliveryFullView({@required this.delivery});
   final String bullet = "\u2022 ";
   final double leftPadding = 30.0;
@@ -42,7 +41,7 @@ class ShippedDeliveryFullView extends StatelessWidget {
                           horizontal: rightPadding,
                         ),
                         child: Text(
-                          "Delivery " + delivery.id.toString(),
+                          "Delivery " + delivery.orderID.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
@@ -67,7 +66,7 @@ class ShippedDeliveryFullView extends StatelessWidget {
                       ),
                       ListView.builder(
                         physics: ClampingScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: delivery.products.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.only(left: leftPadding, top: 5),
@@ -75,45 +74,52 @@ class ShippedDeliveryFullView extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 10.0,
-                                    right: rightPadding,
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Product name placeholder",
-                                        style: TextStyle(
-                                          fontSize: 16.0,
+                                    padding: EdgeInsets.only(
+                                      left: 10.0,
+                                      right: rightPadding,
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Product: " +
+                                              delivery
+                                                  .products[index].productName,
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        "Supplier Information",
-                                        style: TextStyle(
-                                          fontSize: 16.0,
+                                        SizedBox(
+                                          height: 5.0,
                                         ),
-                                      ),
-                                      Text(
-                                        "Supplier Name",
-                                        style: TextStyle(
-                                          fontSize: 16.0,
+                                        Text(
+                                          "Quantity: " +
+                                              delivery.products[index].quantity
+                                                  .toString(),
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        "Supplier Address",
-                                        style: TextStyle(
-                                          fontSize: 16.0,
+                                        SizedBox(
+                                          height: 5.0,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 5.0,
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                        Text(
+                                          "Total Price: Rs." +
+                                              delivery
+                                                  .products[index].totalPrice
+                                                  .toStringAsFixed(2),
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5.0,
+                                        ),
+                                      ],
+                                    )),
                               ),
                             ],
                           ),
