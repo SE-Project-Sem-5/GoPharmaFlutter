@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
-
-import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_delivery_full_view.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
+import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_delivery_full_view.dart';
 
 class ShippedDeliveryCard extends StatelessWidget {
-  final Delivery delivery;
+  final ShippedDelivery delivery;
 
   const ShippedDeliveryCard({this.delivery});
 
@@ -12,6 +12,13 @@ class ShippedDeliveryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: GoPharmaColors.GreyColor,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(4.0),
+        ),
         child: Column(
           children: [
             ListTile(
@@ -21,7 +28,7 @@ class ShippedDeliveryCard extends StatelessWidget {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("#" + delivery.id.toString()),
+                  Text("#" + delivery.orderID.toString()),
                   Text(
                     "Rs. " + delivery.totalPrice.toStringAsFixed(2),
                   ),
@@ -38,7 +45,7 @@ class ShippedDeliveryCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PendingDeliveryFullView(
+                        builder: (context) => ShippedDeliveryFullView(
                           delivery: delivery,
                         ),
                       ),

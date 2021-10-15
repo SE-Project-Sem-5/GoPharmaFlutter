@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_state.dart';
 import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'transient_collected_delivery_card.dart';
@@ -13,7 +14,11 @@ class TransientCollectedDeliveriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
-
+    deliveryListBloc.add(
+      GetAllTransientCollectedOrders(
+        deliveryAgentID: 10,
+      ),
+    );
     return CommonSkeleton(
       title: title,
       child: BlocBuilder<DeliveryListBloc, DeliveryListState>(
@@ -27,10 +32,11 @@ class TransientCollectedDeliveriesPage extends StatelessWidget {
               : Container(
                   child: ListView.builder(
                     physics: ClampingScrollPhysics(),
-                    itemCount: state.confirmedOrders.deliveries.length,
+                    itemCount: state.transientCollectedOrders.deliveries.length,
                     itemBuilder: (context, index) =>
                         TransientCollectedDeliveryCard(
-                      delivery: state.confirmedOrders.deliveries[index],
+                      delivery:
+                          state.transientCollectedOrders.deliveries[index],
                     ),
                   ),
                 );

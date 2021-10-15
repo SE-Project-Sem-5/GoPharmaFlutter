@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/collectedDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/transientCollectedList.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/transientDelivery.dart';
 
 @immutable
 class DeliveryListState {
@@ -10,11 +13,17 @@ class DeliveryListState {
   final PendingDeliveryList confirmedOrders;
   final ReservedDeliveryList reservedOrders;
   final CollectedDeliveryList collectedOrders;
+  final TransientDeliveryList transientOrders;
+  final TransientCollectedList transientCollectedOrders;
+  final ShippedOrderList shippedOrders;
 
   DeliveryListState({
     this.confirmedOrders,
     this.reservedOrders,
     this.collectedOrders,
+    this.transientOrders,
+    this.transientCollectedOrders,
+    this.shippedOrders,
     this.error,
     this.isLoading,
   });
@@ -31,6 +40,15 @@ class DeliveryListState {
         collectedOrders: new CollectedDeliveryList(
           deliveries: [],
         ),
+        transientOrders: new TransientDeliveryList(
+          deliveries: [],
+        ),
+        transientCollectedOrders: new TransientCollectedList(
+          deliveries: [],
+        ),
+        shippedOrders: new ShippedOrderList(
+          deliveries: [],
+        ),
       );
 
   DeliveryListState clone({
@@ -40,6 +58,9 @@ class DeliveryListState {
     PendingDeliveryList confirmedOrders,
     ReservedDeliveryList reservedOrders,
     CollectedDeliveryList collectedOrders,
+    TransientDeliveryList transientOrders,
+    TransientCollectedList transientCollectedOrders,
+    ShippedOrderList shippedOrders,
   }) {
     return DeliveryListState(
       error: error ?? this.error,
@@ -47,6 +68,10 @@ class DeliveryListState {
       confirmedOrders: confirmedOrders ?? this.confirmedOrders,
       reservedOrders: reservedOrders ?? this.reservedOrders,
       collectedOrders: collectedOrders ?? this.collectedOrders,
+      transientOrders: transientOrders ?? this.transientOrders,
+      transientCollectedOrders:
+          transientCollectedOrders ?? this.transientCollectedOrders,
+      shippedOrders: shippedOrders ?? this.shippedOrders,
     );
   }
 }

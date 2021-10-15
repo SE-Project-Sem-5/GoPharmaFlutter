@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
-import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_delivery_full_view.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/transientCollectedList.dart';
+import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/delivery_agent/transient_collected_deliveries/transient_collected_delivery_full_view.dart';
 
 class TransientCollectedDeliveryCard extends StatelessWidget {
-  final Delivery delivery;
+  final TransientCollectedDelivery delivery;
 
   const TransientCollectedDeliveryCard({this.delivery});
 
@@ -11,6 +12,13 @@ class TransientCollectedDeliveryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: GoPharmaColors.GreyColor,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(4.0),
+        ),
         child: Column(
           children: [
             ListTile(
@@ -20,9 +28,9 @@ class TransientCollectedDeliveryCard extends StatelessWidget {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("#" + delivery.id.toString()),
+                  Text("#" + delivery.orderID.toString()),
                   Text(
-                    "Rs. " + delivery.totalPrice.toStringAsFixed(2),
+                    "Rs. ",
                   ),
                 ],
               ),
@@ -37,7 +45,8 @@ class TransientCollectedDeliveryCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PendingDeliveryFullView(
+                        builder: (context) =>
+                            TransientCollectedDeliveryFullView(
                           delivery: delivery,
                         ),
                       ),

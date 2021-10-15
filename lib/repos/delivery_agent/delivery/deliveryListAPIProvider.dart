@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/collectedDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
-
-import 'collectedDelivery.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/transientCollectedList.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/transientDelivery.dart';
 
 class DeliveryListAPIProvider {
   final Dio _dio = Client.init();
@@ -56,6 +58,44 @@ class DeliveryListAPIProvider {
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return CollectedDeliveryList();
+    }
+  }
+
+  Future<TransientDeliveryList> getAllTransientOrders() async {
+    try {
+      Response response = await _dio.post(
+        "delivery-agent/order/transient/view",
+      );
+      return TransientDeliveryList.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return TransientDeliveryList();
+    }
+  }
+
+  Future<TransientCollectedList> getAllTransientCollectedOrders(
+    int deliveryAgentID,
+  ) async {
+    try {
+      Response response = await _dio.post(
+          "delivery-agent/order/transient_collect/view",
+          data: {"deliveryAgentID": deliveryAgentID});
+      return TransientCollectedList.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return TransientCollectedList();
+    }
+  }
+
+  Future<ShippedOrderList> getAllShippedOrders() async {
+    try {
+      Response response = await _dio.post(
+        "delivery-agent/order/ship/view",
+      );
+      return ShippedOrderList.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return ShippedOrderList();
     }
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
-
-import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_delivery_full_view.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
+import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_delivery_full_view.dart';
 
 class ReservedDeliveryCard extends StatelessWidget {
-  final Delivery delivery;
+  final ReservedDelivery delivery;
 
   const ReservedDeliveryCard({this.delivery});
 
@@ -12,6 +12,13 @@ class ReservedDeliveryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: GoPharmaColors.GreyColor,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(4.0),
+        ),
         child: Column(
           children: [
             ListTile(
@@ -38,7 +45,7 @@ class ReservedDeliveryCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PendingDeliveryFullView(
+                        builder: (context) => ReservedDeliveryFullView(
                           delivery: delivery,
                         ),
                       ),
