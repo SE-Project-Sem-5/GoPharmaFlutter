@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
 
 @immutable

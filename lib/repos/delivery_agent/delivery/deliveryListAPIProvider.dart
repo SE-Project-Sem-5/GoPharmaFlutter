@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListModel.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
 
 class DeliveryListAPIProvider {
