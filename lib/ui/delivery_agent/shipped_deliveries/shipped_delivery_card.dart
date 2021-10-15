@@ -28,31 +28,42 @@ class ShippedDeliveryCard extends StatelessWidget {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("#" + delivery.orderID.toString()),
+                  Text("Delivery #" + delivery.orderID.toString()),
                   Text(
                     "Rs. " + delivery.totalPrice.toStringAsFixed(2),
                   ),
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const SizedBox(width: 8),
-                TextButton(
-                  child: const Text('View Delivery Details'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ShippedDeliveryFullView(
-                          delivery: delivery,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 70,
+              ),
+              child: Text(
+                "Customer Address: " + delivery.destinationAddress,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const SizedBox(width: 8),
+                  TextButton(
+                    child: const Text('View Delivery Details'),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ShippedDeliveryFullView(
+                            delivery: delivery,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ],
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

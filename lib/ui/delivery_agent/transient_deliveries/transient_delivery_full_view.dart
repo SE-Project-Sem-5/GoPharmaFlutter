@@ -36,14 +36,27 @@ class TransientDeliveryFullView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
+                        padding: EdgeInsets.only(
+                          top: 20.0,
+                          bottom: 10.0,
+                          left: rightPadding,
+                        ),
+                        child: Text(
+                          "Delivery #" + delivery.orderID.toString(),
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                      Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: 10.0,
                           horizontal: rightPadding,
                         ),
                         child: Text(
-                          "Delivery " + delivery.orderID.toString(),
+                          "Delivery District: " + delivery.destinationDistrict,
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 16.0,
                           ),
                         ),
                       ),
@@ -66,7 +79,7 @@ class TransientDeliveryFullView extends StatelessWidget {
                       ),
                       ListView.builder(
                         physics: ClampingScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: delivery.products.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.only(left: leftPadding, top: 5),
@@ -84,25 +97,19 @@ class TransientDeliveryFullView extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Product name placeholder",
+                                        "Product Name: ${delivery.products[index].productName}",
                                         style: TextStyle(
                                           fontSize: 16.0,
                                         ),
                                       ),
                                       Text(
-                                        "Supplier Information",
+                                        "Quantity: ${delivery.products[index].quantity}",
                                         style: TextStyle(
                                           fontSize: 16.0,
                                         ),
                                       ),
                                       Text(
-                                        "Supplier Name",
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Supplier Address",
+                                        "Total Price: Rs.${delivery.products[index].totalPrice.toStringAsFixed(2)}",
                                         style: TextStyle(
                                           fontSize: 16.0,
                                         ),

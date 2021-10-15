@@ -22,6 +22,8 @@ class TransientDeliveryCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(4.0),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
                 leading: Icon(
@@ -31,7 +33,7 @@ class TransientDeliveryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "#" + delivery.orderID.toString(),
+                      "Delivery #" + delivery.orderID.toString(),
                     ),
                     Text(
                       "Rs. " + delivery.totalPrice.toStringAsFixed(2),
@@ -39,24 +41,35 @@ class TransientDeliveryCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const SizedBox(width: 8),
-                  TextButton(
-                    child: const Text('View Delivery Details'),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TransientDeliveryFullView(
-                            delivery: delivery,
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 70,
+                ),
+                child: Text(
+                  "Destination District: " + delivery.destinationDistrict,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const SizedBox(width: 8),
+                    TextButton(
+                      child: const Text('View Delivery Details'),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TransientDeliveryFullView(
+                              delivery: delivery,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

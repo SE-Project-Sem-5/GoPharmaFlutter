@@ -15,7 +15,7 @@ class ShippedOrderList {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.deliveries != null) {
-      data['deliveries'] = this.deliveries.map((v) => v.toJson()).toList();
+      data['data'] = this.deliveries.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -24,20 +24,20 @@ class ShippedOrderList {
 class ShippedDelivery {
   int orderID;
   int totalPrice;
-  String destinationDistrict;
+  String destinationAddress;
   List<Products> products;
 
   ShippedDelivery({
     this.orderID,
     this.totalPrice,
-    this.destinationDistrict,
+    this.destinationAddress,
     this.products,
   });
 
   ShippedDelivery.fromJson(Map<String, dynamic> json) {
     orderID = json['orderID'];
     totalPrice = json['totalPrice'];
-    destinationDistrict = json['destinationDistrict'];
+    destinationAddress = json['destinationAddress'];
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
@@ -50,7 +50,7 @@ class ShippedDelivery {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['orderID'] = this.orderID;
     data['totalPrice'] = this.totalPrice;
-    data['destinationDistrict'] = this.destinationDistrict;
+    data['destinationAddress'] = this.destinationAddress;
     if (this.products != null) {
       data['products'] = this.products.map((v) => v.toJson()).toList();
     }
