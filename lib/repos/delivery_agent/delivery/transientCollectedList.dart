@@ -29,15 +29,18 @@ class TransientCollectedList {
 
 class TransientCollectedDelivery {
   int orderID;
+  int totalPrice;
   List<Products> products;
   String destinationDistrict;
   String destinationCity;
 
-  TransientCollectedDelivery(
-      {this.orderID,
-      this.products,
-      this.destinationDistrict,
-      this.destinationCity});
+  TransientCollectedDelivery({
+    this.orderID,
+    this.products,
+    this.totalPrice,
+    this.destinationDistrict,
+    this.destinationCity,
+  });
 
   TransientCollectedDelivery.fromJson(Map<String, dynamic> json) {
     orderID = json['orderID'];
@@ -48,6 +51,7 @@ class TransientCollectedDelivery {
       });
     }
     destinationDistrict = json['destinationDistrict'];
+    totalPrice = json['totalPrice'];
     destinationCity = json['destinationCity'];
   }
 

@@ -30,7 +30,7 @@ class TransientCollectedDeliveryCard extends StatelessWidget {
                 children: [
                   Text("#" + delivery.orderID.toString()),
                   Text(
-                    "Rs. ",
+                    "Rs. " + delivery.totalPrice.toStringAsFixed(2),
                   ),
                 ],
               ),

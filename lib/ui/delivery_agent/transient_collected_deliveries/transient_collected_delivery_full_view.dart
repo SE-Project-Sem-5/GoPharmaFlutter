@@ -47,6 +47,19 @@ class TransientCollectedDeliveryFullView extends StatelessWidget {
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: rightPadding,
+                        ),
+                        child: Text(
+                          "Destination District: " +
+                              delivery.destinationDistrict,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
                       HorizontalLine(
                         leftPadding: leftPadding,
                         rightPadding: rightPadding,
@@ -66,7 +79,7 @@ class TransientCollectedDeliveryFullView extends StatelessWidget {
                       ),
                       ListView.builder(
                         physics: ClampingScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: delivery.products.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.only(left: leftPadding, top: 5),
