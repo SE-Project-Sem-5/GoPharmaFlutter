@@ -27,8 +27,12 @@ class Deliveries {
   String destinationDistrict;
   List<Products> products;
 
-  Deliveries(
-      {this.orderID, this.totalPrice, this.destinationDistrict, this.products});
+  Deliveries({
+    this.orderID,
+    this.totalPrice,
+    this.destinationDistrict,
+    this.products,
+  });
 
   Deliveries.fromJson(Map<String, dynamic> json) {
     orderID = json['orderID'];
@@ -60,7 +64,12 @@ class Products {
   int totalPrice;
   String productName;
 
-  Products({this.id, this.quantity, this.totalPrice, this.productName});
+  Products({
+    this.id,
+    this.quantity,
+    this.totalPrice,
+    this.productName,
+  });
 
   Products.fromJson(Map<String, dynamic> json) {
     id = json['id'];
