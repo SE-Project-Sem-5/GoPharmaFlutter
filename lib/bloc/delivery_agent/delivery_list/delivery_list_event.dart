@@ -31,3 +31,14 @@ class GetAllCollectedOrders extends DeliveryListEvent {
     this.deliveryAgentHomeAddressID,
   });
 }
+
+class GetAllTransientOrders extends DeliveryListEvent {
+  GetAllTransientOrders();
+}
+
+class GetAllTransientCollectedOrders extends DeliveryListEvent {
+  final int deliveryAgentHomeAddressID;
+  GetAllTransientCollectedOrders({
+    this.deliveryAgentHomeAddressID,
+  });
+}
