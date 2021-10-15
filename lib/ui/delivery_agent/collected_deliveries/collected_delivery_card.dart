@@ -32,13 +32,12 @@ class CollectedDeliveryCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 70.0),
-              child: Text("Current Location: " + delivery.currentLocation),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 70.0),
-              child: Text("Destination Location: " +
-                  delivery.district +
-                  " District Warehouse"),
+              child: Text(
+                "Destination: " + delivery.currentLocation,
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

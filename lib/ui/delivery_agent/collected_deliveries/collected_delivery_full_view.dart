@@ -12,6 +12,9 @@ class CollectedDeliveryFullView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("Collected Deliveries"),
+        ),
         body: Container(
           child: Center(
             child: Padding(
@@ -31,14 +34,30 @@ class CollectedDeliveryFullView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: rightPadding,
+                        padding: EdgeInsets.only(
+                          top: 20.0,
+                          bottom: 10.0,
+                          left: rightPadding,
+                          right: rightPadding,
                         ),
                         child: Text(
                           "Delivery " + delivery.id.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: rightPadding,
+                        ),
+                        child: Text(
+                          "Destination: " +
+                              delivery.district +
+                              " District Warehouse",
+                          style: TextStyle(
+                            fontSize: 16.0,
                           ),
                         ),
                       ),
@@ -61,7 +80,7 @@ class CollectedDeliveryFullView extends StatelessWidget {
                       ),
                       ListView.builder(
                         physics: ClampingScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: delivery.products.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.only(left: leftPadding, top: 5),
@@ -79,25 +98,19 @@ class CollectedDeliveryFullView extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Product name placeholder",
+                                        "Product name: ${delivery.products[index].product.productName}",
                                         style: TextStyle(
                                           fontSize: 16.0,
                                         ),
                                       ),
                                       Text(
-                                        "Supplier Information",
+                                        "Quantity: ${delivery.products[index].quantity.toString()}",
                                         style: TextStyle(
                                           fontSize: 16.0,
                                         ),
                                       ),
                                       Text(
-                                        "Supplier Name",
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Supplier Address",
+                                        "Total Price: ${delivery.products[index].totalPrice.toStringAsFixed(2)}",
                                         style: TextStyle(
                                           fontSize: 16.0,
                                         ),
