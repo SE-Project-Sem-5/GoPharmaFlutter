@@ -49,24 +49,27 @@ class TransientDeliveryCard extends StatelessWidget {
                   "Destination District: " + delivery.destinationDistrict,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const SizedBox(width: 8),
-                  TextButton(
-                    child: const Text('View Delivery Details'),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TransientDeliveryFullView(
-                            delivery: delivery,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const SizedBox(width: 8),
+                    TextButton(
+                      child: const Text('View Delivery Details'),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TransientDeliveryFullView(
+                              delivery: delivery,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

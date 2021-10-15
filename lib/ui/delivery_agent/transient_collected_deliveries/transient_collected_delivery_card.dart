@@ -35,25 +35,28 @@ class TransientCollectedDeliveryCard extends StatelessWidget {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const SizedBox(width: 8),
-                TextButton(
-                  child: const Text('View Delivery Details'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            TransientCollectedDeliveryFullView(
-                          delivery: delivery,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const SizedBox(width: 8),
+                  TextButton(
+                    child: const Text('View Delivery Details'),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              TransientCollectedDeliveryFullView(
+                            delivery: delivery,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ],
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

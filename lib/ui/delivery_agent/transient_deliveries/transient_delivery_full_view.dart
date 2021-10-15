@@ -42,7 +42,7 @@ class TransientDeliveryFullView extends StatelessWidget {
                           left: rightPadding,
                         ),
                         child: Text(
-                          "Delivery " + delivery.orderID.toString(),
+                          "Delivery #" + delivery.orderID.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
@@ -109,13 +109,7 @@ class TransientDeliveryFullView extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        "Supplier Name",
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Supplier Address",
+                                        "Total Price: Rs.${delivery.products[index].totalPrice.toStringAsFixed(2)}",
                                         style: TextStyle(
                                           fontSize: 16.0,
                                         ),
