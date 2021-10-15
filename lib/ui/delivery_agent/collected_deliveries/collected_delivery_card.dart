@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
-import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_delivery_full_view.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/collectedDelivery.dart';
+
+import 'collected_delivery_full_view.dart';
 
 class CollectedDeliveryCard extends StatelessWidget {
-  final Delivery delivery;
+  final CollectedDelivery delivery;
 
   const CollectedDeliveryCard({this.delivery});
 
@@ -12,6 +13,8 @@ class CollectedDeliveryCard extends StatelessWidget {
     return Center(
       child: Card(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
               leading: Icon(
@@ -27,6 +30,16 @@ class CollectedDeliveryCard extends StatelessWidget {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 70.0),
+              child: Text("Current Location: " + delivery.currentLocation),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 70.0),
+              child: Text("Destination Location: " +
+                  delivery.district +
+                  " District Warehouse"),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -37,7 +50,7 @@ class CollectedDeliveryCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PendingDeliveryFullView(
+                        builder: (context) => CollectedDeliveryFullView(
                           delivery: delivery,
                         ),
                       ),

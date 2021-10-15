@@ -1,13 +1,13 @@
-class CollectedDeliveries {
-  List<Deliveries> deliveries;
+class CollectedDeliveryList {
+  List<CollectedDelivery> deliveries;
 
-  CollectedDeliveries({this.deliveries});
+  CollectedDeliveryList({this.deliveries});
 
-  CollectedDeliveries.fromJson(Map<String, dynamic> json) {
+  CollectedDeliveryList.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       deliveries = [];
       json['data'].forEach((v) {
-        deliveries.add(new Deliveries.fromJson(v));
+        deliveries.add(new CollectedDelivery.fromJson(v));
       });
     }
   }
@@ -21,7 +21,7 @@ class CollectedDeliveries {
   }
 }
 
-class Deliveries {
+class CollectedDelivery {
   int id;
   List<Products> products;
   String status;
@@ -29,7 +29,7 @@ class Deliveries {
   String district;
   String currentLocation;
 
-  Deliveries(
+  CollectedDelivery(
       {this.id,
       this.products,
       this.status,
@@ -37,10 +37,10 @@ class Deliveries {
       this.district,
       this.currentLocation});
 
-  Deliveries.fromJson(Map<String, dynamic> json) {
+  CollectedDelivery.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     if (json['products'] != null) {
-      products = new List<Products>();
+      products = [];
       json['products'].forEach((v) {
         products.add(new Products.fromJson(v));
       });

@@ -24,3 +24,10 @@ class GetAllReservedOrders extends DeliveryListEvent {
     this.deliveryAgentID,
   });
 }
+
+class GetAllCollectedOrders extends DeliveryListEvent {
+  final int deliveryAgentHomeAddressID;
+  GetAllCollectedOrders({
+    this.deliveryAgentHomeAddressID,
+  });
+}
