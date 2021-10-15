@@ -33,7 +33,7 @@ class TransientDeliveryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "#" + delivery.orderID.toString(),
+                      "Delivery #" + delivery.orderID.toString(),
                     ),
                     Text(
                       "Rs. " + delivery.totalPrice.toStringAsFixed(2),
