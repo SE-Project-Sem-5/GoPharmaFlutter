@@ -1,17 +1,17 @@
 class TransientCollectedList {
   String type;
   String msg;
-  List<TransientCollectedDelivery> data;
+  List<TransientCollectedDelivery> deliveries;
 
-  TransientCollectedList({this.type, this.msg, this.data});
+  TransientCollectedList({this.type, this.msg, this.deliveries});
 
   TransientCollectedList.fromJson(Map<String, dynamic> json) {
     type = json['type'];
     msg = json['msg'];
     if (json['data'] != null) {
-      data = [];
+      deliveries = [];
       json['data'].forEach((v) {
-        data.add(new TransientCollectedDelivery.fromJson(v));
+        deliveries.add(new TransientCollectedDelivery.fromJson(v));
       });
     }
   }
@@ -20,8 +20,8 @@ class TransientCollectedList {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['type'] = this.type;
     data['msg'] = this.msg;
-    if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
+    if (this.deliveries != null) {
+      data['data'] = this.deliveries.map((v) => v.toJson()).toList();
     }
     return data;
   }
