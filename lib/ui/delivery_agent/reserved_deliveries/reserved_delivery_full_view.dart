@@ -72,8 +72,7 @@ class ReservedDeliveryFullView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Product: " +
-                                      delivery.orderProduct.product.productName,
+                                  "Product: " + delivery.productName,
                                   style: TextStyle(
                                     fontSize: 16.0,
                                   ),
@@ -82,8 +81,7 @@ class ReservedDeliveryFullView extends StatelessWidget {
                                   height: 5.0,
                                 ),
                                 Text(
-                                  "Quantity: " +
-                                      delivery.orderProduct.quantity.toString(),
+                                  "Quantity: " + delivery.quantity.toString(),
                                   style: TextStyle(
                                     fontSize: 16.0,
                                   ),
@@ -92,9 +90,27 @@ class ReservedDeliveryFullView extends StatelessWidget {
                                   height: 5.0,
                                 ),
                                 Text(
-                                  "Supplier Name: " +
-                                      delivery.orderProduct.product.supplier
-                                          .businessName,
+                                  "Supplier Name: " + delivery.supplierName,
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Text(
+                                  "Collection Point: " + delivery.address,
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Text(
+                                  "Delivery Point: " +
+                                      delivery.district +
+                                      " District Warehouse",
                                   style: TextStyle(
                                     fontSize: 16.0,
                                   ),

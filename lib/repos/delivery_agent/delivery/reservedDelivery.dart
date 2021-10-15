@@ -1,5 +1,3 @@
-import 'orderProduct.dart';
-
 class ReservedDeliveryList {
   List<ReservedDelivery> deliveries;
 
@@ -16,27 +14,51 @@ class ReservedDeliveryList {
 }
 
 class ReservedDelivery {
-  int orderID;
   int id;
-  OrderProduct orderProduct;
+  String productName;
+  int quantity;
+  String brandName;
+  int totalPrice;
+  String supplierName;
+  String supplierContactNo;
+  String address;
+  String district;
 
-  ReservedDelivery({this.orderID, this.id, this.orderProduct});
+  ReservedDelivery({
+    this.id,
+    this.productName,
+    this.quantity,
+    this.brandName,
+    this.totalPrice,
+    this.supplierName,
+    this.supplierContactNo,
+    this.address,
+    this.district,
+  });
 
   ReservedDelivery.fromJson(Map<String, dynamic> json) {
-    orderID = json['orderID'];
     id = json['id'];
-    orderProduct = json['OrderProduct'] != null
-        ? new OrderProduct.fromJson(json['OrderProduct'])
-        : null;
+    productName = json['productName'];
+    quantity = json['quantity'];
+    brandName = json['brandName'];
+    totalPrice = json['totalPrice'];
+    supplierName = json['supplierName'];
+    supplierContactNo = json['supplierContactNo'];
+    address = json['address'];
+    district = json['district'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['orderID'] = this.orderID;
     data['id'] = this.id;
-    if (this.orderProduct != null) {
-      data['OrderProduct'] = this.orderProduct.toJson();
-    }
+    data['productName'] = this.productName;
+    data['quantity'] = this.quantity;
+    data['brandName'] = this.brandName;
+    data['totalPrice'] = this.totalPrice;
+    data['supplierName'] = this.supplierName;
+    data['supplierContactNo'] = this.supplierContactNo;
+    data['address'] = this.address;
+    data['district'] = this.district;
     return data;
   }
 }
