@@ -59,7 +59,7 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
           isLoading: true,
         );
         final deliveryAgentHomeAddressID =
-            (event as GetAllConfirmedOrders).deliveryAgentHomeAddressID;
+            (event as GetAllCollectedOrders).deliveryAgentHomeAddressID;
         var collectedOrders =
             await deliveryListAPIProvider.getCollectedDeliveryOrders(
           deliveryAgentHomeAddressID,

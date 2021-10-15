@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/collectedDelivery.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
 class CollectedDeliveryFullView extends StatelessWidget {
-  final Delivery delivery;
+  final CollectedDelivery delivery;
   const CollectedDeliveryFullView({@required this.delivery});
   final String bullet = "\u2022 ";
   final double leftPadding = 30.0;
@@ -12,11 +12,6 @@ class CollectedDeliveryFullView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Delivery Details",
-          ),
-        ),
         body: Container(
           child: Center(
             child: Padding(
