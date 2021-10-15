@@ -37,9 +37,9 @@ class GetAllTransientOrders extends DeliveryListEvent {
 }
 
 class GetAllTransientCollectedOrders extends DeliveryListEvent {
-  final int deliveryAgentHomeAddressID;
+  final int deliveryAgentID;
   GetAllTransientCollectedOrders({
-    this.deliveryAgentHomeAddressID,
+    this.deliveryAgentID,
   });
 }
 

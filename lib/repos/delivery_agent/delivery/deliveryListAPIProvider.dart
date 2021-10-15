@@ -73,11 +73,13 @@ class DeliveryListAPIProvider {
     }
   }
 
-  Future<TransientCollectedList> getAllTransientCollectedOrders() async {
+  Future<TransientCollectedList> getAllTransientCollectedOrders(
+    int deliveryAgentID,
+  ) async {
     try {
       Response response = await _dio.post(
-        "delivery-agent/order/transient_collect/view",
-      );
+          "delivery-agent/order/transient_collect/view",
+          data: {"deliveryAgentID": deliveryAgentID});
       return TransientCollectedList.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
