@@ -32,16 +32,16 @@ class DeliveryAgentStartingPage extends StatelessWidget {
                   DeliveryAgentSignInProvider.id,
                 ),
               ),
-              RoundedButtonFilled(
-                title: "SIGN UP",
-                size: size,
-                fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
-                textColor: GoPharmaColors.BlackColor,
-                onTapped: () => Navigator.pushNamed(
-                  context,
-                  DeliveryAgentSignUpProvider.id,
-                ),
-              ),
+              // RoundedButtonFilled(
+              //   title: "SIGN UP",
+              //   size: size,
+              //   fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
+              //   textColor: GoPharmaColors.BlackColor,
+              //   onTapped: () => Navigator.pushNamed(
+              //     context,
+              //     DeliveryAgentSignUpProvider.id,
+              //   ),
+              // ),
             ],
           ),
         ),
