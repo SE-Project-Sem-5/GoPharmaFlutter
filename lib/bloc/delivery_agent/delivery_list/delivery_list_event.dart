@@ -46,3 +46,33 @@ class GetAllTransientCollectedOrders extends DeliveryListEvent {
 class GetAllShippedOrders extends DeliveryListEvent {
   GetAllShippedOrders();
 }
+
+class ReserveOrderFOrDeliveryEvent extends DeliveryListEvent {
+  final int deliveryAgentID;
+  final int orderProductID;
+  ReserveOrderFOrDeliveryEvent({this.deliveryAgentID, this.orderProductID});
+}
+
+class CollectOrderEvent extends DeliveryListEvent {
+  final int deliveryAgentID;
+  final int orderProductID;
+  CollectOrderEvent({this.deliveryAgentID, this.orderProductID});
+}
+
+class TransitionOrderEvent extends DeliveryListEvent {
+  final int deliveryAgentID;
+  final int orderID;
+  TransitionOrderEvent({this.deliveryAgentID, this.orderID});
+}
+
+class TransitionCollectOrderEvent extends DeliveryListEvent {
+  final int deliveryAgentID;
+  final int orderID;
+  TransitionCollectOrderEvent({this.deliveryAgentID, this.orderID});
+}
+
+class ShipOrderEvent extends DeliveryListEvent {
+  final int deliveryAgentID;
+  final int orderID;
+  ShipOrderEvent({this.deliveryAgentID, this.orderID});
+}
