@@ -155,7 +155,9 @@ class ReservedDeliveryFullView extends StatelessWidget {
                               ),
                             );
                             Navigator.pushReplacementNamed(
-                                context, ReservedDeliveriesPage.id);
+                              context,
+                              ReservedDeliveriesPage.id,
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             primary: GoPharmaColors.PrimaryColor,

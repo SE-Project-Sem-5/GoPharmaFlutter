@@ -47,7 +47,8 @@ class DeliveryListAPIProvider {
   }
 
   Future<CollectedDeliveryList> getCollectedDeliveryOrders(
-      int deliveryAgentHomeAddressID) async {
+    int deliveryAgentHomeAddressID,
+  ) async {
     try {
       Response response = await _dio.post(
         "delivery-agent/order/collected/view",
@@ -121,14 +122,14 @@ class DeliveryListAPIProvider {
 
   Future<OrderResponse> collectOrderProduct(
     int deliveryAgentID,
-    int orderProductID,
+    int orderID,
   ) async {
     try {
       Response response = await _dio.post(
         "delivery-agent/order/order-product/collect",
         data: {
           "deliveryAgentID": deliveryAgentID,
-          "orderProductID": orderProductID
+          "orderID": orderID,
         },
       );
       return OrderResponse.fromJson(response.data);
@@ -138,10 +139,17 @@ class DeliveryListAPIProvider {
     }
   }
 
-  Future<OrderResponse> transientOrder() async {
+  Future<OrderResponse> transientOrder(
+    int deliveryAgentID,
+    int orderID,
+  ) async {
     try {
       Response response = await _dio.post(
-        "delivery-agent/order/ship/view",
+        "delivery-agent/order/transient",
+        data: {
+          "deliveryAgentID": deliveryAgentID,
+          "orderID": orderID,
+        },
       );
       return OrderResponse.fromJson(response.data);
     } catch (error, stacktrace) {
@@ -150,10 +158,17 @@ class DeliveryListAPIProvider {
     }
   }
 
-  Future<OrderResponse> transientCollectOrder() async {
+  Future<OrderResponse> transientCollectOrder(
+    int deliveryAgentID,
+    int orderID,
+  ) async {
     try {
       Response response = await _dio.post(
-        "delivery-agent/order/ship/view",
+        "delivery-agent/order/transient_collect",
+        data: {
+          "deliveryAgentID": deliveryAgentID,
+          "orderID": orderID,
+        },
       );
       return OrderResponse.fromJson(response.data);
     } catch (error, stacktrace) {
@@ -162,10 +177,17 @@ class DeliveryListAPIProvider {
     }
   }
 
-  Future<OrderResponse> shipOrder() async {
+  Future<OrderResponse> shipOrder(
+    int deliveryAgentID,
+    int orderID,
+  ) async {
     try {
       Response response = await _dio.post(
-        "delivery-agent/order/ship/view",
+        "delivery-agent/order/ship",
+        data: {
+          "deliveryAgentID": deliveryAgentID,
+          "orderID": orderID,
+        },
       );
       return OrderResponse.fromJson(response.data);
     } catch (error, stacktrace) {
