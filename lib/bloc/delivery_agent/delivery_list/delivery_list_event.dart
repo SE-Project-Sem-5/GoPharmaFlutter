@@ -47,10 +47,10 @@ class GetAllShippedOrders extends DeliveryListEvent {
   GetAllShippedOrders();
 }
 
-class ReserveOrderFOrDeliveryEvent extends DeliveryListEvent {
+class ReserveOrderForDeliveryEvent extends DeliveryListEvent {
   final int deliveryAgentID;
   final int orderProductID;
-  ReserveOrderFOrDeliveryEvent({this.deliveryAgentID, this.orderProductID});
+  ReserveOrderForDeliveryEvent({this.deliveryAgentID, this.orderProductID});
 }
 
 class CollectOrderEvent extends DeliveryListEvent {

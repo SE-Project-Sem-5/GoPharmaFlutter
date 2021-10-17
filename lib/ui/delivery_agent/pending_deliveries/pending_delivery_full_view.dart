@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
@@ -9,6 +12,8 @@ class PendingDeliveryFullView extends StatelessWidget {
   final double rightPadding = 20.0;
   @override
   Widget build(BuildContext context) {
+    final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
+
     return Container(
       child: Center(
         child: Padding(
@@ -124,7 +129,14 @@ class PendingDeliveryFullView extends StatelessWidget {
                       bottom: 15.0,
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        deliveryListBloc.add(
+                          ReserveOrderForDeliveryEvent(
+                            deliveryAgentID: 10,
+                            orderProductID: delivery.id,
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: GoPharmaColors.PrimaryColor,
                         textStyle: TextStyle(
