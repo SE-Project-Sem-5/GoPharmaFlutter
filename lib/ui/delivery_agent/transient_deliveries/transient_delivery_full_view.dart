@@ -136,45 +136,17 @@ class TransientDeliveryFullView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                           horizontal: 40.0,
                         ),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Reserve this delivery?",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                              ),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            primary: GoPharmaColors.PrimaryColor,
+                            textStyle: TextStyle(
+                              fontWeight: FontWeight.bold,
                             ),
-                            SizedBox(
-                              width: 7,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                primary: GoPharmaColors.PrimaryColor,
-                                textStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              child: Text(
-                                "Yes",
-                              ),
-                            ),
-                            SizedBox(
-                              width: 7,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                primary: GoPharmaColors.PrimaryColor,
-                                textStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              child: Text(
-                                "No",
-                              ),
-                            )
-                          ],
+                          ),
+                          child: Text(
+                            "Confirm Delivery Handover",
+                          ),
                         ),
                       ),
                     ],
