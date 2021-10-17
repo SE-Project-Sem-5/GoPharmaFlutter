@@ -119,10 +119,17 @@ class DeliveryListAPIProvider {
     }
   }
 
-  Future<OrderResponse> collectOrderProduct() async {
+  Future<OrderResponse> collectOrderProduct(
+    int deliveryAgentID,
+    int orderProductID,
+  ) async {
     try {
       Response response = await _dio.post(
-        "delivery-agent/order/ship/view",
+        "delivery-agent/order/order-product/collect",
+        data: {
+          "deliveryAgentID": deliveryAgentID,
+          "orderProductID": orderProductID
+        },
       );
       return OrderResponse.fromJson(response.data);
     } catch (error, stacktrace) {
