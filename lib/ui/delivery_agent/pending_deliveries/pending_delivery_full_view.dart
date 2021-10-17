@@ -134,6 +134,7 @@ class PendingDeliveryFullView extends StatelessWidget {
                           ReserveOrderForDeliveryEvent(
                             deliveryAgentID: 10,
                             orderProductID: delivery.id,
+                            deliveryAgentHomeAddressID: 3,
                           ),
                         );
                       },
