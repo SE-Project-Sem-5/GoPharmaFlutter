@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
+import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/collectedDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
@@ -96,6 +97,85 @@ class DeliveryListAPIProvider {
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return ShippedOrderList();
+    }
+  }
+
+  Future<OrderResponse> reserveOrderProduct(
+    int deliveryAgentID,
+    int orderProductID,
+  ) async {
+    try {
+      Response response = await _dio.post(
+        "delivery-agent/order/order_product/reserve",
+        data: {
+          "deliveryAgentID": deliveryAgentID,
+          "orderProductID": orderProductID
+        },
+      );
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
+
+  Future<OrderResponse> collectOrderProduct() async {
+    try {
+      Response response = await _dio.post(
+        "delivery-agent/order/ship/view",
+      );
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
+
+  Future<OrderResponse> transientOrder() async {
+    try {
+      Response response = await _dio.post(
+        "delivery-agent/order/ship/view",
+      );
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
+
+  Future<OrderResponse> transientCollectOrder() async {
+    try {
+      Response response = await _dio.post(
+        "delivery-agent/order/ship/view",
+      );
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
+
+  Future<OrderResponse> shipOrder() async {
+    try {
+      Response response = await _dio.post(
+        "delivery-agent/order/ship/view",
+      );
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
+
+  Future<OrderResponse> deliverOrder() async {
+    try {
+      Response response = await _dio.post(
+        "delivery-agent/order/ship/view",
+      );
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
     }
   }
 }

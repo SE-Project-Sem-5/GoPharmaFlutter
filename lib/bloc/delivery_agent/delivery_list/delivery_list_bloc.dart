@@ -100,6 +100,51 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
           shippedOrders: shippedOrders,
         );
         break;
+      case ReserveOrderForDeliveryEvent:
+        yield state.clone(
+          isLoading: true,
+        );
+        final deliveryAgentID =
+            (event as ReserveOrderForDeliveryEvent).deliveryAgentID;
+        final orderProductID =
+            (event as ReserveOrderForDeliveryEvent).orderProductID;
+        var reservedOrderProduct =
+            await deliveryListAPIProvider.reserveOrderProduct(
+          deliveryAgentID,
+          orderProductID,
+        );
+        final deliveryAgentHomeAddressID =
+            (event as ReserveOrderForDeliveryEvent).deliveryAgentHomeAddressID;
+        print(reservedOrderProduct);
+        print(reservedOrderProduct.orderID);
+        var confirmedOrders =
+            await deliveryListAPIProvider.getConfirmedDeliveryOrders(
+          deliveryAgentID,
+          deliveryAgentHomeAddressID,
+        );
+        print(confirmedOrders.deliveries);
+        yield state.clone(
+          isLoading: false,
+          confirmedOrders: confirmedOrders,
+        );
+        break;
+      case CollectOrderEvent:
+        yield state.clone(
+          isLoading: true,
+        );
+        final deliveryAgentID = (event as CollectOrderEvent).deliveryAgentID;
+        final orderProductID = (event as CollectOrderEvent).orderProductID;
+        final deliveryAgentHomeAddressID =
+            (event as CollectOrderEvent).deliveryAgentHomeAddressID;
+        var reservedOrders =
+            await deliveryListAPIProvider.getReservedDeliveryOrders(
+          deliveryAgentHomeAddressID,
+        );
+        yield state.clone(
+          isLoading: false,
+          reservedOrders: reservedOrders,
+        );
+        break;
     }
   }
 
