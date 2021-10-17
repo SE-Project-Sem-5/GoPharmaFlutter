@@ -29,13 +29,14 @@ class CollectedDelivery {
   String district;
   String currentLocation;
 
-  CollectedDelivery(
-      {this.id,
-      this.products,
-      this.status,
-      this.totalPrice,
-      this.district,
-      this.currentLocation});
+  CollectedDelivery({
+    this.id,
+    this.products,
+    this.status,
+    this.totalPrice,
+    this.district,
+    this.currentLocation,
+  });
 
   CollectedDelivery.fromJson(Map<String, dynamic> json) {
     id = json['id'];

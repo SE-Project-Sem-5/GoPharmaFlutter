@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
 
 class ReservedDeliveryFullView extends StatelessWidget {
   final ReservedDelivery delivery;
@@ -10,6 +14,8 @@ class ReservedDeliveryFullView extends StatelessWidget {
   final double rightPadding = 30.0;
   @override
   Widget build(BuildContext context) {
+    final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -140,7 +146,19 @@ class ReservedDeliveryFullView extends StatelessWidget {
                           bottom: 15.0,
                         ),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            deliveryListBloc.add(
+                              CollectOrderEvent(
+                                deliveryAgentID: 10,
+                                orderProductID: delivery.id,
+                                deliveryAgentHomeAddressID: 3,
+                              ),
+                            );
+                            Navigator.pushReplacementNamed(
+                              context,
+                              ReservedDeliveriesPage.id,
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             primary: GoPharmaColors.PrimaryColor,
                             textStyle: TextStyle(

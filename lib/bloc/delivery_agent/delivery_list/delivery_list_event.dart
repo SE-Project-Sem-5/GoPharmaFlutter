@@ -85,11 +85,23 @@ class TransitionOrderEvent extends DeliveryListEvent {
 class TransitionCollectOrderEvent extends DeliveryListEvent {
   final int deliveryAgentID;
   final int orderID;
-  TransitionCollectOrderEvent({this.deliveryAgentID, this.orderID});
+  final int deliveryAgentHomeAddressID;
+
+  TransitionCollectOrderEvent({
+    this.deliveryAgentID,
+    this.orderID,
+    this.deliveryAgentHomeAddressID,
+  });
 }
 
 class ShipOrderEvent extends DeliveryListEvent {
   final int deliveryAgentID;
   final int orderID;
-  ShipOrderEvent({this.deliveryAgentID, this.orderID});
+  final int deliveryAgentHomeAddressID;
+
+  ShipOrderEvent({
+    this.deliveryAgentID,
+    this.orderID,
+    this.deliveryAgentHomeAddressID,
+  });
 }

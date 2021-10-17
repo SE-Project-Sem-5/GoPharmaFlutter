@@ -9,7 +9,7 @@ class ProductAPIProvider {
   Future<ProductList> getAllProducts(String category) async {
     try {
       Response response = await _dio.post(
-        "customer/category/product",
+        "information/category/product",
         data: {"category": category},
       );
       print(response);
