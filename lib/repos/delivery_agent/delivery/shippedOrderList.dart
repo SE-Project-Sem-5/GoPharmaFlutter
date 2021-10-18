@@ -4,9 +4,9 @@ class ShippedOrderList {
   ShippedOrderList({this.deliveries});
 
   ShippedOrderList.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
+    if (json['deliveries'] != null) {
       deliveries = [];
-      json['data'].forEach((v) {
+      json['deliveries'].forEach((v) {
         deliveries.add(new ShippedDelivery.fromJson(v));
       });
     }
@@ -15,7 +15,7 @@ class ShippedOrderList {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.deliveries != null) {
-      data['data'] = this.deliveries.map((v) => v.toJson()).toList();
+      data['deliveries'] = this.deliveries.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -24,20 +24,29 @@ class ShippedOrderList {
 class ShippedDelivery {
   int orderID;
   int totalPrice;
-  String destinationAddress;
+  int customerID;
+  String customerEmail;
+  String customerContactNumber;
+  String customerAddress;
   List<Products> products;
 
   ShippedDelivery({
     this.orderID,
     this.totalPrice,
-    this.destinationAddress,
+    this.customerID,
+    this.customerEmail,
+    this.customerContactNumber,
+    this.customerAddress,
     this.products,
   });
 
   ShippedDelivery.fromJson(Map<String, dynamic> json) {
     orderID = json['orderID'];
     totalPrice = json['totalPrice'];
-    destinationAddress = json['destinationAddress'];
+    customerID = json['customerID'];
+    customerEmail = json['customerEmail'];
+    customerContactNumber = json['customerContactNumber'];
+    customerAddress = json['customerAddress'];
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
@@ -50,7 +59,10 @@ class ShippedDelivery {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['orderID'] = this.orderID;
     data['totalPrice'] = this.totalPrice;
-    data['destinationAddress'] = this.destinationAddress;
+    data['customerID'] = this.customerID;
+    data['customerEmail'] = this.customerEmail;
+    data['customerContactNumber'] = this.customerContactNumber;
+    data['customerAddress'] = this.customerAddress;
     if (this.products != null) {
       data['products'] = this.products.map((v) => v.toJson()).toList();
     }

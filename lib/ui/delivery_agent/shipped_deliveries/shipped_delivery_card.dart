@@ -40,7 +40,15 @@ class ShippedDeliveryCard extends StatelessWidget {
                 horizontal: 70,
               ),
               child: Text(
-                "Customer Address: " + delivery.destinationAddress,
+                "Customer Address: " + delivery.customerAddress,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 70,
+              ),
+              child: Text(
+                "Customer Contact Number: " + delivery.customerContactNumber,
               ),
             ),
             Padding(
