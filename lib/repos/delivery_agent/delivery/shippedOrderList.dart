@@ -4,20 +4,12 @@ class ShippedOrderList {
   ShippedOrderList({this.deliveries});
 
   ShippedOrderList.fromJson(Map<String, dynamic> json) {
-    if (json['deliveries'] != null) {
+    if (json['data'] != null) {
       deliveries = [];
-      json['deliveries'].forEach((v) {
+      json['data'].forEach((v) {
         deliveries.add(new ShippedDelivery.fromJson(v));
       });
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.deliveries != null) {
-      data['deliveries'] = this.deliveries.map((v) => v.toJson()).toList();
-    }
-    return data;
   }
 }
 
