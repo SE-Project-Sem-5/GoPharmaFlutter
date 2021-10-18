@@ -105,3 +105,27 @@ class ShipOrderEvent extends DeliveryListEvent {
     this.deliveryAgentHomeAddressID,
   });
 }
+
+class DeliverCashOrder extends DeliveryListEvent {
+  final int deliveryAgentID;
+  final int orderID;
+  final int deliveryAgentHomeAddressID;
+
+  DeliverCashOrder({
+    this.deliveryAgentID,
+    this.orderID,
+    this.deliveryAgentHomeAddressID,
+  });
+}
+
+class DeliverOnlineOrder extends DeliveryListEvent {
+  final int deliveryAgentID;
+  final int orderID;
+  final int deliveryAgentHomeAddressID;
+
+  DeliverOnlineOrder({
+    this.deliveryAgentID,
+    this.orderID,
+    this.deliveryAgentHomeAddressID,
+  });
+}
