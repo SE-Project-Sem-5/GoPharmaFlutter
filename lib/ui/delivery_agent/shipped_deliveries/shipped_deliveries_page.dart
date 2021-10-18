@@ -7,7 +7,6 @@ import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'shipped_delivery_card.dart';
 
 class ShippedDeliveriesPage extends StatelessWidget {
-  //TODO:replace with the list gotten from the backend
   static final String id = "shipped_deliveries_page";
   final String title = "Shipped Deliveries";
 

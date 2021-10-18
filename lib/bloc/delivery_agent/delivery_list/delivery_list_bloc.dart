@@ -208,6 +208,68 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
           transientCollectedOrders: transientCollectedOrders,
         );
         break;
+      case DeliverCashOrder:
+        yield state.clone(
+          isLoading: true,
+        );
+        final deliveryAgentID = (event as DeliverCashOrder).deliveryAgentID;
+        final orderID = (event as DeliverCashOrder).orderID;
+        final amountPaid = (event as DeliverCashOrder).amountPaid;
+        final checkoutDiscount = (event as DeliverCashOrder).checkoutDiscount;
+        final currency = (event as DeliverCashOrder).currency;
+        final customerEmail = (event as DeliverCashOrder).customerEmail;
+        final customerID = (event as DeliverCashOrder).customerID;
+        await deliveryListAPIProvider.deliverCashOrder(
+          deliveryAgentID: deliveryAgentID,
+          orderID: orderID,
+          amountPaid: amountPaid,
+          checkoutDiscount: checkoutDiscount,
+          currency: currency,
+          customerEmail: customerEmail,
+          customerID: customerID,
+        );
+        var shippedOrders = await deliveryListAPIProvider.getAllShippedOrders();
+        yield state.clone(
+          isLoading: false,
+          shippedOrders: shippedOrders,
+        );
+        break;
+      case DeliverOnlineOrder:
+        yield state.clone(
+          isLoading: true,
+        );
+        final deliveryAgentID = (event as DeliverOnlineOrder).deliveryAgentID;
+        final orderID = (event as DeliverOnlineOrder).orderID;
+        await deliveryListAPIProvider.shipOrder(
+          deliveryAgentID,
+          orderID,
+        );
+        var transientCollectedOrders = await deliveryListAPIProvider
+            .getAllTransientCollectedOrders(deliveryAgentID);
+        print(transientCollectedOrders);
+        yield state.clone(
+          isLoading: false,
+          transientCollectedOrders: transientCollectedOrders,
+        );
+        break;
+      case DeliverCashOrder:
+        yield state.clone(
+          isLoading: true,
+        );
+        final deliveryAgentID = (event as DeliverCashOrder).deliveryAgentID;
+        final orderID = (event as DeliverCashOrder).orderID;
+        await deliveryListAPIProvider.shipOrder(
+          deliveryAgentID,
+          orderID,
+        );
+        var transientCollectedOrders = await deliveryListAPIProvider
+            .getAllTransientCollectedOrders(deliveryAgentID);
+        print(transientCollectedOrders);
+        yield state.clone(
+          isLoading: false,
+          transientCollectedOrders: transientCollectedOrders,
+        );
+        break;
     }
   }
 

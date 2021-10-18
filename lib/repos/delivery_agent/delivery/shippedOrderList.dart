@@ -11,50 +11,46 @@ class ShippedOrderList {
       });
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.deliveries != null) {
-      data['data'] = this.deliveries.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
 class ShippedDelivery {
   int orderID;
   int totalPrice;
-  String destinationAddress;
+  int customerID;
+  String paymentType;
+  String customerName;
+  String customerEmail;
+  String customerContactNumber;
+  String customerAddress;
   List<Products> products;
 
   ShippedDelivery({
     this.orderID,
     this.totalPrice,
-    this.destinationAddress,
+    this.paymentType,
+    this.customerID,
+    this.customerName,
+    this.customerEmail,
+    this.customerContactNumber,
+    this.customerAddress,
     this.products,
   });
 
   ShippedDelivery.fromJson(Map<String, dynamic> json) {
     orderID = json['orderID'];
     totalPrice = json['totalPrice'];
-    destinationAddress = json['destinationAddress'];
+    customerID = json['customerID'];
+    paymentType = json['paymentType'];
+    customerName = json['customerName'];
+    customerEmail = json['customerEmail'];
+    customerContactNumber = json['customerContactNumber'];
+    customerAddress = json['customerAddress'];
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
         products.add(new Products.fromJson(v));
       });
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['orderID'] = this.orderID;
-    data['totalPrice'] = this.totalPrice;
-    data['destinationAddress'] = this.destinationAddress;
-    if (this.products != null) {
-      data['products'] = this.products.map((v) => v.toJson()).toList();
-    }
-    return data;
   }
 }
 

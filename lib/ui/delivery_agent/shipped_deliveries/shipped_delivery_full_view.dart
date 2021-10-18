@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_deliveries_page.dart';
 
 class ShippedDeliveryFullView extends StatelessWidget {
   final ShippedDelivery delivery;
@@ -10,6 +14,7 @@ class ShippedDeliveryFullView extends StatelessWidget {
   final double rightPadding = 30.0;
   @override
   Widget build(BuildContext context) {
+    final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -20,7 +25,11 @@ class ShippedDeliveryFullView extends StatelessWidget {
         body: Container(
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.only(
+                bottom: 10.0,
+                top: 10.0,
+                left: 10.0,
+              ),
               child: Container(
                 decoration: new BoxDecoration(
                   boxShadow: [
@@ -36,15 +45,44 @@ class ShippedDeliveryFullView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: rightPadding,
+                        padding: EdgeInsets.only(
+                          top: 20.0,
+                          bottom: 10.0,
+                          left: rightPadding,
+                          right: rightPadding,
                         ),
                         child: Text(
                           "Delivery " + delivery.orderID.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: leftPadding,
+                        ),
+                        child: Text(
+                          "Customer Name: " + delivery.customerName,
+                        ),
+                      ),
+                      SizedBox(height: 5.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: leftPadding,
+                        ),
+                        child: Text(
+                          "Customer Address: " + delivery.customerAddress,
+                        ),
+                      ),
+                      SizedBox(height: 5.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: leftPadding,
+                        ),
+                        child: Text(
+                          "Customer Contact Number: " +
+                              delivery.customerContactNumber,
                         ),
                       ),
                       HorizontalLine(
@@ -137,20 +175,60 @@ class ShippedDeliveryFullView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                           horizontal: 40.0,
                         ),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            primary: GoPharmaColors.PrimaryColor,
-                            textStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          child: Text(
-                            //Accept Payment first for cash orders
-                            //do both in one endpoint?
-                            "Confirm Delivery to Customer",
-                          ),
-                        ),
+                        child: delivery.paymentType == "cash"
+                            ? ElevatedButton(
+                                onPressed: () {
+                                  deliveryListBloc.add(
+                                    DeliverCashOrder(
+                                      customerEmail: delivery.customerEmail,
+                                      deliveryAgentID: 10,
+                                      orderID: delivery.orderID,
+                                      amountPaid:
+                                          delivery.totalPrice.toDouble(),
+                                      customerID: delivery.customerID,
+                                    ),
+                                  );
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    ShippedDeliveriesPage.id,
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: GoPharmaColors.PrimaryColor,
+                                  textStyle: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                child: Text(
+                                  //Accept Payment first for cash orders
+                                  //do both in one endpoint?
+                                  "Accept Payment for Delivery Confirmation",
+                                ),
+                              )
+                            : ElevatedButton(
+                                onPressed: () {
+                                  DeliverCashOrder(
+                                    customerEmail: delivery.customerEmail,
+                                    deliveryAgentID: 10,
+                                    orderID: delivery.orderID,
+                                    amountPaid: delivery.totalPrice.toDouble(),
+                                    customerID: delivery.customerID,
+                                  );
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    ShippedDeliveriesPage.id,
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: GoPharmaColors.PrimaryColor,
+                                  textStyle: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                child: Text(
+                                  "Confirm Delivery to Customer",
+                                ),
+                              ),
                       ),
                     ],
                   ),
