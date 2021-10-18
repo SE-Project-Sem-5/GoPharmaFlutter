@@ -112,53 +112,52 @@ class ShippedDeliveryFullView extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: 10.0,
-                                      right: rightPadding,
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Product: " +
-                                              delivery
-                                                  .products[index].productName,
-                                          style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                  padding: EdgeInsets.only(
+                                    left: 10.0,
+                                    right: rightPadding,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Product: " +
+                                            delivery
+                                                .products[index].productName,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w600,
                                         ),
-                                        SizedBox(
-                                          height: 5.0,
+                                      ),
+                                      SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      Text(
+                                        "Quantity: " +
+                                            delivery.products[index].quantity
+                                                .toString(),
+                                        style: TextStyle(
+                                          fontSize: 16.0,
                                         ),
-                                        Text(
-                                          "Quantity: " +
-                                              delivery.products[index].quantity
-                                                  .toString(),
-                                          style: TextStyle(
-                                            fontSize: 16.0,
-                                          ),
+                                      ),
+                                      SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      Text(
+                                        "Total Price: Rs." +
+                                            delivery.products[index].totalPrice
+                                                .toStringAsFixed(2),
+                                        style: TextStyle(
+                                          fontSize: 16.0,
                                         ),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Text(
-                                          "Total Price: Rs." +
-                                              delivery
-                                                  .products[index].totalPrice
-                                                  .toStringAsFixed(2),
-                                          style: TextStyle(
-                                            fontSize: 16.0,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10.0,
-                                        ),
-                                      ],
-                                    )),
+                                      ),
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -167,6 +166,26 @@ class ShippedDeliveryFullView extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
+                      delivery.paymentType == "cash"
+                          ? Padding(
+                              padding: EdgeInsets.only(left: leftPadding),
+                              child: Text(
+                                "Total Price To Be Paid: " +
+                                    delivery.totalPrice.toStringAsFixed(2),
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            )
+                          : Padding(
+                              padding: EdgeInsets.only(left: leftPadding),
+                              child: Text(
+                                "This order has already been paid for by the customer",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            ),
                       HorizontalLine(
                         leftPadding: leftPadding,
                         rightPadding: rightPadding,
@@ -207,12 +226,11 @@ class ShippedDeliveryFullView extends StatelessWidget {
                               )
                             : ElevatedButton(
                                 onPressed: () {
-                                  DeliverCashOrder(
-                                    customerEmail: delivery.customerEmail,
-                                    deliveryAgentID: 10,
-                                    orderID: delivery.orderID,
-                                    amountPaid: delivery.totalPrice.toDouble(),
-                                    customerID: delivery.customerID,
+                                  deliveryListBloc.add(
+                                    DeliverOnlineOrder(
+                                      deliveryAgentID: 10,
+                                      orderID: delivery.orderID,
+                                    ),
                                   );
                                   Navigator.pushReplacementNamed(
                                     context,
