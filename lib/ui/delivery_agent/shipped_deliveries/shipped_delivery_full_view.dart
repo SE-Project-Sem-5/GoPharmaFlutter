@@ -20,7 +20,11 @@ class ShippedDeliveryFullView extends StatelessWidget {
         body: Container(
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.only(
+                bottom: 10.0,
+                top: 10.0,
+                left: 10.0,
+              ),
               child: Container(
                 decoration: new BoxDecoration(
                   boxShadow: [
@@ -36,15 +40,44 @@ class ShippedDeliveryFullView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: rightPadding,
+                        padding: EdgeInsets.only(
+                          top: 20.0,
+                          bottom: 10.0,
+                          left: rightPadding,
+                          right: rightPadding,
                         ),
                         child: Text(
                           "Delivery " + delivery.orderID.toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: leftPadding,
+                        ),
+                        child: Text(
+                          "Customer Name: " + delivery.customerName,
+                        ),
+                      ),
+                      SizedBox(height: 5.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: leftPadding,
+                        ),
+                        child: Text(
+                          "Customer Address: " + delivery.customerAddress,
+                        ),
+                      ),
+                      SizedBox(height: 5.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: leftPadding,
+                        ),
+                        child: Text(
+                          "Customer Contact Number: " +
+                              delivery.customerContactNumber,
                         ),
                       ),
                       HorizontalLine(

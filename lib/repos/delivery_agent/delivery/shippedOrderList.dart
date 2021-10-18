@@ -17,6 +17,7 @@ class ShippedDelivery {
   int orderID;
   int totalPrice;
   int customerID;
+  String customerName;
   String customerEmail;
   String customerContactNumber;
   String customerAddress;
@@ -26,6 +27,7 @@ class ShippedDelivery {
     this.orderID,
     this.totalPrice,
     this.customerID,
+    this.customerName,
     this.customerEmail,
     this.customerContactNumber,
     this.customerAddress,
@@ -36,6 +38,7 @@ class ShippedDelivery {
     orderID = json['orderID'];
     totalPrice = json['totalPrice'];
     customerID = json['customerID'];
+    customerName = json['customerName'];
     customerEmail = json['customerEmail'];
     customerContactNumber = json['customerContactNumber'];
     customerAddress = json['customerAddress'];
@@ -45,20 +48,6 @@ class ShippedDelivery {
         products.add(new Products.fromJson(v));
       });
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['orderID'] = this.orderID;
-    data['totalPrice'] = this.totalPrice;
-    data['customerID'] = this.customerID;
-    data['customerEmail'] = this.customerEmail;
-    data['customerContactNumber'] = this.customerContactNumber;
-    data['customerAddress'] = this.customerAddress;
-    if (this.products != null) {
-      data['products'] = this.products.map((v) => v.toJson()).toList();
-    }
-    return data;
   }
 }
 

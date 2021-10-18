@@ -20,6 +20,7 @@ class ShippedDeliveryCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(4.0),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
               leading: Icon(
@@ -40,9 +41,19 @@ class ShippedDeliveryCard extends StatelessWidget {
                 horizontal: 70,
               ),
               child: Text(
+                "Customer Name: " + delivery.customerName,
+              ),
+            ),
+            SizedBox(height: 5.0),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 70,
+              ),
+              child: Text(
                 "Customer Address: " + delivery.customerAddress,
               ),
             ),
+            SizedBox(height: 5.0),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 70,
