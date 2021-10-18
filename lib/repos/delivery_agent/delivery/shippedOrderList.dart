@@ -17,6 +17,7 @@ class ShippedDelivery {
   int orderID;
   int totalPrice;
   int customerID;
+  String paymentType;
   String customerName;
   String customerEmail;
   String customerContactNumber;
@@ -26,6 +27,7 @@ class ShippedDelivery {
   ShippedDelivery({
     this.orderID,
     this.totalPrice,
+    this.paymentType,
     this.customerID,
     this.customerName,
     this.customerEmail,
@@ -38,6 +40,7 @@ class ShippedDelivery {
     orderID = json['orderID'];
     totalPrice = json['totalPrice'];
     customerID = json['customerID'];
+    paymentType = json['paymentType'];
     customerName = json['customerName'];
     customerEmail = json['customerEmail'];
     customerContactNumber = json['customerContactNumber'];

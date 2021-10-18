@@ -109,12 +109,20 @@ class ShipOrderEvent extends DeliveryListEvent {
 class DeliverCashOrder extends DeliveryListEvent {
   final int deliveryAgentID;
   final int orderID;
-  final int deliveryAgentHomeAddressID;
+  final double amountPaid;
+  final double checkoutDiscount;
+  final String currency;
+  final String customerEmail;
+  final int customerID;
 
   DeliverCashOrder({
-    this.deliveryAgentID,
-    this.orderID,
-    this.deliveryAgentHomeAddressID,
+    @required this.deliveryAgentID,
+    @required this.orderID,
+    @required this.amountPaid,
+    this.checkoutDiscount = 0.0,
+    this.currency = "LKR",
+    @required this.customerEmail,
+    @required this.customerID,
   });
 }
 

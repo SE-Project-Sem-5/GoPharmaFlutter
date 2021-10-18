@@ -196,10 +196,39 @@ class DeliveryListAPIProvider {
     }
   }
 
-  Future<OrderResponse> deliverOrder() async {
+  Future<OrderResponse> deliverCashOrder({
+    int deliveryAgentID,
+    int orderID,
+    double amountPaid,
+    double checkoutDiscount,
+    String currency,
+    String customerEmail,
+    int customerID,
+  }) async {
     try {
       Response response = await _dio.post(
-        "delivery-agent/order/ship/view",
+        "delivery-agent/order/cash/deliver",
+        data: {
+          "deliveryAgentID": deliveryAgentID,
+          "orderID": orderID,
+          "amountPaid": amountPaid,
+          "checkoutDiscount": checkoutDiscount,
+          "currency": currency,
+          "customerEmail": customerEmail,
+          "customerID": customerID,
+        },
+      );
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
+
+  Future<OrderResponse> deliverOnlineOrder() async {
+    try {
+      Response response = await _dio.post(
+        "delivery-agent/order/online/deliver",
       );
       return OrderResponse.fromJson(response.data);
     } catch (error, stacktrace) {
