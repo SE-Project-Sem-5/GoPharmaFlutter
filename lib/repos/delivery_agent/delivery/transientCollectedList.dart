@@ -3,7 +3,11 @@ class TransientCollectedList {
   String msg;
   List<TransientCollectedDelivery> deliveries;
 
-  TransientCollectedList({this.type, this.msg, this.deliveries});
+  TransientCollectedList({
+    this.type,
+    this.msg,
+    this.deliveries,
+  });
 
   TransientCollectedList.fromJson(Map<String, dynamic> json) {
     type = json['type'];
@@ -73,7 +77,12 @@ class Products {
   int totalPrice;
   String productName;
 
-  Products({this.id, this.quantity, this.totalPrice, this.productName});
+  Products({
+    this.id,
+    this.quantity,
+    this.totalPrice,
+    this.productName,
+  });
 
   Products.fromJson(Map<String, dynamic> json) {
     id = json['id'];

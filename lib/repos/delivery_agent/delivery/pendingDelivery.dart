@@ -33,17 +33,18 @@ class Delivery {
   String address;
   String district;
 
-  Delivery(
-      {this.id,
-      this.productName,
-      this.quantity,
-      this.status,
-      this.brandName,
-      this.totalPrice,
-      this.supplierName,
-      this.supplierContactNo,
-      this.address,
-      this.district});
+  Delivery({
+    this.id,
+    this.productName,
+    this.quantity,
+    this.status,
+    this.brandName,
+    this.totalPrice,
+    this.supplierName,
+    this.supplierContactNo,
+    this.address,
+    this.district,
+  });
 
   Delivery.fromJson(Map<String, dynamic> json) {
     id = json['id'];
