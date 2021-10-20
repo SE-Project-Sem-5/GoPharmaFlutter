@@ -12,8 +12,14 @@ class CustomerSignUpState {
   final bool isVisible;
   final CustomerSignUpStep step;
   final String twoFA;
+  final String email;
+  final String password;
+  final String role;
 
   CustomerSignUpState({
+    this.email,
+    this.password,
+    this.role,
     this.error,
     this.isVisible,
     this.step,
@@ -25,6 +31,9 @@ class CustomerSignUpState {
         isVisible: true,
         step: CustomerSignUpStep.CUSTOMERSIGNUPSTEP_START,
         twoFA: '',
+        email: '',
+        password: '',
+        role: 'customer',
       );
 
   CustomerSignUpState clone({
@@ -32,10 +41,14 @@ class CustomerSignUpState {
     bool isVisible = true,
     CustomerSignUpStep step,
     String twoFA,
+    String email,
+    String password,
   }) {
     return CustomerSignUpState(
       error: error ?? this.error,
       isVisible: isVisible ?? this.isVisible,
+      email: email ?? this.email,
+      password: password ?? this.password,
       step: step ?? this.step,
       twoFA: twoFA ?? this.twoFA,
     );

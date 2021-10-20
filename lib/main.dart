@@ -11,6 +11,7 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'bloc/customer/category/category_bloc.dart';
 import 'bloc/customer/checkout/checkout_bloc.dart';
+import 'bloc/customer/sign_up/sign_up_bloc.dart';
 import 'bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
 import 'config/routes.dart';
 import 'config/theme.dart';
@@ -50,6 +51,9 @@ class GoPharmaApp extends StatelessWidget {
         ),
         BlocProvider<CategoryBloc>(
           create: (context) => CategoryBloc(context),
+        ),
+        BlocProvider<CustomerSignUpBloc>(
+          create: (context) => CustomerSignUpBloc(context),
         ),
         BlocProvider<CustomerRootBloc>(
           create: (context) => CustomerRootBloc(context),
