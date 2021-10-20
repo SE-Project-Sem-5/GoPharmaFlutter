@@ -31,3 +31,14 @@ class UpdateTwoFA extends CustomerSignUpEvent {
   final String twoFA;
   UpdateTwoFA({this.twoFA});
 }
+
+class SignUpStep1 extends CustomerSignUpEvent {
+  final String email;
+  final String password;
+  final String role;
+  SignUpStep1({
+    this.email,
+    this.password,
+    this.role = "customer",
+  });
+}

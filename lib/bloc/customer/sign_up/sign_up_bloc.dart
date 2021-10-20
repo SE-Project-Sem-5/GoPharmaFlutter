@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_pharma/repos/common/signup/signUpAPIProvider.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 
 import 'sign_up_event.dart';
@@ -9,6 +10,7 @@ import 'sign_up_state.dart';
 
 class CustomerSignUpBloc
     extends Bloc<CustomerSignUpEvent, CustomerSignUpState> {
+  SignUpAPIProvider signUpAPIProvider = new SignUpAPIProvider();
   static List<CustomerSignUpStep> stepOrder = [
     CustomerSignUpStep.CUSTOMERSIGNUPSTEP_START,
     CustomerSignUpStep.CUSTOMERSIGNUPSTEP_INFORMATION,
@@ -30,6 +32,25 @@ class CustomerSignUpBloc
       case ToggleVisibility:
         final isVisible = state.isVisible;
         yield state.clone(isVisible: !isVisible);
+        break;
+      case SignUpStep1:
+        final email = (event as SignUpStep1).email;
+        final password = (event as SignUpStep1).password;
+        final result = await signUpAPIProvider.signUpUser(
+          email,
+          password,
+          "customer",
+        );
+        if (result == "Sign up successfully initiated.") {
+          yield state.clone(
+            email: email,
+            password: password,
+          );
+        } else {
+          yield state.clone(
+            error: result,
+          );
+        }
         break;
       case UpdateTwoFA:
         final twoFA = (event as UpdateTwoFA).twoFA;
