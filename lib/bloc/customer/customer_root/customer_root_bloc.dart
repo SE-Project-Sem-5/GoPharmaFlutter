@@ -4,14 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/repos/common/signup/user.dart';
+import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
+  final UserAPIProvider apiProvider = new UserAPIProvider();
   CustomerRootBloc(BuildContext context)
       : super(CustomerRootState.initialState) {
     _init();
   }
 
   Future<void> _init() async {
+    var prefs = await SharedPreferences.getInstance();
+    final token = (prefs.getString('token') ?? '');
+    if (token != '') {
+      apiProvider.getCurrentUser(token);
+    }
     add(StartInitCheckEvent());
     add(UpdateUserEvent(new User()));
     add(ChangeSignInStateEvent(CustomerRootSignInState.SIGNED_OUT));
@@ -39,7 +47,6 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
       case SignOutEvent:
         yield state.clone(signInState: CustomerRootSignInState.SIGNED_OUT);
         break;
-
       case ToggleVisibility:
         final isVisible = (event as ToggleVisibility).isVisible;
         yield state.clone(isVisible: isVisible);

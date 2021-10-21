@@ -152,7 +152,8 @@ class UserAPIProvider {
     }
   }
 
-  Future<Map<String, dynamic>> getCurrentUser() async {
+  Future<Map<String, dynamic>> getCurrentUser(String token) async {
+    var dio = Dio();
     try {
       Response response = await _dio.get("api/user/details");
       return {"user": User.fromJson(response.data)};
