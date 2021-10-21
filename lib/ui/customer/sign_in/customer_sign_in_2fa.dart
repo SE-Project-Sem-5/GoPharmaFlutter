@@ -8,6 +8,7 @@ import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 class CustomerSignIn2FA extends StatelessWidget {
+  static final String id = "customer_2fa";
   final _formKey = GlobalKey<FormState>();
   final _twoFAController = TextEditingController();
   final _pinPutFocusNode = FocusNode();

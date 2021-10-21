@@ -9,6 +9,7 @@ import 'package:go_pharma/ui/common/widgets/facebook_button.dart';
 import 'package:go_pharma/ui/common/widgets/google_button.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
+import 'package:go_pharma/ui/customer/sign_up/sign_up_start.dart';
 
 // ignore: must_be_immutable
 class CustomerSignInPage extends StatelessWidget {
@@ -18,7 +19,7 @@ class CustomerSignInPage extends StatelessWidget {
   final _form = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final customerSignInBloc = BlocProvider.of<CustomerRootBloc>(context);
+    final customerRootBloc = BlocProvider.of<CustomerRootBloc>(context);
     final size = MediaQuery.of(context).size;
 
     return BlocBuilder<CustomerRootBloc, CustomerRootState>(
@@ -156,7 +157,12 @@ class CustomerSignInPage extends StatelessWidget {
                                 fontSize: 16.0,
                               ),
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushReplacementNamed(
+                                context,
+                                CustomerSignUpPage.id,
+                              );
+                            },
                           ),
                         ],
                       ),

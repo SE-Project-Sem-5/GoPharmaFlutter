@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
-import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
+import 'package:go_pharma/ui/customer/customer_home_page.dart';
 
 class CheckoutProvider extends BlocProvider<CheckoutBloc> {
   static final String id = "/checkout_page";

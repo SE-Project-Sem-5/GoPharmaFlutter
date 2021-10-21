@@ -9,6 +9,7 @@ import 'package:go_pharma/ui/common/widgets/facebook_button.dart';
 import 'package:go_pharma/ui/common/widgets/google_button.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
+import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_start.dart';
 
 //TODO: password needs to be more than 7 characters
 // ignore: must_be_immutable
@@ -224,7 +225,12 @@ class CustomerSignUpPage extends StatelessWidget {
                                           fontSize: 16.0,
                                         ),
                                       ),
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.pushReplacementNamed(
+                                          context,
+                                          CustomerSignInPage.id,
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
