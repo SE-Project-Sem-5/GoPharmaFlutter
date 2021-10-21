@@ -16,9 +16,9 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
 
   Future<void> _init() async {
     var prefs = await SharedPreferences.getInstance();
-    final token = (prefs.getString('token') ?? '');
-    if (token != '') {
-      Map<String, User> user = await apiProvider.getCurrentUser(token);
+    final accessToken = (prefs.getString('accessToken') ?? '');
+    if (accessToken != '') {
+      Map<String, User> user = await apiProvider.getCurrentUser(accessToken);
       if (user.containsKey("user")) {
         add(UpdateUserEvent(user["user"]));
       }
