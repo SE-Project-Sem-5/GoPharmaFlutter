@@ -32,8 +32,6 @@ class RootSignInEvent extends CustomerRootEvent {
 
 class SignOutEvent extends CustomerRootEvent {}
 
-class StartInitCheckEvent extends CustomerRootEvent {}
-
 class ToggleGeneralInformationEditableEvent extends CustomerRootEvent {
   ToggleGeneralInformationEditableEvent();
 }

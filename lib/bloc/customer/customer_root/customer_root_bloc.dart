@@ -18,11 +18,13 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
     var prefs = await SharedPreferences.getInstance();
     final token = (prefs.getString('token') ?? '');
     if (token != '') {
-      apiProvider.getCurrentUser(token);
+      Map<String, User> user = await apiProvider.getCurrentUser(token);
+      if (user.containsKey("user")) {
+        add(UpdateUserEvent(user["user"]));
+      }
+    } else {
+      add(ChangeSignInStateEvent(CustomerRootSignInState.SIGNED_OUT));
     }
-    add(StartInitCheckEvent());
-    add(UpdateUserEvent(new User()));
-    add(ChangeSignInStateEvent(CustomerRootSignInState.SIGNED_OUT));
   }
 
   @override
@@ -36,9 +38,6 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
       case UpdateUserEvent:
         final user = (event as UpdateUserEvent).user;
         yield state.clone(user: user);
-        break;
-      case StartInitCheckEvent:
-        yield state.clone(initializing: true);
         break;
       case ChangeSignInStateEvent:
         final signInState = (event as ChangeSignInStateEvent).state;
