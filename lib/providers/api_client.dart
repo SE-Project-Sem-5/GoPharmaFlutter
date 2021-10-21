@@ -12,6 +12,7 @@ class Client {
     Dio _dio = new Dio();
     _dio.options.baseUrl = URL.baseURL;
     _dio.interceptors.add(CookieManager(cookieJar));
+    print("Dio gotten");
     return _dio;
   }
 

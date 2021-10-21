@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 import 'package:go_pharma/repos/customer/actual/prescription_order/prescriptionOrder.dart';
 import 'package:go_pharma/repos/customer/actual/prescription_order/prescriptionOrderAPIProvider.dart';
-import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
+import 'package:go_pharma/ui/customer/customer_home_page.dart';
 
 import 'prescription_order_event.dart';
 import 'prescription_order_state.dart';

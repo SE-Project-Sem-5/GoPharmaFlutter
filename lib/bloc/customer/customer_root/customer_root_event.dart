@@ -37,6 +37,10 @@ class ToggleGeneralInformationEditableEvent extends CustomerRootEvent {
 }
 
 class ToggleVisibility extends CustomerRootEvent {
-  final bool isVisible;
-  ToggleVisibility(this.isVisible);
+  ToggleVisibility();
+}
+
+class UpdateTwoFA extends CustomerRootEvent {
+  final String twoFA;
+  UpdateTwoFA({this.twoFA});
 }

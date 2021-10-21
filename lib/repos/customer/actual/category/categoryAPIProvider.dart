@@ -9,6 +9,7 @@ class CategoryAPIProvider {
   Future<CategoriesList> getAllCategories() async {
     try {
       Response response = await _dio.post("information/categories");
+      print(response.data);
       return CategoriesList.fromJson(response.data["data"]);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");

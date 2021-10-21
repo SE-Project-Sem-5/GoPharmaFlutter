@@ -7,7 +7,6 @@ import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'package:go_pharma/ui/customer/profile/view_security_settings.dart';
-
 import 'bold_text.dart';
 
 class VerifyPassword extends StatelessWidget {
@@ -68,9 +67,7 @@ class VerifyPassword extends StatelessWidget {
                             ),
                             onTap: () {
                               bloc.add(
-                                ToggleVisibility(
-                                  !state.isVisible,
-                                ),
+                                ToggleVisibility(),
                               );
                             },
                           ),
