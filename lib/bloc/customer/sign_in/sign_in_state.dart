@@ -5,6 +5,8 @@ enum CustomerSignInStep {
   CUSTOMERSIGNINSTEP_2FA,
 }
 
+enum SignInStates { CUSTOMERSIGNIN_INITIATED, CUSTOMERSIGNIN_TWOFA }
+
 @immutable
 class CustomerSignInState {
   final String error;

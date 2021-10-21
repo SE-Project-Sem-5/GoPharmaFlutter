@@ -34,6 +34,9 @@ class CustomerSignUpBloc
         yield state.clone(isVisible: !isVisible);
         break;
       case SignUpStep1:
+        yield state.clone(
+          isLoading: true,
+        );
         final email = (event as SignUpStep1).email;
         final password = (event as SignUpStep1).password;
         final result = await signUpAPIProvider.signUpUser(
@@ -43,11 +46,13 @@ class CustomerSignUpBloc
         );
         if (result == "Sign up successfully initiated.") {
           yield state.clone(
+            isLoading: false,
             email: email,
             password: password,
           );
         } else {
           yield state.clone(
+            isLoading: false,
             error: result,
           );
         }
@@ -67,7 +72,6 @@ class CustomerSignUpBloc
             step: stepOrder[nextIndex],
           );
         } else {
-          //  TODO: adjust
           Navigator.pushReplacementNamed(
             context,
             CustomerHomePage.id,
@@ -78,6 +82,7 @@ class CustomerSignUpBloc
         final currentStep = (event as PreviousStepEvent).currentStep;
         final context = (event as PreviousStepEvent).context;
         final prevIndex = stepOrder.indexOf(currentStep) - 1;
+        print(prevIndex);
         if (prevIndex >= 0) {
           yield state.clone(
             step: stepOrder[prevIndex],
