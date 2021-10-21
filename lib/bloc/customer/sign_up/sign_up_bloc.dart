@@ -45,9 +45,9 @@ class CustomerSignUpBloc
         final email = (event as SignUpStep1).email;
         final password = (event as SignUpStep1).password;
         final Map<String, String> result = await userAPIProvider.signUpUser(
-          email,
-          password,
-          "customer",
+          email: email,
+          password: password,
+          role: "customer",
         );
         if (result.containsKey("success")) {
           yield state.clone(

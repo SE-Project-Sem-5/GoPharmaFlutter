@@ -7,11 +7,11 @@ import 'loginResponse.dart';
 class UserAPIProvider {
   final Dio _dio = Client.init();
 
-  Future<Map<String, String>> signUpUser(
+  Future<Map<String, String>> signUpUser({
     String email,
     String password,
     String role,
-  ) async {
+  }) async {
     try {
       Response response = await _dio.post(
         "api/auth/sign-up/user/step1",

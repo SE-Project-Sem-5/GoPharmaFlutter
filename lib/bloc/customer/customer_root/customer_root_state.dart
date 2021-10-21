@@ -29,7 +29,7 @@ class CustomerRootState {
 
   static CustomerRootState get initialState => CustomerRootState(
         error: '',
-        user: null,
+        user: new User(),
         signInState: CustomerRootSignInState.INITIALIZING,
         initializing: false,
         isGeneralInformationEditable: false,
