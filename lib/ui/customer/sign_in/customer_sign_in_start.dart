@@ -136,7 +136,7 @@ class CustomerSignInPage extends StatelessWidget {
                         },
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -167,7 +167,7 @@ class CustomerSignInPage extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: 70,
+                        height: 10,
                       ),
                       BlocBuilder<CustomerRootBloc, CustomerRootState>(
                         builder: (context, state) {
@@ -183,7 +183,7 @@ class CustomerSignInPage extends StatelessWidget {
                         },
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
                       RoundedButtonFilled(
                         title: "Forgot Password?",
@@ -193,7 +193,7 @@ class CustomerSignInPage extends StatelessWidget {
                         onTapped: () {},
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
                       Text(
                         "OR",
@@ -203,7 +203,7 @@ class CustomerSignInPage extends StatelessWidget {
                             color: GoPharmaColors.PrimaryColor),
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
                     ],
                   ),
@@ -214,7 +214,7 @@ class CustomerSignInPage extends StatelessWidget {
                   title: 'Sign in with Google',
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 FacebookButton(
                   size: size,
