@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/customer/sign_in/sign_in_bloc.dart';
-import 'package:go_pharma/bloc/customer/sign_in/sign_in_event.dart';
-import 'package:go_pharma/bloc/customer/sign_in/sign_in_state.dart';
-import 'package:go_pharma/bloc/customer/sign_up/sign_up_provider.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/facebook_button.dart';
 import 'package:go_pharma/ui/common/widgets/google_button.dart';
@@ -20,7 +19,7 @@ class CustomerSignInStart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final customerSignInBloc = BlocProvider.of<CustomerSignInBloc>(context);
+    final customerRootBloc = BlocProvider.of<CustomerRootBloc>(context);
     final size = MediaQuery.of(context).size;
 
     return Column(
@@ -75,11 +74,11 @@ class CustomerSignInStart extends StatelessWidget {
                   ),
                 ),
               ),
-              BlocBuilder<CustomerSignInBloc, CustomerSignInState>(
+              BlocBuilder<CustomerRootBloc, CustomerRootState>(
                 buildWhen: (previous, current) =>
                     previous.isVisible != current.isVisible,
                 builder: (context, state) {
-                  final bloc = BlocProvider.of<CustomerSignInBloc>(context);
+                  final bloc = BlocProvider.of<CustomerRootBloc>(context);
                   return TextFieldContainer(
                     child: TextFormField(
                       controller: passwordController,
@@ -116,9 +115,7 @@ class CustomerSignInStart extends StatelessWidget {
                           ),
                           onTap: () {
                             bloc.add(
-                              ToggleVisibility(
-                                !state.isVisible,
-                              ),
+                              ToggleVisibility(),
                             );
                           },
                         ),
@@ -149,19 +146,14 @@ class CustomerSignInStart extends StatelessWidget {
                         fontSize: 16.0,
                       ),
                     ),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        CustomerSignUpProvider.id,
-                      );
-                    },
+                    onTap: () {},
                   ),
                 ],
               ),
               SizedBox(
                 height: 70,
               ),
-              BlocBuilder<CustomerSignInBloc, CustomerSignInState>(
+              BlocBuilder<CustomerRootBloc, CustomerRootState>(
                 builder: (context, state) {
                   return RoundedButtonFilled(
                     title: "Next",
@@ -169,12 +161,7 @@ class CustomerSignInStart extends StatelessWidget {
                     fillColor: GoPharmaColors.PrimaryColor,
                     textColor: GoPharmaColors.WhiteColor,
                     onTapped: () {
-                      if (_form.currentState.validate()) {
-                        customerSignInBloc.add(NextStepEvent(
-                          currentStep: state.step,
-                          context: context,
-                        ));
-                      }
+                      if (_form.currentState.validate()) {}
                     },
                   );
                 },

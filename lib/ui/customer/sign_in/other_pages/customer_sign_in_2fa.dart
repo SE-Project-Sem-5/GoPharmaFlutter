@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/customer/sign_in/sign_in_bloc.dart';
-import 'package:go_pharma/bloc/customer/sign_in/sign_in_event.dart';
-import 'package:go_pharma/bloc/customer/sign_in/sign_in_state.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:pinput/pin_put/pin_put.dart';
@@ -21,7 +21,7 @@ class CustomerSignIn2FA extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<CustomerSignInBloc>(context);
+    final bloc = BlocProvider.of<CustomerRootBloc>(context);
     String title = "Please enter your 6 digit code";
     return Form(
       key: _formKey,
@@ -38,7 +38,7 @@ class CustomerSignIn2FA extends StatelessWidget {
             ),
           ),
           Spacer(),
-          BlocBuilder<CustomerSignInBloc, CustomerSignInState>(
+          BlocBuilder<CustomerRootBloc, CustomerRootState>(
             builder: (context, state) {
               _twoFAController.text = state.twoFA;
               return Container(
@@ -75,7 +75,7 @@ class CustomerSignIn2FA extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              BlocBuilder<CustomerSignInBloc, CustomerSignInState>(
+              BlocBuilder<CustomerRootBloc, CustomerRootState>(
                 builder: (context, state) {
                   return RoundedButtonFilled(
                     title: "Sign In",
@@ -84,16 +84,9 @@ class CustomerSignIn2FA extends StatelessWidget {
                     textColor: GoPharmaColors.WhiteColor,
                     onTapped: () {
                       if (_formKey.currentState.validate()) {
-                        //TODO: backend call - get twoFA value and compare
                         bloc.add(
                           UpdateTwoFA(
                             twoFA: _twoFAController.text,
-                          ),
-                        );
-                        bloc.add(
-                          NextStepEvent(
-                            currentStep: state.step,
-                            context: context,
                           ),
                         );
                       }

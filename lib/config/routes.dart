@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/category/category_provider.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
-import 'package:go_pharma/bloc/customer/sign_in/sign_in_provider.dart';
-import 'package:go_pharma/bloc/customer/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_provider.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_provider.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_provider.dart';
@@ -23,10 +21,11 @@ import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 import 'package:go_pharma/ui/customer/profile/view_security_settings.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
+import 'package:go_pharma/ui/customer/sign_up/customer_sign_up_information.dart';
+import 'package:go_pharma/ui/customer/sign_up/sign_up_start.dart';
 import 'package:go_pharma/ui/delivery_agent/collected_deliveries/collected_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery_agent_starting_page.dart';
-import 'package:go_pharma/ui/delivery_agent/delivery_agent_home_page.dart';
 import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/settings_page/view_profile.dart';
@@ -54,21 +53,20 @@ Map<String, Widget Function(BuildContext context)> routes = {
   ZoneSelectionPage.id: (context) => ZoneSelectionPage(),
   PrescriptionOrderProvider.id: (context) => PrescriptionOrderProvider(),
   ProfileSecuritySettings.id: (context) => ProfileSecuritySettings(),
-  CustomerSignUpProvider.id: (contest) => CustomerSignUpProvider(),
-  CustomerSignInProvider.id: (context) => CustomerSignInProvider(),
   SelectOrderPrescriptionScreen.id: (context) =>
       SelectOrderPrescriptionScreen(),
   PaymentSelectionPage.id: (context) => PaymentSelectionPage(),
   OrderSuccessfulPage.id: (context) => OrderSuccessfulPage(),
   AddressInformationPage.id: (context) => AddressInformationPage(),
   ConfirmedOrdersPage.id: (context) => ConfirmedOrdersPage(),
+  SignUpInformation.id: (context) => SignUpInformation(),
+  CustomerSignUpPage.id: (context) => CustomerSignUpPage(),
 
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
   DeliveryAgentSignUpProvider.id: (context) => DeliveryAgentSignUpProvider(),
   DeliveryAgentSignInProvider.id: (context) => DeliveryAgentSignInProvider(),
   DeliveriesPage.id: (context) => DeliveriesPage(),
-
   PendingDeliveriesPage.id: (context) => PendingDeliveriesPage(),
   ReservedDeliveriesPage.id: (context) => ReservedDeliveriesPage(),
   CollectedDeliveriesPage.id: (context) => CollectedDeliveriesPage(),
@@ -76,7 +74,6 @@ Map<String, Widget Function(BuildContext context)> routes = {
   TransientCollectedDeliveriesPage.id: (context) =>
       TransientCollectedDeliveriesPage(),
   ShippedDeliveriesPage.id: (context) => ShippedDeliveriesPage(),
-
   DeliveryListProvider.id: (context) => DeliveryListProvider(),
   DeliveryAgentSettingsPage.id: (context) => DeliveryAgentSettingsPage(),
 };
