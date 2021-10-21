@@ -5,6 +5,8 @@ class User {
   String gender;
   String contactNumber;
   String role;
+  String email;
+  String password;
   String createdAt;
   UserAccount userAccount;
   AddressDetail addressDetail;
@@ -12,6 +14,8 @@ class User {
   User({
     this.firstName,
     this.lastName,
+    this.email,
+    this.password,
     this.dateOfBirth,
     this.gender,
     this.contactNumber,

@@ -13,7 +13,6 @@ class UserAPIProvider {
     String role,
   }) async {
     try {
-      print("HI");
       Response response = await _dio.post(
         "auth/sign-up/user/step1",
         data: {
@@ -25,7 +24,7 @@ class UserAPIProvider {
       return {"success": "Sign up successfully initiated."};
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      return {"error": "Invalid request; cannot proceed with the signup"};
+      return {"error": "This email has already been registered"};
     }
   }
 

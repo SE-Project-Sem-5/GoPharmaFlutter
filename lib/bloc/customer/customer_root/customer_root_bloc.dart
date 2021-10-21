@@ -8,7 +8,7 @@ import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
-  final UserAPIProvider apiProvider = new UserAPIProvider();
+  final UserAPIProvider userApiProvider = new UserAPIProvider();
   CustomerRootBloc(BuildContext context)
       : super(CustomerRootState.initialState) {
     _init();
@@ -18,12 +18,17 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
     var prefs = await SharedPreferences.getInstance();
     final accessToken = (prefs.getString('accessToken') ?? '');
     if (accessToken != '') {
-      Map<String, User> user = await apiProvider.getCurrentUser(accessToken);
+      Map<String, User> user =
+          await userApiProvider.getCurrentUser(accessToken);
       if (user.containsKey("user")) {
         add(UpdateUserEvent(user["user"]));
       }
     } else {
-      add(ChangeSignInStateEvent(CustomerRootSignInState.SIGNED_OUT));
+      add(
+        ChangeSignInStateEvent(
+          CustomerRootSignInState.SIGNED_OUT,
+        ),
+      );
     }
   }
 
@@ -34,6 +39,25 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final error = (event as RootErrorEvent).error;
         yield state.clone(error: "");
         yield state.clone(error: error);
+        break;
+      case SignUpCustomerEvent:
+        final email = (event as SignUpCustomerEvent).email;
+        final password = (event as SignUpCustomerEvent).password;
+        final role = "customer";
+        final user = state.user;
+        final Map<String, String> result = await userApiProvider.signUpUser(
+          email: email,
+          password: password,
+          role: role,
+        );
+        if (result.containsKey("success")) {
+          user.email = email;
+          user.password = password;
+          yield state.clone(
+            signUpProcessState: SignUpProcessState.INITIATED,
+            user: user,
+          );
+        } else {}
         break;
       case UpdateUserEvent:
         final user = (event as UpdateUserEvent).user;
