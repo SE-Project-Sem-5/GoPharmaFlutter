@@ -15,10 +15,12 @@ class CustomerSignUpState {
   final String email;
   final String password;
   final String role;
+  final bool isLoading;
 
   CustomerSignUpState({
     this.email,
     this.password,
+    this.isLoading,
     this.role,
     this.error,
     this.isVisible,
@@ -34,11 +36,13 @@ class CustomerSignUpState {
         email: '',
         password: '',
         role: 'customer',
+        isLoading: false,
       );
 
   CustomerSignUpState clone({
     String error = '',
-    bool isVisible = true,
+    bool isVisible,
+    bool isLoading,
     CustomerSignUpStep step,
     String twoFA,
     String email,
@@ -47,6 +51,7 @@ class CustomerSignUpState {
     return CustomerSignUpState(
       error: error ?? this.error,
       isVisible: isVisible ?? this.isVisible,
+      isLoading: isLoading ?? this.isLoading,
       email: email ?? this.email,
       password: password ?? this.password,
       step: step ?? this.step,

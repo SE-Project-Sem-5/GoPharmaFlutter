@@ -1,15 +1,30 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
-import 'package:go_pharma/repos/customer/dummy/user_customer/customer_model.dart';
+import 'package:go_pharma/repos/common/signup/user.dart';
+import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
+  final UserAPIProvider apiProvider = new UserAPIProvider();
   CustomerRootBloc(BuildContext context)
       : super(CustomerRootState.initialState) {
     _init();
+  }
+
+  Future<void> _init() async {
+    var prefs = await SharedPreferences.getInstance();
+    final accessToken = (prefs.getString('accessToken') ?? '');
+    if (accessToken != '') {
+      Map<String, User> user = await apiProvider.getCurrentUser(accessToken);
+      if (user.containsKey("user")) {
+        add(UpdateUserEvent(user["user"]));
+      }
+    } else {
+      add(ChangeSignInStateEvent(CustomerRootSignInState.SIGNED_OUT));
+    }
   }
 
   @override
@@ -21,11 +36,8 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         yield state.clone(error: error);
         break;
       case UpdateUserEvent:
-        final customer = (event as UpdateUserEvent).customer;
-        yield state.clone(customer: customer);
-        break;
-      case StartInitCheckEvent:
-        yield state.clone(initializing: true);
+        final user = (event as UpdateUserEvent).user;
+        yield state.clone(user: user);
         break;
       case ChangeSignInStateEvent:
         final signInState = (event as ChangeSignInStateEvent).state;
@@ -33,19 +45,6 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         break;
       case SignOutEvent:
         yield state.clone(signInState: CustomerRootSignInState.SIGNED_OUT);
-        //TODO: Logic to sign out user
-        break;
-      case RootSignInEvent:
-        final email = (event as RootSignInEvent).email;
-        final password = (event as RootSignInEvent).password;
-        // TODO: Logic to sign in user
-        // final auth = locator<AuthService>();
-        // User user = await auth.createUserWithEmailAndPassword(email, password);
-        Customer customer = new Customer();
-        yield state.clone(
-          signInState: CustomerRootSignInState.SIGNED_IN,
-          customer: customer,
-        );
         break;
       case ToggleVisibility:
         final isVisible = (event as ToggleVisibility).isVisible;
@@ -57,16 +56,6 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         );
         break;
     }
-  }
-
-  Future<void> _init() async {
-    add(StartInitCheckEvent());
-    //TODO: init sign in automatically when app starts
-    // Get email and password from shared prefs?
-    // final auth = locator<AuthService>();
-    // User user = await auth.createUserWithEmailAndPassword(email, password);
-    add(UpdateUserEvent(new Customer()));
-    add(ChangeSignInStateEvent(CustomerRootSignInState.SIGNED_OUT));
   }
 
   @override

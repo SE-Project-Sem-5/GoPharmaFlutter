@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
-import 'package:go_pharma/repos/customer/dummy/user_customer/customer_model.dart';
+import 'package:go_pharma/repos/common/signup/user.dart';
 
 @immutable
 abstract class CustomerRootEvent {}
@@ -12,9 +12,9 @@ class RootErrorEvent extends CustomerRootEvent {
 }
 
 class UpdateUserEvent extends CustomerRootEvent {
-  final Customer customer;
+  final User user;
 
-  UpdateUserEvent(this.customer);
+  UpdateUserEvent(this.user);
 }
 
 class ChangeSignInStateEvent extends CustomerRootEvent {
@@ -31,8 +31,6 @@ class RootSignInEvent extends CustomerRootEvent {
 }
 
 class SignOutEvent extends CustomerRootEvent {}
-
-class StartInitCheckEvent extends CustomerRootEvent {}
 
 class ToggleGeneralInformationEditableEvent extends CustomerRootEvent {
   ToggleGeneralInformationEditableEvent();

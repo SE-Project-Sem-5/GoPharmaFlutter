@@ -5,6 +5,11 @@ enum CustomerSignInStep {
   CUSTOMERSIGNINSTEP_2FA,
 }
 
+enum SignInStates {
+  CUSTOMERSIGNIN_INITIATED,
+  CUSTOMERSIGNIN_TWOFA,
+}
+
 @immutable
 class CustomerSignInState {
   final String error;
@@ -26,11 +31,12 @@ class CustomerSignInState {
         twoFA: '',
       );
 
-  CustomerSignInState clone(
-      {String error = '',
-      bool isVisible = true,
-      CustomerSignInStep step,
-      String twoFA = ''}) {
+  CustomerSignInState clone({
+    String error = '',
+    bool isVisible = true,
+    CustomerSignInStep step,
+    String twoFA = '',
+  }) {
     return CustomerSignInState(
       error: error ?? this.error,
       isVisible: isVisible ?? this.isVisible,

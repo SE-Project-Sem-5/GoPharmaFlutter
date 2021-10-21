@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/dummy/user_customer/customer_model.dart';
+import 'package:go_pharma/repos/common/signup/user.dart';
 
 enum CustomerRootSignInState {
   INITIALIZING,
@@ -10,7 +10,7 @@ enum CustomerRootSignInState {
 @immutable
 class CustomerRootState {
   final String error;
-  final Customer customer;
+  final User user;
   final CustomerRootSignInState signInState;
   final bool initializing;
   final bool isGeneralInformationEditable;
@@ -20,7 +20,7 @@ class CustomerRootState {
   CustomerRootState({
     this.isPasswordEditable,
     @required this.error,
-    @required this.customer,
+    @required this.user,
     @required this.signInState,
     @required this.initializing,
     @required this.isVisible,
@@ -29,7 +29,7 @@ class CustomerRootState {
 
   static CustomerRootState get initialState => CustomerRootState(
         error: '',
-        customer: null,
+        user: new User(),
         signInState: CustomerRootSignInState.INITIALIZING,
         initializing: false,
         isGeneralInformationEditable: false,
@@ -39,7 +39,7 @@ class CustomerRootState {
 
   CustomerRootState clone({
     String error,
-    Customer customer,
+    User user,
     CustomerRootSignInState signInState,
     bool initializing,
     bool isGeneralInformationEditable,
@@ -48,7 +48,7 @@ class CustomerRootState {
   }) {
     return CustomerRootState(
       error: error ?? this.error,
-      customer: customer ?? this.customer,
+      user: user ?? this.user,
       signInState: signInState ?? this.signInState,
       initializing: initializing ?? this.initializing,
       isGeneralInformationEditable:
