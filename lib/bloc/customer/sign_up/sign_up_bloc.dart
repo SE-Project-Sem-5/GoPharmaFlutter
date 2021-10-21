@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
 import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 
@@ -11,6 +13,7 @@ import 'sign_up_state.dart';
 class CustomerSignUpBloc
     extends Bloc<CustomerSignUpEvent, CustomerSignUpState> {
   UserAPIProvider userAPIProvider = new UserAPIProvider();
+  CustomerRootBloc rootBloc;
   static List<CustomerSignUpStep> stepOrder = [
     CustomerSignUpStep.CUSTOMERSIGNUPSTEP_START,
     CustomerSignUpStep.CUSTOMERSIGNUPSTEP_INFORMATION,
@@ -18,7 +21,9 @@ class CustomerSignUpBloc
   ];
 
   CustomerSignUpBloc(BuildContext context)
-      : super(CustomerSignUpState.initialState);
+      : super(CustomerSignUpState.initialState) {
+    rootBloc = BlocProvider.of<CustomerRootBloc>(context);
+  }
 
   @override
   Stream<CustomerSignUpState> mapEventToState(
