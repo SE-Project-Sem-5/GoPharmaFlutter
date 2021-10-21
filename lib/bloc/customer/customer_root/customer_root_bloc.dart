@@ -41,6 +41,9 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         yield state.clone(error: error);
         break;
       case SignUpCustomerEvent:
+        yield state.clone(
+          isLoading: true,
+        );
         final email = (event as SignUpCustomerEvent).email;
         final password = (event as SignUpCustomerEvent).password;
         final role = "customer";
@@ -54,8 +57,47 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           user.email = email;
           user.password = password;
           yield state.clone(
+            isLoading: false,
             signUpProcessState: SignUpProcessState.INITIATED,
             user: user,
+          );
+        } else {}
+        break;
+      case LoginCustomerEvent:
+        yield state.clone(
+          isLoading: true,
+        );
+        final firstName = (event as LoginCustomerEvent).firstName;
+        final lastName = (event as LoginCustomerEvent).lastName;
+        final streetAddress = (event as LoginCustomerEvent).streetAddress;
+        final city = (event as LoginCustomerEvent).city;
+        final district = (event as LoginCustomerEvent).district;
+        final province = (event as LoginCustomerEvent).province;
+        final birthDate = (event as LoginCustomerEvent).birthDate;
+        final gender = (event as LoginCustomerEvent).gender;
+        final contactNumber = (event as LoginCustomerEvent).contactNumber;
+        final result = await userApiProvider.signUpCustomer(
+          firstName: firstName,
+          lastName: lastName,
+          streetAddress: streetAddress,
+          city: city,
+          district: district,
+          province: province,
+          birthDate: birthDate,
+          gender: gender,
+          contactNumber: contactNumber,
+        );
+        if (result.containsKey("success")) {
+          User newUser = new User(
+            firstName: firstName,
+            lastName: lastName,
+            gender: gender,
+            contactNumber: contactNumber,
+          );
+          yield state.clone(
+            isLoading: false,
+            signUpProcessState: SignUpProcessState.FILLED,
+            user: newUser,
           );
         } else {}
         break;
