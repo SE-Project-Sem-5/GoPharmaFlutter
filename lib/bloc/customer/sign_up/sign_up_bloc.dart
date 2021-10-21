@@ -44,6 +44,8 @@ class CustomerSignUpBloc
         );
         final email = (event as SignUpStep1).email;
         final password = (event as SignUpStep1).password;
+        print(email);
+        print(password);
         final Map<String, String> result = await userAPIProvider.signUpUser(
           email: email,
           password: password,

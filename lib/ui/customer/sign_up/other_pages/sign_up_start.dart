@@ -225,10 +225,12 @@ class SignUpStart extends StatelessWidget {
                               textColor: GoPharmaColors.WhiteColor,
                               onTapped: () {
                                 if (_form.currentState.validate()) {
-                                  bloc.add(SignUpStep1(
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                  ));
+                                  bloc.add(
+                                    SignUpStep1(
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    ),
+                                  );
                                   if (state.error == "") {
                                     bloc.add(
                                       NextStepEvent(
