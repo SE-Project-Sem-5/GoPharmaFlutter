@@ -10,7 +10,7 @@ import 'sign_up_state.dart';
 
 class CustomerSignUpBloc
     extends Bloc<CustomerSignUpEvent, CustomerSignUpState> {
-  UserAPIProvider signUpAPIProvider = new UserAPIProvider();
+  UserAPIProvider userAPIProvider = new UserAPIProvider();
   static List<CustomerSignUpStep> stepOrder = [
     CustomerSignUpStep.CUSTOMERSIGNUPSTEP_START,
     CustomerSignUpStep.CUSTOMERSIGNUPSTEP_INFORMATION,
@@ -39,7 +39,7 @@ class CustomerSignUpBloc
         );
         final email = (event as SignUpStep1).email;
         final password = (event as SignUpStep1).password;
-        final Map<String, String> result = await signUpAPIProvider.signUpUser(
+        final Map<String, String> result = await userAPIProvider.signUpUser(
           email,
           password,
           "customer",
@@ -49,6 +49,42 @@ class CustomerSignUpBloc
             isLoading: false,
             email: email,
             password: password,
+          );
+        } else {
+          yield state.clone(
+            isLoading: false,
+            error: result["error"],
+          );
+        }
+        break;
+      case CustomerSignUpStep2:
+        yield state.clone(
+          isLoading: true,
+        );
+        final firstName = (event as CustomerSignUpStep2).firstName;
+        final lastName = (event as CustomerSignUpStep2).lastName;
+        final streetAddress = (event as CustomerSignUpStep2).streetAddress;
+        final city = (event as CustomerSignUpStep2).city;
+        final district = (event as CustomerSignUpStep2).district;
+        final province = (event as CustomerSignUpStep2).province;
+        final birthDate = (event as CustomerSignUpStep2).birthDate;
+        final gender = (event as CustomerSignUpStep2).gender;
+        final contactNumber = (event as CustomerSignUpStep2).contactNumber;
+        final result = await userAPIProvider.signUpCustomer(
+          firstName: firstName,
+          lastName: lastName,
+          streetAddress: streetAddress,
+          city: city,
+          district: district,
+          province: province,
+          birthDate: birthDate,
+          gender: gender,
+          contactNumber: contactNumber,
+        );
+
+        if (result.containsKey("success")) {
+          yield state.clone(
+            isLoading: false,
           );
         } else {
           yield state.clone(
