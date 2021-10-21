@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/common/signup/signUpAPIProvider.dart';
+import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
 import 'package:go_pharma/ui/customer/home/customer_home_page.dart';
 
 import 'sign_up_event.dart';
@@ -10,7 +10,7 @@ import 'sign_up_state.dart';
 
 class CustomerSignUpBloc
     extends Bloc<CustomerSignUpEvent, CustomerSignUpState> {
-  SignUpAPIProvider signUpAPIProvider = new SignUpAPIProvider();
+  UserAPIProvider signUpAPIProvider = new UserAPIProvider();
   static List<CustomerSignUpStep> stepOrder = [
     CustomerSignUpStep.CUSTOMERSIGNUPSTEP_START,
     CustomerSignUpStep.CUSTOMERSIGNUPSTEP_INFORMATION,
@@ -39,12 +39,12 @@ class CustomerSignUpBloc
         );
         final email = (event as SignUpStep1).email;
         final password = (event as SignUpStep1).password;
-        final result = await signUpAPIProvider.signUpUser(
+        final Map<String, String> result = await signUpAPIProvider.signUpUser(
           email,
           password,
           "customer",
         );
-        if (result == "Sign up successfully initiated.") {
+        if (result.containsKey("success")) {
           yield state.clone(
             isLoading: false,
             email: email,
@@ -53,7 +53,7 @@ class CustomerSignUpBloc
         } else {
           yield state.clone(
             isLoading: false,
-            error: result,
+            error: result["error"],
           );
         }
         break;
