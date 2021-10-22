@@ -27,12 +27,16 @@ class CustomerRootState {
   final bool isGeneralInformationEditable;
   final bool isPasswordEditable;
   final bool isVisible;
+  final bool twoFAenabled;
   final String twoFA;
+  final String gender;
 
   CustomerRootState({
     this.isPasswordEditable,
     @required this.error,
     @required this.user,
+    @required this.twoFAenabled,
+    @required this.gender,
     @required this.isLoading,
     @required this.twoFA,
     @required this.signUpProcessState,
@@ -48,7 +52,9 @@ class CustomerRootState {
         signUpProcessState: SignUpProcessState.NONE,
         signInState: CustomerRootSignInState.INITIALIZING,
         initializing: false,
+        twoFAenabled: false,
         twoFA: '',
+        gender: 'male',
         isGeneralInformationEditable: false,
         isPasswordEditable: false,
         isVisible: false,
@@ -57,10 +63,12 @@ class CustomerRootState {
 
   CustomerRootState clone({
     String error,
+    String gender,
     User user,
     CustomerRootSignInState signInState,
     bool initializing,
     bool isLoading,
+    bool twoFAenabled,
     SignUpProcessState signUpProcessState,
     bool isGeneralInformationEditable,
     bool isPasswordEditable,
@@ -69,6 +77,8 @@ class CustomerRootState {
   }) {
     return CustomerRootState(
       error: error ?? this.error,
+      gender: gender ?? this.gender,
+      twoFAenabled: twoFAenabled ?? this.twoFAenabled,
       user: user ?? this.user,
       isLoading: isLoading ?? this.isLoading,
       signUpProcessState: signUpProcessState ?? this.signUpProcessState,

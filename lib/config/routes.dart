@@ -22,7 +22,7 @@ import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 import 'package:go_pharma/ui/customer/profile/view_security_settings.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_2fa.dart';
-import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_start.dart';
+import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up_information.dart';
 import 'package:go_pharma/ui/customer/sign_up/sign_up_start.dart';
 import 'package:go_pharma/ui/delivery_agent/collected_deliveries/collected_deliveries_page.dart';
