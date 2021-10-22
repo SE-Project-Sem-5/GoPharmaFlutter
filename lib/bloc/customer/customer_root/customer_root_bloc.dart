@@ -3,7 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
-import 'package:go_pharma/repos/common/signup/loginResponse.dart';
 import 'package:go_pharma/repos/common/signup/user.dart';
 import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,11 +16,10 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
 
   Future<void> _init() async {
     var prefs = await SharedPreferences.getInstance();
-    final accessToken = (prefs.getString('accessToken') ?? '');
-    if (accessToken != '') {
+    final cookie = (prefs.getString('cookie') ?? '');
+    if (cookie != '') {
       print("Looking for access token");
-      Map<String, User> user =
-          await userApiProvider.getCurrentUser(accessToken);
+      Map<String, User> user = await userApiProvider.getCurrentUser(cookie);
       if (user.containsKey("user")) {
         add(UpdateUserEvent(user["user"]));
       }
@@ -115,14 +113,16 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
       case LoginUser:
         final email = (event as LoginUser).email;
         final password = (event as LoginUser).password;
-        final Map<String, LoginResponse> result =
-            await userApiProvider.loginUser(
+        final Map<String, dynamic> result = await userApiProvider.loginUser(
           email: email,
           password: password,
         );
-
         if (result.containsKey("data")) {
           final loginReponse = result["data"];
+          final cookie = result["cookie"];
+          //TODO: find proper location to set cookie
+          // SharedPreferences prefs = await SharedPreferences.getInstance();
+          // prefs.setString("cookie", cookie);
           if (loginReponse.data.twoFactorAuth == "none") {
             yield state.clone(
               signUpProcessState: SignUpProcessState.INITIATED,

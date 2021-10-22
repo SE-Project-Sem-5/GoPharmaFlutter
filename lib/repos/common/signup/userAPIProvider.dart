@@ -75,7 +75,12 @@ class UserAPIProvider {
         },
       );
       print(response.data);
-      return {"data": LoginResponse.fromJson(response.data)};
+      print(response.headers);
+      print(LoginResponse.fromJson(response.data));
+      return {
+        "data": LoginResponse.fromJson(response.data),
+        "cookie": response.headers["set-cookie"],
+      };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return {
@@ -154,8 +159,9 @@ class UserAPIProvider {
     }
   }
 
-  Future<Map<String, dynamic>> getCurrentUser(String token) async {
+  Future<Map<String, dynamic>> getCurrentUser(String cookie) async {
     try {
+      _dio.options.headers['set-cookie'] = cookie;
       Response response = await _dio.get("api/user/details");
       return {"user": User.fromJson(response.data)};
     } catch (error, stacktrace) {
