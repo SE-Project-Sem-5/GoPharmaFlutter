@@ -56,6 +56,9 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         if (result.containsKey("success")) {
           user.email = email;
           user.password = password;
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString("email", email);
+          prefs.setString("password", password);
           yield state.clone(
             isLoading: false,
             signUpProcessState: SignUpProcessState.INITIATED,
@@ -63,19 +66,21 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           );
         } else {}
         break;
-      case LoginCustomerEvent:
+      case SignUpCustomerInformationEvent:
         yield state.clone(
           isLoading: true,
         );
-        final firstName = (event as LoginCustomerEvent).firstName;
-        final lastName = (event as LoginCustomerEvent).lastName;
-        final streetAddress = (event as LoginCustomerEvent).streetAddress;
-        final city = (event as LoginCustomerEvent).city;
-        final district = (event as LoginCustomerEvent).district;
-        final province = (event as LoginCustomerEvent).province;
-        final birthDate = (event as LoginCustomerEvent).birthDate;
-        final gender = (event as LoginCustomerEvent).gender;
-        final contactNumber = (event as LoginCustomerEvent).contactNumber;
+        final firstName = (event as SignUpCustomerInformationEvent).firstName;
+        final lastName = (event as SignUpCustomerInformationEvent).lastName;
+        final streetAddress =
+            (event as SignUpCustomerInformationEvent).streetAddress;
+        final city = (event as SignUpCustomerInformationEvent).city;
+        final district = (event as SignUpCustomerInformationEvent).district;
+        final province = (event as SignUpCustomerInformationEvent).province;
+        final birthDate = (event as SignUpCustomerInformationEvent).birthDate;
+        final gender = (event as SignUpCustomerInformationEvent).gender;
+        final contactNumber =
+            (event as SignUpCustomerInformationEvent).contactNumber;
         final result = await userApiProvider.signUpCustomer(
           firstName: firstName,
           lastName: lastName,
@@ -99,7 +104,15 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
             signUpProcessState: SignUpProcessState.FILLED,
             user: newUser,
           );
-        } else {}
+        } else {
+          yield state.clone(
+            error: result["error"],
+          );
+        }
+        break;
+      case LoginUser:
+        final email = (event as LoginUser).email;
+        final password = (event as LoginUser).password;
         break;
       case UpdateUserEvent:
         final user = (event as UpdateUserEvent).user;
@@ -109,6 +122,11 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final twoFA = (event as UpdateTwoFA).twoFA;
         yield state.clone(
           twoFA: twoFA,
+        );
+        break;
+      case ToggleVisibility:
+        yield state.clone(
+          isVisible: !state.isVisible,
         );
         break;
     }

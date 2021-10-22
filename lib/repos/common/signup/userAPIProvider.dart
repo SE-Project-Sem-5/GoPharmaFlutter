@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
 import 'package:go_pharma/repos/common/signup/user.dart';
-
 import 'loginResponse.dart';
 
 class UserAPIProvider {
@@ -58,14 +57,15 @@ class UserAPIProvider {
       );
       return {"success": "Sign up successfully initiated."};
     } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
       return {"error": "Sign Up Error"};
     }
   }
 
-  Future<Map<String, dynamic>> loginUser(
+  Future<Map<String, dynamic>> loginUser({
     String email,
     String password,
-  ) async {
+  }) async {
     try {
       Response response = await _dio.post(
         "auth/login",
@@ -74,9 +74,10 @@ class UserAPIProvider {
           "password": password,
         },
       );
-
+      print(response.data);
       return {"data": LoginResponse.fromJson(response.data)};
     } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
       return {
         "error": "This email address has already been registered",
       };
@@ -95,6 +96,7 @@ class UserAPIProvider {
       );
       return {"data": "Your email is successfully verified"};
     } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
       return {
         "error": "Something went wrong, try again later",
       };
@@ -111,6 +113,7 @@ class UserAPIProvider {
       );
       return {"data": "Your email is successfully verified"};
     } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
       return {
         "error": "Something went wrong, try again later",
       };
@@ -130,6 +133,7 @@ class UserAPIProvider {
       );
       return {"data": "Your email is successfully verified"};
     } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
       return {
         "error": "Something went wrong, try again later",
       };
@@ -143,6 +147,7 @@ class UserAPIProvider {
       );
       return {"data": "Your email is successfully verified"};
     } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
       return {
         "error": "Something went wrong, try again later",
       };
@@ -154,6 +159,7 @@ class UserAPIProvider {
       Response response = await _dio.get("api/user/details");
       return {"user": User.fromJson(response.data)};
     } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
       return {"error": "Something went wrong, try again later"};
     }
   }

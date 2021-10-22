@@ -21,7 +21,7 @@ class SignUpCustomerEvent extends CustomerRootEvent {
 }
 
 //2.
-class LoginCustomerEvent extends CustomerRootEvent {
+class SignUpCustomerInformationEvent extends CustomerRootEvent {
   final String firstName;
   final String lastName;
   final String streetAddress;
@@ -32,7 +32,7 @@ class LoginCustomerEvent extends CustomerRootEvent {
   final String gender;
   final String contactNumber;
 
-  LoginCustomerEvent({
+  SignUpCustomerInformationEvent({
     this.firstName,
     this.lastName,
     this.streetAddress,
@@ -42,6 +42,15 @@ class LoginCustomerEvent extends CustomerRootEvent {
     this.birthDate,
     this.gender,
     this.contactNumber,
+  });
+}
+
+class LoginUser extends CustomerRootEvent {
+  final String email;
+  final String password;
+  LoginUser({
+    this.email,
+    this.password,
   });
 }
 

@@ -10,6 +10,7 @@ import 'package:go_pharma/ui/common/widgets/google_button.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_start.dart';
+import 'customer_sign_up_information.dart';
 
 //TODO: password needs to be more than 7 characters
 // ignore: must_be_immutable
@@ -26,19 +27,25 @@ class CustomerSignUpPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     String title = "Enter your email and password";
-    return BlocBuilder<CustomerRootBloc, CustomerRootState>(
+    return BlocListener<CustomerRootBloc, CustomerRootState>(
+      listenWhen: (context, state) {
+        return state.signUpProcessState == SignUpProcessState.INITIATED;
+      },
+      listener: (context, state) {
+        Navigator.pushReplacementNamed(context, SignUpInformation.id);
+      },
+      child: BlocBuilder<CustomerRootBloc, CustomerRootState>(
+        buildWhen: (p, c) => p.isLoading != c.isLoading,
         builder: (context, state) {
-      return SafeArea(
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            title: Text("SIGN UP"),
-          ),
-          body: Container(
-            child: BlocBuilder<CustomerRootBloc, CustomerRootState>(
-              builder: (context, state) {
-                return state.isLoading
-                    ? CircularProgressIndicator()
+          return SafeArea(
+            child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              appBar: AppBar(
+                title: Text("SIGN UP"),
+              ),
+              body: Container(
+                child: state.isLoading
+                    ? Center(child: CircularProgressIndicator())
                     : Column(
                         children: [
                           Form(
@@ -139,8 +146,9 @@ class CustomerSignUpPage extends StatelessWidget {
                                                   GoPharmaColors.PrimaryColor,
                                             ),
                                             onTap: () {
-                                              customerRootBloc
-                                                  .add(ToggleVisibility());
+                                              customerRootBloc.add(
+                                                ToggleVisibility(),
+                                              );
                                             },
                                           ),
                                         ),
@@ -246,7 +254,14 @@ class CustomerSignUpPage extends StatelessWidget {
                                       fillColor: GoPharmaColors.PrimaryColor,
                                       textColor: GoPharmaColors.WhiteColor,
                                       onTapped: () {
-                                        if (_form.currentState.validate()) {}
+                                        if (_form.currentState.validate()) {
+                                          customerRootBloc.add(
+                                            SignUpCustomerEvent(
+                                              email: emailController.text,
+                                              password: passwordController.text,
+                                            ),
+                                          );
+                                        }
                                       },
                                     );
                                   },
@@ -278,12 +293,12 @@ class CustomerSignUpPage extends StatelessWidget {
                             title: 'Join with Facebook',
                           ),
                         ],
-                      );
-              },
+                      ),
+              ),
             ),
-          ),
-        ),
-      );
-    });
+          );
+        },
+      ),
+    );
   }
 }
