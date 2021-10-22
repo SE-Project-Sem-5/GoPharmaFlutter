@@ -8,7 +8,7 @@ import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
-  final UserAPIProvider apiProvider = new UserAPIProvider();
+  final UserAPIProvider userApiProvider = new UserAPIProvider();
   CustomerRootBloc(BuildContext context)
       : super(CustomerRootState.initialState) {
     _init();
@@ -18,12 +18,17 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
     var prefs = await SharedPreferences.getInstance();
     final accessToken = (prefs.getString('accessToken') ?? '');
     if (accessToken != '') {
-      Map<String, User> user = await apiProvider.getCurrentUser(accessToken);
+      Map<String, User> user =
+          await userApiProvider.getCurrentUser(accessToken);
       if (user.containsKey("user")) {
         add(UpdateUserEvent(user["user"]));
       }
     } else {
-      add(ChangeSignInStateEvent(CustomerRootSignInState.SIGNED_OUT));
+      add(
+        ChangeSignInStateEvent(
+          CustomerRootSignInState.SIGNED_OUT,
+        ),
+      );
     }
   }
 
@@ -35,6 +40,80 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         yield state.clone(error: "");
         yield state.clone(error: error);
         break;
+      case SignUpCustomerEvent:
+        yield state.clone(
+          isLoading: true,
+        );
+        final email = (event as SignUpCustomerEvent).email;
+        final password = (event as SignUpCustomerEvent).password;
+        final role = "customer";
+        final user = state.user;
+        final Map<String, String> result = await userApiProvider.signUpUser(
+          email: email,
+          password: password,
+          role: role,
+        );
+        if (result.containsKey("success")) {
+          user.email = email;
+          user.password = password;
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString("email", email);
+          prefs.setString("password", password);
+          yield state.clone(
+            isLoading: false,
+            signUpProcessState: SignUpProcessState.INITIATED,
+            user: user,
+          );
+        } else {}
+        break;
+      case SignUpCustomerInformationEvent:
+        yield state.clone(
+          isLoading: true,
+        );
+        final firstName = (event as SignUpCustomerInformationEvent).firstName;
+        final lastName = (event as SignUpCustomerInformationEvent).lastName;
+        final streetAddress =
+            (event as SignUpCustomerInformationEvent).streetAddress;
+        final city = (event as SignUpCustomerInformationEvent).city;
+        final district = (event as SignUpCustomerInformationEvent).district;
+        final province = (event as SignUpCustomerInformationEvent).province;
+        final birthDate = (event as SignUpCustomerInformationEvent).birthDate;
+        final gender = (event as SignUpCustomerInformationEvent).gender;
+        final contactNumber =
+            (event as SignUpCustomerInformationEvent).contactNumber;
+        final result = await userApiProvider.signUpCustomer(
+          firstName: firstName,
+          lastName: lastName,
+          streetAddress: streetAddress,
+          city: city,
+          district: district,
+          province: province,
+          birthDate: birthDate,
+          gender: gender,
+          contactNumber: contactNumber,
+        );
+        if (result.containsKey("success")) {
+          User newUser = new User(
+            firstName: firstName,
+            lastName: lastName,
+            gender: gender,
+            contactNumber: contactNumber,
+          );
+          yield state.clone(
+            isLoading: false,
+            signUpProcessState: SignUpProcessState.FILLED,
+            user: newUser,
+          );
+        } else {
+          yield state.clone(
+            error: result["error"],
+          );
+        }
+        break;
+      case LoginUser:
+        final email = (event as LoginUser).email;
+        final password = (event as LoginUser).password;
+        break;
       case UpdateUserEvent:
         final user = (event as UpdateUserEvent).user;
         yield state.clone(user: user);
@@ -43,6 +122,11 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final twoFA = (event as UpdateTwoFA).twoFA;
         yield state.clone(
           twoFA: twoFA,
+        );
+        break;
+      case ToggleVisibility:
+        yield state.clone(
+          isVisible: !state.isVisible,
         );
         break;
     }
