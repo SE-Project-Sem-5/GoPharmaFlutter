@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
-import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_start.dart';
+import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 import 'package:go_pharma/ui/customer/sign_up/sign_up_start.dart';
 
 class CustomerStartingPage extends StatelessWidget {

@@ -9,10 +9,8 @@ import 'package:go_pharma/ui/common/widgets/facebook_button.dart';
 import 'package:go_pharma/ui/common/widgets/google_button.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
-import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_start.dart';
-import 'customer_sign_up_information.dart';
+import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 
-//TODO: password needs to be more than 7 characters
 // ignore: must_be_immutable
 class CustomerSignUpPage extends StatelessWidget {
   static const String id = "customer_sign_up";
@@ -32,7 +30,10 @@ class CustomerSignUpPage extends StatelessWidget {
         return state.signUpProcessState == SignUpProcessState.INITIATED;
       },
       listener: (context, state) {
-        Navigator.pushReplacementNamed(context, SignUpInformation.id);
+        Navigator.pushReplacementNamed(
+          context,
+          CustomerSignInPage.id,
+        );
       },
       child: BlocBuilder<CustomerRootBloc, CustomerRootState>(
         buildWhen: (p, c) => p.isLoading != c.isLoading,
@@ -202,8 +203,9 @@ class CustomerSignUpPage extends StatelessWidget {
                                                   GoPharmaColors.PrimaryColor,
                                             ),
                                             onTap: () {
-                                              customerRootBloc
-                                                  .add(ToggleVisibility());
+                                              customerRootBloc.add(
+                                                ToggleVisibility(),
+                                              );
                                             },
                                           ),
                                         ),
@@ -272,9 +274,10 @@ class CustomerSignUpPage extends StatelessWidget {
                                 Text(
                                   "OR",
                                   style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: GoPharmaColors.PrimaryColor),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: GoPharmaColors.PrimaryColor,
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 15,

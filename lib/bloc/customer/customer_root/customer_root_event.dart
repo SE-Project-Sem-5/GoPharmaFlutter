@@ -72,6 +72,12 @@ class RootSignInEvent extends CustomerRootEvent {
   RootSignInEvent({this.email, this.password});
 }
 
+class UpdateGenderEvent extends CustomerRootEvent {
+  final String gender;
+
+  UpdateGenderEvent({this.gender});
+}
+
 class SignOutEvent extends CustomerRootEvent {}
 
 class ToggleGeneralInformationEditableEvent extends CustomerRootEvent {
