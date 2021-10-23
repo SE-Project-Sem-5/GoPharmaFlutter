@@ -7,7 +7,6 @@ class PastOrderFullView extends StatelessWidget {
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
   const PastOrderFullView({Key key, this.order}) : super(key: key);
-  final String bullet = "\u2022 ";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -108,7 +107,6 @@ class PastOrderFullView extends StatelessWidget {
                           itemBuilder: (context, index) => OrderedItem(
                             orderProduct: order.orderProducts[index],
                             leftPadding: leftPadding,
-                            bullet: bullet,
                             rightPadding: rightPadding,
                           ),
                         ),
@@ -141,13 +139,11 @@ class OrderedItem extends StatelessWidget {
   const OrderedItem({
     Key key,
     @required this.orderProduct,
-    @required this.bullet,
     @required this.leftPadding,
     @required this.rightPadding,
   }) : super(key: key);
   final OrderProducts orderProduct;
   final double leftPadding;
-  final String bullet;
   final double rightPadding;
 
   @override
