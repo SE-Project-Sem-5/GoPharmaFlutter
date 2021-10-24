@@ -71,6 +71,9 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
 
       //  2. Sign up step 2
       case LoginUser:
+        yield state.clone(
+          isLoading: true,
+        );
         final email = (event as LoginUser).email;
         final password = (event as LoginUser).password;
         final Map<String, dynamic> result = await userApiProvider.loginUser(
@@ -88,11 +91,13 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
             );
           } else if (loginReponse.data.twoFactorAuth == "true") {
             yield state.clone(
+              isLoading: false,
               signUpProcessState: SignUpProcessState.COMPLETED,
               twoFAenabled: true,
             );
           } else {
             yield state.clone(
+              isLoading: false,
               signUpProcessState: SignUpProcessState.COMPLETED,
               twoFAenabled: false,
             );
@@ -147,6 +152,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           );
         } else {
           yield state.clone(
+            isLoading: false,
             error: result["error"],
           );
         }
@@ -218,6 +224,9 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         }
         break;
       case VerifyEmail:
+        yield state.clone(
+          isLoading: true,
+        );
         final result = await userApiProvider.verifyEmail();
         if (result.containsKey("success")) {
           final cookie = result["cookie"];

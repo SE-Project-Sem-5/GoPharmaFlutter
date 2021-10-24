@@ -23,6 +23,7 @@ class UserAPIProvider {
       return {"success": "Sign up successfully initiated."};
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
+      print("This email has already been registered");
       return {"error": "This email has already been registered"};
     }
   }
@@ -42,9 +43,10 @@ class UserAPIProvider {
       print(response.data);
       print(response.headers);
       print(LoginResponse.fromJson(response.data));
+      print(response.headers["set-cookie"]);
       return {
         "data": LoginResponse.fromJson(response.data),
-        "cookie": response.headers["set-cookie"],
+        "cookie": response.headers["set-cookie"][0],
       };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
@@ -86,7 +88,7 @@ class UserAPIProvider {
       );
       return {
         "success": "Sign up successfully initiated.",
-        "cookie": response.headers["set - cookie"],
+        "cookie": response.headers["set - cookie"][0],
       };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
@@ -106,7 +108,7 @@ class UserAPIProvider {
       );
       return {
         "data": "Your email is successfully verified",
-        "cookie": response.headers["set - cookie"],
+        "cookie": response.headers["set - cookie"][0],
       };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
@@ -149,7 +151,7 @@ class UserAPIProvider {
       );
       return {
         "data": "Your email is successfully verified",
-        "cookie": response.headers["set - cookie"],
+        "cookie": response.headers["set - cookie"][0],
       };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
