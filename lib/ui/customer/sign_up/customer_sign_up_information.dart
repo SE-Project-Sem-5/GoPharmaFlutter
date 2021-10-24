@@ -184,7 +184,31 @@ class SignUpInformation extends StatelessWidget {
                                 size: MediaQuery.of(context).size,
                                 fillColor: GoPharmaColors.PrimaryColor,
                                 textColor: GoPharmaColors.WhiteColor,
-                                onTapped: () {},
+                                onTapped: () {
+                                  print(firstNameController.text);
+                                  print(lastNameController.text);
+                                  print(addressController.text);
+                                  print(cityController.text);
+                                  print(districtController.text);
+                                  print(provinceController.text);
+                                  print(birthdayController.text);
+                                  print(state.gender);
+                                  print(contactNumberController.text);
+                                  bloc.add(
+                                    SignUpCustomerInformationEvent(
+                                      firstName: firstNameController.text,
+                                      lastName: lastNameController.text,
+                                      streetAddress: addressController.text,
+                                      city: cityController.text,
+                                      district: districtController.text,
+                                      province: provinceController.text,
+                                      birthDate: birthdayController.text,
+                                      gender: state.gender,
+                                      contactNumber:
+                                          contactNumberController.text,
+                                    ),
+                                  );
+                                },
                               );
                             },
                           ),
