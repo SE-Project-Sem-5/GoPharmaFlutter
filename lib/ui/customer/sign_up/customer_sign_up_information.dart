@@ -22,10 +22,13 @@ class SignUpInformation extends StatelessWidget {
     var provinceController = TextEditingController();
     return BlocListener<CustomerRootBloc, CustomerRootState>(
       listenWhen: (context, state) {
-        return state.signUpProcessState == SignUpProcessState.INITIATED;
+        return state.signUpProcessState == SignUpProcessState.FILLED;
       },
       listener: (context, state) {
-        // TODO: implement listener
+        Navigator.pushReplacementNamed(
+          context,
+          SignUpInformation.id,
+        );
       },
       child: SafeArea(
         child: Scaffold(

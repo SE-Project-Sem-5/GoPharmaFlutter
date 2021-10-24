@@ -24,6 +24,7 @@ import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_2fa.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up_information.dart';
+import 'package:go_pharma/ui/customer/sign_up/enable_two_fa_question.dart';
 import 'package:go_pharma/ui/customer/sign_up/sign_up_start.dart';
 import 'package:go_pharma/ui/delivery_agent/collected_deliveries/collected_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/delivery/deliveries_page.dart';
@@ -65,6 +66,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   //Customer sign up
   CustomerSignUpPage.id: (context) => CustomerSignUpPage(),
   SignUpInformation.id: (context) => SignUpInformation(),
+  EnableTwoFAQuestion.id: (context) => EnableTwoFAQuestion(),
 
   //Customer sign in
   CustomerSignInPage.id: (context) => CustomerSignInPage(),
