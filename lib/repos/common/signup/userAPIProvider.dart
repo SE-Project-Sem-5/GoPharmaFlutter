@@ -27,7 +27,34 @@ class UserAPIProvider {
     }
   }
 
-  Future<Map<String, String>> signUpCustomer({
+  Future<Map<String, dynamic>> loginUser({
+    String email,
+    String password,
+  }) async {
+    try {
+      Response response = await _dio.post(
+        "auth/login",
+        data: {
+          "email": email,
+          "password": password,
+        },
+      );
+      print(response.data);
+      print(response.headers);
+      print(LoginResponse.fromJson(response.data));
+      return {
+        "data": LoginResponse.fromJson(response.data),
+        "cookie": response.headers["set-cookie"],
+      };
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return {
+        "error": "This email address has already been registered",
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> signUpCustomer({
     String firstName,
     String lastName,
     String streetAddress,
@@ -57,51 +84,30 @@ class UserAPIProvider {
           }
         },
       );
-      return {"success": "Sign up successfully initiated."};
+      return {
+        "success": "Sign up successfully initiated.",
+        "cookie": response.headers["set - cookie"],
+      };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return {"error": "Sign Up Error"};
     }
   }
 
-  Future<Map<String, dynamic>> loginUser({
-    String email,
-    String password,
-  }) async {
-    try {
-      Response response = await _dio.post(
-        "auth/login",
-        data: {
-          "email": email,
-          "password": password,
-        },
-      );
-      print(response.data);
-      print(response.headers);
-      print(LoginResponse.fromJson(response.data));
-      return {
-        "data": LoginResponse.fromJson(response.data),
-        "cookie": response.headers["set-cookie"],
-      };
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
-      return {
-        "error": "This email address has already been registered",
-      };
-    }
-  }
-
-  Future<Map<String, String>> verifyEmail() async {
+  Future<Map<String, dynamic>> verifyEmail() async {
     try {
       Response response = await _dio.post(
         "auth/sign-up/verify-email",
-        //TODO: get from email
+        //TODO: add userID and passcode manually
         data: {
           "userID": "Phone number",
           "passcode": "",
         },
       );
-      return {"data": "Your email is successfully verified"};
+      return {
+        "data": "Your email is successfully verified",
+        "cookie": response.headers["set - cookie"],
+      };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return {
@@ -114,6 +120,7 @@ class UserAPIProvider {
     String cookie,
   }) async {
     try {
+      _dio.options.headers['set-cookie'] = cookie;
       Response response = await _dio.post(
         "auth/two-factor/generate",
         data: {
@@ -129,8 +136,10 @@ class UserAPIProvider {
     }
   }
 
-  Future<Map<String, String>> verifyTwoFA({String twoFA, String cookie}) async {
+  Future<Map<String, dynamic>> verifyTwoFA(
+      {String twoFA, String cookie}) async {
     try {
+      _dio.options.headers['set-cookie'] = cookie;
       Response response = await _dio.post(
         "auth/two-factor/verify",
         data: {
@@ -138,7 +147,10 @@ class UserAPIProvider {
           "scope": "register",
         },
       );
-      return {"data": "Your email is successfully verified"};
+      return {
+        "data": "Your email is successfully verified",
+        "cookie": response.headers["set - cookie"],
+      };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return {

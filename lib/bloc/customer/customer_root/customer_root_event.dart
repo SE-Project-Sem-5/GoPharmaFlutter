@@ -67,8 +67,12 @@ class VerifyTwoFACode extends CustomerRootEvent {
 }
 
 //4. Option 2
-class SkipTwoFACode extends CustomerRootEvent {
-  SkipTwoFACode();
+class DisableTwoFA extends CustomerRootEvent {
+  DisableTwoFA();
+}
+
+class VerifyEmail extends CustomerRootEvent {
+  VerifyEmail();
 }
 
 class ToggleGeneralInformationEditableEvent extends CustomerRootEvent {

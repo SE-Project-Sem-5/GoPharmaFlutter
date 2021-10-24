@@ -131,6 +131,9 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           cookie: cookie,
         );
         if (result.containsKey("success")) {
+          final cookie = result["cookie"];
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString("cookie", cookie);
           User newUser = new User(
             firstName: firstName,
             lastName: lastName,
@@ -155,9 +158,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         final cookie = prefs.getString('cookie');
         final result = await userApiProvider.generateTwoFA(cookie: cookie);
-        yield state.clone(
-          twoFAenabled: true,
-        );
+
         if (result.containsKey("success")) {
           yield state.clone(
             isLoading: false,
@@ -182,6 +183,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           twoFA: twoFA,
         );
         if (result.containsKey("success")) {
+          prefs.setString("cookie", cookie);
           yield state.clone(
             twoFAenabled: true,
             isLoading: false,
@@ -194,17 +196,36 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           );
         }
         break;
-      case SkipTwoFACode:
+      case DisableTwoFA:
         yield state.clone(
           isLoading: true,
         );
         SharedPreferences prefs = await SharedPreferences.getInstance();
         final cookie = prefs.getString('cookie');
-        final result = await userApiProvider.disableTwoFA(cookie: cookie);
+        final result = await userApiProvider.disableTwoFA(
+          cookie: cookie,
+        );
         if (result.containsKey("success")) {
           yield state.clone(
             isLoading: false,
             twoFAenabled: true,
+          );
+        } else {
+          yield state.clone(
+            isLoading: false,
+            error: result["error"],
+          );
+        }
+        break;
+      case VerifyEmail:
+        final result = await userApiProvider.verifyEmail();
+        if (result.containsKey("success")) {
+          final cookie = result["cookie"];
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString("cookie", cookie);
+          yield state.clone(
+            isLoading: false,
+            signUpProcessState: SignUpProcessState.VERIFIED,
           );
         } else {
           yield state.clone(
