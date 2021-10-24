@@ -7,6 +7,8 @@ import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:intl/intl.dart';
 
+import 'enable_two_fa_question.dart';
+
 class SignUpInformation extends StatelessWidget {
   static final String id = "customer_sign_up_information";
   @override
@@ -22,10 +24,13 @@ class SignUpInformation extends StatelessWidget {
     var provinceController = TextEditingController();
     return BlocListener<CustomerRootBloc, CustomerRootState>(
       listenWhen: (context, state) {
-        return state.signUpProcessState == SignUpProcessState.INITIATED;
+        return state.signUpProcessState == SignUpProcessState.FILLED;
       },
       listener: (context, state) {
-        // TODO: implement listener
+        Navigator.pushReplacementNamed(
+          context,
+          EnableTwoFAQuestion.id,
+        );
       },
       child: SafeArea(
         child: Scaffold(
@@ -181,7 +186,31 @@ class SignUpInformation extends StatelessWidget {
                                 size: MediaQuery.of(context).size,
                                 fillColor: GoPharmaColors.PrimaryColor,
                                 textColor: GoPharmaColors.WhiteColor,
-                                onTapped: () {},
+                                onTapped: () {
+                                  print(firstNameController.text);
+                                  print(lastNameController.text);
+                                  print(addressController.text);
+                                  print(cityController.text);
+                                  print(districtController.text);
+                                  print(provinceController.text);
+                                  print(birthdayController.text);
+                                  print(state.gender);
+                                  print(contactNumberController.text);
+                                  bloc.add(
+                                    SignUpCustomerInformationEvent(
+                                      firstName: firstNameController.text,
+                                      lastName: lastNameController.text,
+                                      streetAddress: addressController.text,
+                                      city: cityController.text,
+                                      district: districtController.text,
+                                      province: provinceController.text,
+                                      birthDate: birthdayController.text,
+                                      gender: state.gender,
+                                      contactNumber:
+                                          contactNumberController.text,
+                                    ),
+                                  );
+                                },
                               );
                             },
                           ),

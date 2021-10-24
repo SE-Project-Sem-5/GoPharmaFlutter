@@ -86,7 +86,7 @@ class CustomerSignIn2FA extends StatelessWidget {
                     onTapped: () {
                       if (_formKey.currentState.validate()) {
                         bloc.add(
-                          UpdateTwoFA(
+                          VerifyTwoFACode(
                             twoFA: _twoFAController.text,
                           ),
                         );

@@ -40,6 +40,8 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         yield state.clone(error: "");
         yield state.clone(error: error);
         break;
+
+      //  1. Sign up step 1
       case SignUpCustomerEvent:
         yield state.clone(
           isLoading: true,
@@ -66,50 +68,8 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           );
         } else {}
         break;
-      case SignUpCustomerInformationEvent:
-        yield state.clone(
-          isLoading: true,
-        );
-        final firstName = (event as SignUpCustomerInformationEvent).firstName;
-        final lastName = (event as SignUpCustomerInformationEvent).lastName;
-        final streetAddress =
-            (event as SignUpCustomerInformationEvent).streetAddress;
-        final city = (event as SignUpCustomerInformationEvent).city;
-        final district = (event as SignUpCustomerInformationEvent).district;
-        final province = (event as SignUpCustomerInformationEvent).province;
-        final birthDate = (event as SignUpCustomerInformationEvent).birthDate;
-        final gender = (event as SignUpCustomerInformationEvent).gender;
-        final contactNumber =
-            (event as SignUpCustomerInformationEvent).contactNumber;
-        final result = await userApiProvider.signUpCustomer(
-          firstName: firstName,
-          lastName: lastName,
-          streetAddress: streetAddress,
-          city: city,
-          district: district,
-          province: province,
-          birthDate: birthDate,
-          gender: gender,
-          contactNumber: contactNumber,
-        );
-        if (result.containsKey("success")) {
-          User newUser = new User(
-            firstName: firstName,
-            lastName: lastName,
-            gender: gender,
-            contactNumber: contactNumber,
-          );
-          yield state.clone(
-            isLoading: false,
-            signUpProcessState: SignUpProcessState.FILLED,
-            user: newUser,
-          );
-        } else {
-          yield state.clone(
-            error: result["error"],
-          );
-        }
-        break;
+
+      //  2. Sign up step 2
       case LoginUser:
         final email = (event as LoginUser).email;
         final password = (event as LoginUser).password;
@@ -120,9 +80,8 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         if (result.containsKey("data")) {
           final loginReponse = result["data"];
           final cookie = result["cookie"];
-          //TODO: find proper location to set cookie
-          // SharedPreferences prefs = await SharedPreferences.getInstance();
-          // prefs.setString("cookie", cookie);
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString("cookie", cookie);
           if (loginReponse.data.twoFactorAuth == "none") {
             yield state.clone(
               signUpProcessState: SignUpProcessState.INITIATED,
@@ -141,20 +100,148 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         } else {}
         break;
 
-      case UpdateUserEvent:
-        final user = (event as UpdateUserEvent).user;
-        yield state.clone(user: user);
-        break;
-      case UpdateTwoFA:
-        final twoFA = (event as UpdateTwoFA).twoFA;
+      //  3. Sign up step 3
+      case SignUpCustomerInformationEvent:
         yield state.clone(
+          isLoading: true,
+        );
+        final firstName = (event as SignUpCustomerInformationEvent).firstName;
+        final lastName = (event as SignUpCustomerInformationEvent).lastName;
+        final streetAddress =
+            (event as SignUpCustomerInformationEvent).streetAddress;
+        final city = (event as SignUpCustomerInformationEvent).city;
+        final district = (event as SignUpCustomerInformationEvent).district;
+        final province = (event as SignUpCustomerInformationEvent).province;
+        final birthDate = (event as SignUpCustomerInformationEvent).birthDate;
+        final gender = (event as SignUpCustomerInformationEvent).gender;
+        final contactNumber =
+            (event as SignUpCustomerInformationEvent).contactNumber;
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final cookie = prefs.getString('cookie');
+        final result = await userApiProvider.signUpCustomer(
+          firstName: firstName,
+          lastName: lastName,
+          streetAddress: streetAddress,
+          city: city,
+          district: district,
+          province: province,
+          birthDate: birthDate,
+          gender: gender,
+          contactNumber: contactNumber,
+          cookie: cookie,
+        );
+        if (result.containsKey("success")) {
+          final cookie = result["cookie"];
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString("cookie", cookie);
+          User newUser = new User(
+            firstName: firstName,
+            lastName: lastName,
+            gender: gender,
+            contactNumber: contactNumber,
+          );
+          yield state.clone(
+            isLoading: false,
+            signUpProcessState: SignUpProcessState.FILLED,
+            user: newUser,
+          );
+        } else {
+          yield state.clone(
+            error: result["error"],
+          );
+        }
+        break;
+      case GenerateTwoFACode:
+        yield state.clone(
+          isLoading: true,
+        );
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final cookie = prefs.getString('cookie');
+        final result = await userApiProvider.generateTwoFA(cookie: cookie);
+
+        if (result.containsKey("success")) {
+          yield state.clone(
+            isLoading: false,
+            twoFAenabled: true,
+          );
+        } else {
+          yield state.clone(
+            isLoading: false,
+            error: result["error"],
+          );
+        }
+        break;
+      case VerifyTwoFACode:
+        yield state.clone(
+          isLoading: true,
+        );
+        final twoFA = (event as VerifyTwoFACode).twoFA;
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final cookie = prefs.getString('cookie');
+        final result = await userApiProvider.verifyTwoFA(
+          cookie: cookie,
           twoFA: twoFA,
         );
+        if (result.containsKey("success")) {
+          prefs.setString("cookie", cookie);
+          yield state.clone(
+            twoFAenabled: true,
+            isLoading: false,
+            twoFA: twoFA,
+          );
+        } else {
+          yield state.clone(
+            isLoading: false,
+            error: result["error"],
+          );
+        }
+        break;
+      case DisableTwoFA:
+        yield state.clone(
+          isLoading: true,
+        );
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final cookie = prefs.getString('cookie');
+        final result = await userApiProvider.disableTwoFA(
+          cookie: cookie,
+        );
+        if (result.containsKey("success")) {
+          yield state.clone(
+            isLoading: false,
+            twoFAenabled: true,
+          );
+        } else {
+          yield state.clone(
+            isLoading: false,
+            error: result["error"],
+          );
+        }
+        break;
+      case VerifyEmail:
+        final result = await userApiProvider.verifyEmail();
+        if (result.containsKey("success")) {
+          final cookie = result["cookie"];
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString("cookie", cookie);
+          yield state.clone(
+            isLoading: false,
+            signUpProcessState: SignUpProcessState.VERIFIED,
+          );
+        } else {
+          yield state.clone(
+            isLoading: false,
+            error: result["error"],
+          );
+        }
         break;
       case ToggleVisibility:
         yield state.clone(
           isVisible: !state.isVisible,
         );
+        break;
+      case UpdateUserEvent:
+        final user = (event as UpdateUserEvent).user;
+        yield state.clone(user: user);
         break;
       case UpdateGenderEvent:
         final gender = (event as UpdateGenderEvent).gender;
