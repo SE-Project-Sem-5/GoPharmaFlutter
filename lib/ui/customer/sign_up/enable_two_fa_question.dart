@@ -6,7 +6,7 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/customer/customer_home_page.dart';
-import 'package:intl/intl.dart';
+import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_2fa.dart';
 
 class EnableTwoFAQuestion extends StatelessWidget {
   static final String id = "enable_two_fa_question";
@@ -16,13 +16,21 @@ class EnableTwoFAQuestion extends StatelessWidget {
 
     return BlocListener<CustomerRootBloc, CustomerRootState>(
       listenWhen: (context, state) {
-        return state.signUpProcessState == SignUpProcessState.COMPLETED;
+        return state.signUpProcessState == SignUpProcessState.COMPLETED ||
+            state.twoFAenabled;
       },
       listener: (context, state) {
-        Navigator.pushReplacementNamed(
-          context,
-          CustomerHomePage.id,
-        );
+        if (state.signUpProcessState == SignUpProcessState.COMPLETED) {
+          Navigator.pushReplacementNamed(
+            context,
+            CustomerHomePage.id,
+          );
+        } else if (state.twoFAenabled) {
+          Navigator.pushReplacementNamed(
+            context,
+            CustomerSignIn2FA.id,
+          );
+        } else {}
       },
       child: SafeArea(
         child: Scaffold(
@@ -53,7 +61,7 @@ class EnableTwoFAQuestion extends StatelessWidget {
                             textColor: GoPharmaColors.WhiteColor,
                             onTapped: () {
                               bloc.add(
-                                DisableTwoFA(),
+                                GenerateTwoFACode(),
                               );
                             },
                           ),
