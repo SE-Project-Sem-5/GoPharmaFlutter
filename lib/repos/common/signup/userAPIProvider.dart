@@ -37,8 +37,10 @@ class UserAPIProvider {
     String birthDate,
     String gender,
     String contactNumber,
+    String cookie,
   }) async {
     try {
+      _dio.options.headers['set-cookie'] = cookie;
       Response response = await _dio.post(
         "auth/sign-up/customer/step2",
         data: {
@@ -89,7 +91,7 @@ class UserAPIProvider {
     }
   }
 
-  Future<Map<String, dynamic>> verifyEmail() async {
+  Future<Map<String, String>> verifyEmail() async {
     try {
       Response response = await _dio.post(
         "auth/sign-up/verify-email",
@@ -108,7 +110,9 @@ class UserAPIProvider {
     }
   }
 
-  Future<Map<String, dynamic>> generateTwoFA() async {
+  Future<Map<String, String>> generateTwoFA({
+    String cookie,
+  }) async {
     try {
       Response response = await _dio.post(
         "auth/two-factor/generate",
@@ -125,9 +129,7 @@ class UserAPIProvider {
     }
   }
 
-  Future<Map<String, dynamic>> verifyTwoFA({
-    String twoFA,
-  }) async {
+  Future<Map<String, String>> verifyTwoFA({String twoFA, String cookie}) async {
     try {
       Response response = await _dio.post(
         "auth/two-factor/verify",
@@ -145,8 +147,9 @@ class UserAPIProvider {
     }
   }
 
-  Future<Map<String, dynamic>> disableTwoFA() async {
+  Future<Map<String, dynamic>> disableTwoFA({String cookie}) async {
     try {
+      _dio.options.headers['set-cookie'] = cookie;
       Response response = await _dio.get(
         "auth/two-factor/disable",
       );

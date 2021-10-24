@@ -45,6 +45,7 @@ class SignUpCustomerInformationEvent extends CustomerRootEvent {
   });
 }
 
+//3.
 class LoginUser extends CustomerRootEvent {
   final String email;
   final String password;
@@ -54,9 +55,24 @@ class LoginUser extends CustomerRootEvent {
   });
 }
 
-class UpdateUserEvent extends CustomerRootEvent {
-  final User user;
-  UpdateUserEvent(this.user);
+//4. Option 1 - Part 1
+class GenerateTwoFACode extends CustomerRootEvent {
+  GenerateTwoFACode();
+}
+
+//4. Option 1 - Part 2
+class VerifyTwoFACode extends CustomerRootEvent {
+  final String twoFA;
+  VerifyTwoFACode({this.twoFA});
+}
+
+//4. Option 2
+class SkipTwoFACode extends CustomerRootEvent {
+  SkipTwoFACode();
+}
+
+class ToggleGeneralInformationEditableEvent extends CustomerRootEvent {
+  ToggleGeneralInformationEditableEvent();
 }
 
 class ChangeSignInStateEvent extends CustomerRootEvent {
@@ -65,30 +81,17 @@ class ChangeSignInStateEvent extends CustomerRootEvent {
   ChangeSignInStateEvent(this.state);
 }
 
-class RootSignInEvent extends CustomerRootEvent {
-  final String email;
-  final String password;
-
-  RootSignInEvent({this.email, this.password});
+class UpdateUserEvent extends CustomerRootEvent {
+  final User user;
+  UpdateUserEvent(this.user);
 }
 
-class UpdateGenderEvent extends CustomerRootEvent {
-  final String gender;
-
-  UpdateGenderEvent({this.gender});
-}
-
-class SignOutEvent extends CustomerRootEvent {}
-
-class ToggleGeneralInformationEditableEvent extends CustomerRootEvent {
-  ToggleGeneralInformationEditableEvent();
-}
-
+//UI events
 class ToggleVisibility extends CustomerRootEvent {
   ToggleVisibility();
 }
 
-class UpdateTwoFA extends CustomerRootEvent {
-  final String twoFA;
-  UpdateTwoFA({this.twoFA});
+class UpdateGenderEvent extends CustomerRootEvent {
+  final String gender;
+  UpdateGenderEvent({this.gender});
 }

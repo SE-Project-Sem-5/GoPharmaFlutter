@@ -7,6 +7,8 @@ import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:intl/intl.dart';
 
+import 'enable_two_fa_question.dart';
+
 class SignUpInformation extends StatelessWidget {
   static final String id = "customer_sign_up_information";
   @override
@@ -27,7 +29,7 @@ class SignUpInformation extends StatelessWidget {
       listener: (context, state) {
         Navigator.pushReplacementNamed(
           context,
-          SignUpInformation.id,
+          EnableTwoFAQuestion.id,
         );
       },
       child: SafeArea(
