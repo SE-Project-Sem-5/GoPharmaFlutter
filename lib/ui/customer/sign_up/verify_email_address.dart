@@ -50,12 +50,15 @@ class VerifyEmailAddress extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Spacer(),
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: GoPharmaColors.PrimaryColor,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                          color: GoPharmaColors.PrimaryColor,
+                        ),
                       ),
                     ),
                     Spacer(),
