@@ -6,9 +6,8 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
+import 'package:go_pharma/ui/customer/sign_up/verify_email_address.dart';
 import 'package:intl/intl.dart';
-
-import 'enable_two_fa_question.dart';
 
 class SignUpInformation extends StatelessWidget {
   static final String id = "customer_sign_up_information";
@@ -30,7 +29,7 @@ class SignUpInformation extends StatelessWidget {
       listener: (context, state) {
         Navigator.pushReplacementNamed(
           context,
-          EnableTwoFAQuestion.id,
+          VerifyEmailAddress.id,
         );
       },
       child: SafeArea(
