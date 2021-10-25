@@ -72,7 +72,8 @@ class DisableTwoFA extends CustomerRootEvent {
 }
 
 class VerifyEmail extends CustomerRootEvent {
-  VerifyEmail();
+  final String code;
+  VerifyEmail({this.code});
 }
 
 class ToggleGeneralInformationEditableEvent extends CustomerRootEvent {

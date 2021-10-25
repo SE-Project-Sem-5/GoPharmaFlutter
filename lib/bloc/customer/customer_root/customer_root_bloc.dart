@@ -17,7 +17,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
   Future<void> _init() async {
     var prefs = await SharedPreferences.getInstance();
     add(LoadCities());
-
+    print("Loading");
     final cookie = (prefs.getString('cookie') ?? '');
 
     // if (cookie != '' && email != '' && password != '') {
@@ -93,7 +93,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           final cookie = result["cookie"];
           SharedPreferences prefs = await SharedPreferences.getInstance();
           print(cookie);
-          prefs.setString("cookie", cookie[0]);
+          prefs.setString("cookie", cookie);
           if (loginReponse.data.twoFactorAuth == "none") {
             yield state.clone(
               isLoading: false,
@@ -147,7 +147,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         );
         if (result.containsKey("success")) {
           final cookie = result["cookie"];
-          prefs.setString("cookie", cookie[0]);
+          prefs.setString("cookie", cookie);
           User newUser = new User(
             firstName: firstName,
             lastName: lastName,
@@ -201,7 +201,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           twoFA: twoFA,
         );
         if (result.containsKey("success")) {
-          prefs.setString("cookie", result["cookie"][0]);
+          prefs.setString("cookie", result["cookie"]);
           yield state.clone(
             twoFAverified: true,
             isLoading: false,
@@ -239,11 +239,16 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         yield state.clone(
           isLoading: true,
         );
-        final result = await userApiProvider.verifyEmail();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String cookie = prefs.get('cookie');
+        final code = (event as VerifyEmail).code;
+        final result = await userApiProvider.verifyEmail(
+          code: code,
+          cookie: cookie,
+        );
         if (result.containsKey("success")) {
           final cookie = result["cookie"];
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setString("cookie", cookie[0]);
+          prefs.setString("cookie", cookie);
           yield state.clone(
             isLoading: false,
             signUpProcessState: SignUpProcessState.VERIFIED,
@@ -280,7 +285,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         if (result.containsKey("data")) {
           yield state.clone(
             isLoading: false,
-            city: result["data"].cities.cities[0],
+            city: result["data"].cities[0].description,
             cities: result["data"],
           );
         }
