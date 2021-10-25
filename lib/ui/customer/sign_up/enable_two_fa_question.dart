@@ -6,7 +6,7 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/customer/customer_home_page.dart';
-import 'package:intl/intl.dart';
+import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_2fa.dart';
 
 class EnableTwoFAQuestion extends StatelessWidget {
   static final String id = "enable_two_fa_question";
@@ -16,20 +16,28 @@ class EnableTwoFAQuestion extends StatelessWidget {
 
     return BlocListener<CustomerRootBloc, CustomerRootState>(
       listenWhen: (context, state) {
-        return state.signUpProcessState == SignUpProcessState.COMPLETED;
+        return state.signUpProcessState == SignUpProcessState.COMPLETED ||
+            state.twoFAenabled;
       },
       listener: (context, state) {
-        Navigator.pushReplacementNamed(
-          context,
-          CustomerHomePage.id,
-        );
+        if (state.signUpProcessState == SignUpProcessState.COMPLETED) {
+          Navigator.pushReplacementNamed(
+            context,
+            CustomerHomePage.id,
+          );
+        } else if (state.twoFAenabled) {
+          Navigator.pushReplacementNamed(
+            context,
+            CustomerSignIn2FA.id,
+          );
+        } else {}
       },
       child: SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             title: Text(
-              "Would you like to turn on Two-Factor Authentication?",
+              "Turn 2FA On?",
             ),
           ),
           body: BlocBuilder<CustomerRootBloc, CustomerRootState>(
@@ -44,8 +52,8 @@ class EnableTwoFAQuestion extends StatelessWidget {
                         right: 25.0,
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
+                          Spacer(),
                           RoundedButtonFilled(
                             title: "Yes",
                             size: MediaQuery.of(context).size,
@@ -53,7 +61,7 @@ class EnableTwoFAQuestion extends StatelessWidget {
                             textColor: GoPharmaColors.WhiteColor,
                             onTapped: () {
                               bloc.add(
-                                DisableTwoFA(),
+                                GenerateTwoFACode(),
                               );
                             },
                           ),
@@ -63,14 +71,15 @@ class EnableTwoFAQuestion extends StatelessWidget {
                           RoundedButtonFilled(
                             title: "No",
                             size: MediaQuery.of(context).size,
-                            fillColor: GoPharmaColors.PrimaryColor,
-                            textColor: GoPharmaColors.WhiteColor,
+                            fillColor: GoPharmaColors.GreyColor,
+                            textColor: GoPharmaColors.BlackColor,
                             onTapped: () {
                               bloc.add(
                                 DisableTwoFA(),
                               );
                             },
-                          )
+                          ),
+                          Spacer(),
                         ],
                       ),
                     );

@@ -28,6 +28,7 @@ class CustomerRootState {
   final bool isPasswordEditable;
   final bool isVisible;
   final bool twoFAenabled;
+  final bool twoFAverified;
   final String twoFA;
   final String gender;
 
@@ -36,6 +37,7 @@ class CustomerRootState {
     @required this.error,
     @required this.user,
     @required this.twoFAenabled,
+    @required this.twoFAverified,
     @required this.gender,
     @required this.isLoading,
     @required this.twoFA,
@@ -53,6 +55,7 @@ class CustomerRootState {
         signInState: CustomerRootSignInState.INITIALIZING,
         initializing: false,
         twoFAenabled: false,
+        twoFAverified: false,
         twoFA: '',
         gender: 'male',
         isGeneralInformationEditable: false,
@@ -69,6 +72,7 @@ class CustomerRootState {
     bool initializing,
     bool isLoading,
     bool twoFAenabled,
+    bool twoFAverified,
     SignUpProcessState signUpProcessState,
     bool isGeneralInformationEditable,
     bool isPasswordEditable,
@@ -79,6 +83,7 @@ class CustomerRootState {
       error: error ?? this.error,
       gender: gender ?? this.gender,
       twoFAenabled: twoFAenabled ?? this.twoFAenabled,
+      twoFAverified: twoFAverified ?? this.twoFAverified,
       user: user ?? this.user,
       isLoading: isLoading ?? this.isLoading,
       signUpProcessState: signUpProcessState ?? this.signUpProcessState,

@@ -24,7 +24,8 @@ class Data {
   });
 
   Data.fromJson(Map<String, dynamic> json) {
-    twoFactorAuth =
-        json['twoFactorAuth'] != null ? json['twoFactorAuth'] : "none";
+    twoFactorAuth = json['twoFactorAuth'] != null
+        ? json['twoFactorAuth'].toString()
+        : "none";
   }
 }
