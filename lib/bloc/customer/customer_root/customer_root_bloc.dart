@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
+import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/repos/common/signup/user.dart';
 import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -124,22 +125,20 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final lastName = (event as SignUpCustomerInformationEvent).lastName;
         final streetAddress =
             (event as SignUpCustomerInformationEvent).streetAddress;
-        final city = (event as SignUpCustomerInformationEvent).city;
-        final district = (event as SignUpCustomerInformationEvent).district;
-        final province = (event as SignUpCustomerInformationEvent).province;
         final birthDate = (event as SignUpCustomerInformationEvent).birthDate;
         final gender = (event as SignUpCustomerInformationEvent).gender;
         final contactNumber =
             (event as SignUpCustomerInformationEvent).contactNumber;
+        final cityInState = state.city;
         SharedPreferences prefs = await SharedPreferences.getInstance();
         final cookie = prefs.getString('cookie');
         final result = await userApiProvider.signUpCustomer(
           firstName: firstName,
           lastName: lastName,
           streetAddress: streetAddress,
-          city: city,
-          district: district,
-          province: province,
+          city: cityInState.city,
+          district: cityInState.district,
+          province: cityInState.province,
           birthDate: birthDate,
           gender: gender,
           contactNumber: contactNumber,
@@ -267,8 +266,14 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         break;
       case UpdateCity:
         final city = (event as UpdateCity).city;
+        City newCity;
+        for (City c in state.cities.cities) {
+          if (c.description == city) {
+            newCity = c;
+          }
+        }
         yield state.clone(
-          city: city,
+          city: newCity,
         );
         break;
       case UpdateUserEvent:

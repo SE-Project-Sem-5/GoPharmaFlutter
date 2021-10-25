@@ -32,7 +32,7 @@ class CustomerRootState {
   final bool twoFAverified;
   final String twoFA;
   final CityList cities;
-  final String city;
+  final City city;
   final String address;
   final String gender;
 
@@ -64,7 +64,7 @@ class CustomerRootState {
         twoFAenabled: false,
         twoFAverified: false,
         twoFA: '',
-        city: '',
+        city: new City(),
         address: '',
         cities: new CityList(),
         gender: 'male',
@@ -78,6 +78,7 @@ class CustomerRootState {
     String error,
     String gender,
     User user,
+    City city,
     CityList cities,
     CustomerRootSignInState signInState,
     bool initializing,
@@ -90,7 +91,6 @@ class CustomerRootState {
     bool isVisible,
     String twoFA,
     String address,
-    String city,
   }) {
     return CustomerRootState(
       error: error ?? this.error,

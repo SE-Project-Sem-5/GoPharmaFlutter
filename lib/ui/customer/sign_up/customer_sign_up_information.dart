@@ -19,9 +19,6 @@ class SignUpInformation extends StatelessWidget {
     var contactNumberController = TextEditingController();
     var birthdayController = TextEditingController();
     var addressController = TextEditingController();
-    var cityController = TextEditingController();
-    var districtController = TextEditingController();
-    var provinceController = TextEditingController();
     return BlocListener<CustomerRootBloc, CustomerRootState>(
       listenWhen: (context, state) {
         return state.signUpProcessState == SignUpProcessState.FILLED;
@@ -155,7 +152,9 @@ class SignUpInformation extends StatelessWidget {
                             enabled: true,
                           ),
                           DropdownButton<String>(
-                            value: state.city ?? state.cities.cities[0],
+                            value: state.city != null
+                                ? state.city.description
+                                : state.cities.cities[0].description,
                             icon: const Icon(
                               Icons.arrow_downward,
                               color: GoPharmaColors.PrimaryColor,
@@ -197,9 +196,6 @@ class SignUpInformation extends StatelessWidget {
                                   print(firstNameController.text);
                                   print(lastNameController.text);
                                   print(addressController.text);
-                                  print(cityController.text);
-                                  print(districtController.text);
-                                  print(provinceController.text);
                                   print(birthdayController.text);
                                   print(state.gender);
                                   print(contactNumberController.text);
@@ -208,9 +204,6 @@ class SignUpInformation extends StatelessWidget {
                                       firstName: firstNameController.text,
                                       lastName: lastNameController.text,
                                       streetAddress: addressController.text,
-                                      city: cityController.text,
-                                      district: districtController.text,
-                                      province: provinceController.text,
                                       birthDate: birthdayController.text,
                                       gender: state.gender,
                                       contactNumber:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
+import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/repos/common/signup/user.dart';
 
 @immutable
@@ -25,9 +26,6 @@ class SignUpCustomerInformationEvent extends CustomerRootEvent {
   final String firstName;
   final String lastName;
   final String streetAddress;
-  final String city;
-  final String district;
-  final String province;
   final String birthDate;
   final String gender;
   final String contactNumber;
@@ -36,9 +34,6 @@ class SignUpCustomerInformationEvent extends CustomerRootEvent {
     this.firstName,
     this.lastName,
     this.streetAddress,
-    this.city,
-    this.district,
-    this.province,
     this.birthDate,
     this.gender,
     this.contactNumber,
