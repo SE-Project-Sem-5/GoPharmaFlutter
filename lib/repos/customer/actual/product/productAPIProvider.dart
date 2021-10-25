@@ -13,7 +13,7 @@ class ProductAPIProvider {
         data: {"category": category},
       );
       print(response);
-      return ProductList.fromJson(response.data["data"]);
+      return ProductList.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return ProductList();

@@ -99,3 +99,17 @@ class UpdateGenderEvent extends CustomerRootEvent {
   final String gender;
   UpdateGenderEvent({this.gender});
 }
+
+class LoadCities extends CustomerRootEvent {
+  LoadCities();
+}
+
+class LoadCitiesByProvince extends CustomerRootEvent {
+  final String province;
+  LoadCitiesByProvince({this.province});
+}
+
+class UpdateCity extends CustomerRootEvent {
+  final String city;
+  UpdateCity({this.city});
+}

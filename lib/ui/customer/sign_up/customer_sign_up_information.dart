@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
+import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:intl/intl.dart';
@@ -131,9 +132,11 @@ class SignUpInformation extends StatelessWidget {
                                 onTap: () async {
                                   final datePick = await showDatePicker(
                                       context: context,
-                                      initialDate: new DateTime.now(),
+                                      initialDate: new DateTime(
+                                          new DateTime.now().year - 18),
                                       firstDate: new DateTime(1900),
-                                      lastDate: new DateTime(2100));
+                                      lastDate: new DateTime(
+                                          new DateTime.now().year - 18));
                                   if (datePick != null) {
                                     birthdayController.text =
                                         DateFormat("dd-MM-yyyy")
@@ -152,33 +155,37 @@ class SignUpInformation extends StatelessWidget {
                             ),
                             enabled: true,
                           ),
-                          TextField(
-                            controller: addressController,
-                            decoration: InputDecoration(
-                              hintText: "Street Address",
+                          DropdownButton<String>(
+                            value: state.city ?? state.cities.cities[0],
+                            icon: const Icon(
+                              Icons.arrow_downward,
+                              color: GoPharmaColors.PrimaryColor,
                             ),
-                            enabled: true,
-                          ),
-                          TextField(
-                            controller: cityController,
-                            decoration: InputDecoration(
-                              hintText: "City",
+                            iconSize: 24,
+                            elevation: 16,
+                            style: const TextStyle(
+                              color: GoPharmaColors.BlackColor,
+                              fontSize: 16,
                             ),
-                            enabled: true,
-                          ),
-                          TextField(
-                            controller: districtController,
-                            decoration: InputDecoration(
-                              hintText: "District",
+                            underline: Container(
+                              height: 2,
+                              color: GoPharmaColors.PrimaryColor,
                             ),
-                            enabled: true,
-                          ),
-                          TextField(
-                            controller: provinceController,
-                            decoration: InputDecoration(
-                              hintText: "Province",
-                            ),
-                            enabled: true,
+                            onChanged: (String newValue) {
+                              print("Changing");
+                              bloc.add(
+                                UpdateCity(city: newValue),
+                              );
+                            },
+                            items: state.cities.cities
+                                .map<DropdownMenuItem<String>>((City value) {
+                              return DropdownMenuItem<String>(
+                                value: value.description,
+                                child: Text(
+                                  value.description,
+                                ),
+                              );
+                            }).toList(),
                           ),
                           BlocBuilder<CustomerRootBloc, CustomerRootState>(
                             builder: (context, state) {

@@ -36,6 +36,7 @@ class EnableTwoFAQuestion extends StatelessWidget {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
+            leading: SizedBox(),
             title: Text(
               "Turn 2FA On?",
             ),

@@ -98,10 +98,14 @@ class CustomerSignIn2FA extends StatelessWidget {
                               textColor: GoPharmaColors.WhiteColor,
                               onTapped: () {
                                 if (_formKey.currentState.validate()) {
-                                  bloc.add(
-                                    VerifyTwoFACode(
-                                      twoFA: _twoFAController.text,
-                                    ),
+                                  // bloc.add(
+                                  //   VerifyTwoFACode(
+                                  //     twoFA: _twoFAController.text,
+                                  //   ),
+                                  // );
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    CustomerHomePage.id,
                                   );
                                 }
                               },

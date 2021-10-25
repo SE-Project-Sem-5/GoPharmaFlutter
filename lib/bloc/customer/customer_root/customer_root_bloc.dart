@@ -16,6 +16,8 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
 
   Future<void> _init() async {
     var prefs = await SharedPreferences.getInstance();
+    add(LoadCities());
+
     final cookie = (prefs.getString('cookie') ?? '');
 
     // if (cookie != '' && email != '' && password != '') {
@@ -169,6 +171,10 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           isLoading: true,
         );
         SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString(
+          "cookie",
+          "accessToken=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEyLCJzdGF0ZSI6InZlcmlmaWVkIiwibWVzc2FnZSI6bnVsbCwidGhpcmRQYXJ0eSI6ZmFsc2UsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTYzNTE0ODgzMiwiZXhwIjo0MjI3MTQ4ODMyfQ.NreQEGlCxFzVZLOFbb81Ckp-qLhQi3_sozjATA4INAQ.xrhoapg0xTYp6f9VzrK%2FP9VYDMzAwAjk%2BREsQwap6Rk; Expires=Wed, 24 Nov 2021 08:00:32 GMT; Path=/; HttpOnly; SameSite=Strict; Domain=localhost",
+        );
         final cookie = prefs.getString('cookie');
         final result = await userApiProvider.generateTwoFA(cookie: cookie);
         if (result.containsKey("success")) {
@@ -254,11 +260,37 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           isVisible: !state.isVisible,
         );
         break;
+      case UpdateCity:
+        final city = (event as UpdateCity).city;
+        yield state.clone(
+          city: city,
+        );
+        break;
       case UpdateUserEvent:
         final user = (event as UpdateUserEvent).user;
         yield state.clone(
           user: user,
         );
+        break;
+      case LoadCities:
+        yield state.clone(
+          isLoading: true,
+        );
+        final result = await userApiProvider.getAllCities();
+        if (result.containsKey("data")) {
+          yield state.clone(
+            isLoading: false,
+            city: result["data"].cities.cities[0],
+            cities: result["data"],
+          );
+        }
+
+        break;
+      case LoadCitiesByProvince:
+        final province = (event as LoadCitiesByProvince).province;
+        yield state.clone(
+            // user: user,
+            );
         break;
       case UpdateGenderEvent:
         final gender = (event as UpdateGenderEvent).gender;

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
+import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/repos/common/signup/user.dart';
 import 'loginResponse.dart';
 
@@ -200,6 +201,20 @@ class UserAPIProvider {
       // print("Exception occured: $error stackTrace: $stacktrace");
       print("error in login process - didnt complete sign up");
       return {"error": "Something went wrong, try again later"};
+    }
+  }
+
+  Future<Map<String, dynamic>> getAllCities() async {
+    try {
+      Response response = await _dio.get(
+        "information/cities",
+      );
+      return {"data": CityList.fromJson(response.data)};
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return {
+        "error": "Something went wrong, try again later",
+      };
     }
   }
 }
