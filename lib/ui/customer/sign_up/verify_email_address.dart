@@ -5,10 +5,11 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/customer/customer_home_page.dart';
+import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_2fa.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
-class CustomerSignIn2FA extends StatelessWidget {
-  static final String id = "customer_2fa";
+class VerifyEmailAddress extends StatelessWidget {
+  static final String id = "verify_email_address_customer";
   final _formKey = GlobalKey<FormState>();
   final _twoFAController = TextEditingController();
   final _pinPutFocusNode = FocusNode();
@@ -23,15 +24,15 @@ class CustomerSignIn2FA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<CustomerRootBloc>(context);
-    String title = "Please enter your 6 digit code";
+    String title = "Please enter the 6 digit code sent to your email address.";
     return BlocListener<CustomerRootBloc, CustomerRootState>(
       listenWhen: (context, state) {
-        return state.signUpProcessState == SignUpProcessState.COMPLETED;
+        return state.signUpProcessState == SignUpProcessState.VERIFIED;
       },
       listener: (context, state) {
         Navigator.pushReplacementNamed(
           context,
-          CustomerHomePage.id,
+          CustomerSignIn2FA.id,
         );
       },
       child: BlocBuilder<CustomerRootBloc, CustomerRootState>(

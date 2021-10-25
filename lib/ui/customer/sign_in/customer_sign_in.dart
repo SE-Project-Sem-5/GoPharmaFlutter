@@ -40,7 +40,6 @@ class CustomerSignInPage extends StatelessWidget {
         } else {
           if (state.twoFAenabled) {
             print("completed - twoFA enabled");
-
             Navigator.pushReplacementNamed(
               context,
               CustomerSignIn2FA.id,
