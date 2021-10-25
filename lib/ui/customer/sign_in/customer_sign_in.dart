@@ -32,17 +32,22 @@ class CustomerSignInPage extends StatelessWidget {
       },
       listener: (context, state) {
         if (state.signUpProcessState == SignUpProcessState.INITIATED) {
+          print("initiated");
           Navigator.pushReplacementNamed(
             context,
             SignUpInformation.id,
           );
         } else {
           if (state.twoFAenabled) {
+            print("completed - twoFA enabled");
+
             Navigator.pushReplacementNamed(
               context,
               CustomerSignIn2FA.id,
             );
           } else {
+            print("completed - twoFA disabled");
+
             Navigator.pushReplacementNamed(
               context,
               CustomerHomePage.id,

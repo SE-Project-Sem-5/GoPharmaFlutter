@@ -37,7 +37,7 @@ class EnableTwoFAQuestion extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             title: Text(
-              "Would you like to turn on Two-Factor Authentication?",
+              "Turn 2FA On?",
             ),
           ),
           body: BlocBuilder<CustomerRootBloc, CustomerRootState>(
@@ -52,8 +52,8 @@ class EnableTwoFAQuestion extends StatelessWidget {
                         right: 25.0,
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
+                          Spacer(),
                           RoundedButtonFilled(
                             title: "Yes",
                             size: MediaQuery.of(context).size,
@@ -71,14 +71,15 @@ class EnableTwoFAQuestion extends StatelessWidget {
                           RoundedButtonFilled(
                             title: "No",
                             size: MediaQuery.of(context).size,
-                            fillColor: GoPharmaColors.PrimaryColor,
-                            textColor: GoPharmaColors.WhiteColor,
+                            fillColor: GoPharmaColors.GreyColor,
+                            textColor: GoPharmaColors.BlackColor,
                             onTapped: () {
                               bloc.add(
                                 DisableTwoFA(),
                               );
                             },
-                          )
+                          ),
+                          Spacer(),
                         ],
                       ),
                     );

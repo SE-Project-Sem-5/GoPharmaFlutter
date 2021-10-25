@@ -46,7 +46,7 @@ class UserAPIProvider {
       print(response.headers["set-cookie"]);
       return {
         "data": LoginResponse.fromJson(response.data),
-        "cookie": response.headers["set-cookie"][0],
+        "cookie": response.headers["set-cookie"],
       };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
@@ -69,26 +69,24 @@ class UserAPIProvider {
     String cookie,
   }) async {
     try {
-      _dio.options.headers['set-cookie'] = cookie;
+      _dio.options.headers.putIfAbsent("cookie", () => cookie);
       Response response = await _dio.post(
         "auth/sign-up/customer/step2",
         data: {
-          {
-            "firstName": firstName,
-            "lastName": lastName,
-            "streetAddress": streetAddress,
-            "city": city,
-            "district": district,
-            "province": province,
-            "birthDate": birthDate,
-            "gender": gender,
-            "contactNumber": contactNumber
-          }
+          "firstName": firstName,
+          "lastName": lastName,
+          "streetAddress": streetAddress,
+          "city": city,
+          "district": district,
+          "province": province,
+          "birthDate": birthDate,
+          "gender": gender,
+          "contactNumber": contactNumber
         },
       );
       return {
         "success": "Sign up successfully initiated.",
-        "cookie": response.headers["set - cookie"][0],
+        "cookie": response.headers["set-cookie"],
       };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
@@ -108,7 +106,7 @@ class UserAPIProvider {
       );
       return {
         "data": "Your email is successfully verified",
-        "cookie": response.headers["set - cookie"][0],
+        "cookie": response.headers["set-cookie"],
       };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
@@ -122,14 +120,18 @@ class UserAPIProvider {
     String cookie,
   }) async {
     try {
-      _dio.options.headers['set-cookie'] = cookie;
+      _dio.options.headers.update(
+          "cookie",
+          (v) =>
+              "accessToken=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEyLCJzdGF0ZSI6InZlcmlmaWVkIiwibWVzc2FnZSI6bnVsbCwidGhpcmRQYXJ0eSI6ZmFsc2UsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTYzNTEzMjE3NCwiZXhwIjo0MjI3MTMyMTc0fQ.sG2LOpVxS4AjMlC1khGnVcBEt8WFKNX7Lt_WQssAYMg.nhq6in0H6nNrtjhKBcclDlYrVEuLVPLOB4PqSx78yao; Expires=Wed, 24 Nov 2021 03:22:54 GMT; Path=/; HttpOnly; SameSite=Strict; Domain=localhost");
+
       Response response = await _dio.post(
         "auth/two-factor/generate",
         data: {
           "medium": "email",
         },
       );
-      return {"data": "Your email is successfully verified"};
+      return {"data": "2FA generated"};
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return {
@@ -138,10 +140,12 @@ class UserAPIProvider {
     }
   }
 
-  Future<Map<String, dynamic>> verifyTwoFA(
-      {String twoFA, String cookie}) async {
+  Future<Map<String, dynamic>> verifyTwoFA({
+    String twoFA,
+    String cookie,
+  }) async {
     try {
-      _dio.options.headers['set-cookie'] = cookie;
+      _dio.options.headers.update("cookie", (v) => cookie);
       Response response = await _dio.post(
         "auth/two-factor/verify",
         data: {
@@ -149,9 +153,10 @@ class UserAPIProvider {
           "scope": "register",
         },
       );
+      print(response.headers["set-cookie"][0]);
       return {
         "data": "Your email is successfully verified",
-        "cookie": response.headers["set - cookie"][0],
+        "cookie": response.headers["set-cookie"],
       };
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
@@ -163,7 +168,11 @@ class UserAPIProvider {
 
   Future<Map<String, dynamic>> disableTwoFA({String cookie}) async {
     try {
-      _dio.options.headers['set-cookie'] = cookie;
+      _dio.options.headers.update(
+          "cookie",
+          (v) =>
+              "accessToken=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEyLCJzdGF0ZSI6InZlcmlmaWVkIiwibWVzc2FnZSI6bnVsbCwidGhpcmRQYXJ0eSI6ZmFsc2UsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTYzNTEzMjE3NCwiZXhwIjo0MjI3MTMyMTc0fQ.sG2LOpVxS4AjMlC1khGnVcBEt8WFKNX7Lt_WQssAYMg.nhq6in0H6nNrtjhKBcclDlYrVEuLVPLOB4PqSx78yao; Expires=Wed, 24 Nov 2021 03:22:54 GMT; Path=/; HttpOnly; SameSite=Strict; Domain=localhost");
+
       Response response = await _dio.get(
         "auth/two-factor/disable",
       );
@@ -178,11 +187,14 @@ class UserAPIProvider {
 
   Future<Map<String, dynamic>> getCurrentUser(String cookie) async {
     try {
-      _dio.options.headers['set-cookie'] = cookie;
-      Response response = await _dio.get("api/user/details");
+      _dio.options.headers.update("cookie", (v) => cookie);
+      print(_dio.options.headers);
+      Response response = await _dio.get("user/details");
+      print(response.data);
       return {"user": User.fromJson(response.data)};
     } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      print("error in login process - didnt complete sign up");
       return {"error": "Something went wrong, try again later"};
     }
   }

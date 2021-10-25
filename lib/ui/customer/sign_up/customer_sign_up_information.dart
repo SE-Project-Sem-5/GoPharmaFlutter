@@ -39,10 +39,11 @@ class SignUpInformation extends StatelessWidget {
             title: Text("Enter your details."),
           ),
           body: BlocBuilder<CustomerRootBloc, CustomerRootState>(
-            buildWhen: (p, c) => p.isLoading != c.isLoading,
             builder: (context, state) {
               return state.isLoading
-                  ? CircularProgressIndicator()
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
                   : Padding(
                       padding: EdgeInsets.only(
                         top: 30,
