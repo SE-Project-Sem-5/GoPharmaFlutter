@@ -8,6 +8,8 @@ import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_2fa.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
+import 'enable_two_fa_question.dart';
+
 class VerifyEmailAddress extends StatelessWidget {
   static final String id = "verify_email_address_customer";
   final _formKey = GlobalKey<FormState>();
@@ -32,7 +34,7 @@ class VerifyEmailAddress extends StatelessWidget {
       listener: (context, state) {
         Navigator.pushReplacementNamed(
           context,
-          CustomerSignIn2FA.id,
+          EnableTwoFAQuestion.id,
         );
       },
       child: BlocBuilder<CustomerRootBloc, CustomerRootState>(

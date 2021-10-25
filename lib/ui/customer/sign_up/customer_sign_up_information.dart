@@ -151,6 +151,13 @@ class SignUpInformation extends StatelessWidget {
                             ),
                             enabled: true,
                           ),
+                          TextField(
+                            controller: addressController,
+                            decoration: InputDecoration(
+                              hintText: "Street Address",
+                            ),
+                            enabled: true,
+                          ),
                           DropdownButton<String>(
                             value: state.city != null
                                 ? state.city.description

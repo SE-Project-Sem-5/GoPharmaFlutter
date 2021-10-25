@@ -290,7 +290,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         if (result.containsKey("data")) {
           yield state.clone(
             isLoading: false,
-            city: result["data"].cities[0].description,
+            city: result["data"].cities[0],
             cities: result["data"],
           );
         }
