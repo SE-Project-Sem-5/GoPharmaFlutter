@@ -216,7 +216,13 @@ class UserAPIProvider {
       print(_dio.options.headers);
       Response response = await _dio.get("user/details");
       print(response.data);
-      return {"user": User.fromJson(response.data)};
+      final user = User.fromJson(response.data["data"]);
+      print(user.firstName);
+      print(user.lastName);
+      return {
+        "user": user,
+        "cookie": response.headers["set-cookie"][0],
+      };
     } catch (error, stacktrace) {
       // print("Exception occured: $error stackTrace: $stacktrace");
       print("error in login process - didnt complete sign up");

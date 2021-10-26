@@ -6,7 +6,7 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_bloc.dart';
 import 'package:go_pharma/bloc/internet_connectivity/internet_bloc.dart';
-import 'package:go_pharma/ui/initial_routing_page.dart';
+import 'package:go_pharma/ui/start_up_page.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'bloc/customer/category/category_bloc.dart';
@@ -76,8 +76,7 @@ class GoPharmaApp extends StatelessWidget {
             ResponsiveBreakpoint.autoScale(2460, name: "4K"),
           ],
         ),
-        initialRoute: InitialRoutingPage.id,
-        // email.compareTo("Not logged in") == 0 ? SignInStart.id : HomePage.id,
+        initialRoute: AppStartUpPage.id,
         routes: routes,
         theme: buildThemeData(context),
         // supportedLocales: S.delegate.supportedLocales,

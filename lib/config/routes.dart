@@ -37,10 +37,12 @@ import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_deliverie
 import 'package:go_pharma/ui/delivery_agent/transient_collected_deliveries/transient_collected_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/transient_deliveries/transient_deliveries_page.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
+import 'package:go_pharma/ui/start_up_page.dart';
 
 Map<String, Widget Function(BuildContext context)> routes = {
   //start page
   InitialRoutingPage.id: (context) => InitialRoutingPage(),
+  AppStartUpPage.id: (context) => AppStartUpPage(),
 
   //customer pages
   CustomerStartingPage.id: (context) => CustomerStartingPage(),

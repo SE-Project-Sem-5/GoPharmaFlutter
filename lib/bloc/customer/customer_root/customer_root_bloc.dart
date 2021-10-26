@@ -20,25 +20,28 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
     add(LoadCities());
     print("Loading");
     final cookie = (prefs.getString('cookie') ?? '');
-
-    // if (cookie != '' && email != '' && password != '') {
-    //   print("Looking for access token");
-    //   print(cookie);
-    //   // Map<String, dynamic> user = await userApiProvider.getCurrentUser(cookie);
-    //   add(
-    //     LoginUser(
-    //       email: email,
-    //       password: password,
-    //     ),
-    //   );
-    // } else {
-    //   prefs.setString('cookie', "");
-    //   add(
-    //     ChangeSignInStateEvent(
-    //       CustomerRootSignInState.SIGNED_OUT,
-    //     ),
-    //   );
-    // }
+    print("cookie: " + cookie);
+    if (cookie != '') {
+      print("Looking for access token");
+      print(cookie);
+      Map<String, dynamic> result =
+          await userApiProvider.getCurrentUser(cookie);
+      if (result.containsKey("user")) {
+        add(
+          UpdateUserEvent(
+            result["user"],
+          ),
+        );
+        prefs.setString('cookie', result["cookie"]);
+      }
+    } else {
+      prefs.setString('cookie', "");
+      add(
+        ChangeSignInStateEvent(
+          CustomerRootSignInState.SIGNED_OUT,
+        ),
+      );
+    }
   }
 
   @override
@@ -48,6 +51,12 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final error = (event as RootErrorEvent).error;
         yield state.clone(error: "");
         yield state.clone(error: error);
+        break;
+      case ChangeSignInStateEvent:
+        final stateSignIn = (event as ChangeSignInStateEvent).state;
+        yield state.clone(
+          signInState: stateSignIn,
+        );
         break;
 
       //  1. Sign up step 1
@@ -100,18 +109,25 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
               isLoading: false,
               signUpProcessState: SignUpProcessState.INITIATED,
             );
-          } else if (loginReponse.data.twoFactorAuth == "true") {
-            yield state.clone(
-              isLoading: false,
-              signUpProcessState: SignUpProcessState.COMPLETED,
-              twoFAenabled: true,
-            );
           } else {
-            yield state.clone(
-              isLoading: false,
-              signUpProcessState: SignUpProcessState.COMPLETED,
-              twoFAenabled: false,
-            );
+            Map<String, dynamic> result =
+                await userApiProvider.getCurrentUser(cookie);
+
+            if (loginReponse.data.twoFactorAuth == "true") {
+              yield state.clone(
+                isLoading: false,
+                signUpProcessState: SignUpProcessState.COMPLETED,
+                twoFAenabled: true,
+                user: result["user"],
+              );
+            } else {
+              yield state.clone(
+                isLoading: false,
+                signUpProcessState: SignUpProcessState.COMPLETED,
+                twoFAenabled: false,
+                user: result["user"],
+              );
+            }
           }
         } else {}
         break;
@@ -282,8 +298,11 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         break;
       case UpdateUserEvent:
         final user = (event as UpdateUserEvent).user;
+        print("Getting user");
+        print(user.firstName);
         yield state.clone(
           user: user,
+          signInState: CustomerRootSignInState.SIGNED_IN,
         );
         break;
       case LoadCities:

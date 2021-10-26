@@ -48,7 +48,7 @@ class SettingsPage extends StatelessWidget {
                     fontSize: 20.0,
                   ),
                   BoldText(
-                    text: 'First Name',
+                    text: "First Name",
                     fontSize: 16.0,
                   ),
                   state.isGeneralInformationEditable
@@ -60,10 +60,10 @@ class SettingsPage extends StatelessWidget {
                           autofocus: true,
                         )
                       : InformationText(
-                          text: "Customer First Name",
+                          text: state.user.firstName,
                         ),
                   BoldText(
-                    text: 'Last Name',
+                    text: "Last Name",
                     fontSize: 16.0,
                   ),
                   state.isGeneralInformationEditable
@@ -75,10 +75,10 @@ class SettingsPage extends StatelessWidget {
                           autofocus: true,
                         )
                       : InformationText(
-                          text: "Customer Last Name",
+                          text: state.user.lastName,
                         ),
                   BoldText(
-                    text: 'Gender',
+                    text: "Gender",
                     fontSize: 16.0,
                   ),
                   state.isGeneralInformationEditable
@@ -90,10 +90,10 @@ class SettingsPage extends StatelessWidget {
                           autofocus: true,
                         )
                       : InformationText(
-                          text: "Gender",
+                          text: state.user.gender,
                         ),
                   BoldText(
-                    text: 'Date of Birth',
+                    text: "Date of Birth",
                     fontSize: 16.0,
                   ),
                   state.isGeneralInformationEditable
@@ -105,7 +105,7 @@ class SettingsPage extends StatelessWidget {
                           autofocus: true,
                         )
                       : InformationText(
-                          text: "Date of Birth",
+                          text: state.user.dateOfBirth.substring(0, 10),
                         ),
                   BoldText(
                     text: 'Email Address',
@@ -119,7 +119,7 @@ class SettingsPage extends StatelessWidget {
                           enabled: true,
                         )
                       : InformationText(
-                          text: "Customer Email",
+                          text: state.user.userAccount.email,
                         ),
                   BoldText(
                     text: 'Mobile Number',
@@ -133,7 +133,7 @@ class SettingsPage extends StatelessWidget {
                           enabled: true,
                         )
                       : InformationText(
-                          text: "Customer Phone Number",
+                          text: state.user.contactNumber,
                         ),
                   BoldText(
                     text: 'Address',
@@ -142,42 +142,27 @@ class SettingsPage extends StatelessWidget {
                   state.isGeneralInformationEditable
                       ? TextField(
                           decoration: InputDecoration(
-                            hintText: "Enter Mobile Number",
+                            hintText: "Edit Address Information",
                           ),
                           enabled: true,
                         )
                       : InformationText(
-                          text: "Customer Street Number",
+                          text: state.user.addressDetail.streetAddress,
                         ),
+                  BoldText(
+                    text: 'City',
+                    fontSize: 16.0,
+                  ),
                   state.isGeneralInformationEditable
                       ? TextField(
                           decoration: InputDecoration(
-                            hintText: "City",
+                            hintText: "Edit City Information",
                           ),
                           enabled: true,
                         )
                       : InformationText(
-                          text: "Customer City",
-                        ),
-                  state.isGeneralInformationEditable
-                      ? TextField(
-                          decoration: InputDecoration(
-                            hintText: "District",
-                          ),
-                          enabled: true,
-                        )
-                      : InformationText(
-                          text: "Customer District",
-                        ),
-                  state.isGeneralInformationEditable
-                      ? TextField(
-                          decoration: InputDecoration(
-                            hintText: "Province",
-                          ),
-                          enabled: true,
-                        )
-                      : InformationText(
-                          text: "Customer Province",
+                          text: state.user.addressDetail.provinceDistrictCity
+                              .toString(),
                         ),
                   state.isGeneralInformationEditable
                       ? Row(

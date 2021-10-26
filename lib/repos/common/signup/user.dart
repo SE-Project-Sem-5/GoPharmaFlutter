@@ -144,4 +144,14 @@ class ProvinceDistrictCity {
     data['city'] = this.city;
     return data;
   }
+
+  @override
+  String toString() {
+    return this.city +
+        ", " +
+        this.district +
+        ", " +
+        this.province +
+        " Province";
+  }
 }
