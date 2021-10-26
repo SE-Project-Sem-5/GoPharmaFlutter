@@ -104,15 +104,18 @@ class UserAPIProvider {
     String cookie,
   }) async {
     try {
+      print(cookie);
       if (_dio.options.headers.containsKey("cookie")) {
         _dio.options.headers.update("cookie", (c) => cookie);
       } else {
         _dio.options.headers.putIfAbsent("cookie", () => cookie);
       }
-      Response response = await _dio.post(
+      print(_dio.options.headers);
+      print(code);
+      Response response = await _dio.patch(
         "auth/sign-up/verify-email-mobile",
         data: {
-          "verificationCode": code,
+          "verificationCode": int.parse(code),
         },
       );
       return {
@@ -131,11 +134,12 @@ class UserAPIProvider {
     String cookie,
   }) async {
     try {
-      _dio.options.headers.update(
-          "cookie",
-          (v) =>
-              "accessToken=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEyLCJzdGF0ZSI6InZlcmlmaWVkIiwibWVzc2FnZSI6bnVsbCwidGhpcmRQYXJ0eSI6ZmFsc2UsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTYzNTEzMjE3NCwiZXhwIjo0MjI3MTMyMTc0fQ.sG2LOpVxS4AjMlC1khGnVcBEt8WFKNX7Lt_WQssAYMg.nhq6in0H6nNrtjhKBcclDlYrVEuLVPLOB4PqSx78yao; Expires=Wed, 24 Nov 2021 03:22:54 GMT; Path=/; HttpOnly; SameSite=Strict; Domain=localhost");
-
+      print(cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "auth/two-factor/generate",
         data: {
@@ -164,7 +168,7 @@ class UserAPIProvider {
       Response response = await _dio.post(
         "auth/two-factor/verify",
         data: {
-          "verificationCode": twoFA,
+          "verificationCode": int.parse(twoFA),
           "scope": "register",
         },
       );

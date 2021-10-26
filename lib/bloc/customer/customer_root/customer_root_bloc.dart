@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
+import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/repos/common/signup/user.dart';
 import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -124,22 +125,20 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final lastName = (event as SignUpCustomerInformationEvent).lastName;
         final streetAddress =
             (event as SignUpCustomerInformationEvent).streetAddress;
-        final city = (event as SignUpCustomerInformationEvent).city;
-        final district = (event as SignUpCustomerInformationEvent).district;
-        final province = (event as SignUpCustomerInformationEvent).province;
         final birthDate = (event as SignUpCustomerInformationEvent).birthDate;
         final gender = (event as SignUpCustomerInformationEvent).gender;
         final contactNumber =
             (event as SignUpCustomerInformationEvent).contactNumber;
+        final cityInState = state.city;
         SharedPreferences prefs = await SharedPreferences.getInstance();
         final cookie = prefs.getString('cookie');
         final result = await userApiProvider.signUpCustomer(
           firstName: firstName,
           lastName: lastName,
           streetAddress: streetAddress,
-          city: city,
-          district: district,
-          province: province,
+          city: cityInState.city,
+          district: cityInState.district,
+          province: cityInState.province,
           birthDate: birthDate,
           gender: gender,
           contactNumber: contactNumber,
@@ -154,6 +153,9 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
             gender: gender,
             contactNumber: contactNumber,
           );
+          final twoFA = await userApiProvider.generateTwoFA(
+            cookie: cookie,
+          );
           yield state.clone(
             isLoading: false,
             signUpProcessState: SignUpProcessState.FILLED,
@@ -166,18 +168,41 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           );
         }
         break;
+      case VerifyEmail:
+        yield state.clone(
+          isLoading: true,
+        );
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String cookie = prefs.get('cookie');
+        final code = (event as VerifyEmail).code;
+        final result = await userApiProvider.verifyEmail(
+          code: code,
+          cookie: cookie,
+        );
+        if (result.containsKey("data")) {
+          print("email successfully verified");
+          final cookie = result["cookie"];
+          prefs.setString("cookie", cookie);
+          yield state.clone(
+            isLoading: false,
+            signUpProcessState: SignUpProcessState.VERIFIED,
+          );
+        } else {
+          print("error");
+          yield state.clone(
+            isLoading: false,
+            error: result["error"],
+          );
+        }
+        break;
       case GenerateTwoFACode:
         yield state.clone(
           isLoading: true,
         );
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString(
-          "cookie",
-          "accessToken=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEyLCJzdGF0ZSI6InZlcmlmaWVkIiwibWVzc2FnZSI6bnVsbCwidGhpcmRQYXJ0eSI6ZmFsc2UsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTYzNTE0ODgzMiwiZXhwIjo0MjI3MTQ4ODMyfQ.NreQEGlCxFzVZLOFbb81Ckp-qLhQi3_sozjATA4INAQ.xrhoapg0xTYp6f9VzrK%2FP9VYDMzAwAjk%2BREsQwap6Rk; Expires=Wed, 24 Nov 2021 08:00:32 GMT; Path=/; HttpOnly; SameSite=Strict; Domain=localhost",
-        );
         final cookie = prefs.getString('cookie');
         final result = await userApiProvider.generateTwoFA(cookie: cookie);
-        if (result.containsKey("success")) {
+        if (result.containsKey("data")) {
           yield state.clone(
             isLoading: false,
             twoFAenabled: true,
@@ -200,10 +225,11 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           cookie: cookie,
           twoFA: twoFA,
         );
-        if (result.containsKey("success")) {
+        if (result.containsKey("data")) {
           prefs.setString("cookie", result["cookie"]);
           yield state.clone(
             twoFAverified: true,
+            signUpProcessState: SignUpProcessState.COMPLETED,
             isLoading: false,
             twoFA: twoFA,
           );
@@ -223,10 +249,11 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final result = await userApiProvider.disableTwoFA(
           cookie: cookie,
         );
-        if (result.containsKey("success")) {
+        if (result.containsKey("data")) {
           yield state.clone(
             isLoading: false,
-            twoFAenabled: true,
+            twoFAenabled: false,
+            signUpProcessState: SignUpProcessState.COMPLETED,
           );
         } else {
           yield state.clone(
@@ -235,31 +262,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           );
         }
         break;
-      case VerifyEmail:
-        yield state.clone(
-          isLoading: true,
-        );
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        String cookie = prefs.get('cookie');
-        final code = (event as VerifyEmail).code;
-        final result = await userApiProvider.verifyEmail(
-          code: code,
-          cookie: cookie,
-        );
-        if (result.containsKey("success")) {
-          final cookie = result["cookie"];
-          prefs.setString("cookie", cookie);
-          yield state.clone(
-            isLoading: false,
-            signUpProcessState: SignUpProcessState.VERIFIED,
-          );
-        } else {
-          yield state.clone(
-            isLoading: false,
-            error: result["error"],
-          );
-        }
-        break;
+
       case ToggleVisibility:
         yield state.clone(
           isVisible: !state.isVisible,
@@ -267,8 +270,14 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         break;
       case UpdateCity:
         final city = (event as UpdateCity).city;
+        City newCity;
+        for (City c in state.cities.cities) {
+          if (c.description == city) {
+            newCity = c;
+          }
+        }
         yield state.clone(
-          city: city,
+          city: newCity,
         );
         break;
       case UpdateUserEvent:
@@ -285,7 +294,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         if (result.containsKey("data")) {
           yield state.clone(
             isLoading: false,
-            city: result["data"].cities[0].description,
+            city: result["data"].cities[0],
             cities: result["data"],
           );
         }
