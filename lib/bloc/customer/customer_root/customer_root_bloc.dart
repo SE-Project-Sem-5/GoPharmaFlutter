@@ -202,7 +202,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         final cookie = prefs.getString('cookie');
         final result = await userApiProvider.generateTwoFA(cookie: cookie);
-        if (result.containsKey("success")) {
+        if (result.containsKey("data")) {
           yield state.clone(
             isLoading: false,
             twoFAenabled: true,
@@ -225,10 +225,11 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           cookie: cookie,
           twoFA: twoFA,
         );
-        if (result.containsKey("success")) {
+        if (result.containsKey("data")) {
           prefs.setString("cookie", result["cookie"]);
           yield state.clone(
             twoFAverified: true,
+            signUpProcessState: SignUpProcessState.COMPLETED,
             isLoading: false,
             twoFA: twoFA,
           );
@@ -248,10 +249,11 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final result = await userApiProvider.disableTwoFA(
           cookie: cookie,
         );
-        if (result.containsKey("success")) {
+        if (result.containsKey("data")) {
           yield state.clone(
             isLoading: false,
             twoFAenabled: false,
+            signUpProcessState: SignUpProcessState.COMPLETED,
           );
         } else {
           yield state.clone(

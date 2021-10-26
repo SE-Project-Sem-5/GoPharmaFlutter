@@ -16,6 +16,8 @@ class EnableTwoFAQuestion extends StatelessWidget {
 
     return BlocListener<CustomerRootBloc, CustomerRootState>(
       listenWhen: (context, state) {
+        print(state.signUpProcessState);
+        print(state.twoFAenabled);
         return state.signUpProcessState == SignUpProcessState.COMPLETED ||
             state.twoFAenabled;
       },
