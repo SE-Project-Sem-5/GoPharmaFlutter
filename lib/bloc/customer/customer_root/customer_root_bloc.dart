@@ -179,7 +179,8 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           code: code,
           cookie: cookie,
         );
-        if (result.containsKey("success")) {
+        if (result.containsKey("data")) {
+          print("email successfully verified");
           final cookie = result["cookie"];
           prefs.setString("cookie", cookie);
           yield state.clone(
@@ -187,6 +188,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
             signUpProcessState: SignUpProcessState.VERIFIED,
           );
         } else {
+          print("error");
           yield state.clone(
             isLoading: false,
             error: result["error"],
@@ -249,7 +251,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         if (result.containsKey("success")) {
           yield state.clone(
             isLoading: false,
-            twoFAenabled: true,
+            twoFAenabled: false,
           );
         } else {
           yield state.clone(

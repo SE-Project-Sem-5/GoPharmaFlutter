@@ -86,7 +86,7 @@ class CustomerSignInPage extends StatelessWidget {
                                     color: GoPharmaColors.PrimaryColor),
                               ),
                               SizedBox(
-                                height: 30,
+                                height: 70,
                               ),
                               TextFieldContainer(
                                 child: TextFormField(
@@ -173,7 +173,7 @@ class CustomerSignInPage extends StatelessWidget {
                                 },
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 30,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -204,7 +204,7 @@ class CustomerSignInPage extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 30,
                               ),
                               BlocBuilder<CustomerRootBloc, CustomerRootState>(
                                 builder: (context, state) {
@@ -227,7 +227,7 @@ class CustomerSignInPage extends StatelessWidget {
                                 },
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 30,
                               ),
                               RoundedButtonFilled(
                                 title: "Forgot Password?",
@@ -239,32 +239,32 @@ class CustomerSignInPage extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                "OR",
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: GoPharmaColors.PrimaryColor),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
+                              // Text(
+                              //   "OR",
+                              //   style: TextStyle(
+                              //       fontSize: 16.0,
+                              //       fontWeight: FontWeight.bold,
+                              //       color: GoPharmaColors.PrimaryColor),
+                              // ),
+                              // SizedBox(
+                              //   height: 10,
+                              // ),
                             ],
                           ),
                         ),
-                        GoogleButton(
-                          size: size,
-                          onClick: () {},
-                          title: 'Sign in with Google',
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FacebookButton(
-                          size: size,
-                          onClick: () {},
-                          title: 'Sign in with Facebook',
-                        ),
+                        // GoogleButton(
+                        //   size: size,
+                        //   onClick: () {},
+                        //   title: 'Sign in with Google',
+                        // ),
+                        // SizedBox(
+                        //   height: 10,
+                        // ),
+                        // FacebookButton(
+                        //   size: size,
+                        //   onClick: () {},
+                        //   title: 'Sign in with Facebook',
+                        // ),
                       ],
                     ),
                   ),

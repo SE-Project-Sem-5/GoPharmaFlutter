@@ -56,7 +56,7 @@ class CustomerSignUpPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 SizedBox(
-                                  height: 50,
+                                  height: 70,
                                 ),
                                 Text(
                                   title,
@@ -66,7 +66,7 @@ class CustomerSignUpPage extends StatelessWidget {
                                       color: GoPharmaColors.PrimaryColor),
                                 ),
                                 SizedBox(
-                                  height: 30,
+                                  height: 70,
                                 ),
                                 BlocBuilder<CustomerRootBloc,
                                     CustomerRootState>(
@@ -214,7 +214,7 @@ class CustomerSignUpPage extends StatelessWidget {
                                   },
                                 ),
                                 SizedBox(
-                                  height: 5,
+                                  height: 40,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -245,7 +245,7 @@ class CustomerSignUpPage extends StatelessWidget {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 15,
+                                  height: 40,
                                 ),
                                 BlocBuilder<CustomerRootBloc,
                                     CustomerRootState>(
@@ -271,30 +271,30 @@ class CustomerSignUpPage extends StatelessWidget {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                Text(
-                                  "OR",
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: GoPharmaColors.PrimaryColor,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
+                                // Text(
+                                //   "OR",
+                                //   style: TextStyle(
+                                //     fontSize: 16.0,
+                                //     fontWeight: FontWeight.bold,
+                                //     color: GoPharmaColors.PrimaryColor,
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: 15,
+                                // ),
                               ],
                             ),
                           ),
-                          GoogleButton(
-                            size: size,
-                            onClick: () {},
-                            title: 'Join with Google',
-                          ),
-                          FacebookButton(
-                            size: size,
-                            onClick: () {},
-                            title: 'Join with Facebook',
-                          ),
+                          // GoogleButton(
+                          //   size: size,
+                          //   onClick: () {},
+                          //   title: 'Join with Google',
+                          // ),
+                          // FacebookButton(
+                          //   size: size,
+                          //   onClick: () {},
+                          //   title: 'Join with Facebook',
+                          // ),
                         ],
                       ),
               ),
