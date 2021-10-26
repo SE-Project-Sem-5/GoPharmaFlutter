@@ -5,7 +5,9 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/customer/customer_home_page.dart';
 
-class InitialRoutingPage extends StatelessWidget {
+import 'initial_routing_page.dart';
+
+class AppStartUpPage extends StatelessWidget {
   static const id = "start_up_page";
 
   @override
