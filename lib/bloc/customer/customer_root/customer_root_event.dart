@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
-import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/repos/common/signup/user.dart';
 
 @immutable
