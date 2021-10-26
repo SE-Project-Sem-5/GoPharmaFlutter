@@ -13,14 +13,4 @@ class CategoriesList {
       });
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.categoriesList != null) {
-      data['categoriesList'] =
-          this.categoriesList.map((v) => v.toJson()).toList();
-    }
-    print(data);
-    return data;
-  }
 }
