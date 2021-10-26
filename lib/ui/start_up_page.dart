@@ -13,6 +13,8 @@ class AppStartUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final bloc = BlocProvider.of<CustomerRootBloc>(context);
+
     return BlocListener<CustomerRootBloc, CustomerRootState>(
       listenWhen: (context, state) {
         return state.signInState == CustomerRootSignInState.SIGNED_IN ||
@@ -39,7 +41,9 @@ class AppStartUpPage extends StatelessWidget {
           body: Container(
             width: size.width,
             height: size.height,
-            child: CircularProgressIndicator(),
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
           ),
         ),
       ),

@@ -109,18 +109,25 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
               isLoading: false,
               signUpProcessState: SignUpProcessState.INITIATED,
             );
-          } else if (loginReponse.data.twoFactorAuth == "true") {
-            yield state.clone(
-              isLoading: false,
-              signUpProcessState: SignUpProcessState.COMPLETED,
-              twoFAenabled: true,
-            );
           } else {
-            yield state.clone(
-              isLoading: false,
-              signUpProcessState: SignUpProcessState.COMPLETED,
-              twoFAenabled: false,
-            );
+            Map<String, dynamic> result =
+                await userApiProvider.getCurrentUser(cookie);
+
+            if (loginReponse.data.twoFactorAuth == "true") {
+              yield state.clone(
+                isLoading: false,
+                signUpProcessState: SignUpProcessState.COMPLETED,
+                twoFAenabled: true,
+                user: result["user"],
+              );
+            } else {
+              yield state.clone(
+                isLoading: false,
+                signUpProcessState: SignUpProcessState.COMPLETED,
+                twoFAenabled: false,
+                user: result["user"],
+              );
+            }
           }
         } else {}
         break;
@@ -295,6 +302,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         print(user.firstName);
         yield state.clone(
           user: user,
+          signInState: CustomerRootSignInState.SIGNED_IN,
         );
         break;
       case LoadCities:
