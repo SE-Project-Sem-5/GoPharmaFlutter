@@ -48,7 +48,7 @@ class SettingsPage extends StatelessWidget {
                     fontSize: 20.0,
                   ),
                   BoldText(
-                    text: 'First Name',
+                    text: state.user.firstName,
                     fontSize: 16.0,
                   ),
                   state.isGeneralInformationEditable
@@ -63,7 +63,7 @@ class SettingsPage extends StatelessWidget {
                           text: "Customer First Name",
                         ),
                   BoldText(
-                    text: 'Last Name',
+                    text: state.user.lastName,
                     fontSize: 16.0,
                   ),
                   state.isGeneralInformationEditable
@@ -78,7 +78,7 @@ class SettingsPage extends StatelessWidget {
                           text: "Customer Last Name",
                         ),
                   BoldText(
-                    text: 'Gender',
+                    text: state.user.gender,
                     fontSize: 16.0,
                   ),
                   state.isGeneralInformationEditable
@@ -93,7 +93,7 @@ class SettingsPage extends StatelessWidget {
                           text: "Gender",
                         ),
                   BoldText(
-                    text: 'Date of Birth',
+                    text: state.user.dateOfBirth,
                     fontSize: 16.0,
                   ),
                   state.isGeneralInformationEditable
