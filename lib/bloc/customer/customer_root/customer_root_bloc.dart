@@ -331,6 +331,12 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           gender: gender,
         );
         break;
+      case ToggleGeneralInformationEditableEvent:
+        final isEditable = state.isGeneralInformationEditable;
+        yield state.clone(
+          isGeneralInformationEditable: !isEditable,
+        );
+        break;
     }
   }
 
