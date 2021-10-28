@@ -8,6 +8,8 @@ import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/transientCollectedList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/transientDelivery.dart';
 
+import '../../utilities.dart';
+
 //TODO: add error handling
 class DeliveryListAPIProvider {
   final Dio _dio = Client.init();
@@ -15,6 +17,8 @@ class DeliveryListAPIProvider {
   Future<PendingDeliveryList> getConfirmedDeliveryOrders(
       int deliveryAgentID, int deliveryAgentHomeAddressID) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/view",
         data: {
@@ -33,6 +37,8 @@ class DeliveryListAPIProvider {
   Future<ReservedDeliveryList> getReservedDeliveryOrders(
       int deliveryAgentHomeAddressID) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/reserved/view",
         data: {
@@ -51,6 +57,8 @@ class DeliveryListAPIProvider {
     int deliveryAgentHomeAddressID,
   ) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/collected/view",
         data: {
@@ -66,6 +74,8 @@ class DeliveryListAPIProvider {
 
   Future<TransientDeliveryList> getAllTransientOrders() async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/transient/view",
       );
@@ -80,6 +90,8 @@ class DeliveryListAPIProvider {
     int deliveryAgentID,
   ) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
           "delivery-agent/order/transient_collect/view",
           data: {"deliveryAgentID": deliveryAgentID});
@@ -92,6 +104,8 @@ class DeliveryListAPIProvider {
 
   Future<ShippedOrderList> getAllShippedOrders() async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/ship/view",
       );
@@ -107,6 +121,8 @@ class DeliveryListAPIProvider {
     int orderProductID,
   ) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/order_product/reserve",
         data: {
@@ -126,6 +142,8 @@ class DeliveryListAPIProvider {
     int orderID,
   ) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/order-product/collect",
         data: {
@@ -145,6 +163,8 @@ class DeliveryListAPIProvider {
     int orderID,
   ) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/transient",
         data: {
@@ -164,6 +184,8 @@ class DeliveryListAPIProvider {
     int orderID,
   ) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/transient_collect",
         data: {
@@ -183,6 +205,8 @@ class DeliveryListAPIProvider {
     int orderID,
   ) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/ship",
         data: {
@@ -207,6 +231,8 @@ class DeliveryListAPIProvider {
     int customerID,
   }) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/cash/deliver",
         data: {
@@ -231,6 +257,8 @@ class DeliveryListAPIProvider {
     int orderID,
   ) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/online/deliver",
         data: {

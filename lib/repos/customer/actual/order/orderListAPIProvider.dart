@@ -2,12 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
+import 'package:go_pharma/repos/utilities.dart';
 
 class OrderListAPIProvider {
   final Dio _dio = Client.init();
 
   Future<OrderList> getOrderByStatus(int customerID, String status) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "customer/order/view/status",
         data: {
@@ -26,6 +29,8 @@ class OrderListAPIProvider {
 
   Future<OrderList> getAllOrders(int customerID) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "customer/order/view",
         data: {"customerID": customerID.toString()},
@@ -41,6 +46,8 @@ class OrderListAPIProvider {
 
   Future<OrderResponse> cancelOrder(int customerID, int orderID) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "customer/order/normal/cancel",
         data: {
@@ -60,6 +67,8 @@ class OrderListAPIProvider {
   Future<OrderResponse> cancelOrderProduct(
       int customerID, int orderProductID) async {
     try {
+      final cookie = await Utilities.getCookie();
+      _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "customer/order/product/normal/cancel",
         data: {
