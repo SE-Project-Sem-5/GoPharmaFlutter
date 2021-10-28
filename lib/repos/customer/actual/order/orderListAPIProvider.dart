@@ -88,8 +88,7 @@ class OrderListAPIProvider {
       Response response = await _dio.post(
         "customer/order/product/normal/cancel",
         data: {
-          "customerID": customerID.toString(),
-          "orderProductID": orderProductID.toString(),
+          "orderProductID": orderProductID,
         },
       );
       print(response);
