@@ -12,7 +12,11 @@ class PrescriptionOrderAPIProvider {
       PrescriptionOrder order, List<String> localPhotoPaths) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       FormData formData = new FormData.fromMap({
         "customerID": order.customerID,
         "zone": order.zone,

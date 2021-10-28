@@ -10,7 +10,11 @@ class OrderListAPIProvider {
   Future<OrderList> getOrderByStatus(int customerID, String status) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/view/status",
         data: {
@@ -30,7 +34,11 @@ class OrderListAPIProvider {
   Future<OrderList> getAllOrders(int customerID) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/view",
         data: {"customerID": customerID.toString()},
@@ -47,7 +55,11 @@ class OrderListAPIProvider {
   Future<OrderResponse> cancelOrder(int customerID, int orderID) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/normal/cancel",
         data: {
@@ -68,7 +80,11 @@ class OrderListAPIProvider {
       int customerID, int orderProductID) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/product/normal/cancel",
         data: {

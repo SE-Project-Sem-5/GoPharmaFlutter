@@ -13,7 +13,11 @@ class ProgressingOrderAPIProvider {
       DeliveryDetails delivery) async {
     print(delivery);
     final cookie = await Utilities.getCookie();
-    _dio.options.headers.update("cookie", (c) => cookie);
+    if (_dio.options.headers.containsKey("cookie")) {
+      _dio.options.headers.update("cookie", (c) => cookie);
+    } else {
+      _dio.options.headers.putIfAbsent("cookie", () => cookie);
+    }
 
     try {
       Response response = await _dio.post(
@@ -34,7 +38,11 @@ class ProgressingOrderAPIProvider {
     try {
       final cookie = await Utilities.getCookie();
 
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/normal/cash/confirm",
         data: order.toJson(),
@@ -57,7 +65,11 @@ class ProgressingOrderAPIProvider {
     print(products);
     final cookie = await Utilities.getCookie();
 
-    _dio.options.headers.update("cookie", (c) => cookie);
+    if (_dio.options.headers.containsKey("cookie")) {
+      _dio.options.headers.update("cookie", (c) => cookie);
+    } else {
+      _dio.options.headers.putIfAbsent("cookie", () => cookie);
+    }
     FormData formData = new FormData.fromMap({
       "totalPrice": order.totalPrice.toString(),
       "deliveryCharge": order.deliveryCharge.toString(),
@@ -98,7 +110,11 @@ class ProgressingOrderAPIProvider {
     try {
       final cookie = await Utilities.getCookie();
 
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/normal/online/confirm",
         data: order.toJson(),
@@ -118,7 +134,11 @@ class ProgressingOrderAPIProvider {
     try {
       final cookie = await Utilities.getCookie();
 
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/delivery",
         data: delivery.toJson(),
