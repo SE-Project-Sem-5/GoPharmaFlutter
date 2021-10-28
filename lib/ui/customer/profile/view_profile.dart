@@ -4,6 +4,7 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/repos/common/signup/cityList.dart';
+import 'package:go_pharma/repos/common/signup/user.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/customer/profile/bold_text.dart';
@@ -138,9 +139,7 @@ class SettingsPage extends StatelessWidget {
                             );
                           },
                         )
-                      : InformationText(
-                          text: state.user.gender,
-                        ),
+                      : InformationText(text: state.user.gender.toUpperCase()),
                   BoldText(
                     text: "Date of Birth",
                     fontSize: 16.0,
