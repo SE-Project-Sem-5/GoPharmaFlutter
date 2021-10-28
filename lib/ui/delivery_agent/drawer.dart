@@ -36,7 +36,7 @@ class DeliveryAgentDrawer extends StatelessWidget {
               onTap: () {
                 deliveryListBloc.add(
                   GetAllConfirmedOrders(
-                    deliveryAgentID: 10,
+                    //TODO: replace
                     deliveryAgentHomeAddressID: 3,
                   ),
                 );
@@ -53,9 +53,7 @@ class DeliveryAgentDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 deliveryListBloc.add(
-                  GetAllReservedOrders(
-                    deliveryAgentID: 10,
-                  ),
+                  GetAllReservedOrders(),
                 );
                 Navigator.pushReplacementNamed(
                   context,

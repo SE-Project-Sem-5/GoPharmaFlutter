@@ -3,14 +3,21 @@ import 'package:go_pharma/providers/api_client.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 import 'package:go_pharma/repos/customer/actual/prescription_order/prescriptionOrder.dart';
 
+import '../../../utilities.dart';
+
 class PrescriptionOrderAPIProvider {
   final Dio _dio = Client.init();
 
   Future<OrderResponse> confirmPrescriptionOrder(
       PrescriptionOrder order, List<String> localPhotoPaths) async {
     try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       FormData formData = new FormData.fromMap({
-        "customerID": order.customerID,
         "zone": order.zone,
       });
       formData.files.addAll([

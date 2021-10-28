@@ -2,16 +2,22 @@ import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
+import 'package:go_pharma/repos/utilities.dart';
 
 class OrderListAPIProvider {
   final Dio _dio = Client.init();
 
-  Future<OrderList> getOrderByStatus(int customerID, String status) async {
+  Future<OrderList> getOrderByStatus(String status) async {
     try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/view/status",
         data: {
-          "customerID": customerID,
           "status": status,
         },
       );
@@ -24,11 +30,16 @@ class OrderListAPIProvider {
     }
   }
 
-  Future<OrderList> getAllOrders(int customerID) async {
+  Future<OrderList> getAllOrders() async {
     try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/view",
-        data: {"customerID": customerID.toString()},
       );
       print(response);
       print(response.data["data"]);
@@ -39,12 +50,17 @@ class OrderListAPIProvider {
     }
   }
 
-  Future<OrderResponse> cancelOrder(int customerID, int orderID) async {
+  Future<OrderResponse> cancelOrder(int orderID) async {
     try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/normal/cancel",
         data: {
-          "customerID": customerID.toString(),
           "orderID": orderID.toString(),
         },
       );
@@ -57,14 +73,18 @@ class OrderListAPIProvider {
     }
   }
 
-  Future<OrderResponse> cancelOrderProduct(
-      int customerID, int orderProductID) async {
+  Future<OrderResponse> cancelOrderProduct(int orderProductID) async {
     try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/product/normal/cancel",
         data: {
-          "customerID": customerID.toString(),
-          "orderProductID": orderProductID.toString(),
+          "orderProductID": orderProductID,
         },
       );
       print(response);

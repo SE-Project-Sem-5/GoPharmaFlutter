@@ -64,8 +64,8 @@ class CustomerRootState {
         twoFAenabled: false,
         twoFAverified: false,
         twoFA: '',
-        city: new City(),
         address: '',
+        city: new City(),
         cities: new CityList(),
         gender: 'male',
         isGeneralInformationEditable: false,
@@ -78,6 +78,7 @@ class CustomerRootState {
     String error,
     String gender,
     User user,
+    String address,
     City city,
     CityList cities,
     CustomerRootSignInState signInState,
@@ -90,7 +91,6 @@ class CustomerRootState {
     bool isPasswordEditable,
     bool isVisible,
     String twoFA,
-    String address,
   }) {
     return CustomerRootState(
       error: error ?? this.error,

@@ -35,9 +35,7 @@ class ConfirmedOrdersPage extends StatelessWidget {
                     onRefresh: () {
                       final bloc = BlocProvider.of<OrderListBloc>(context);
                       bloc.add(
-                        GetAllOrders(
-                          customerID: 2,
-                        ),
+                        GetAllOrders(),
                       );
                     },
                     child: orders.length > 0

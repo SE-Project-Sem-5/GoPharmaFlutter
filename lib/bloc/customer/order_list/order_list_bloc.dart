@@ -24,10 +24,8 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
           isLoading: true,
         );
         final status = (event as GetOrderListByStatus).status;
-        final customerID = (event as GetOrderListByStatus).customerID;
-        //TODO: replace by customerID
         final OrderList orderList =
-            await orderListAPIProvider.getOrderByStatus(customerID, status);
+            await orderListAPIProvider.getOrderByStatus(status);
         var orderMapping = state.orderList;
         orderMapping[status] = orderList;
         yield state.clone(
@@ -39,9 +37,7 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         yield state.clone(
           isLoading: true,
         );
-        final customerID = (event as GetAllOrders).customerID;
-        var orderListResponse =
-            await orderListAPIProvider.getAllOrders(customerID);
+        var orderListResponse = await orderListAPIProvider.getAllOrders();
         print(orderListResponse);
         Map<String, OrderList> orderList = {};
         for (String status in statuses) {
@@ -61,11 +57,9 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         yield state.clone(
           isLoading: true,
         );
-        final customerID = (event as CancelOrder).customerID;
         final context = (event as CancelOrder).context;
         final orderID = (event as CancelOrder).orderID;
-        var orderResponse =
-            await orderListAPIProvider.cancelOrder(customerID, orderID);
+        var orderResponse = await orderListAPIProvider.cancelOrder(orderID);
         print(orderResponse);
         yield state.clone(
           isLoading: false,
@@ -80,10 +74,8 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         yield state.clone(
           isLoading: true,
         );
-        final customerID = (event as CancelOrderProduct).customerID;
         final orderProductID = (event as CancelOrderProduct).orderProductID;
         var orderResponse = await orderListAPIProvider.cancelOrderProduct(
-          customerID,
           orderProductID,
         );
         print(orderResponse);

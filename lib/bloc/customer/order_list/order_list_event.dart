@@ -11,26 +11,22 @@ class ErrorEvent extends OrderListEvent {
 
 class GetOrderListByStatus extends OrderListEvent {
   final String status;
-  final int customerID;
 
-  GetOrderListByStatus({this.customerID, this.status});
+  GetOrderListByStatus({this.status});
 }
 
 class GetAllOrders extends OrderListEvent {
-  final int customerID;
-  GetAllOrders({this.customerID});
+  GetAllOrders();
 }
 
 class CancelOrder extends OrderListEvent {
-  final int customerID;
   final int orderID;
   final BuildContext context;
-  CancelOrder({this.customerID, this.orderID, this.context});
+  CancelOrder({this.orderID, this.context});
 }
 
 class CancelOrderProduct extends OrderListEvent {
-  final int customerID;
   final BuildContext context;
   final int orderProductID;
-  CancelOrderProduct({this.customerID, this.orderProductID, this.context});
+  CancelOrderProduct({this.orderProductID, this.context});
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/repos/customer/actual/product/orderProductModel.dart';
 
 @immutable
@@ -16,8 +17,8 @@ class CheckoutState {
   final bool orderLoading;
   final int orderID;
   final String streetAddress;
-  final String city;
-  final String district;
+  final CityList cities;
+  final City city;
 
   CheckoutState({
     this.orderLoading = false,
@@ -26,7 +27,7 @@ class CheckoutState {
     this.orderID,
     this.streetAddress,
     this.city,
-    this.district,
+    this.cities,
     this.productIDs,
     this.photos,
     this.error,
@@ -38,8 +39,8 @@ class CheckoutState {
   static CheckoutState get initialState => CheckoutState(
         error: '',
         streetAddress: '',
-        district: '',
-        city: '',
+        city: new City(),
+        cities: new CityList(),
         productListPrescriptionless: [],
         productListNeedPrescriptions: [],
         productListTotal: 0.0,
@@ -55,7 +56,8 @@ class CheckoutState {
     String error = '',
     String streetAddress,
     String district,
-    String city,
+    City city,
+    CityList cities,
     int orderID,
     List<OrderProduct> productListNeedPrescriptions,
     List<OrderProduct> productListPrescriptionless,
@@ -68,9 +70,9 @@ class CheckoutState {
   }) {
     return CheckoutState(
       error: error ?? this.error,
-      streetAddress: streetAddress ?? this.streetAddress,
-      district: district ?? this.district,
       city: city ?? this.city,
+      cities: cities ?? this.cities,
+      streetAddress: streetAddress ?? this.streetAddress,
       orderID: orderID ?? this.orderID,
       productListPrescriptionless:
           productListPrescriptionless ?? this.productListPrescriptionless,

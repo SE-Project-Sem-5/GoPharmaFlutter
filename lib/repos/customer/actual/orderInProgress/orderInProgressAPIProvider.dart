@@ -4,6 +4,7 @@ import 'package:go_pharma/repos/customer/actual/orderInProgress/deliveryDetails.
 import 'package:go_pharma/repos/customer/actual/orderInProgress/normalOrder.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderPriceInformation.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
+import 'package:go_pharma/repos/utilities.dart';
 
 class ProgressingOrderAPIProvider {
   final Dio _dio = Client.init();
@@ -11,6 +12,13 @@ class ProgressingOrderAPIProvider {
   Future<OrderPriceInformation> getDeliveryChargeForNormalOrder(
       DeliveryDetails delivery) async {
     print(delivery);
+    final cookie = await Utilities.getCookie();
+    if (_dio.options.headers.containsKey("cookie")) {
+      _dio.options.headers.update("cookie", (c) => cookie);
+    } else {
+      _dio.options.headers.putIfAbsent("cookie", () => cookie);
+    }
+
     try {
       Response response = await _dio.post(
         "customer/order/delivery",
@@ -28,6 +36,13 @@ class ProgressingOrderAPIProvider {
   Future<OrderResponse> confirmNormalCashPrescriptionlessOrder(
       NormalOrder order) async {
     try {
+      final cookie = await Utilities.getCookie();
+
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/normal/cash/confirm",
         data: order.toJson(),
@@ -48,6 +63,13 @@ class ProgressingOrderAPIProvider {
       products.add(product.toJson());
     }
     print(products);
+    final cookie = await Utilities.getCookie();
+
+    if (_dio.options.headers.containsKey("cookie")) {
+      _dio.options.headers.update("cookie", (c) => cookie);
+    } else {
+      _dio.options.headers.putIfAbsent("cookie", () => cookie);
+    }
     FormData formData = new FormData.fromMap({
       "totalPrice": order.totalPrice.toString(),
       "deliveryCharge": order.deliveryCharge.toString(),
@@ -86,6 +108,13 @@ class ProgressingOrderAPIProvider {
       NormalOrder order) async {
     print(order);
     try {
+      final cookie = await Utilities.getCookie();
+
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/normal/online/confirm",
         data: order.toJson(),
@@ -103,6 +132,13 @@ class ProgressingOrderAPIProvider {
       DeliveryDetails delivery) async {
     print(delivery);
     try {
+      final cookie = await Utilities.getCookie();
+
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "customer/order/delivery",
         data: delivery.toJson(),

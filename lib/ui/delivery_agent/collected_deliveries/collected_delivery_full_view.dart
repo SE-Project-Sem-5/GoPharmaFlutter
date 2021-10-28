@@ -148,8 +148,8 @@ class CollectedDeliveryFullView extends StatelessWidget {
                             print(delivery.id);
                             deliveryListBloc.add(
                               TransitionOrderEvent(
-                                deliveryAgentID: 10,
                                 orderID: delivery.id,
+                                //TODO: replace
                                 deliveryAgentHomeAddressID: 3,
                               ),
                             );

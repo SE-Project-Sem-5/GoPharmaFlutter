@@ -69,7 +69,6 @@ class PrescriptionOrderBloc
       case ConfirmOrderEvent:
         yield state.clone(orderLoading: true);
         PrescriptionOrder prescriptionOrder = new PrescriptionOrder(
-          customerID: 2,
           zone: state.zone.toLowerCase(),
         );
         print(state.localPhotoPaths);

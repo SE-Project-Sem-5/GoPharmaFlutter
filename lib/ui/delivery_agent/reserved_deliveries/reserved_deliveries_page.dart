@@ -14,9 +14,7 @@ class ReservedDeliveriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
     deliveryListBloc.add(
-      GetAllReservedOrders(
-        deliveryAgentID: 10,
-      ),
+      GetAllReservedOrders(),
     );
     return CommonSkeleton(
       title: title,
