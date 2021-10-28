@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_bloc.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
+import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
 
@@ -61,23 +62,39 @@ class AddressInformationPage extends StatelessWidget {
                     SizedBox(
                       height: 30,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0,
+                    DropdownButton<String>(
+                      value: state.city != null
+                          ? state.city.description
+                          : state.cities.cities[0].description,
+                      icon: const Icon(
+                        Icons.arrow_downward,
+                        color: GoPharmaColors.PrimaryColor,
                       ),
-                      child: TextFormField(
-                        controller: cityController,
-                        // ignore: missing_return
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return ("Please pick a city");
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: "City",
-                        ),
-                        enabled: true,
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(
+                        color: GoPharmaColors.BlackColor,
+                        fontSize: 16,
                       ),
+                      underline: Container(
+                        height: 2,
+                        color: GoPharmaColors.PrimaryColor,
+                      ),
+                      onChanged: (String newValue) {
+                        print("Changing");
+                        bloc.add(
+                          UpdateCity(city: newValue),
+                        );
+                      },
+                      items: state.cities.cities
+                          .map<DropdownMenuItem<String>>((City value) {
+                        return DropdownMenuItem<String>(
+                          value: value.description,
+                          child: Text(
+                            value.description,
+                          ),
+                        );
+                      }).toList(),
                     ),
                     SizedBox(
                       height: 30,

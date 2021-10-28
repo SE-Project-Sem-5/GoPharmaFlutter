@@ -23,13 +23,11 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-        final deliveryAgentID =
-            (event as GetAllConfirmedOrders).deliveryAgentID;
+
         final deliveryAgentHomeAddressID =
             (event as GetAllConfirmedOrders).deliveryAgentHomeAddressID;
         var confirmedOrders =
             await deliveryListAPIProvider.getConfirmedDeliveryOrders(
-          deliveryAgentID,
           deliveryAgentHomeAddressID,
         );
         print(confirmedOrders.deliveries);
@@ -42,12 +40,10 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-        final deliveryAgentID = (event as GetAllReservedOrders).deliveryAgentID;
-        var reservedOrders =
-            await deliveryListAPIProvider.getReservedDeliveryOrders(
-          deliveryAgentID,
-        );
-        print(reservedOrders);
+        final deliveryAgentHomeAddressID =
+            (event as GetAllReservedOrders).deliveryAgentHomeAddressID;
+        var reservedOrders = await deliveryListAPIProvider
+            .getReservedDeliveryOrders(deliveryAgentHomeAddressID);
         print(reservedOrders.deliveries);
         yield state.clone(
           isLoading: false,
@@ -81,10 +77,9 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-        final deliveryAgentID =
-            (event as GetAllTransientCollectedOrders).deliveryAgentID;
-        var transientCollectedOrders = await deliveryListAPIProvider
-            .getAllTransientCollectedOrders(deliveryAgentID);
+
+        var transientCollectedOrders =
+            await deliveryListAPIProvider.getAllTransientCollectedOrders();
         yield state.clone(
           isLoading: false,
           transientCollectedOrders: transientCollectedOrders,
@@ -104,13 +99,11 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-        final deliveryAgentID =
-            (event as ReserveOrderForDeliveryEvent).deliveryAgentID;
+
         final orderProductID =
             (event as ReserveOrderForDeliveryEvent).orderProductID;
         var reservedOrderProduct =
             await deliveryListAPIProvider.reserveOrderProduct(
-          deliveryAgentID,
           orderProductID,
         );
         final deliveryAgentHomeAddressID =
@@ -119,7 +112,6 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         print(reservedOrderProduct.orderID);
         var confirmedOrders =
             await deliveryListAPIProvider.getConfirmedDeliveryOrders(
-          deliveryAgentID,
           deliveryAgentHomeAddressID,
         );
         print(confirmedOrders.deliveries);
@@ -132,12 +124,10 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-        final deliveryAgentID = (event as CollectOrderEvent).deliveryAgentID;
         final orderProductID = (event as CollectOrderEvent).orderProductID;
         final deliveryAgentHomeAddressID =
             (event as CollectOrderEvent).deliveryAgentHomeAddressID;
         await deliveryListAPIProvider.collectOrderProduct(
-          deliveryAgentID,
           orderProductID,
         );
         var collectedOrders =
@@ -153,12 +143,10 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-        final deliveryAgentID = (event as TransitionOrderEvent).deliveryAgentID;
         final orderID = (event as TransitionOrderEvent).orderID;
         final deliveryAgentHomeAddressID =
             (event as TransitionOrderEvent).deliveryAgentHomeAddressID;
         await deliveryListAPIProvider.transientOrder(
-          deliveryAgentID,
           orderID,
         );
         var collectedOrders =
@@ -175,11 +163,8 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-        final deliveryAgentID =
-            (event as TransitionCollectOrderEvent).deliveryAgentID;
         final orderID = (event as TransitionCollectOrderEvent).orderID;
         await deliveryListAPIProvider.transientCollectOrder(
-          deliveryAgentID,
           orderID,
         );
         var transientOrders =
@@ -194,14 +179,12 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-        final deliveryAgentID = (event as ShipOrderEvent).deliveryAgentID;
         final orderID = (event as ShipOrderEvent).orderID;
         await deliveryListAPIProvider.shipOrder(
-          deliveryAgentID,
           orderID,
         );
-        var transientCollectedOrders = await deliveryListAPIProvider
-            .getAllTransientCollectedOrders(deliveryAgentID);
+        var transientCollectedOrders =
+            await deliveryListAPIProvider.getAllTransientCollectedOrders();
         print(transientCollectedOrders);
         yield state.clone(
           isLoading: false,
@@ -212,7 +195,6 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-        final deliveryAgentID = (event as DeliverCashOrder).deliveryAgentID;
         final orderID = (event as DeliverCashOrder).orderID;
         final amountPaid = (event as DeliverCashOrder).amountPaid;
         final checkoutDiscount = (event as DeliverCashOrder).checkoutDiscount;
@@ -220,7 +202,6 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         final customerEmail = (event as DeliverCashOrder).customerEmail;
         final customerID = (event as DeliverCashOrder).customerID;
         await deliveryListAPIProvider.deliverCashOrder(
-          deliveryAgentID: deliveryAgentID,
           orderID: orderID,
           amountPaid: amountPaid,
           checkoutDiscount: checkoutDiscount,
@@ -238,10 +219,8 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: true,
         );
-        final deliveryAgentID = (event as DeliverOnlineOrder).deliveryAgentID;
         final orderID = (event as DeliverOnlineOrder).orderID;
         await deliveryListAPIProvider.deliverOnlineOrder(
-          deliveryAgentID,
           orderID,
         );
         var shippedOrders = await deliveryListAPIProvider.getAllShippedOrders();

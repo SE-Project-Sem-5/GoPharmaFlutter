@@ -132,8 +132,8 @@ class PendingDeliveryFullView extends StatelessWidget {
                       onPressed: () {
                         deliveryListBloc.add(
                           ReserveOrderForDeliveryEvent(
-                            deliveryAgentID: 10,
                             orderProductID: delivery.id,
+                            //TODO: replace
                             deliveryAgentHomeAddressID: 3,
                           ),
                         );

@@ -157,8 +157,8 @@ class TransientCollectedDeliveryFullView extends StatelessWidget {
                           onPressed: () {
                             deliveryListBloc.add(
                               ShipOrderEvent(
-                                deliveryAgentID: 10,
                                 orderID: delivery.orderID,
+                                //TODO: replace
                                 deliveryAgentHomeAddressID: 3,
                               ),
                             );

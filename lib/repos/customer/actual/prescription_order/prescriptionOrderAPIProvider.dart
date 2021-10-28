@@ -18,7 +18,6 @@ class PrescriptionOrderAPIProvider {
         _dio.options.headers.putIfAbsent("cookie", () => cookie);
       }
       FormData formData = new FormData.fromMap({
-        "customerID": order.customerID,
         "zone": order.zone,
       });
       formData.files.addAll([

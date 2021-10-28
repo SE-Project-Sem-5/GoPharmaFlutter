@@ -65,3 +65,12 @@ class AddAddressDetails extends CheckoutEvent {
     this.district,
   });
 }
+
+class GetAllCities extends CheckoutEvent {
+  GetAllCities();
+}
+
+class UpdateCity extends CheckoutEvent {
+  final String city;
+  UpdateCity({this.city});
+}

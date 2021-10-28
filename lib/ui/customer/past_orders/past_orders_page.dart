@@ -27,7 +27,6 @@ class PastOrdersPage extends StatelessWidget {
                         final bloc = BlocProvider.of<OrderListBloc>(context);
                         bloc.add(
                           GetOrderListByStatus(
-                            customerID: 2,
                             status: "delivered",
                           ),
                         );

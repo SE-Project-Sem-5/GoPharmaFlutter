@@ -200,7 +200,6 @@ class ShippedDeliveryFullView extends StatelessWidget {
                                   deliveryListBloc.add(
                                     DeliverCashOrder(
                                       customerEmail: delivery.customerEmail,
-                                      deliveryAgentID: 10,
                                       orderID: delivery.orderID,
                                       amountPaid:
                                           delivery.totalPrice.toDouble(),
@@ -228,7 +227,6 @@ class ShippedDeliveryFullView extends StatelessWidget {
                                 onPressed: () {
                                   deliveryListBloc.add(
                                     DeliverOnlineOrder(
-                                      deliveryAgentID: 10,
                                       orderID: delivery.orderID,
                                     ),
                                   );

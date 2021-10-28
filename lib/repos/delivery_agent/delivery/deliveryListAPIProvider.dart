@@ -7,22 +7,20 @@ import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/transientCollectedList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/transientDelivery.dart';
-
-import '../../utilities.dart';
+import 'package:go_pharma/repos/utilities.dart';
 
 //TODO: add error handling
 class DeliveryListAPIProvider {
   final Dio _dio = Client.init();
 
   Future<PendingDeliveryList> getConfirmedDeliveryOrders(
-      int deliveryAgentID, int deliveryAgentHomeAddressID) async {
+      int deliveryAgentHomeAddressID) async {
     try {
       final cookie = await Utilities.getCookie();
       _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/view",
         data: {
-          "deliveryAgentID": deliveryAgentID,
           "deliveryAgentHomeAddressID": deliveryAgentHomeAddressID,
         },
       );
@@ -41,9 +39,6 @@ class DeliveryListAPIProvider {
       _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/reserved/view",
-        data: {
-          "deliveryAgentID": deliveryAgentHomeAddressID,
-        },
       );
       print(response.data["data"]);
       return ReservedDeliveryList.fromJson(response.data);
@@ -86,15 +81,13 @@ class DeliveryListAPIProvider {
     }
   }
 
-  Future<TransientCollectedList> getAllTransientCollectedOrders(
-    int deliveryAgentID,
-  ) async {
+  Future<TransientCollectedList> getAllTransientCollectedOrders() async {
     try {
       final cookie = await Utilities.getCookie();
       _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
-          "delivery-agent/order/transient_collect/view",
-          data: {"deliveryAgentID": deliveryAgentID});
+        "delivery-agent/order/transient_collect/view",
+      );
       return TransientCollectedList.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
@@ -117,7 +110,6 @@ class DeliveryListAPIProvider {
   }
 
   Future<OrderResponse> reserveOrderProduct(
-    int deliveryAgentID,
     int orderProductID,
   ) async {
     try {
@@ -125,10 +117,7 @@ class DeliveryListAPIProvider {
       _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/order_product/reserve",
-        data: {
-          "deliveryAgentID": deliveryAgentID,
-          "orderProductID": orderProductID
-        },
+        data: {"orderProductID": orderProductID},
       );
       return OrderResponse.fromJson(response.data);
     } catch (error, stacktrace) {
@@ -138,7 +127,6 @@ class DeliveryListAPIProvider {
   }
 
   Future<OrderResponse> collectOrderProduct(
-    int deliveryAgentID,
     int orderID,
   ) async {
     try {
@@ -147,7 +135,6 @@ class DeliveryListAPIProvider {
       Response response = await _dio.post(
         "delivery-agent/order/order-product/collect",
         data: {
-          "deliveryAgentID": deliveryAgentID,
           "orderID": orderID,
         },
       );
@@ -159,7 +146,6 @@ class DeliveryListAPIProvider {
   }
 
   Future<OrderResponse> transientOrder(
-    int deliveryAgentID,
     int orderID,
   ) async {
     try {
@@ -168,7 +154,6 @@ class DeliveryListAPIProvider {
       Response response = await _dio.post(
         "delivery-agent/order/transient",
         data: {
-          "deliveryAgentID": deliveryAgentID,
           "orderID": orderID,
         },
       );
@@ -180,7 +165,6 @@ class DeliveryListAPIProvider {
   }
 
   Future<OrderResponse> transientCollectOrder(
-    int deliveryAgentID,
     int orderID,
   ) async {
     try {
@@ -189,7 +173,6 @@ class DeliveryListAPIProvider {
       Response response = await _dio.post(
         "delivery-agent/order/transient_collect",
         data: {
-          "deliveryAgentID": deliveryAgentID,
           "orderID": orderID,
         },
       );
@@ -201,7 +184,6 @@ class DeliveryListAPIProvider {
   }
 
   Future<OrderResponse> shipOrder(
-    int deliveryAgentID,
     int orderID,
   ) async {
     try {
@@ -210,7 +192,6 @@ class DeliveryListAPIProvider {
       Response response = await _dio.post(
         "delivery-agent/order/ship",
         data: {
-          "deliveryAgentID": deliveryAgentID,
           "orderID": orderID,
         },
       );
@@ -222,7 +203,6 @@ class DeliveryListAPIProvider {
   }
 
   Future<OrderResponse> deliverCashOrder({
-    int deliveryAgentID,
     int orderID,
     double amountPaid,
     double checkoutDiscount,
@@ -236,7 +216,6 @@ class DeliveryListAPIProvider {
       Response response = await _dio.post(
         "delivery-agent/order/cash/deliver",
         data: {
-          "deliveryAgentID": deliveryAgentID,
           "orderID": orderID,
           "amountPaid": amountPaid,
           "checkoutDiscount": checkoutDiscount,
@@ -253,7 +232,6 @@ class DeliveryListAPIProvider {
   }
 
   Future<OrderResponse> deliverOnlineOrder(
-    int deliveryAgentID,
     int orderID,
   ) async {
     try {
@@ -262,7 +240,6 @@ class DeliveryListAPIProvider {
       Response response = await _dio.post(
         "delivery-agent/order/online/deliver",
         data: {
-          "deliveryAgentID": deliveryAgentID,
           "orderID": orderID,
         },
       );

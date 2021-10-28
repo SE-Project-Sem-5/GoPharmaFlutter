@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
+import 'package:go_pharma/repos/common/signup/cityList.dart';
+import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/address.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/deliveryDetails.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/normalOrder.dart';
@@ -14,6 +16,7 @@ import 'dart:async';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   CheckoutBloc(BuildContext context) : super(CheckoutState.initialState);
+  final UserAPIProvider userApiProvider = new UserAPIProvider();
   ProgressingOrderAPIProvider orderAPIProvider =
       new ProgressingOrderAPIProvider();
   @override
@@ -138,8 +141,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         }
         DeliveryDetails delivery = new DeliveryDetails(
           customerAddressID: 2,
-          city: state.city,
-          district: state.district,
+          city: state.city.city,
+          district: state.city.district,
           streetAddress: state.streetAddress,
           products: deliveryProducts,
         );
@@ -153,9 +156,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           productListTotal: orderPriceInformation.totalPrice.toDouble(),
         );
         break;
-
       //  Confirm normal order
-
       case ConfirmNormalCashOrder:
         yield state.clone(orderLoading: true);
         List<OrderConfirmationProducts> orderConfirmationProducts = [];
@@ -190,15 +191,14 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         NormalOrder order = new NormalOrder(
           totalPrice: state.productListTotal,
           deliveryCharge: state.deliveryCharge,
-          customerID: 2,
           //TODO: get from logged in user
           customerEmail: "sgayangi@gmail.com",
           orderType: "normal",
           products: orderConfirmationProducts,
           address: new Address(
             streetAddress: state.streetAddress,
-            city: state.city,
-            district: state.district,
+            city: state.city.city,
+            district: state.city.district,
           ),
         );
         if (state.productListNeedPrescriptions.length == 0) {
@@ -218,7 +218,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
             localPhotoPaths: [],
             deliveryCharge: 0.0,
             streetAddress: "",
-            city: "",
+            city: new City(),
             district: "",
             productIDs: [],
             photos: [],
@@ -237,6 +237,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
 
         yield state.clone(orderLoading: false);
         break;
+
       case ConfirmPrescriptionOrder:
         yield state.clone(orderLoading: true);
 
@@ -256,12 +257,33 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
       case AddAddressDetails:
         var streetAddress = (event as AddAddressDetails).streetAddress;
-        var city = (event as AddAddressDetails).city;
-        var district = (event as AddAddressDetails).district;
         yield state.clone(
           streetAddress: streetAddress,
-          city: city,
-          district: district,
+        );
+        break;
+      case GetAllCities:
+        yield state.clone(
+          orderLoading: true,
+        );
+        final result = await userApiProvider.getAllCities();
+        if (result.containsKey("data")) {
+          yield state.clone(
+            orderLoading: false,
+            city: result["data"].cities[0],
+            cities: result["data"],
+          );
+        }
+        break;
+      case UpdateCity:
+        final city = (event as UpdateCity).city;
+        City newCity;
+        for (City c in state.cities.cities) {
+          if (c.description == city) {
+            newCity = c;
+          }
+        }
+        yield state.clone(
+          city: newCity,
         );
         break;
     }

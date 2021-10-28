@@ -195,7 +195,6 @@ class ProcessingOrderFullView extends StatelessWidget {
                                                     onTap: () {
                                                       bloc.add(
                                                         CancelOrderProduct(
-                                                          customerID: 2,
                                                           orderProductID: order
                                                               .orderProducts[
                                                                   index]
@@ -249,7 +248,6 @@ class ProcessingOrderFullView extends StatelessWidget {
                                                     OrderListBloc>(context);
                                                 bloc.add(
                                                   CancelOrder(
-                                                    customerID: 2,
                                                     orderID: order.id,
                                                     context: context,
                                                   ),
@@ -358,7 +356,6 @@ class OrderedItem extends StatelessWidget {
                     onTap: () {
                       bloc.add(
                         CancelOrderProduct(
-                          customerID: 2,
                           orderProductID: orderProduct.id,
                           context: context,
                         ),

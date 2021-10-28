@@ -15,9 +15,7 @@ class TransientCollectedDeliveriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
     deliveryListBloc.add(
-      GetAllTransientCollectedOrders(
-        deliveryAgentID: 10,
-      ),
+      GetAllTransientCollectedOrders(),
     );
     return CommonSkeleton(
       title: title,

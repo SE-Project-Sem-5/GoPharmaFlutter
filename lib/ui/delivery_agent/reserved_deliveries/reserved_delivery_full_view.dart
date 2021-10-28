@@ -149,8 +149,8 @@ class ReservedDeliveryFullView extends StatelessWidget {
                           onPressed: () {
                             deliveryListBloc.add(
                               CollectOrderEvent(
-                                deliveryAgentID: 10,
                                 orderProductID: delivery.id,
+                                //TODO: replace
                                 deliveryAgentHomeAddressID: 3,
                               ),
                             );
