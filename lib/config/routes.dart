@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/category/category_provider.dart';
 import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_provider.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_provider.dart';
-import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_provider.dart';
-import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/customer/checkout/address_information.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_receipt.dart';
 import 'package:go_pharma/ui/customer/checkout/checkout_upload_prescription.dart';
@@ -37,6 +35,7 @@ import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliverie
 import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/settings_page/view_profile.dart';
 import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_in/delivery_agent_sign_in.dart';
 import 'package:go_pharma/ui/delivery_agent/transient_collected_deliveries/transient_collected_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/transient_deliveries/transient_deliveries_page.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
@@ -85,8 +84,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
 
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
-  DeliveryAgentSignUpProvider.id: (context) => DeliveryAgentSignUpProvider(),
-  DeliveryAgentSignInProvider.id: (context) => DeliveryAgentSignInProvider(),
+  DeliveryAgentSignInPage.id: (context) => DeliveryAgentSignInPage(),
   DeliveriesPage.id: (context) => DeliveriesPage(),
   PendingDeliveriesPage.id: (context) => PendingDeliveriesPage(),
   ReservedDeliveriesPage.id: (context) => ReservedDeliveriesPage(),

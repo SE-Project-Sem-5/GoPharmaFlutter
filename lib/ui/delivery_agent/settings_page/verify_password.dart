@@ -68,9 +68,7 @@ class VerifyPassword extends StatelessWidget {
                             ),
                             onTap: () {
                               bloc.add(
-                                ToggleVisibility(
-                                  !state.isVisible,
-                                ),
+                                ToggleVisibility(),
                               );
                             },
                           ),

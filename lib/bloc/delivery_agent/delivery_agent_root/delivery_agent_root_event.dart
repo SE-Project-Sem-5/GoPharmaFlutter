@@ -39,8 +39,7 @@ class ToggleGeneralInformationEditableEvent extends DeliveryAgentRootEvent {
 }
 
 class ToggleVisibility extends DeliveryAgentRootEvent {
-  final bool isVisible;
-  ToggleVisibility(this.isVisible);
+  ToggleVisibility();
 }
 
 class LogoutEvent extends DeliveryAgentRootEvent {

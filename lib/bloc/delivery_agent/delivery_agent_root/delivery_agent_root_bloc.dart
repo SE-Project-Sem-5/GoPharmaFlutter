@@ -93,8 +93,9 @@ class DeliveryAgentRootBloc
         );
         break;
       case ToggleVisibility:
-        final isVisible = (event as ToggleVisibility).isVisible;
-        yield state.clone(isVisible: isVisible);
+        yield state.clone(
+          isVisible: !state.isVisible,
+        );
         break;
       case ToggleGeneralInformationEditableEvent:
         yield state.clone(
