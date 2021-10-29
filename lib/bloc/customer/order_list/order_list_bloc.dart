@@ -6,6 +6,7 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderListAPIProvider.dart';
 import 'package:go_pharma/ui/customer/processing_orders/normal_orders/processing_normal_orders_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
   OrderListAPIProvider orderListAPIProvider = new OrderListAPIProvider();
@@ -59,11 +60,14 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         );
         var orderListResponse =
             await orderListAPIProvider.getAllPrescriptionOrders();
+        final pref = await SharedPreferences.getInstance();
+        final cookie = pref.get("cookie");
         print(orderListResponse);
         if (orderListResponse.containsKey("data")) {
           yield state.clone(
             isLoading: false,
             prescriptionOrderList: orderListResponse["data"],
+            cookie: cookie,
           );
         } else {
           yield state.clone(

@@ -28,14 +28,12 @@ class ProcessingPrescriptionOrdersPage extends StatelessWidget {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : state.normalOrderList["processing"].orders.length > 0
+                : state.prescriptionOrderList.prescriptionOrder.length > 0
                     ? RefreshIndicator(
                         //ignore: missing_return
                         onRefresh: () {
                           bloc.add(
-                            GetOrderListByStatus(
-                              status: "processing",
-                            ),
+                            GetAllPrescriptionOrders(),
                           );
                         },
                         child: ListView.builder(

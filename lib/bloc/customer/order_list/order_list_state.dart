@@ -9,8 +9,10 @@ class OrderListState {
   final String status;
   final bool isLoading;
   final PrescriptionOrderList prescriptionOrderList;
+  final String cookie;
   OrderListState({
     this.error,
+    this.cookie,
     this.status,
     this.normalOrderList,
     this.prescriptionOrderList,
@@ -20,6 +22,7 @@ class OrderListState {
   static OrderListState get initialState => OrderListState(
         error: '',
         status: '',
+        cookie: '',
         normalOrderList: {},
         isLoading: false,
         prescriptionOrderList: new PrescriptionOrderList(),
@@ -29,11 +32,13 @@ class OrderListState {
     String error = '',
     Map<String, NormalOrderList> normalOrderList,
     String status,
+    String cookie,
     bool isLoading,
     PrescriptionOrderList prescriptionOrderList,
   }) {
     return OrderListState(
       error: error ?? this.error,
+      cookie: cookie ?? this.cookie,
       status: status ?? this.status,
       isLoading: isLoading ?? this.isLoading,
       prescriptionOrderList:

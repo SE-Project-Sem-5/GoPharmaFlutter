@@ -3,20 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
+import 'package:go_pharma/config/url.dart';
 import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/repos/customer/actual/order/prescriptionOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProcessingPrescriptionOrderFullView extends StatelessWidget {
   final PrescriptionOrder order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
-  const ProcessingPrescriptionOrderFullView({Key key, this.order})
-      : super(key: key);
+  const ProcessingPrescriptionOrderFullView({
+    Key key,
+    this.order,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<OrderListBloc>(context);
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -82,39 +84,44 @@ class ProcessingPrescriptionOrderFullView extends StatelessWidget {
                                     height: 10,
                                   ),
                                   HorizontalLine(),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Ordered Products',
-                                        style: TextStyle(
-                                          fontSize: 16.0,
+                                  Container(
+                                    height: 300,
+                                    child: ListView.builder(
+                                      physics: ClampingScrollPhysics(),
+                                      itemCount: order.prescriptions.length,
+                                      itemBuilder: (context, index) =>
+                                          Container(
+                                        height: 300,
+                                        width: 150,
+                                        child: Image.network(
+                                          URL.baseURL +
+                                              "user/images?key=" +
+                                              order.prescriptions[index]
+                                                  .imageName,
+                                          headers: {"cookie": state.cookie},
+                                          fit: BoxFit.fill,
+                                          loadingBuilder: (BuildContext context,
+                                              Widget child,
+                                              ImageChunkEvent loadingProgress) {
+                                            if (loadingProgress == null)
+                                              return child;
+                                            return Center(
+                                              child: CircularProgressIndicator(
+                                                value: loadingProgress
+                                                            .expectedTotalBytes !=
+                                                        null
+                                                    ? loadingProgress
+                                                            .cumulativeBytesLoaded /
+                                                        loadingProgress
+                                                            .expectedTotalBytes
+                                                    : null,
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
-                                      Spacer(),
-                                      Text(
-                                        'Qty',
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Text(
-                                        'Unit Price',
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Text(
-                                        'Total Price',
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                  HorizontalLine(),
-                                  Spacer(),
                                   HorizontalLine(),
                                   SizedBox(
                                     height: 20,
@@ -152,6 +159,13 @@ class ProcessingPrescriptionOrderFullView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<String> getCookie() async {
+    final pref = await SharedPreferences.getInstance();
+    String cookie = pref.get("cookie");
+    print(cookie);
+    return cookie;
   }
 }
 
