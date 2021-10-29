@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
 import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
+import 'package:go_pharma/repos/customer/actual/order/prescriptionOrderList.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 import 'package:go_pharma/repos/utilities.dart';
 
@@ -50,7 +51,7 @@ class OrderListAPIProvider {
     }
   }
 
-  Future<NormalOrderList> getAllPrescriptionOrders() async {
+  Future<Map<String, dynamic>> getAllPrescriptionOrders() async {
     try {
       final cookie = await Utilities.getCookie();
       if (_dio.options.headers.containsKey("cookie")) {
@@ -63,10 +64,10 @@ class OrderListAPIProvider {
       );
       print(response);
       print(response.data["data"]);
-      return NormalOrderList.fromJson(response.data);
+      return {"data": PrescriptionOrderList.fromJson(response.data)};
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      return NormalOrderList();
+      return {"error": "An error has occured. Please try again later."};
     }
   }
 

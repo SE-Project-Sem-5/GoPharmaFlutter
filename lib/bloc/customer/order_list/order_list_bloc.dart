@@ -5,7 +5,8 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderListAPIProvider.dart';
-import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
+import 'package:go_pharma/ui/customer/processing_orders/normal_orders/processing_normal_orders_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
   OrderListAPIProvider orderListAPIProvider = new OrderListAPIProvider();
@@ -57,21 +58,23 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         yield state.clone(
           isLoading: true,
         );
-        var orderListResponse = await orderListAPIProvider.getAllNormalOrders();
+        var orderListResponse =
+            await orderListAPIProvider.getAllPrescriptionOrders();
+        final pref = await SharedPreferences.getInstance();
+        final cookie = pref.get("cookie");
         print(orderListResponse);
-        Map<String, NormalOrderList> orderList = {};
-        for (String status in statuses) {
-          orderList[status] = new NormalOrderList();
-          orderList[status].orders = [];
+        if (orderListResponse.containsKey("data")) {
+          yield state.clone(
+            isLoading: false,
+            prescriptionOrderList: orderListResponse["data"],
+            cookie: cookie,
+          );
+        } else {
+          yield state.clone(
+            isLoading: false,
+            error: orderListResponse["error"],
+          );
         }
-        for (NormalOrder order in orderListResponse.orders) {
-          orderList[order.status].orders.add(order);
-        }
-        print(orderList);
-        yield state.clone(
-          isLoading: false,
-          normalOrderList: orderList,
-        );
         break;
       case CancelOrder:
         yield state.clone(
@@ -87,7 +90,7 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         Navigator.of(context).popUntil((route) => route.isFirst);
         Navigator.pushReplacementNamed(
           context,
-          ProcessingOrdersPage.id,
+          ProcessingNormalOrdersPage.id,
         );
         break;
       case CancelOrderProduct:
