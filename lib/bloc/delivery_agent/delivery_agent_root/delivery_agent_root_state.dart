@@ -18,6 +18,7 @@ class DeliveryAgentRootState {
   final bool isPasswordEditable;
   final bool isVisible;
   final bool isLoading;
+  final bool twoFAenabled;
   final String twoFA;
   final CityList cities;
   final City city;
@@ -30,6 +31,7 @@ class DeliveryAgentRootState {
     @required this.isVisible,
     @required this.isLoading,
     @required this.user,
+    @required this.twoFAenabled,
     @required this.twoFA,
     @required this.isGeneralInformationEditable,
     @required this.cities,
@@ -49,6 +51,7 @@ class DeliveryAgentRootState {
         isGeneralInformationEditable: false,
         isPasswordEditable: false,
         isVisible: false,
+        twoFAenabled: false,
         twoFA: '',
         address: '',
         city: new City(),
@@ -62,6 +65,7 @@ class DeliveryAgentRootState {
     DeliveryAgentRootSignInState signInState,
     bool initializing,
     bool isLoading,
+    bool twoFAenabled,
     bool isGeneralInformationEditable,
     bool isPasswordEditable,
     bool isVisible,
@@ -69,12 +73,12 @@ class DeliveryAgentRootState {
     String address,
     City city,
     CityList cities,
-    bool twoFAenabled,
     bool twoFAverified,
     String twoFA,
   }) {
     return DeliveryAgentRootState(
       error: error ?? this.error,
+      twoFAenabled: twoFAenabled ?? this.twoFAenabled,
       user: user ?? this.user,
       isLoading: isLoading ?? this.isLoading,
       signInState: signInState ?? this.signInState,

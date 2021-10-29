@@ -45,7 +45,6 @@ class CustomerSignInPage extends StatelessWidget {
             );
           } else {
             print("completed - twoFA disabled");
-
             Navigator.pushReplacementNamed(
               context,
               CustomerHomePage.id,
@@ -53,19 +52,19 @@ class CustomerSignInPage extends StatelessWidget {
           }
         }
       },
-      child: BlocBuilder<CustomerRootBloc, CustomerRootState>(
-          builder: (context, state) {
-        return state.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : SafeArea(
-                child: Scaffold(
-                  resizeToAvoidBottomInset: false,
-                  appBar: AppBar(
-                    title: Text("SIGN IN"),
-                  ),
-                  body: Container(
+      child: SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            title: Text("SIGN IN"),
+          ),
+          body: BlocBuilder<CustomerRootBloc, CustomerRootState>(
+              builder: (context, state) {
+            return state.isLoading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Container(
                     child: Column(
                       children: [
                         Form(
@@ -271,10 +270,10 @@ class CustomerSignInPage extends StatelessWidget {
                         // ),
                       ],
                     ),
-                  ),
-                ),
-              );
-      }),
+                  );
+          }),
+        ),
+      ),
     );
   }
 }

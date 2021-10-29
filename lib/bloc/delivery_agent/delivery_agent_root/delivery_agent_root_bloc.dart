@@ -155,6 +155,7 @@ class DeliveryAgentRootBloc
               isLoading: false,
               twoFAenabled: true,
               user: cookieResult["user"],
+              signInState: DeliveryAgentRootSignInState.SIGNED_IN,
             );
           } else {
             yield state.clone(
