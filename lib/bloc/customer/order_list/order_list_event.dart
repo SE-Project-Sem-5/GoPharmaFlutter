@@ -15,8 +15,12 @@ class GetOrderListByStatus extends OrderListEvent {
   GetOrderListByStatus({this.status});
 }
 
-class GetAllOrders extends OrderListEvent {
-  GetAllOrders();
+class GetAllNormalOrders extends OrderListEvent {
+  GetAllNormalOrders();
+}
+
+class GetAllPrescriptionOrders extends OrderListEvent {
+  GetAllPrescriptionOrders();
 }
 
 class CancelOrder extends OrderListEvent {

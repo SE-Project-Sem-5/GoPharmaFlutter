@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
-import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
+import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
 
 class ProcessingOrderFullView extends StatelessWidget {
-  final Orders order;
+  final NormalOrder order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
   const ProcessingOrderFullView({Key key, this.order}) : super(key: key);
@@ -463,7 +463,7 @@ class CurrentOrderStatusChip extends StatelessWidget {
   }
 }
 
-bool isOrderCancellable(Orders order) {
+bool isOrderCancellable(NormalOrder order) {
   for (var op in order.orderProducts) {
     if (op.status != "processing" && op.status != "cancelled") {
       return false;

@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
-import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
+import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderListAPIProvider.dart';
 import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
 
@@ -24,33 +24,53 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
           isLoading: true,
         );
         final status = (event as GetOrderListByStatus).status;
-        final OrderList orderList =
+        final NormalOrderList orderList =
             await orderListAPIProvider.getOrderByStatus(status);
-        var orderMapping = state.orderList;
+        var orderMapping = state.normalOrderList;
         orderMapping[status] = orderList;
         yield state.clone(
           isLoading: false,
-          orderList: orderMapping,
+          normalOrderList: orderMapping,
         );
         break;
-      case GetAllOrders:
+      case GetAllNormalOrders:
         yield state.clone(
           isLoading: true,
         );
-        var orderListResponse = await orderListAPIProvider.getAllOrders();
+        var orderListResponse = await orderListAPIProvider.getAllNormalOrders();
         print(orderListResponse);
-        Map<String, OrderList> orderList = {};
+        Map<String, NormalOrderList> orderList = {};
         for (String status in statuses) {
-          orderList[status] = new OrderList();
+          orderList[status] = new NormalOrderList();
           orderList[status].orders = [];
         }
-        for (Orders order in orderListResponse.orders) {
+        for (NormalOrder order in orderListResponse.orders) {
           orderList[order.status].orders.add(order);
         }
         print(orderList);
         yield state.clone(
           isLoading: false,
-          orderList: orderList,
+          normalOrderList: orderList,
+        );
+        break;
+      case GetAllPrescriptionOrders:
+        yield state.clone(
+          isLoading: true,
+        );
+        var orderListResponse = await orderListAPIProvider.getAllNormalOrders();
+        print(orderListResponse);
+        Map<String, NormalOrderList> orderList = {};
+        for (String status in statuses) {
+          orderList[status] = new NormalOrderList();
+          orderList[status].orders = [];
+        }
+        for (NormalOrder order in orderListResponse.orders) {
+          orderList[order.status].orders.add(order);
+        }
+        print(orderList);
+        yield state.clone(
+          isLoading: false,
+          normalOrderList: orderList,
         );
         break;
       case CancelOrder:

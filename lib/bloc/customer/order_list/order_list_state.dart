@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
+import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 
 @immutable
 class OrderListState {
   final String error;
-  final Map<String, OrderList> orderList;
+  final Map<String, NormalOrderList> normalOrderList;
   final String status;
   final bool isLoading;
 
   OrderListState({
     this.error,
     this.status,
-    this.orderList,
+    this.normalOrderList,
     this.isLoading,
   });
 
   static OrderListState get initialState => OrderListState(
         error: '',
         status: '',
-        orderList: {},
+        normalOrderList: {},
         isLoading: false,
       );
 
   OrderListState clone({
     String error = '',
-    Map<String, OrderList> orderList,
+    Map<String, NormalOrderList> normalOrderList,
     String status,
     bool isLoading,
   }) {
@@ -32,7 +32,7 @@ class OrderListState {
       error: error ?? this.error,
       status: status ?? this.status,
       isLoading: isLoading ?? this.isLoading,
-      orderList: orderList ?? this.orderList,
+      normalOrderList: normalOrderList ?? this.normalOrderList,
     );
   }
 }

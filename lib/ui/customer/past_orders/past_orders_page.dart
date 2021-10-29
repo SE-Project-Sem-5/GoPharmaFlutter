@@ -31,14 +31,15 @@ class PastOrdersPage extends StatelessWidget {
                           ),
                         );
                       },
-                      child: state.orderList["delivered"].orders.length > 0
+                      child: state.normalOrderList["delivered"].orders.length >
+                              0
                           ? ListView.builder(
                               physics: AlwaysScrollableScrollPhysics(),
-                              itemCount:
-                                  state.orderList["delivered"].orders.length,
+                              itemCount: state
+                                  .normalOrderList["delivered"].orders.length,
                               itemBuilder: (context, index) => PastOrderCard(
-                                order:
-                                    state.orderList["delivered"].orders[index],
+                                order: state
+                                    .normalOrderList["delivered"].orders[index],
                               ),
                             )
                           : Center(

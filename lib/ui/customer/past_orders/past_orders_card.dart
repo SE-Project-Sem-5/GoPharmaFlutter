@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
+import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_order_full_view.dart';
 
 class PastOrderCard extends StatelessWidget {
-  final Orders order;
+  final NormalOrder order;
   const PastOrderCard({Key key, this.order}) : super(key: key);
 
   @override

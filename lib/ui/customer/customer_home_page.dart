@@ -94,7 +94,7 @@ class CustomerHomePage extends StatelessWidget {
                       onClick: () {
                         final bloc = BlocProvider.of<OrderListBloc>(context);
                         bloc.add(
-                          GetAllOrders(),
+                          GetAllNormalOrders(),
                         );
                         Navigator.pushNamed(
                           context,

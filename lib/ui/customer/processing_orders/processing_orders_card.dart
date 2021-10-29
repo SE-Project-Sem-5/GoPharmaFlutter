@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
+import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
 import 'processing_order_full_view.dart';
 
 class ProcessingOrderCard extends StatelessWidget {
-  final Orders order;
+  final NormalOrder order;
   const ProcessingOrderCard({Key key, this.order}) : super(key: key);
 
   @override
