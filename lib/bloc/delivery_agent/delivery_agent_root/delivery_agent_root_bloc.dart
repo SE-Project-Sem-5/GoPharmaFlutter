@@ -162,6 +162,7 @@ class DeliveryAgentRootBloc
               isLoading: false,
               twoFAenabled: false,
               user: cookieResult["user"],
+              signInState: DeliveryAgentRootSignInState.SIGNED_IN,
             );
           }
         } else {}
