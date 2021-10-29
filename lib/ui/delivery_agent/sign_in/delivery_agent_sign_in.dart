@@ -11,7 +11,7 @@ import 'forgot_password_page.dart';
 
 // ignore: must_be_immutable
 class DeliveryAgentSignInPage extends StatelessWidget {
-  static const String id = "devliery_agent_sign_in";
+  static const String id = "delivery_agent_sign_in";
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   final _form = GlobalKey<FormState>();
