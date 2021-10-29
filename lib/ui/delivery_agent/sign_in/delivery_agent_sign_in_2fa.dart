@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:pinput/pin_put/pin_put.dart';
@@ -24,7 +25,7 @@ class DeliveryAgentSignIn2FA extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<DeliveryAgentRootBloc>(context);
     String title = "Please enter your 6 digit code";
-    return BlocBuilder<CustomerRootBloc, CustomerRootState>(
+    return BlocBuilder<DeliveryAgentRootBloc, DeliveryAgentRootState>(
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
