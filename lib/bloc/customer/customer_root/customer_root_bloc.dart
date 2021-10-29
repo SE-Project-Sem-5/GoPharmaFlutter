@@ -68,6 +68,19 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         yield state.clone(
           signInState: CustomerRootSignInState.SIGNED_OUT,
           isLoading: false,
+          user: new User(),
+          signUpProcessState: SignUpProcessState.NONE,
+          initializing: false,
+          twoFAenabled: false,
+          twoFAverified: false,
+          twoFA: '',
+          address: '',
+          city: new City(),
+          cities: new CityList(),
+          gender: 'male',
+          isGeneralInformationEditable: false,
+          isPasswordEditable: false,
+          isVisible: false,
         );
         break;
 
