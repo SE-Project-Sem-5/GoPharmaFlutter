@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
+import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
 import 'confirmed_order_full_view.dart';
@@ -9,7 +9,7 @@ import 'confirmed_order_full_view.dart';
 //TODO: add cancelling capability for the orderInProgress
 
 class ConfirmedOrderCard extends StatelessWidget {
-  final Orders order;
+  final NormalOrder order;
   const ConfirmedOrderCard({Key key, this.order}) : super(key: key);
 
   @override

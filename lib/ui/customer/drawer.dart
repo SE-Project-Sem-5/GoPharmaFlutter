@@ -70,7 +70,7 @@ class CustomerDrawer extends StatelessWidget {
               icon: Icons.shopping_cart,
               onTap: () {
                 bloc.add(
-                  GetAllOrders(),
+                  GetAllNormalOrders(),
                 );
                 Navigator.pop(context);
                 Navigator.pushNamed(
@@ -84,7 +84,7 @@ class CustomerDrawer extends StatelessWidget {
               icon: Icons.shopping_cart,
               onTap: () {
                 bloc.add(
-                  GetAllOrders(),
+                  GetAllNormalOrders(),
                 );
                 Navigator.pop(context);
                 Navigator.pushNamed(
@@ -99,7 +99,7 @@ class CustomerDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 bloc.add(
-                  GetAllOrders(),
+                  GetAllNormalOrders(),
                 );
                 Navigator.pushNamed(
                   context,

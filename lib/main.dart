@@ -18,17 +18,15 @@ import 'config/theme.dart';
 main() async {
   // SharedPreferences prefs = await SharedPreferences.getInstance();
   // var email = prefs.getString('email');
-  bool isLoggedIn = true;
 
   runApp(
-    GoPharmaApp(isLoggedIn: isLoggedIn),
+    GoPharmaApp(),
   );
 }
 
 class GoPharmaApp extends StatelessWidget {
-  bool isLoggedIn = false;
   Connectivity connectivity = Connectivity();
-  GoPharmaApp({this.isLoggedIn});
+  GoPharmaApp();
 
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 import 'package:go_pharma/repos/customer/actual/prescription_order/prescriptionOrder.dart';
-
-import '../../../utilities.dart';
+import 'package:go_pharma/repos/utilities.dart';
 
 class PrescriptionOrderAPIProvider {
   final Dio _dio = Client.init();

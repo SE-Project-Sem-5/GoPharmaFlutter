@@ -28,7 +28,7 @@ class ProcessingOrdersPage extends StatelessWidget {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : state.orderList["processing"].orders.length > 0
+                : state.normalOrderList["processing"].orders.length > 0
                     ? RefreshIndicator(
                         //ignore: missing_return
                         onRefresh: () {
@@ -41,9 +41,10 @@ class ProcessingOrdersPage extends StatelessWidget {
                         child: ListView.builder(
                           physics: AlwaysScrollableScrollPhysics(),
                           itemCount:
-                              state.orderList["processing"].orders.length,
+                              state.normalOrderList["processing"].orders.length,
                           itemBuilder: (context, index) => ProcessingOrderCard(
-                            order: state.orderList["processing"].orders[index],
+                            order: state
+                                .normalOrderList["processing"].orders[index],
                           ),
                         ),
                       )

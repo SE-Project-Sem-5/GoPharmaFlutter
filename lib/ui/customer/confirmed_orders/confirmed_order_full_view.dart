@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/actual/order/orderList.dart';
+import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
 class ConfirmedOrderFullView extends StatelessWidget {
-  final Orders order;
+  final NormalOrder order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
   const ConfirmedOrderFullView({Key key, this.order}) : super(key: key);
