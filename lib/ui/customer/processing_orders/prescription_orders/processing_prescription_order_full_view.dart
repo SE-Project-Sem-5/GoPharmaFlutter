@@ -4,11 +4,11 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
+import 'package:go_pharma/repos/customer/actual/order/prescriptionOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/customer/processing_orders/normal_orders/processing_normal_orders_page.dart';
 
 class ProcessingPrescriptionOrderFullView extends StatelessWidget {
-  final NormalOrder order;
+  final PrescriptionOrder order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
   const ProcessingPrescriptionOrderFullView({Key key, this.order})
@@ -114,156 +114,30 @@ class ProcessingPrescriptionOrderFullView extends StatelessWidget {
                                     ],
                                   ),
                                   HorizontalLine(),
-                                  ListView.builder(
-                                    physics: ClampingScrollPhysics(),
-                                    itemCount: order.orderProducts.length,
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, index) => Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: Container(
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      order.orderProducts[index]
-                                                          .product.productName,
-                                                      style: TextStyle(
-                                                        fontSize: 16.0,
-                                                      ),
-                                                    ),
-                                                    Spacer(),
-                                                    Text(
-                                                      order.orderProducts[index]
-                                                          .quantity
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                        fontSize: 16.0,
-                                                      ),
-                                                    ),
-                                                    Spacer(),
-                                                    Text(
-                                                      order.orderProducts[index]
-                                                          .product.unitPrice
-                                                          .toStringAsFixed(2),
-                                                      style: TextStyle(
-                                                        fontSize: 16.0,
-                                                      ),
-                                                    ),
-                                                    Spacer(),
-                                                    Text(
-                                                      "Rs. " +
-                                                          order
-                                                              .orderProducts[
-                                                                  index]
-                                                              .totalPrice
-                                                              .toStringAsFixed(
-                                                                  2),
-                                                      style: TextStyle(
-                                                        fontSize: 16.0,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        OrderProductDescriptionRow(
-                                          rightPadding: rightPadding,
-                                          tag: "Status: ",
-                                          value: order
-                                              .orderProducts[index].status
-                                              .toUpperCase(),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        order.orderProducts[index].status ==
-                                                "processing"
-                                            ? BlocBuilder<OrderListBloc,
-                                                OrderListState>(
-                                                builder: (context, state) {
-                                                  return GestureDetector(
-                                                    onTap: () {
-                                                      bloc.add(
-                                                        CancelOrderProduct(
-                                                          orderProductID: order
-                                                              .orderProducts[
-                                                                  index]
-                                                              .id,
-                                                          context: context,
-                                                        ),
-                                                      );
-                                                      Navigator.of(context)
-                                                          .popUntil((route) =>
-                                                              route.isFirst);
-                                                      Navigator
-                                                          .pushReplacementNamed(
-                                                        context,
-                                                        ProcessingNormalOrdersPage
-                                                            .id,
-                                                      );
-                                                    },
-                                                    child:
-                                                        CurrentOrderStatusChip(
-                                                      text: "Cancel",
-                                                    ),
-                                                  );
-                                                },
-                                              )
-                                            : SizedBox(height: 1),
-                                      ],
-                                    ),
-                                  ),
                                   Spacer(),
                                   HorizontalLine(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      PastOrderTitleText(text: "Total Price"),
-                                      PastOrderTitleText(
-                                        text: "Rs. " +
-                                            order.totalPrice.toStringAsFixed(2),
-                                      ),
-                                    ],
-                                  ),
                                   SizedBox(
                                     height: 20,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      isOrderCancellable(order)
-                                          ? GestureDetector(
-                                              onTap: () {
-                                                final bloc = BlocProvider.of<
-                                                    OrderListBloc>(context);
-                                                bloc.add(
-                                                  CancelOrder(
-                                                    orderID: order.id,
-                                                    context: context,
-                                                  ),
-                                                );
-                                              },
-                                              child: CurrentOrderStatusChip(
-                                                text: "Cancel Order",
-                                              ),
-                                            )
-                                          : CurrentOrderStatusChip(
-                                              width: 300,
-                                              text:
-                                                  "You cannot cancel this order.",
-                                            )
+                                      GestureDetector(
+                                        onTap: () {
+                                          final bloc =
+                                              BlocProvider.of<OrderListBloc>(
+                                                  context);
+                                          bloc.add(
+                                            CancelOrder(
+                                              orderID: order.id,
+                                              context: context,
+                                            ),
+                                          );
+                                        },
+                                        child: CurrentOrderStatusChip(
+                                          text: "Cancel Order",
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ],

@@ -7,6 +7,7 @@ import 'package:go_pharma/bloc/customer/prescription_order/prescription_order_pr
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/processing_orders/normal_orders/processing_normal_orders_page.dart';
+import 'package:go_pharma/ui/customer/processing_orders/select_order_type.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 
@@ -72,10 +73,13 @@ class CustomerDrawer extends StatelessWidget {
                 bloc.add(
                   GetAllNormalOrders(),
                 );
+                bloc.add(
+                  GetAllPrescriptionOrders(),
+                );
                 Navigator.pop(context);
                 Navigator.pushNamed(
                   context,
-                  ProcessingNormalOrdersPage.id,
+                  SelectProcessingOrderType.id,
                 );
               },
             ),

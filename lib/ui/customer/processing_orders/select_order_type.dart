@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
-import 'package:go_pharma/ui/customer/customer_starting_page.dart';
 import 'package:go_pharma/ui/customer/processing_orders/normal_orders/processing_normal_orders_page.dart';
+import 'package:go_pharma/ui/customer/processing_orders/prescription_orders/processing_prescription_orders_page.dart';
 
 class SelectProcessingOrderType extends StatelessWidget {
   static const id = "select_processing_order_type";
@@ -28,18 +28,12 @@ class SelectProcessingOrderType extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Are you a customer, or a delivery agent?",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
               RoundedButtonFilled(
                 title: "Prescription Orders",
                 size: size,
                 onTapped: () => Navigator.pushNamed(
                   context,
-                  CustomerStartingPage.id,
+                  ProcessingPrescriptionOrdersPage.id,
                 ),
               ),
               RoundedButtonFilled(

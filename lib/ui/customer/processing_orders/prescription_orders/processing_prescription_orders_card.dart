@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
+import 'package:go_pharma/repos/customer/actual/order/prescriptionOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
 import 'processing_prescription_order_full_view.dart';
 
 class ProcessingPrescriptionOrderCard extends StatelessWidget {
-  final NormalOrder order;
+  final PrescriptionOrder order;
   const ProcessingPrescriptionOrderCard({Key key, this.order})
       : super(key: key);
 
@@ -33,9 +33,6 @@ class ProcessingPrescriptionOrderCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Order ID: #" + order.id.toString()),
-                    Text(
-                      "Rs. " + order.totalPrice.toStringAsFixed(2),
-                    ),
                   ],
                 ),
                 subtitle: Text(

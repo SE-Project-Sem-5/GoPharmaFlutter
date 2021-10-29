@@ -40,12 +40,12 @@ class ProcessingPrescriptionOrdersPage extends StatelessWidget {
                         },
                         child: ListView.builder(
                           physics: AlwaysScrollableScrollPhysics(),
-                          itemCount:
-                              state.normalOrderList["processing"].orders.length,
+                          itemCount: state
+                              .prescriptionOrderList.prescriptionOrder.length,
                           itemBuilder: (context, index) =>
                               ProcessingPrescriptionOrderCard(
                             order: state
-                                .normalOrderList["processing"].orders[index],
+                                .prescriptionOrderList.prescriptionOrder[index],
                           ),
                         ),
                       )
