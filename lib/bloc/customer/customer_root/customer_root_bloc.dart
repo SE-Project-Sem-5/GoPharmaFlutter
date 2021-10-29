@@ -58,6 +58,18 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           signInState: stateSignIn,
         );
         break;
+      case LogoutEvent:
+        yield state.clone(
+          isLoading: true,
+        );
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final result = await userApiProvider.logoutUser();
+        prefs.setString("cookie", '');
+        yield state.clone(
+          signInState: CustomerRootSignInState.SIGNED_OUT,
+          isLoading: false,
+        );
+        break;
 
       //  1. Sign up step 1
       case SignUpCustomerEvent:

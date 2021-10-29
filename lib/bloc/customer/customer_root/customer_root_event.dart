@@ -11,6 +11,10 @@ class RootErrorEvent extends CustomerRootEvent {
   RootErrorEvent(this.error);
 }
 
+class LogoutEvent extends CustomerRootEvent {
+  LogoutEvent();
+}
+
 //Sign up process
 //1.
 class SignUpCustomerEvent extends CustomerRootEvent {
