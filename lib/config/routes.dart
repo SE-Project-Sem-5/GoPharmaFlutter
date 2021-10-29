@@ -36,6 +36,7 @@ import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliver
 import 'package:go_pharma/ui/delivery_agent/settings_page/view_profile.dart';
 import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/sign_in/delivery_agent_sign_in.dart';
+import 'package:go_pharma/ui/delivery_agent/sign_in/delivery_agent_sign_in_2fa.dart';
 import 'package:go_pharma/ui/delivery_agent/transient_collected_deliveries/transient_collected_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/transient_deliveries/transient_deliveries_page.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
@@ -85,6 +86,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
   DeliveryAgentSignInPage.id: (context) => DeliveryAgentSignInPage(),
+  DeliveryAgentSignIn2FA.id: (context) => DeliveryAgentSignIn2FA(),
   DeliveriesPage.id: (context) => DeliveriesPage(),
   PendingDeliveriesPage.id: (context) => PendingDeliveriesPage(),
   ReservedDeliveriesPage.id: (context) => ReservedDeliveriesPage(),
