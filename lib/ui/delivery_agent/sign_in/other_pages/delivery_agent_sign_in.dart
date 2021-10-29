@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_bloc.dart';
-import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_event.dart';
-import 'package:go_pharma/bloc/delivery_agent/sign_in/sign_in_state.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_event.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_state.dart';
 import 'package:go_pharma/bloc/delivery_agent/sign_up/sign_up_provider.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
@@ -21,7 +21,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deliveryAgentSignInBloc =
-        BlocProvider.of<DeliveryAgentSignInBloc>(context);
+        BlocProvider.of<DeliveryAgentRootBloc>(context);
     return Form(
       key: _form,
       child: Column(
@@ -69,7 +69,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
               ),
             ),
           ),
-          BlocBuilder<DeliveryAgentSignInBloc, DeliveryAgentSignInState>(
+          BlocBuilder<DeliveryAgentRootBloc, DeliveryAgentRootState>(
             buildWhen: (previous, current) =>
                 previous.isVisible != current.isVisible,
             builder: (context, state) {
@@ -121,34 +121,7 @@ class DeliveryAgentSignInStart extends StatelessWidget {
             },
           ),
           Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Don't have an account? ",
-                style: TextStyle(
-                  color: GoPharmaColors.PrimaryColor,
-                ),
-              ),
-              GestureDetector(
-                child: Text(
-                  "Sign Up.",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: GoPharmaColors.PrimaryColor,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushReplacementNamed(
-                    context,
-                    DeliveryAgentSignUpProvider.id,
-                  );
-                },
-              ),
-            ],
-          ),
-          Spacer(),
-          BlocBuilder<DeliveryAgentSignInBloc, DeliveryAgentSignInState>(
+          BlocBuilder<DeliveryAgentRootBloc, DeliveryAgentRootState>(
             builder: (context, state) {
               return RoundedButtonFilled(
                 title: "Next",
@@ -158,9 +131,9 @@ class DeliveryAgentSignInStart extends StatelessWidget {
                 onTapped: () {
                   if (_form.currentState.validate()) {
                     deliveryAgentSignInBloc.add(
-                      NextStepEvent(
-                        context: context,
-                        currentStep: state.step,
+                      LoginUser(
+                        email: emailController.text,
+                        password: passwordController.text,
                       ),
                     );
                   }

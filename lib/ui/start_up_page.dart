@@ -5,6 +5,7 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/customer/customer_home_page.dart';
 
+import 'delivery_agent/pending_deliveries/pending_deliveries_page.dart';
 import 'initial_routing_page.dart';
 
 class AppStartUpPage extends StatelessWidget {
@@ -32,6 +33,11 @@ class AppStartUpPage extends StatelessWidget {
             Navigator.pushReplacementNamed(
               context,
               CustomerHomePage.id,
+            );
+          } else if (role == "delivery agent") {
+            Navigator.pushReplacementNamed(
+              context,
+              PendingDeliveriesPage.id,
             );
           }
         }
