@@ -57,21 +57,20 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         yield state.clone(
           isLoading: true,
         );
-        var orderListResponse = await orderListAPIProvider.getAllNormalOrders();
+        var orderListResponse =
+            await orderListAPIProvider.getAllPrescriptionOrders();
         print(orderListResponse);
-        Map<String, NormalOrderList> orderList = {};
-        for (String status in statuses) {
-          orderList[status] = new NormalOrderList();
-          orderList[status].orders = [];
+        if (orderListResponse.containsKey("data")) {
+          yield state.clone(
+            isLoading: false,
+            prescriptionOrderList: orderListResponse["data"],
+          );
+        } else {
+          yield state.clone(
+            isLoading: false,
+            error: orderListResponse["error"],
+          );
         }
-        for (NormalOrder order in orderListResponse.orders) {
-          orderList[order.status].orders.add(order);
-        }
-        print(orderList);
-        yield state.clone(
-          isLoading: false,
-          normalOrderList: orderList,
-        );
         break;
       case CancelOrder:
         yield state.clone(
