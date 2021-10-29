@@ -5,13 +5,14 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
+import 'package:go_pharma/ui/customer/processing_orders/normal_orders/processing_normal_orders_page.dart';
 
-class ProcessingOrderFullView extends StatelessWidget {
+class ProcessingPrescriptionOrderFullView extends StatelessWidget {
   final NormalOrder order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
-  const ProcessingOrderFullView({Key key, this.order}) : super(key: key);
+  const ProcessingPrescriptionOrderFullView({Key key, this.order})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<OrderListBloc>(context);
@@ -208,7 +209,8 @@ class ProcessingOrderFullView extends StatelessWidget {
                                                       Navigator
                                                           .pushReplacementNamed(
                                                         context,
-                                                        ProcessingOrdersPage.id,
+                                                        ProcessingNormalOrdersPage
+                                                            .id,
                                                       );
                                                     },
                                                     child:

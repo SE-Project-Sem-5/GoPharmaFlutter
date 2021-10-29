@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
-import 'processing_order_full_view.dart';
+import 'processing_normal_order_full_view.dart';
 
-class ProcessingOrderCard extends StatelessWidget {
+class ProcessingNormalOrderCard extends StatelessWidget {
   final NormalOrder order;
-  const ProcessingOrderCard({Key key, this.order}) : super(key: key);
+  const ProcessingNormalOrderCard({Key key, this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class ProcessingOrderCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProcessingOrderFullView(
+                          builder: (context) => ProcessingNormalOrderFullView(
                             order: order,
                           ),
                         ),

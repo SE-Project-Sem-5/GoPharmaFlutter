@@ -15,7 +15,9 @@ import 'package:go_pharma/ui/customer/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/prescription_order/other_pages/select_zone_page.dart';
 import 'package:go_pharma/ui/customer/prescription_order/other_pages/select_photo_screen.dart';
-import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
+import 'package:go_pharma/ui/customer/processing_orders/normal_orders/processing_normal_orders_page.dart';
+import 'package:go_pharma/ui/customer/processing_orders/prescription_orders/processing_prescription_orders_page.dart';
+import 'package:go_pharma/ui/customer/processing_orders/select_order_type.dart';
 import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
@@ -55,7 +57,9 @@ Map<String, Widget Function(BuildContext context)> routes = {
   CategoryProvider.id: (context) => CategoryProvider(),
   SearchPage.id: (context) => SearchPage(),
   PastOrdersPage.id: (context) => PastOrdersPage(),
-  ProcessingOrdersPage.id: (context) => ProcessingOrdersPage(),
+  ProcessingNormalOrdersPage.id: (context) => ProcessingNormalOrdersPage(),
+  ProcessingPrescriptionOrdersPage.id: (context) =>
+      ProcessingPrescriptionOrdersPage(),
   ZoneSelectionPage.id: (context) => ZoneSelectionPage(),
   PrescriptionOrderProvider.id: (context) => PrescriptionOrderProvider(),
   ProfileSecuritySettings.id: (context) => ProfileSecuritySettings(),
@@ -65,6 +69,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   OrderSuccessfulPage.id: (context) => OrderSuccessfulPage(),
   AddressInformationPage.id: (context) => AddressInformationPage(),
   ConfirmedOrdersPage.id: (context) => ConfirmedOrdersPage(),
+  SelectProcessingOrderType.id: (context) => SelectProcessingOrderType(),
 
   //Customer sign up
   CustomerSignUpPage.id: (context) => CustomerSignUpPage(),

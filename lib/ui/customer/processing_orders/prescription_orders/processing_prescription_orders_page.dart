@@ -4,12 +4,12 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_bloc.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/ui/customer/common_skeleton.dart';
-import 'processing_orders_card.dart';
+import 'processing_prescription_orders_card.dart';
 
-class ProcessingOrdersPage extends StatelessWidget {
-  static final String id = "current_orders_page";
+class ProcessingPrescriptionOrdersPage extends StatelessWidget {
+  static final String id = "processing_prescription_orders";
 
-  const ProcessingOrdersPage({Key key}) : super(key: key);
+  const ProcessingPrescriptionOrdersPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,8 @@ class ProcessingOrdersPage extends StatelessWidget {
                           physics: AlwaysScrollableScrollPhysics(),
                           itemCount:
                               state.normalOrderList["processing"].orders.length,
-                          itemBuilder: (context, index) => ProcessingOrderCard(
+                          itemBuilder: (context, index) =>
+                              ProcessingPrescriptionOrderCard(
                             order: state
                                 .normalOrderList["processing"].orders[index],
                           ),

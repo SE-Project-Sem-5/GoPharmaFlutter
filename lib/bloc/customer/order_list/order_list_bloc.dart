@@ -5,7 +5,7 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderListAPIProvider.dart';
-import 'package:go_pharma/ui/customer/processing_orders/processing_orders_page.dart';
+import 'package:go_pharma/ui/customer/processing_orders/normal_orders/processing_normal_orders_page.dart';
 
 class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
   OrderListAPIProvider orderListAPIProvider = new OrderListAPIProvider();
@@ -87,7 +87,7 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         Navigator.of(context).popUntil((route) => route.isFirst);
         Navigator.pushReplacementNamed(
           context,
-          ProcessingOrdersPage.id,
+          ProcessingNormalOrdersPage.id,
         );
         break;
       case CancelOrderProduct:
