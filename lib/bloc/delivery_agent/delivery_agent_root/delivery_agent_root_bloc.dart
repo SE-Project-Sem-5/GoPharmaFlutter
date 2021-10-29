@@ -4,13 +4,42 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_state.dart';
-import 'package:go_pharma/repos/delivery_agent/user_delivery_agent/delivery_agent_model.dart';
+import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DeliveryAgentRootBloc
     extends Bloc<DeliveryAgentRootEvent, DeliveryAgentRootState> {
+  final UserAPIProvider userApiProvider = new UserAPIProvider();
   DeliveryAgentRootBloc(BuildContext context)
       : super(DeliveryAgentRootState.initialState) {
     _init();
+  }
+  Future<void> _init() async {
+    var prefs = await SharedPreferences.getInstance();
+    print("Loading");
+    final cookie = (prefs.getString('cookie') ?? '');
+    print("cookie: " + cookie);
+    if (cookie != '') {
+      print("Looking for access token");
+      print(cookie);
+      Map<String, dynamic> result =
+          await userApiProvider.getCurrentUser(cookie);
+      if (result.containsKey("user")) {
+        add(
+          UpdateUserEvent(
+            result["user"],
+          ),
+        );
+        prefs.setString('cookie', result["cookie"]);
+      }
+    } else {
+      prefs.setString('cookie', "");
+      add(
+        ChangeSignInStateEvent(
+          DeliveryAgentRootSignInState.SIGNED_OUT,
+        ),
+      );
+    }
   }
 
   @override
@@ -23,32 +52,19 @@ class DeliveryAgentRootBloc
         yield state.clone(error: error);
         break;
       case UpdateUserEvent:
-        final deliveryAgent = (event as UpdateUserEvent).deliveryAgent;
-        yield state.clone(deliveryAgent: deliveryAgent);
-        break;
-      case StartInitCheckEvent:
-        yield state.clone(initializing: true);
+        final user = (event as UpdateUserEvent).user;
+        yield state.clone(
+          user: user,
+        );
         break;
       case ChangeSignInStateEvent:
         final signInState = (event as ChangeSignInStateEvent).state;
         yield state.clone(signInState: signInState);
         break;
-      case SignOutEvent:
-        yield state.clone(signInState: DeliveryAgentRootSignInState.SIGNED_OUT);
-        //TODO: Logic to sign out user
-        break;
+
       case ToggleEditableEvent:
         yield state.clone(
             isGeneralInformationEditable: !state.isGeneralInformationEditable);
-        break;
-      case RootSignInEvent:
-        final email = (event as RootSignInEvent).email;
-        final password = (event as RootSignInEvent).password;
-        DeliveryAgent deliveryAgent = new DeliveryAgent();
-        yield state.clone(
-          signInState: DeliveryAgentRootSignInState.SIGNED_IN,
-          deliveryAgent: deliveryAgent,
-        );
         break;
       case ToggleVisibility:
         final isVisible = (event as ToggleVisibility).isVisible;
@@ -60,16 +76,6 @@ class DeliveryAgentRootBloc
         );
         break;
     }
-  }
-
-  Future<void> _init() async {
-    add(StartInitCheckEvent());
-    //TODO: init sign in automatically when app starts
-    // Get email and password from shared prefs?
-    // final auth = locator<AuthService>();
-    // User user = await auth.createUserWithEmailAndPassword(email, password);
-    add(UpdateUserEvent(new DeliveryAgent()));
-    add(ChangeSignInStateEvent(DeliveryAgentRootSignInState.SIGNED_OUT));
   }
 
   @override

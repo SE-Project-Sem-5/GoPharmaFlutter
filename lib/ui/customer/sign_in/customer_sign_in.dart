@@ -5,14 +5,13 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/common/widgets/facebook_button.dart';
-import 'package:go_pharma/ui/common/widgets/google_button.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'package:go_pharma/ui/customer/customer_home_page.dart';
 import 'package:go_pharma/ui/customer/sign_up/customer_sign_up_information.dart';
 import 'package:go_pharma/ui/customer/sign_up/sign_up_start.dart';
 import 'customer_sign_in_2fa.dart';
+import 'forgot_password_page.dart';
 
 // ignore: must_be_immutable
 class CustomerSignInPage extends StatelessWidget {
@@ -234,7 +233,12 @@ class CustomerSignInPage extends StatelessWidget {
                                 size: MediaQuery.of(context).size,
                                 fillColor: GoPharmaColors.GreyColor,
                                 textColor: GoPharmaColors.BlackColor,
-                                onTapped: () {},
+                                onTapped: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    ForgotPasswordPage.id,
+                                  );
+                                },
                               ),
                               SizedBox(
                                 height: 10,

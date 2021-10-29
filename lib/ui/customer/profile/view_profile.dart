@@ -46,6 +46,7 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
           body: BlocBuilder<CustomerRootBloc, CustomerRootState>(
+            buildWhen: (p, c) => p.isLoading != c.isLoading,
             builder: (context, state) {
               firstNameController.text = state.user.firstName;
               lastNameController.text = state.user.lastName;

@@ -257,8 +257,20 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
       case AddAddressDetails:
         var streetAddress = (event as AddAddressDetails).streetAddress;
+        var cityString = (event as AddAddressDetails).city;
+        print(cityString);
+        var string = cityString.split(", ");
+        var citiesLoaded = state.cities.cities;
+        var correctCity;
+        for (City i in citiesLoaded) {
+          if (i.description == cityString) {
+            correctCity = i;
+            break;
+          }
+        }
         yield state.clone(
           streetAddress: streetAddress,
+          city: correctCity,
         );
         break;
       case GetAllCities:

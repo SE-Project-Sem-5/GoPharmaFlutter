@@ -137,7 +137,6 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           } else {
             Map<String, dynamic> result =
                 await userApiProvider.getCurrentUser(cookie);
-
             if (loginReponse.data.twoFactorAuth == "true") {
               yield state.clone(
                 isLoading: false,
@@ -325,6 +324,15 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final user = (event as UpdateUserEvent).user;
         print("Getting user");
         print(user.firstName);
+        //TODO: implement
+        final pref = await SharedPreferences.getInstance();
+        pref.setString("firstName", user.firstName);
+        pref.setString("lastName", user.firstName);
+        pref.setString("firstName", user.firstName);
+        pref.setString("firstName", user.firstName);
+        pref.setString("firstName", user.firstName);
+        pref.setString("firstName", user.firstName);
+        pref.setString("firstName", user.firstName);
         yield state.clone(
           user: user,
           signInState: CustomerRootSignInState.SIGNED_IN,

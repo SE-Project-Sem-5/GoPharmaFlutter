@@ -9,6 +9,7 @@ import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/common/widgets/text_field.dart';
 import 'dart:core';
 import 'package:email_validator/email_validator.dart';
+import 'package:go_pharma/ui/customer/sign_in/forgot_password_page.dart';
 
 // ignore: must_be_immutable
 class DeliveryAgentSignInStart extends StatelessWidget {
@@ -172,7 +173,12 @@ class DeliveryAgentSignInStart extends StatelessWidget {
             size: MediaQuery.of(context).size,
             fillColor: GoPharmaColors.GreyColor,
             textColor: GoPharmaColors.BlackColor,
-            onTapped: () {},
+            onTapped: () {
+              Navigator.pushNamed(
+                context,
+                ForgotPasswordPage.id,
+              );
+            },
           ),
           Spacer(),
         ],
