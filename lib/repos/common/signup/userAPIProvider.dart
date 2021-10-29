@@ -16,7 +16,7 @@ class UserAPIProvider {
       } else {
         _dio.options.headers.putIfAbsent("cookie", () => cookie);
       }
-      Response response = await _dio.post(
+      Response response = await _dio.get(
         "auth/logout",
       );
       return {"success": "Successfully logged out."};
