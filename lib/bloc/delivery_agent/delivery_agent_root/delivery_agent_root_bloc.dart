@@ -18,6 +18,7 @@ class DeliveryAgentRootBloc
   }
   Future<void> _init() async {
     var prefs = await SharedPreferences.getInstance();
+    add(LoadCities());
     print("Loading");
     final cookie = (prefs.getString('cookie') ?? '');
     print("cookie: " + cookie);
@@ -27,6 +28,7 @@ class DeliveryAgentRootBloc
       Map<String, dynamic> result =
           await userApiProvider.getCurrentUser(cookie);
       if (result.containsKey("user")) {
+        print("Has user");
         add(
           UpdateUserEvent(
             result["user"],
@@ -65,6 +67,19 @@ class DeliveryAgentRootBloc
           city: newCity,
         );
         break;
+      case LoadCities:
+        yield state.clone(
+          isLoading: true,
+        );
+        final result = await userApiProvider.getAllCities();
+        if (result.containsKey("data")) {
+          yield state.clone(
+            isLoading: false,
+            city: result["data"].cities[0],
+            cities: result["data"],
+          );
+        }
+        break;
       case UpdateUserEvent:
         final user = (event as UpdateUserEvent).user;
         print("Getting user");
@@ -72,6 +87,8 @@ class DeliveryAgentRootBloc
         final pref = await SharedPreferences.getInstance();
         pref.setString("firstName", user.firstName);
         pref.setString("lastName", user.lastName);
+        pref.setString("dateOfBirth", user.dateOfBirth);
+        print(user.dateOfBirth);
         yield state.clone(
           user: user,
           signInState: DeliveryAgentRootSignInState.SIGNED_IN,

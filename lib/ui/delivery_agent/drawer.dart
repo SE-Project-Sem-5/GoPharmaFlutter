@@ -5,6 +5,7 @@ import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/settings_page/view_profile.dart';
 import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/transient_collected_deliveries/transient_collected_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/transient_deliveries/transient_deliveries_page.dart';
@@ -103,7 +104,9 @@ class DeliveryAgentDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pushReplacementNamed(
-                    context, PendingDeliveriesPage.id);
+                  context,
+                  DeliveryAgentSettingsPage.id,
+                );
               },
             ),
           ],

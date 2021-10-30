@@ -82,7 +82,6 @@ Map<String, Widget Function(BuildContext context)> routes = {
   //Customer sign in
   CustomerSignInPage.id: (context) => CustomerSignInPage(),
   CustomerSignIn2FA.id: (context) => CustomerSignIn2FA(),
-
   //delivery agent pages
   DeliveryAgentStartingPage.id: (context) => DeliveryAgentStartingPage(),
   DeliveryAgentSignInPage.id: (context) => DeliveryAgentSignInPage(),
