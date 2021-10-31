@@ -6,7 +6,7 @@ import 'package:go_pharma/bloc/internet_connectivity/internet_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/customer_starting_page.dart';
 import 'common/widgets/rounded_button_filled.dart';
-import 'delivery_agent/delivery_agent_starting_page.dart';
+import 'delivery_agent/sign_in/delivery_agent_sign_in.dart';
 
 class InitialRoutingPage extends StatelessWidget {
   static const id = "initial_routing_page";
@@ -62,7 +62,7 @@ class InitialRoutingPage extends StatelessWidget {
                   textColor: GoPharmaColors.BlackColor,
                   onTapped: () => Navigator.pushNamed(
                     context,
-                    DeliveryAgentStartingPage.id,
+                    DeliveryAgentSignInPage.id,
                   ),
                 ),
               ],
