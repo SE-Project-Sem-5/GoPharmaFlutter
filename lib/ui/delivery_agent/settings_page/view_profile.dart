@@ -118,7 +118,10 @@ class DeliveryAgentSettingsPage extends StatelessWidget {
                                     groupValue: state.gender,
                                     onChanged: (value) {
                                       bloc.add(
-                                          UpdateGenderEvent(gender: value));
+                                        UpdateGenderEvent(
+                                          gender: value,
+                                        ),
+                                      );
                                     },
                                   ),
                                   Text(

@@ -51,7 +51,7 @@ class ProcessingNormalOrdersPage extends StatelessWidget {
                       )
                     : Center(
                         child: Text(
-                          "Nothing to see here. ",
+                          "You have no processing orders.",
                           style: TextStyle(
                             fontSize: 18,
                           ),

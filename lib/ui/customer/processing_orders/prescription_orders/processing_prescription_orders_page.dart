@@ -49,7 +49,7 @@ class ProcessingPrescriptionOrdersPage extends StatelessWidget {
                       )
                     : Center(
                         child: Text(
-                          "Nothing to see here. ",
+                          "You have no processing orders.",
                           style: TextStyle(
                             fontSize: 18,
                           ),
@@ -58,7 +58,7 @@ class ProcessingPrescriptionOrdersPage extends StatelessWidget {
           );
         },
       ),
-      title: "Processing Orders",
+      title: "Processing Prescription Orders",
     );
   }
 }
