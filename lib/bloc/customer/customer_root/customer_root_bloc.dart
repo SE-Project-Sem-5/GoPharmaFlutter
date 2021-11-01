@@ -52,6 +52,52 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         yield state.clone(error: "");
         yield state.clone(error: error);
         break;
+      case UpdateUserInformation:
+        yield state.clone(
+          isLoading: true,
+        );
+        final firstName = (event as UpdateUserInformation).firstName;
+        final lastName = (event as UpdateUserInformation).lastName;
+        final streetAddress = (event as UpdateUserInformation).streetAddress;
+        final birthDate = (event as UpdateUserInformation).birthDate;
+        final gender = (event as UpdateUserInformation).gender;
+        final cityInState = state.city;
+        final contactNumber = (event as UpdateUserInformation).contactNumber;
+        final Map<String, String> result =
+            await userApiProvider.updateUserInformation(
+          firstName: firstName,
+          lastName: lastName,
+          streetAddress: streetAddress,
+          city: cityInState.city,
+          district: cityInState.district,
+          province: cityInState.province,
+          birthDate: birthDate,
+          gender: gender,
+          contactNumber: contactNumber,
+        );
+        User oldUser = state.user;
+        User newUser = new User(
+          firstName: firstName,
+          lastName: lastName,
+          gender: gender,
+          contactNumber: contactNumber,
+          dateOfBirth: birthDate,
+          addressDetail: new AddressDetail(
+            streetAddress: streetAddress,
+            provinceDistrictCity: new ProvinceDistrictCity(
+              city: cityInState.city,
+              district: cityInState.district,
+              province: cityInState.province,
+            ),
+          ),
+          userAccount: oldUser.userAccount,
+        );
+        yield state.clone(
+          isLoading: false,
+          user: newUser,
+          isGeneralInformationEditable: false,
+        );
+        break;
       case ChangeSignInStateEvent:
         final stateSignIn = (event as ChangeSignInStateEvent).state;
         yield state.clone(

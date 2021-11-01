@@ -73,3 +73,20 @@ class UpdateCity extends DeliveryAgentRootEvent {
   final String city;
   UpdateCity({this.city});
 }
+
+class UpdateUserInformation extends DeliveryAgentRootEvent {
+  final String firstName;
+  final String lastName;
+  final String streetAddress;
+  final String birthDate;
+  final String gender;
+  final String contactNumber;
+  UpdateUserInformation({
+    this.firstName,
+    this.lastName,
+    this.streetAddress,
+    this.birthDate,
+    this.gender,
+    this.contactNumber,
+  });
+}
