@@ -3,8 +3,11 @@ class OrderPriceInformation {
   int deliveryCharge;
   int totalToBePaid;
 
-  OrderPriceInformation(
-      {this.totalPrice, this.deliveryCharge, this.totalToBePaid});
+  OrderPriceInformation({
+    this.totalPrice,
+    this.deliveryCharge,
+    this.totalToBePaid,
+  });
 
   OrderPriceInformation.fromJson(Map<String, dynamic> json) {
     totalPrice = json['totalPrice'];

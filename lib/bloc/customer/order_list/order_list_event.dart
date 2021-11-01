@@ -25,8 +25,7 @@ class GetAllPrescriptionOrders extends OrderListEvent {
 
 class CancelOrder extends OrderListEvent {
   final int orderID;
-  final BuildContext context;
-  CancelOrder({this.orderID, this.context});
+  CancelOrder({this.orderID});
 }
 
 class CancelOrderProduct extends OrderListEvent {

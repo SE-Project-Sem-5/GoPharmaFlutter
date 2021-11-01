@@ -140,7 +140,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           deliveryProducts.add(newDeliveryProduct);
         }
         DeliveryDetails delivery = new DeliveryDetails(
-          customerAddressID: 2,
           city: state.city.city,
           district: state.city.district,
           streetAddress: state.streetAddress,
@@ -149,7 +148,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         OrderPriceInformation orderPriceInformation =
             await orderAPIProvider.getDeliveryChargeForNormalOrder(delivery);
         print(orderPriceInformation);
-        print(orderPriceInformation.deliveryCharge);
+        print("Delivery Charge" +
+            orderPriceInformation.deliveryCharge.toString());
         yield state.clone(
           orderLoading: false,
           deliveryCharge: orderPriceInformation.deliveryCharge.toDouble(),
@@ -257,8 +257,20 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
       case AddAddressDetails:
         var streetAddress = (event as AddAddressDetails).streetAddress;
+        var cityString = (event as AddAddressDetails).city;
+        print(cityString);
+        var string = cityString.split(", ");
+        var citiesLoaded = state.cities.cities;
+        var correctCity;
+        for (City i in citiesLoaded) {
+          if (i.description == cityString) {
+            correctCity = i;
+            break;
+          }
+        }
         yield state.clone(
           streetAddress: streetAddress,
+          city: correctCity,
         );
         break;
       case GetAllCities:

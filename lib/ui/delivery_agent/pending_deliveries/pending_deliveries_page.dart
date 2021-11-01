@@ -7,7 +7,6 @@ import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_delivery_full_view.dart';
 
 class PendingDeliveriesPage extends StatelessWidget {
-  //TODO:replace with the list gotten from the backend
   static final String id = "pending_deliveries_page";
   final String title = "Pending Deliveries";
 
@@ -16,7 +15,6 @@ class PendingDeliveriesPage extends StatelessWidget {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
     deliveryListBloc.add(
       GetAllConfirmedOrders(
-        //TODO: replace
         deliveryAgentHomeAddressID: 3,
       ),
     );

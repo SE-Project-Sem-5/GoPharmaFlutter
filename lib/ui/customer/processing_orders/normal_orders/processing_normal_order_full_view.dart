@@ -16,263 +16,281 @@ class ProcessingNormalOrderFullView extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<OrderListBloc>(context);
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Order Details",
+    return BlocListener<OrderListBloc, OrderListState>(
+      listenWhen: (pre, current) => pre.isLoading != current.isLoading,
+      listener: (context, state) {
+        Navigator.pushReplacementNamed(
+          context,
+          ProcessingNormalOrdersPage.id,
+        );
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "Order Details",
+            ),
           ),
-        ),
-        body: Container(
-          child: BlocBuilder<OrderListBloc, OrderListState>(
-            builder: (context, state) {
-              return Center(
-                child: state.isLoading
-                    ? CircularProgressIndicator()
-                    : Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: GoPharmaColors.PrimaryColor.withOpacity(
-                                    0.2),
-                                blurRadius: 15.0,
-                              ),
-                            ],
-                          ),
-                          child: Card(
-                            clipBehavior: Clip.antiAlias,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 30.0,
-                                horizontal: 20.0,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Order #" + order.id.toString(),
-                                    style: TextStyle(
-                                      fontSize: 20.0,
+          body: Container(
+            child: BlocBuilder<OrderListBloc, OrderListState>(
+              builder: (context, state) {
+                return Center(
+                  child: state.isLoading
+                      ? CircularProgressIndicator()
+                      : Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color:
+                                      GoPharmaColors.PrimaryColor.withOpacity(
+                                          0.2),
+                                  blurRadius: 15.0,
+                                ),
+                              ],
+                            ),
+                            child: Card(
+                              clipBehavior: Clip.antiAlias,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 30.0,
+                                  horizontal: 20.0,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Order #" + order.id.toString(),
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "Ordered On: " +
-                                        order.orderedDate.substring(0, 10),
-                                    style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
-                                      fontSize: 16.0,
+                                    SizedBox(
+                                      height: 10,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "Status: " + order.status.toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 16.0,
+                                    Text(
+                                      "Ordered On: " +
+                                          order.orderedDate.substring(0, 10),
+                                      style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6),
+                                        fontSize: 16.0,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  HorizontalLine(),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Ordered Products',
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Status: " + order.status.toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: 16.0,
                                       ),
-                                      Spacer(),
-                                      Text(
-                                        'Qty',
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Text(
-                                        'Unit Price',
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Text(
-                                        'Total Price',
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  HorizontalLine(),
-                                  ListView.builder(
-                                    physics: ClampingScrollPhysics(),
-                                    itemCount: order.orderProducts.length,
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, index) => Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    HorizontalLine(),
+                                    Row(
                                       children: [
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: Container(
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      order.orderProducts[index]
-                                                          .product.productName,
-                                                      style: TextStyle(
-                                                        fontSize: 16.0,
+                                        Text(
+                                          'Ordered Products',
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Text(
+                                          'Qty',
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Text(
+                                          'Unit Price',
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Text(
+                                          'Total Price',
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    HorizontalLine(),
+                                    ListView.builder(
+                                      physics: ClampingScrollPhysics(),
+                                      itemCount: order.orderProducts.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, index) => Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        order
+                                                            .orderProducts[
+                                                                index]
+                                                            .product
+                                                            .productName,
+                                                        style: TextStyle(
+                                                          fontSize: 16.0,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Spacer(),
-                                                    Text(
-                                                      order.orderProducts[index]
-                                                          .quantity
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                        fontSize: 16.0,
+                                                      Spacer(),
+                                                      Text(
+                                                        order
+                                                            .orderProducts[
+                                                                index]
+                                                            .quantity
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          fontSize: 16.0,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Spacer(),
-                                                    Text(
-                                                      order.orderProducts[index]
-                                                          .product.unitPrice
-                                                          .toStringAsFixed(2),
-                                                      style: TextStyle(
-                                                        fontSize: 16.0,
+                                                      Spacer(),
+                                                      Text(
+                                                        order
+                                                            .orderProducts[
+                                                                index]
+                                                            .product
+                                                            .unitPrice
+                                                            .toStringAsFixed(2),
+                                                        style: TextStyle(
+                                                          fontSize: 16.0,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Spacer(),
-                                                    Text(
-                                                      "Rs. " +
-                                                          order
-                                                              .orderProducts[
-                                                                  index]
-                                                              .totalPrice
-                                                              .toStringAsFixed(
-                                                                  2),
-                                                      style: TextStyle(
-                                                        fontSize: 16.0,
+                                                      Spacer(),
+                                                      Text(
+                                                        "Rs. " +
+                                                            order
+                                                                .orderProducts[
+                                                                    index]
+                                                                .totalPrice
+                                                                .toStringAsFixed(
+                                                                    2),
+                                                        style: TextStyle(
+                                                          fontSize: 16.0,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        OrderProductDescriptionRow(
-                                          rightPadding: rightPadding,
-                                          tag: "Status: ",
-                                          value: order
-                                              .orderProducts[index].status
-                                              .toUpperCase(),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        order.orderProducts[index].status ==
-                                                "processing"
-                                            ? BlocBuilder<OrderListBloc,
-                                                OrderListState>(
-                                                builder: (context, state) {
-                                                  return GestureDetector(
-                                                    onTap: () {
-                                                      bloc.add(
-                                                        CancelOrderProduct(
-                                                          orderProductID: order
-                                                              .orderProducts[
-                                                                  index]
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          OrderProductDescriptionRow(
+                                            rightPadding: rightPadding,
+                                            tag: "Status: ",
+                                            value: order
+                                                .orderProducts[index].status
+                                                .toUpperCase(),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          order.orderProducts[index].status ==
+                                                  "processing"
+                                              ? BlocBuilder<OrderListBloc,
+                                                  OrderListState>(
+                                                  builder: (context, state) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        bloc.add(
+                                                          CancelOrderProduct(
+                                                            orderProductID: order
+                                                                .orderProducts[
+                                                                    index]
+                                                                .id,
+                                                            context: context,
+                                                          ),
+                                                        );
+                                                        Navigator.of(context)
+                                                            .popUntil((route) =>
+                                                                route.isFirst);
+                                                        Navigator
+                                                            .pushReplacementNamed(
+                                                          context,
+                                                          ProcessingNormalOrdersPage
                                                               .id,
-                                                          context: context,
-                                                        ),
-                                                      );
-                                                      Navigator.of(context)
-                                                          .popUntil((route) =>
-                                                              route.isFirst);
-                                                      Navigator
-                                                          .pushReplacementNamed(
-                                                        context,
-                                                        ProcessingNormalOrdersPage
-                                                            .id,
-                                                      );
-                                                    },
-                                                    child:
-                                                        CurrentOrderStatusChip(
-                                                      text: "Cancel",
+                                                        );
+                                                      },
+                                                      child:
+                                                          CurrentOrderStatusChip(
+                                                        text: "Cancel",
+                                                      ),
+                                                    );
+                                                  },
+                                                )
+                                              : SizedBox(height: 1),
+                                        ],
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    HorizontalLine(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        PastOrderTitleText(text: "Total Price"),
+                                        PastOrderTitleText(
+                                          text: "Rs. " +
+                                              order.totalPrice
+                                                  .toStringAsFixed(2),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        isOrderCancellable(order)
+                                            ? GestureDetector(
+                                                onTap: () {
+                                                  final bloc = BlocProvider.of<
+                                                      OrderListBloc>(context);
+                                                  bloc.add(
+                                                    CancelOrder(
+                                                      orderID: order.id,
                                                     ),
                                                   );
                                                 },
+                                                child: CurrentOrderStatusChip(
+                                                  text: "Cancel Order",
+                                                ),
                                               )
-                                            : SizedBox(height: 1),
+                                            : CurrentOrderStatusChip(
+                                                width: 300,
+                                                text:
+                                                    "You cannot cancel this order.",
+                                              )
                                       ],
                                     ),
-                                  ),
-                                  Spacer(),
-                                  HorizontalLine(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      PastOrderTitleText(text: "Total Price"),
-                                      PastOrderTitleText(
-                                        text: "Rs. " +
-                                            order.totalPrice.toStringAsFixed(2),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      isOrderCancellable(order)
-                                          ? GestureDetector(
-                                              onTap: () {
-                                                final bloc = BlocProvider.of<
-                                                    OrderListBloc>(context);
-                                                bloc.add(
-                                                  CancelOrder(
-                                                    orderID: order.id,
-                                                    context: context,
-                                                  ),
-                                                );
-                                              },
-                                              child: CurrentOrderStatusChip(
-                                                text: "Cancel Order",
-                                              ),
-                                            )
-                                          : CurrentOrderStatusChip(
-                                              width: 300,
-                                              text:
-                                                  "You cannot cancel this order.",
-                                            )
-                                    ],
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ),

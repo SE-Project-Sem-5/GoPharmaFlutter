@@ -17,6 +17,11 @@ class DeliveryListAPIProvider {
       int deliveryAgentHomeAddressID) async {
     try {
       final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/view",
@@ -36,7 +41,11 @@ class DeliveryListAPIProvider {
       int deliveryAgentHomeAddressID) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/reserved/view",
       );
@@ -53,7 +62,11 @@ class DeliveryListAPIProvider {
   ) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/collected/view",
         data: {
@@ -70,7 +83,11 @@ class DeliveryListAPIProvider {
   Future<TransientDeliveryList> getAllTransientOrders() async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/transient/view",
       );
@@ -84,7 +101,11 @@ class DeliveryListAPIProvider {
   Future<TransientCollectedList> getAllTransientCollectedOrders() async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/transient_collect/view",
       );
@@ -98,7 +119,11 @@ class DeliveryListAPIProvider {
   Future<ShippedOrderList> getAllShippedOrders() async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/ship/view",
       );
@@ -114,7 +139,11 @@ class DeliveryListAPIProvider {
   ) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/order_product/reserve",
         data: {"orderProductID": orderProductID},
@@ -131,7 +160,11 @@ class DeliveryListAPIProvider {
   ) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/order-product/collect",
         data: {
@@ -150,7 +183,11 @@ class DeliveryListAPIProvider {
   ) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/transient",
         data: {
@@ -169,7 +206,11 @@ class DeliveryListAPIProvider {
   ) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/transient_collect",
         data: {
@@ -188,7 +229,11 @@ class DeliveryListAPIProvider {
   ) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/ship",
         data: {
@@ -212,7 +257,11 @@ class DeliveryListAPIProvider {
   }) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/cash/deliver",
         data: {
@@ -236,7 +285,11 @@ class DeliveryListAPIProvider {
   ) async {
     try {
       final cookie = await Utilities.getCookie();
-      _dio.options.headers.update("cookie", (c) => cookie);
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
       Response response = await _dio.post(
         "delivery-agent/order/online/deliver",
         data: {

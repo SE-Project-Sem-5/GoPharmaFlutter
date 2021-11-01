@@ -4,13 +4,46 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_state.dart';
-import 'package:go_pharma/repos/delivery_agent/user_delivery_agent/delivery_agent_model.dart';
+import 'package:go_pharma/repos/common/signup/cityList.dart';
+import 'package:go_pharma/repos/common/signup/user.dart';
+import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DeliveryAgentRootBloc
     extends Bloc<DeliveryAgentRootEvent, DeliveryAgentRootState> {
+  final UserAPIProvider userApiProvider = new UserAPIProvider();
   DeliveryAgentRootBloc(BuildContext context)
       : super(DeliveryAgentRootState.initialState) {
     _init();
+  }
+  Future<void> _init() async {
+    var prefs = await SharedPreferences.getInstance();
+    add(LoadCities());
+    print("Loading");
+    final cookie = (prefs.getString('cookie') ?? '');
+    print("cookie: " + cookie);
+    if (cookie != '') {
+      print("Looking for access token");
+      print(cookie);
+      Map<String, dynamic> result =
+          await userApiProvider.getCurrentUser(cookie);
+      if (result.containsKey("user")) {
+        print("Has user");
+        add(
+          UpdateUserEvent(
+            result["user"],
+          ),
+        );
+        prefs.setString('cookie', result["cookie"]);
+      }
+    } else {
+      prefs.setString('cookie', "");
+      add(
+        ChangeSignInStateEvent(
+          DeliveryAgentRootSignInState.SIGNED_OUT,
+        ),
+      );
+    }
   }
 
   @override
@@ -22,54 +55,136 @@ class DeliveryAgentRootBloc
         yield state.clone(error: "");
         yield state.clone(error: error);
         break;
-      case UpdateUserEvent:
-        final deliveryAgent = (event as UpdateUserEvent).deliveryAgent;
-        yield state.clone(deliveryAgent: deliveryAgent);
+      case UpdateCity:
+        final city = (event as UpdateCity).city;
+        City newCity;
+        for (City c in state.cities.cities) {
+          if (c.description == city) {
+            newCity = c;
+          }
+        }
+        yield state.clone(
+          city: newCity,
+        );
         break;
-      case StartInitCheckEvent:
-        yield state.clone(initializing: true);
+      case LoadCities:
+        yield state.clone(
+          isLoading: true,
+        );
+        final result = await userApiProvider.getAllCities();
+        if (result.containsKey("data")) {
+          yield state.clone(
+            isLoading: false,
+            city: result["data"].cities[0],
+            cities: result["data"],
+          );
+        }
+        break;
+      case UpdateUserEvent:
+        final user = (event as UpdateUserEvent).user;
+        print("Getting user");
+        print(user.firstName);
+        final pref = await SharedPreferences.getInstance();
+        pref.setString("firstName", user.firstName);
+        pref.setString("lastName", user.lastName);
+        pref.setString("dateOfBirth", user.dateOfBirth);
+        print(user.dateOfBirth);
+        yield state.clone(
+          user: user,
+          signInState: DeliveryAgentRootSignInState.SIGNED_IN,
+        );
+        break;
+      case UpdateGenderEvent:
+        final gender = (event as UpdateGenderEvent).gender;
+        yield state.clone(
+          gender: gender,
+        );
         break;
       case ChangeSignInStateEvent:
         final signInState = (event as ChangeSignInStateEvent).state;
         yield state.clone(signInState: signInState);
         break;
-      case SignOutEvent:
-        yield state.clone(signInState: DeliveryAgentRootSignInState.SIGNED_OUT);
-        //TODO: Logic to sign out user
-        break;
       case ToggleEditableEvent:
         yield state.clone(
-            isGeneralInformationEditable: !state.isGeneralInformationEditable);
-        break;
-      case RootSignInEvent:
-        final email = (event as RootSignInEvent).email;
-        final password = (event as RootSignInEvent).password;
-        DeliveryAgent deliveryAgent = new DeliveryAgent();
-        yield state.clone(
-          signInState: DeliveryAgentRootSignInState.SIGNED_IN,
-          deliveryAgent: deliveryAgent,
+          isGeneralInformationEditable: !state.isGeneralInformationEditable,
         );
         break;
       case ToggleVisibility:
-        final isVisible = (event as ToggleVisibility).isVisible;
-        yield state.clone(isVisible: isVisible);
+        yield state.clone(
+          isVisible: !state.isVisible,
+        );
         break;
       case ToggleGeneralInformationEditableEvent:
         yield state.clone(
           isGeneralInformationEditable: !state.isGeneralInformationEditable,
         );
         break;
+      case UpdateGenderEvent:
+        final gender = (event as UpdateGenderEvent).gender;
+        yield state.clone(
+          gender: gender,
+        );
+        break;
+      case LogoutEvent:
+        yield state.clone(
+          isLoading: true,
+        );
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final result = await userApiProvider.logoutUser();
+        prefs.setString("cookie", '');
+        yield state.clone(
+          signInState: DeliveryAgentRootSignInState.SIGNED_OUT,
+          isLoading: false,
+          user: new User(),
+          initializing: false,
+          twoFAenabled: false,
+          twoFAverified: false,
+          twoFA: '',
+          address: '',
+          city: new City(),
+          cities: new CityList(),
+          gender: 'male',
+          isGeneralInformationEditable: false,
+          isPasswordEditable: false,
+          isVisible: false,
+        );
+        break;
+      case LoginUser:
+        yield state.clone(
+          isLoading: true,
+        );
+        final email = (event as LoginUser).email;
+        final password = (event as LoginUser).password;
+        final Map<String, dynamic> result = await userApiProvider.loginUser(
+          email: email,
+          password: password,
+        );
+        if (result.containsKey("data")) {
+          final loginReponse = result["data"];
+          final cookie = result["cookie"];
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          print(cookie);
+          prefs.setString("cookie", cookie);
+          Map<String, dynamic> cookieResult =
+              await userApiProvider.getCurrentUser(cookie);
+          if (loginReponse.data.twoFactorAuth == "true") {
+            yield state.clone(
+              isLoading: false,
+              twoFAenabled: true,
+              user: cookieResult["user"],
+              signInState: DeliveryAgentRootSignInState.SIGNED_IN,
+            );
+          } else {
+            yield state.clone(
+              isLoading: false,
+              twoFAenabled: false,
+              user: cookieResult["user"],
+              signInState: DeliveryAgentRootSignInState.SIGNED_IN,
+            );
+          }
+        } else {}
+        break;
     }
-  }
-
-  Future<void> _init() async {
-    add(StartInitCheckEvent());
-    //TODO: init sign in automatically when app starts
-    // Get email and password from shared prefs?
-    // final auth = locator<AuthService>();
-    // User user = await auth.createUserWithEmailAndPassword(email, password);
-    add(UpdateUserEvent(new DeliveryAgent()));
-    add(ChangeSignInStateEvent(DeliveryAgentRootSignInState.SIGNED_OUT));
   }
 
   @override

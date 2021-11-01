@@ -11,6 +11,10 @@ class RootErrorEvent extends CustomerRootEvent {
   RootErrorEvent(this.error);
 }
 
+class LogoutEvent extends CustomerRootEvent {
+  LogoutEvent();
+}
+
 //Sign up process
 //1.
 class SignUpCustomerEvent extends CustomerRootEvent {
@@ -76,7 +80,6 @@ class ToggleGeneralInformationEditableEvent extends CustomerRootEvent {
 
 class ChangeSignInStateEvent extends CustomerRootEvent {
   final CustomerRootSignInState state;
-
   ChangeSignInStateEvent(this.state);
 }
 
@@ -107,4 +110,21 @@ class LoadCitiesByProvince extends CustomerRootEvent {
 class UpdateCity extends CustomerRootEvent {
   final String city;
   UpdateCity({this.city});
+}
+
+class UpdateUserInformation extends CustomerRootEvent {
+  final String firstName;
+  final String lastName;
+  final String streetAddress;
+  final String birthDate;
+  final String gender;
+  final String contactNumber;
+  UpdateUserInformation({
+    this.firstName,
+    this.lastName,
+    this.streetAddress,
+    this.birthDate,
+    this.gender,
+    this.contactNumber,
+  });
 }

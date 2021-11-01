@@ -2,10 +2,29 @@ import 'package:dio/dio.dart';
 import 'package:go_pharma/providers/api_client.dart';
 import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/repos/common/signup/user.dart';
+import 'package:go_pharma/repos/utilities.dart';
 import 'loginResponse.dart';
 
 class UserAPIProvider {
   final Dio _dio = Client.init();
+
+  Future<Map<String, String>> logoutUser() async {
+    try {
+      final cookie = Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
+      Response response = await _dio.get(
+        "auth/logout",
+      );
+      return {"success": "Successfully logged out."};
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return {"error": "Error in logging out, please try again later."};
+    }
+  }
 
   Future<Map<String, String>> signUpUser({
     String email,

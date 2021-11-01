@@ -15,9 +15,7 @@ class ProcessingPrescriptionOrdersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<OrderListBloc>(context);
     bloc.add(
-      GetOrderListByStatus(
-        status: "processing",
-      ),
+      GetAllPrescriptionOrders(),
     );
     return CommonSkeleton(
       child: BlocBuilder<OrderListBloc, OrderListState>(
@@ -49,7 +47,7 @@ class ProcessingPrescriptionOrdersPage extends StatelessWidget {
                       )
                     : Center(
                         child: Text(
-                          "Nothing to see here. ",
+                          "You have no processing orders.",
                           style: TextStyle(
                             fontSize: 18,
                           ),
@@ -58,7 +56,7 @@ class ProcessingPrescriptionOrdersPage extends StatelessWidget {
           );
         },
       ),
-      title: "Processing Orders",
+      title: "Processing Prescription Orders",
     );
   }
 }

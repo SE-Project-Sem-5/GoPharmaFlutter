@@ -7,154 +7,169 @@ import 'package:go_pharma/config/url.dart';
 import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/repos/customer/actual/order/prescriptionOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
+import 'package:go_pharma/ui/customer/processing_orders/prescription_orders/processing_prescription_orders_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProcessingPrescriptionOrderFullView extends StatelessWidget {
   final PrescriptionOrder order;
   final double leftPadding = 30.0;
   final double rightPadding = 30.0;
+
   const ProcessingPrescriptionOrderFullView({
     Key key,
     this.order,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Order Details",
+    return BlocListener<OrderListBloc, OrderListState>(
+      listenWhen: (pre, current) => pre.isLoading != current.isLoading,
+      listener: (context, state) {
+        Navigator.pushReplacementNamed(
+          context,
+          ProcessingPrescriptionOrdersPage.id,
+        );
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "Order Details",
+            ),
           ),
-        ),
-        body: Container(
-          child: BlocBuilder<OrderListBloc, OrderListState>(
-            builder: (context, state) {
-              return Center(
-                child: state.isLoading
-                    ? CircularProgressIndicator()
-                    : Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: GoPharmaColors.PrimaryColor.withOpacity(
-                                    0.2),
-                                blurRadius: 15.0,
-                              ),
-                            ],
-                          ),
-                          child: Card(
-                            clipBehavior: Clip.antiAlias,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 30.0,
-                                horizontal: 20.0,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Order #" + order.id.toString(),
-                                    style: TextStyle(
-                                      fontSize: 20.0,
+          body: Container(
+            child: BlocBuilder<OrderListBloc, OrderListState>(
+              builder: (context, state) {
+                return Center(
+                  child: state.isLoading
+                      ? CircularProgressIndicator()
+                      : Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color:
+                                      GoPharmaColors.PrimaryColor.withOpacity(
+                                          0.2),
+                                  blurRadius: 15.0,
+                                ),
+                              ],
+                            ),
+                            child: Card(
+                              clipBehavior: Clip.antiAlias,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 30.0,
+                                  horizontal: 20.0,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Order #" + order.id.toString(),
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "Ordered On: " +
-                                        order.orderedDate.substring(0, 10),
-                                    style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
-                                      fontSize: 16.0,
+                                    SizedBox(
+                                      height: 10,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "Status: " + order.status.toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 16.0,
+                                    Text(
+                                      "Ordered On: " +
+                                          order.orderedDate.substring(0, 10),
+                                      style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6),
+                                        fontSize: 16.0,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  HorizontalLine(),
-                                  Container(
-                                    height: 300,
-                                    child: ListView.builder(
-                                      physics: ClampingScrollPhysics(),
-                                      itemCount: order.prescriptions.length,
-                                      itemBuilder: (context, index) =>
-                                          Container(
-                                        height: 300,
-                                        width: 150,
-                                        child: Image.network(
-                                          URL.baseURL +
-                                              "user/images?key=" +
-                                              order.prescriptions[index]
-                                                  .imageName,
-                                          headers: {"cookie": state.cookie},
-                                          fit: BoxFit.fill,
-                                          loadingBuilder: (BuildContext context,
-                                              Widget child,
-                                              ImageChunkEvent loadingProgress) {
-                                            if (loadingProgress == null)
-                                              return child;
-                                            return Center(
-                                              child: CircularProgressIndicator(
-                                                value: loadingProgress
-                                                            .expectedTotalBytes !=
-                                                        null
-                                                    ? loadingProgress
-                                                            .cumulativeBytesLoaded /
-                                                        loadingProgress
-                                                            .expectedTotalBytes
-                                                    : null,
-                                              ),
-                                            );
-                                          },
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Status: " + order.status.toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    HorizontalLine(),
+                                    Container(
+                                      height: 300,
+                                      child: ListView.builder(
+                                        physics: ClampingScrollPhysics(),
+                                        itemCount: order.prescriptions.length,
+                                        itemBuilder: (context, index) =>
+                                            Container(
+                                          height: 300,
+                                          width: 150,
+                                          child: Image.network(
+                                            URL.baseURL +
+                                                "user/images?key=" +
+                                                order.prescriptions[index]
+                                                    .imageName,
+                                            headers: {"cookie": state.cookie},
+                                            fit: BoxFit.fill,
+                                            loadingBuilder:
+                                                (BuildContext context,
+                                                    Widget child,
+                                                    ImageChunkEvent
+                                                        loadingProgress) {
+                                              if (loadingProgress == null)
+                                                return child;
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  value: loadingProgress
+                                                              .expectedTotalBytes !=
+                                                          null
+                                                      ? loadingProgress
+                                                              .cumulativeBytesLoaded /
+                                                          loadingProgress
+                                                              .expectedTotalBytes
+                                                      : null,
+                                                ),
+                                              );
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  HorizontalLine(),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          final bloc =
-                                              BlocProvider.of<OrderListBloc>(
-                                                  context);
-                                          bloc.add(
-                                            CancelOrder(
-                                              orderID: order.id,
-                                              context: context,
-                                            ),
-                                          );
-                                        },
-                                        child: CurrentOrderStatusChip(
-                                          text: "Cancel Order",
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
+                                    HorizontalLine(),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            final bloc =
+                                                BlocProvider.of<OrderListBloc>(
+                                                    context);
+                                            bloc.add(
+                                              CancelOrder(
+                                                orderID: order.id,
+                                              ),
+                                            );
+                                          },
+                                          child: CurrentOrderStatusChip(
+                                            text: "Cancel Order",
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -336,6 +351,7 @@ class PastOrderTitleText extends StatelessWidget {
 class CurrentOrderStatusChip extends StatelessWidget {
   final String text;
   final double width;
+
   CurrentOrderStatusChip({this.text, this.width = 125});
 
   @override
