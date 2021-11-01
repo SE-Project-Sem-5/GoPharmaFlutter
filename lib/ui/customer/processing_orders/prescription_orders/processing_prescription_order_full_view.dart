@@ -126,27 +126,6 @@ class ProcessingPrescriptionOrderFullView extends StatelessWidget {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          final bloc =
-                                              BlocProvider.of<OrderListBloc>(
-                                                  context);
-                                          bloc.add(
-                                            CancelOrder(
-                                              orderID: order.id,
-                                              context: context,
-                                            ),
-                                          );
-                                        },
-                                        child: CurrentOrderStatusChip(
-                                          text: "Cancel Order",
-                                        ),
-                                      )
-                                    ],
-                                  ),
                                 ],
                               ),
                             ),
@@ -239,25 +218,6 @@ class OrderedItem extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        orderProduct.status == "processing"
-            ? BlocBuilder<OrderListBloc, OrderListState>(
-                builder: (context, state) {
-                  return GestureDetector(
-                    onTap: () {
-                      bloc.add(
-                        CancelOrderProduct(
-                          orderProductID: orderProduct.id,
-                          context: context,
-                        ),
-                      );
-                    },
-                    child: CurrentOrderStatusChip(
-                      text: "Cancel",
-                    ),
-                  );
-                },
-              )
-            : SizedBox(height: 1),
       ],
     );
   }
@@ -351,13 +311,4 @@ class CurrentOrderStatusChip extends StatelessWidget {
       ),
     );
   }
-}
-
-bool isOrderCancellable(NormalOrder order) {
-  for (var op in order.orderProducts) {
-    if (op.status != "processing" && op.status != "cancelled") {
-      return false;
-    }
-  }
-  return true;
 }

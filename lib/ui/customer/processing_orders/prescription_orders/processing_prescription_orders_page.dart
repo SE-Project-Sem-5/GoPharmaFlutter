@@ -15,9 +15,7 @@ class ProcessingPrescriptionOrdersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<OrderListBloc>(context);
     bloc.add(
-      GetOrderListByStatus(
-        status: "processing",
-      ),
+      GetAllPrescriptionOrders(),
     );
     return CommonSkeleton(
       child: BlocBuilder<OrderListBloc, OrderListState>(
