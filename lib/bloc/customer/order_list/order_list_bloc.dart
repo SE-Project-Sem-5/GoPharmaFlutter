@@ -80,17 +80,11 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         yield state.clone(
           isLoading: true,
         );
-        final context = (event as CancelOrder).context;
         final orderID = (event as CancelOrder).orderID;
         var orderResponse = await orderListAPIProvider.cancelOrder(orderID);
         print(orderResponse);
         yield state.clone(
           isLoading: false,
-        );
-        Navigator.of(context).popUntil((route) => route.isFirst);
-        Navigator.pushReplacementNamed(
-          context,
-          ProcessingNormalOrdersPage.id,
         );
         break;
       case CancelOrderProduct:
