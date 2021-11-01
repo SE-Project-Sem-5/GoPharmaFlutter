@@ -45,7 +45,8 @@ class ProcessingNormalOrderFullView extends StatelessWidget {
                                 BoxShadow(
                                   color:
                                       GoPharmaColors.PrimaryColor.withOpacity(
-                                          0.2),
+                                    0.2,
+                                  ),
                                   blurRadius: 15.0,
                                 ),
                               ],

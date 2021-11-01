@@ -26,6 +26,54 @@ class UserAPIProvider {
     }
   }
 
+  Future<Map<String, String>> updateUserInformation({
+    firstName,
+    lastName,
+    streetAddress,
+    city,
+    district,
+    province,
+    birthDate,
+    gender,
+    contactNumber,
+  }) async {
+    try {
+      final cookie = Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
+      print(firstName);
+      print(lastName);
+      print(streetAddress);
+      print(city);
+      print(district);
+      print(province);
+      print(birthDate);
+      print(gender);
+      print(contactNumber);
+      Response response = await _dio.patch(
+        "customer/update-profile",
+        data: {
+          "firstName": firstName,
+          "lastName": lastName,
+          "streetAddress": streetAddress,
+          "city": city,
+          "district": district,
+          "province": province,
+          "birthDate": birthDate.toString(),
+          "gender": gender,
+          "contactNumber": contactNumber.toString(),
+        },
+      );
+      return {"success": "Successfully updated."};
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return {"error": "Error in logging out, please try again later."};
+    }
+  }
+
   Future<Map<String, String>> signUpUser({
     String email,
     String password,

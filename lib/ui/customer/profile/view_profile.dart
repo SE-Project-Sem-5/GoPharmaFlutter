@@ -46,10 +46,11 @@ class SettingsPage extends StatelessWidget {
           ),
           body: BlocBuilder<CustomerRootBloc, CustomerRootState>(
             builder: (context, state) {
+              print(state.user.dateOfBirth);
               firstNameController.text = state.user.firstName ?? "First Name";
               lastNameController.text = state.user.lastName ?? "Last Name";
               birthdayController.text = state.user.dateOfBirth != null
-                  ? state.user.dateOfBirth.substring(0, 10)
+                  ? state.user.dateOfBirth
                   : "Date of Birth";
               contactNumberController.text =
                   state.user.contactNumber ?? "Contact Number";
@@ -284,7 +285,20 @@ class SettingsPage extends StatelessWidget {
                                       size: MediaQuery.of(context).size,
                                       fillColor: GoPharmaColors.PrimaryColor,
                                       textColor: GoPharmaColors.WhiteColor,
-                                      onTapped: () {},
+                                      onTapped: () {
+                                        bloc.add(
+                                          UpdateUserInformation(
+                                            firstName: firstNameController.text,
+                                            lastName: lastNameController.text,
+                                            streetAddress:
+                                                addressController.text,
+                                            birthDate: birthdayController.text,
+                                            gender: state.gender.toLowerCase(),
+                                            contactNumber:
+                                                contactNumberController.text,
+                                          ),
+                                        );
+                                      },
                                     ),
                                     Spacer(),
                                     RoundedButtonFilled(
