@@ -7,7 +7,6 @@ import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 import 'package:go_pharma/ui/customer/profile/bold_text.dart';
-import 'package:go_pharma/ui/customer/profile/verify_password.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 import 'package:intl/intl.dart';
 
@@ -46,15 +45,19 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
           body: BlocBuilder<CustomerRootBloc, CustomerRootState>(
-            buildWhen: (p, c) => p.isLoading != c.isLoading,
             builder: (context, state) {
-              firstNameController.text = state.user.firstName;
-              lastNameController.text = state.user.lastName;
-              birthdayController.text = state.user.dateOfBirth.substring(0, 10);
-              contactNumberController.text = state.user.contactNumber;
-              addressController.text = state.user.addressDetail.streetAddress;
+              firstNameController.text = state.user.firstName ?? "First Name";
+              lastNameController.text = state.user.lastName ?? "Last Name";
+              birthdayController.text = state.user.dateOfBirth != null
+                  ? state.user.dateOfBirth.substring(0, 10)
+                  : "Date of Birth";
+              contactNumberController.text =
+                  state.user.contactNumber ?? "Contact Number";
+              addressController.text =
+                  state.user.addressDetail.streetAddress ?? "Address";
               cityController.text =
-                  state.user.addressDetail.provinceDistrictCity.toString();
+                  state.user.addressDetail.provinceDistrictCity.toString() ??
+                      "City";
               return state.isLoading
                   ? Center(
                       child: CircularProgressIndicator(),
@@ -232,7 +235,7 @@ class SettingsPage extends StatelessWidget {
                           ),
                           state.isGeneralInformationEditable
                               ? DropdownButton<String>(
-                                  value: state.city != null
+                                  value: state.user != null
                                       ? state.city.description
                                       : state.cities.cities[0].description,
                                   icon: const Icon(
@@ -312,24 +315,9 @@ class SettingsPage extends StatelessWidget {
                                         fillColor: GoPharmaColors.GreyColor,
                                         textColor: GoPharmaColors.BlackColor,
                                         onTapped: () {
+                                          print("tapped");
                                           bloc.add(
                                             ToggleGeneralInformationEditableEvent(),
-                                          );
-                                        },
-                                      ),
-                                      RoundedButtonFilled(
-                                        title: "View Security Settings",
-                                        widthMultiplier: 0.5,
-                                        size: MediaQuery.of(context).size,
-                                        fillColor: GoPharmaColors.GreyColor,
-                                        textColor: GoPharmaColors.BlackColor,
-                                        onTapped: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  VerifyPassword(),
-                                            ),
                                           );
                                         },
                                       ),
@@ -340,6 +328,7 @@ class SettingsPage extends StatelessWidget {
                                         fillColor: GoPharmaColors.GreyColor,
                                         textColor: GoPharmaColors.BlackColor,
                                         onTapped: () {
+                                          print("Logging out");
                                           bloc.add(
                                             LogoutEvent(),
                                           );

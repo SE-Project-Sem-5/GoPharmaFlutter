@@ -140,7 +140,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           deliveryProducts.add(newDeliveryProduct);
         }
         DeliveryDetails delivery = new DeliveryDetails(
-          customerAddressID: 2,
           city: state.city.city,
           district: state.city.district,
           streetAddress: state.streetAddress,
@@ -149,7 +148,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         OrderPriceInformation orderPriceInformation =
             await orderAPIProvider.getDeliveryChargeForNormalOrder(delivery);
         print(orderPriceInformation);
-        print(orderPriceInformation.deliveryCharge);
+        print("Delivery Charge" +
+            orderPriceInformation.deliveryCharge.toString());
         yield state.clone(
           orderLoading: false,
           deliveryCharge: orderPriceInformation.deliveryCharge.toDouble(),

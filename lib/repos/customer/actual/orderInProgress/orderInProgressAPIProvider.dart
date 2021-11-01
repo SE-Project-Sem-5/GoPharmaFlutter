@@ -25,7 +25,7 @@ class ProgressingOrderAPIProvider {
         data: delivery.toJson(),
       );
       print(response);
-      print(response.data["data"]);
+      print(response.data);
       return OrderPriceInformation.fromJson(response.data["data"]);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");

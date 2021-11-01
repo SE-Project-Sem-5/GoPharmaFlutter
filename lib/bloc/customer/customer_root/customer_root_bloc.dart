@@ -192,6 +192,14 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
             lastName: lastName,
             gender: gender,
             contactNumber: contactNumber,
+            addressDetail: new AddressDetail(
+              streetAddress: streetAddress,
+              provinceDistrictCity: new ProvinceDistrictCity(
+                city: cityInState.city,
+                district: cityInState.district,
+                province: cityInState.province,
+              ),
+            ),
           );
           final twoFA = await userApiProvider.generateTwoFA(
             cookie: cookie,
