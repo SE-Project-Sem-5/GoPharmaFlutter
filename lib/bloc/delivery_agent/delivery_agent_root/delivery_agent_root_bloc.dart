@@ -82,6 +82,7 @@ class DeliveryAgentRootBloc
         User newUser = new User(
           firstName: firstName,
           lastName: lastName,
+          dateOfBirth: birthDate,
           gender: gender,
           contactNumber: contactNumber,
           addressDetail: new AddressDetail(
@@ -97,6 +98,7 @@ class DeliveryAgentRootBloc
         yield state.clone(
           isLoading: false,
           user: newUser,
+          isGeneralInformationEditable: false,
         );
         break;
       case UpdateCity:
