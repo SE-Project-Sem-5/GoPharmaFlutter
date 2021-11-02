@@ -52,7 +52,6 @@ class PaymentSelectionPage extends StatelessWidget {
                         fillColor: GoPharmaColors.PrimaryColor,
                         textColor: GoPharmaColors.WhiteColor,
                         onTapped: () {
-                          //TODO: add prescription order
                           bloc.add(
                             ConfirmNormalCashOrder(
                               context: context,
@@ -70,13 +69,15 @@ class PaymentSelectionPage extends StatelessWidget {
                         fillColor: GoPharmaColors.GreyColor,
                         textColor: GoPharmaColors.BlackColor,
                         onTapped: () {
-                          PaymentGateway.pay(
-                              getProductNames(
-                                  state.productListPrescriptionless +
-                                      state.productListNeedPrescriptions),
-                              state.productListTotal,
-                              //TODO: pass customer name, pass order ID
-                              "orderID");
+                          bloc.add(
+                            ConfirmNormalOnlineOrder(
+                              context: context,
+                            ),
+                          );
+                          Navigator.pushReplacementNamed(
+                            context,
+                            OrderSuccessfulPage.id,
+                          );
                         },
                       ),
                     ],
@@ -149,12 +150,4 @@ class ProductReceiptText extends StatelessWidget {
       ),
     );
   }
-}
-
-getProductNames(List<OrderProduct> products) {
-  List<String> names = [];
-  for (OrderProduct i in products) {
-    names.add(i.productName);
-  }
-  return names;
 }

@@ -43,16 +43,9 @@ class ConfirmNormalCashOrder extends CheckoutEvent {
   ConfirmNormalCashOrder({this.context});
 }
 
-class ConfirmNormalOnlinePrescriptionlessOrder extends CheckoutEvent {
-  ConfirmNormalOnlinePrescriptionlessOrder();
-}
-
 class ConfirmNormalOnlineOrder extends CheckoutEvent {
-  ConfirmNormalOnlineOrder();
-}
-
-class ConfirmPrescriptionOrder extends CheckoutEvent {
-  ConfirmPrescriptionOrder();
+  BuildContext context;
+  ConfirmNormalOnlineOrder({this.context});
 }
 
 class AddAddressDetails extends CheckoutEvent {
