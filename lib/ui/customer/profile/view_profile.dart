@@ -54,8 +54,9 @@ class SettingsPage extends StatelessWidget {
                   : "Date of Birth";
               contactNumberController.text =
                   state.user.contactNumber ?? "Contact Number";
-              addressController.text =
-                  state.user.addressDetail.streetAddress ?? "Address";
+              addressController.text = state.user.addressDetail != null
+                  ? state.user.addressDetail.streetAddress
+                  : "Address";
               cityController.text =
                   state.user.addressDetail.provinceDistrictCity.toString() ??
                       "City";

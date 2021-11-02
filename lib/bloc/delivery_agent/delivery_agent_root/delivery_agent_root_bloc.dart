@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent_root_event.dart';
@@ -82,9 +81,9 @@ class DeliveryAgentRootBloc
         User newUser = new User(
           firstName: firstName,
           lastName: lastName,
-          dateOfBirth: birthDate,
           gender: gender,
           contactNumber: contactNumber,
+          dateOfBirth: birthDate,
           addressDetail: new AddressDetail(
             streetAddress: streetAddress,
             provinceDistrictCity: new ProvinceDistrictCity(
