@@ -90,7 +90,7 @@ class CurrentOrderStatusChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       backgroundColor: colorMapping[text],
       label: Container(
-        width: 100,
+        width: 200,
         child: Center(
           child: Text(text.toUpperCase()),
         ),

@@ -57,14 +57,14 @@ class CustomerSignInPage extends StatelessWidget {
           appBar: AppBar(
             title: Text("SIGN IN"),
           ),
-          body: SingleChildScrollView(
-            child: BlocBuilder<CustomerRootBloc, CustomerRootState>(
-                builder: (context, state) {
-              return state.isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Container(
+          body: BlocBuilder<CustomerRootBloc, CustomerRootState>(
+              builder: (context, state) {
+            return state.isLoading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : SingleChildScrollView(
+                    child: Container(
                       child: Column(
                         children: [
                           Form(
@@ -274,9 +274,9 @@ class CustomerSignInPage extends StatelessWidget {
                           // ),
                         ],
                       ),
-                    );
-            }),
-          ),
+                    ),
+                  );
+          }),
         ),
       ),
     );

@@ -35,14 +35,14 @@ class SignUpInformation extends StatelessWidget {
           appBar: AppBar(
             title: Text("Enter your details."),
           ),
-          body: SingleChildScrollView(
-            child: BlocBuilder<CustomerRootBloc, CustomerRootState>(
-              builder: (context, state) {
-                return state.isLoading
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : Padding(
+          body: BlocBuilder<CustomerRootBloc, CustomerRootState>(
+            builder: (context, state) {
+              return state.isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : SingleChildScrollView(
+                      child: Padding(
                         padding: EdgeInsets.only(
                           top: 30,
                           left: 25.0,
@@ -252,9 +252,9 @@ class SignUpInformation extends StatelessWidget {
                             ),
                           ],
                         ),
-                      );
-              },
-            ),
+                      ),
+                    );
+            },
           ),
         ),
       ),

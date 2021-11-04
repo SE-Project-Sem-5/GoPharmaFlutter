@@ -20,7 +20,6 @@ class CustomerSignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final customerRootBloc = BlocProvider.of<CustomerRootBloc>(context);
-    final size = MediaQuery.of(context).size;
 
     String title = "Enter your email and password";
     return BlocListener<CustomerRootBloc, CustomerRootState>(
@@ -42,11 +41,11 @@ class CustomerSignUpPage extends StatelessWidget {
               appBar: AppBar(
                 title: Text("SIGN UP"),
               ),
-              body: SingleChildScrollView(
-                child: Container(
-                  child: state.isLoading
-                      ? Center(child: CircularProgressIndicator())
-                      : Column(
+              body: state.isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : SingleChildScrollView(
+                      child: Container(
+                        child: Column(
                           children: [
                             Form(
                               key: _form,
@@ -308,8 +307,8 @@ class CustomerSignUpPage extends StatelessWidget {
                             // ),
                           ],
                         ),
-                ),
-              ),
+                      ),
+                    ),
             ),
           );
         },
