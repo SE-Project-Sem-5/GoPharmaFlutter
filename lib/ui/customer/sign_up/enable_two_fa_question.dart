@@ -32,7 +32,7 @@ class EnableTwoFAQuestion extends StatelessWidget {
             context,
             CustomerSignIn2FA.id,
           );
-        } else {}
+        }
       },
       child: SafeArea(
         child: Scaffold(

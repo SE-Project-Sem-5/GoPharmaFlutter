@@ -49,7 +49,6 @@ class SignUpInformation extends StatelessWidget {
                           right: 25.0,
                         ),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Text(
                               "Please enter your information",
@@ -57,6 +56,9 @@ class SignUpInformation extends StatelessWidget {
                                   fontSize: 24.0,
                                   fontWeight: FontWeight.bold,
                                   color: GoPharmaColors.PrimaryColor),
+                            ),
+                            SizedBox(
+                              height: 20,
                             ),
                             TextField(
                               controller: firstNameController,
@@ -66,12 +68,18 @@ class SignUpInformation extends StatelessWidget {
                               enabled: true,
                               autofocus: true,
                             ),
+                            SizedBox(
+                              height: 20,
+                            ),
                             TextField(
                               controller: lastNameController,
                               decoration: InputDecoration(
                                 hintText: "Last Name",
                               ),
                               enabled: true,
+                            ),
+                            SizedBox(
+                              height: 20,
                             ),
                             BlocBuilder<CustomerRootBloc, CustomerRootState>(
                               buildWhen: (p, c) => p.gender != c.gender,
@@ -122,6 +130,9 @@ class SignUpInformation extends StatelessWidget {
                                 );
                               },
                             ),
+                            SizedBox(
+                              height: 20,
+                            ),
                             TextField(
                               controller: birthdayController,
                               decoration: InputDecoration(
@@ -147,6 +158,9 @@ class SignUpInformation extends StatelessWidget {
                               ),
                               enabled: true,
                             ),
+                            SizedBox(
+                              height: 20,
+                            ),
                             TextField(
                               controller: contactNumberController,
                               decoration: InputDecoration(
@@ -154,12 +168,18 @@ class SignUpInformation extends StatelessWidget {
                               ),
                               enabled: true,
                             ),
+                            SizedBox(
+                              height: 20,
+                            ),
                             TextField(
                               controller: addressController,
                               decoration: InputDecoration(
                                 hintText: "Street Address",
                               ),
                               enabled: true,
+                            ),
+                            SizedBox(
+                              height: 20,
                             ),
                             DropdownButton<String>(
                               value: state.city != null
@@ -194,6 +214,9 @@ class SignUpInformation extends StatelessWidget {
                                   ),
                                 );
                               }).toList(),
+                            ),
+                            SizedBox(
+                              height: 20,
                             ),
                             BlocBuilder<CustomerRootBloc, CustomerRootState>(
                               builder: (context, state) {

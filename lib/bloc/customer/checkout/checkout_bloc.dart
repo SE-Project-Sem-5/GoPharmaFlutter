@@ -46,7 +46,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
 
       // =========== Remove a prescription image ===========
-
       case RemoveImageEvent:
         final String image = (event as RemoveImageEvent).image;
         final List<String> localPhotoPaths = state.localPhotoPaths;
@@ -60,7 +59,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
 
       // =========== Add/Remove/Update quantity of products ===========
-
       case UpdateProductListEvent:
         final product = (event as UpdateProductListEvent).product;
         final prescriptionNeeded = product.prescriptionNeeded;
@@ -118,7 +116,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
 
       //  Get delivery charge for normal order
-
       case GetDeliveryChargeForNormalOrder:
         yield state.clone(orderLoading: true);
         List<DeliveryChargeProduct> deliveryProducts = [];
