@@ -32,11 +32,11 @@ class EnableTwoFAQuestion extends StatelessWidget {
             context,
             CustomerSignIn2FA.id,
           );
-        } else {}
+        }
       },
       child: SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          // resizeToAvoidBottomInset: false,
           appBar: AppBar(
             leading: SizedBox(),
             title: Text(
@@ -47,7 +47,9 @@ class EnableTwoFAQuestion extends StatelessWidget {
             buildWhen: (p, c) => p.isLoading != c.isLoading,
             builder: (context, state) {
               return state.isLoading
-                  ? CircularProgressIndicator()
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
                   : Padding(
                       padding: EdgeInsets.only(
                         top: 30,

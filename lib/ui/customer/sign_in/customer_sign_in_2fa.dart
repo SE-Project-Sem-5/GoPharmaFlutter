@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_bloc.dart';
+import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
@@ -97,11 +98,11 @@ class CustomerSignIn2FA extends StatelessWidget {
                               textColor: GoPharmaColors.WhiteColor,
                               onTapped: () {
                                 if (_formKey.currentState.validate()) {
-                                  // bloc.add(
-                                  //   VerifyTwoFACode(
-                                  //     twoFA: _twoFAController.text,
-                                  //   ),
-                                  // );
+                                  bloc.add(
+                                    VerifyTwoFACode(
+                                      twoFA: _twoFAController.text,
+                                    ),
+                                  );
                                   Navigator.pushReplacementNamed(
                                     context,
                                     CustomerHomePage.id,

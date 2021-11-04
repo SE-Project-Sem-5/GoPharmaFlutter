@@ -50,15 +50,16 @@ class SettingsPage extends StatelessWidget {
               firstNameController.text = state.user.firstName ?? "First Name";
               lastNameController.text = state.user.lastName ?? "Last Name";
               birthdayController.text = state.user.dateOfBirth != null
-                  ? state.user.dateOfBirth
+                  ? state.user.dateOfBirth.substring(0, 10)
                   : "Date of Birth";
               contactNumberController.text =
                   state.user.contactNumber ?? "Contact Number";
-              addressController.text =
-                  state.user.addressDetail.streetAddress ?? "Address";
-              cityController.text =
-                  state.user.addressDetail.provinceDistrictCity.toString() ??
-                      "City";
+              addressController.text = state.user.addressDetail != null
+                  ? state.user.addressDetail.streetAddress
+                  : "Address";
+              cityController.text = state.user.addressDetail != null
+                  ? state.user.addressDetail.provinceDistrictCity.toString()
+                  : "City";
               return state.isLoading
                   ? Center(
                       child: CircularProgressIndicator(),
@@ -131,7 +132,8 @@ class SettingsPage extends StatelessWidget {
                                           activeColor:
                                               Theme.of(context).primaryColor,
                                           value: "male",
-                                          groupValue: state.gender,
+                                          groupValue:
+                                              state.gender.toLowerCase(),
                                           onChanged: (value) {
                                             bloc.add(UpdateGenderEvent(
                                                 gender: value));
@@ -147,7 +149,8 @@ class SettingsPage extends StatelessWidget {
                                           activeColor:
                                               Theme.of(context).primaryColor,
                                           value: "female",
-                                          groupValue: state.gender,
+                                          groupValue:
+                                              state.gender.toLowerCase(),
                                           onChanged: (value) {
                                             bloc.add(
                                               UpdateGenderEvent(gender: value),

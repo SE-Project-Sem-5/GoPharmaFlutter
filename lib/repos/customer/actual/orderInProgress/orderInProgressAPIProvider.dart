@@ -76,7 +76,6 @@ class ProgressingOrderAPIProvider {
       "type": "mobile",
       "totalToBePaid": (order.totalPrice + order.deliveryCharge).toString(),
       "orderType": "normal",
-      "customerID": order.customerID,
       "address": order.address.toJson(),
       "products": products,
       "hasPrescriptions": "true",
@@ -109,15 +108,58 @@ class ProgressingOrderAPIProvider {
     print(order);
     try {
       final cookie = await Utilities.getCookie();
-
       if (_dio.options.headers.containsKey("cookie")) {
         _dio.options.headers.update("cookie", (c) => cookie);
       } else {
         _dio.options.headers.putIfAbsent("cookie", () => cookie);
       }
       Response response = await _dio.post(
-        "customer/order/normal/online/confirm",
+        "customer/order/normal/online/data/confirm",
         data: order.toJson(),
+      );
+      print(response);
+      print(response.data["data"]);
+      return OrderResponse.fromJson(response.data["data"]);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
+
+  Future<OrderResponse> confirmNormalOnlineOrderWithPrescriptions(
+      NormalOrder order, List<String> localPhotoPaths) async {
+    var products = [];
+    for (var product in order.products) {
+      products.add(product.toJson());
+    }
+    print(products);
+    final cookie = await Utilities.getCookie();
+    if (_dio.options.headers.containsKey("cookie")) {
+      _dio.options.headers.update("cookie", (c) => cookie);
+    } else {
+      _dio.options.headers.putIfAbsent("cookie", () => cookie);
+    }
+    FormData formData = new FormData.fromMap({
+      "totalPrice": order.totalPrice.toString(),
+      "deliveryCharge": order.deliveryCharge.toString(),
+      "type": "mobile",
+      "totalToBePaid": (order.totalPrice + order.deliveryCharge).toString(),
+      "orderType": "normal",
+      "address": order.address.toJson(),
+      "products": products,
+      "hasPrescriptions": "true",
+    });
+    formData.files.addAll([
+      for (var file in localPhotoPaths)
+        ...{
+          MapEntry("prescriptions",
+              await MultipartFile.fromFile(file, filename: "file1"))
+        }.toList()
+    ]);
+    try {
+      Response response = await _dio.post(
+        "customer/order/normal/online/data/confirm",
+        data: formData,
       );
       print(response);
       print(response.data["data"]);

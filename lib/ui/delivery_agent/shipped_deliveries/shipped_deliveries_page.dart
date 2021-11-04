@@ -26,15 +26,19 @@ class ShippedDeliveriesPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                 )
-              : Container(
-                  child: ListView.builder(
-                    physics: ClampingScrollPhysics(),
-                    itemCount: state.shippedOrders.deliveries.length,
-                    itemBuilder: (context, index) => ShippedDeliveryCard(
-                      delivery: state.shippedOrders.deliveries[index],
-                    ),
-                  ),
-                );
+              : state.shippedOrders.deliveries.length == 0
+                  ? Text(
+                      "You have not been assigned any customer deliveries at the moment.",
+                    )
+                  : Container(
+                      child: ListView.builder(
+                        physics: ClampingScrollPhysics(),
+                        itemCount: state.shippedOrders.deliveries.length,
+                        itemBuilder: (context, index) => ShippedDeliveryCard(
+                          delivery: state.shippedOrders.deliveries[index],
+                        ),
+                      ),
+                    );
         },
       ),
     );

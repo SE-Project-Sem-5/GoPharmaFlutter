@@ -92,6 +92,14 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           ),
           userAccount: oldUser.userAccount,
         );
+        var prefs = await SharedPreferences.getInstance();
+        prefs.setString("firstName", firstName);
+        prefs.setString("lastName", lastName);
+        prefs.setString("city", cityInState.city);
+        prefs.setString("district", cityInState.district);
+        prefs.setString("contactNumber", contactNumber);
+        prefs.setString("email", oldUser.userAccount.email);
+        prefs.setString("address", streetAddress);
         yield state.clone(
           isLoading: false,
           user: newUser,
@@ -111,6 +119,14 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         final result = await userApiProvider.logoutUser();
         prefs.setString("cookie", '');
+        prefs.setString("firstName", "");
+        prefs.setString("lastName", "");
+        prefs.setString("city", "");
+        prefs.setString("district", "");
+        prefs.setString("contactNumber", "");
+        prefs.setString("email", "");
+        prefs.setString("address", '');
+
         yield state.clone(
           signInState: CustomerRootSignInState.SIGNED_OUT,
           isLoading: false,
@@ -184,24 +200,46 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
             Map<String, dynamic> result =
                 await userApiProvider.getCurrentUser(cookie);
             if (loginReponse.data.twoFactorAuth == "true") {
+              User user = result["user"];
+              var prefs = await SharedPreferences.getInstance();
+              prefs.setString("firstName", user.firstName);
+              prefs.setString("lastName", user.lastName);
+              prefs.setString(
+                  "city", user.addressDetail.provinceDistrictCity.city);
+              prefs.setString(
+                  "district", user.addressDetail.provinceDistrictCity.district);
+              prefs.setString("contactNumber", user.contactNumber);
+              prefs.setString("email", user.userAccount.email);
+              prefs.setString("address", user.addressDetail.streetAddress);
+
               yield state.clone(
                 isLoading: false,
                 signUpProcessState: SignUpProcessState.COMPLETED,
                 twoFAenabled: true,
-                user: result["user"],
+                user: user,
               );
             } else {
+              User user = result["user"];
+              var prefs = await SharedPreferences.getInstance();
+              prefs.setString("firstName", user.firstName);
+              prefs.setString("lastName", user.lastName);
+              prefs.setString(
+                  "city", user.addressDetail.provinceDistrictCity.city);
+              prefs.setString(
+                  "district", user.addressDetail.provinceDistrictCity.district);
+              prefs.setString("contactNumber", user.contactNumber);
+              prefs.setString("email", user.userAccount.email);
+              prefs.setString("address", user.addressDetail.streetAddress);
               yield state.clone(
                 isLoading: false,
                 signUpProcessState: SignUpProcessState.COMPLETED,
                 twoFAenabled: false,
-                user: result["user"],
+                user: user,
               );
             }
           }
         } else {}
         break;
-
       //  3. Sign up step 3
       case SignUpCustomerInformationEvent:
         yield state.clone(
@@ -356,7 +394,6 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           );
         }
         break;
-
       case ToggleVisibility:
         yield state.clone(
           isVisible: !state.isVisible,
@@ -378,15 +415,15 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final user = (event as UpdateUserEvent).user;
         print("Getting user");
         print(user.firstName);
-        //TODO: implement
-        final pref = await SharedPreferences.getInstance();
-        pref.setString("firstName", user.firstName);
-        pref.setString("lastName", user.firstName);
-        pref.setString("firstName", user.firstName);
-        pref.setString("firstName", user.firstName);
-        pref.setString("firstName", user.firstName);
-        pref.setString("firstName", user.firstName);
-        pref.setString("firstName", user.firstName);
+        var prefs = await SharedPreferences.getInstance();
+        prefs.setString("firstName", user.firstName);
+        prefs.setString("lastName", user.lastName);
+        prefs.setString("address", user.addressDetail.streetAddress);
+        prefs.setString("city", user.addressDetail.provinceDistrictCity.city);
+        prefs.setString(
+            "district", user.addressDetail.provinceDistrictCity.district);
+        prefs.setString("contactNumber", user.contactNumber);
+        prefs.setString("email", user.userAccount.email);
         yield state.clone(
           user: user,
           signInState: CustomerRootSignInState.SIGNED_IN,
@@ -422,6 +459,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final isEditable = state.isGeneralInformationEditable;
         yield state.clone(
           isGeneralInformationEditable: !isEditable,
+          signInState: CustomerRootSignInState.SIGNED_IN,
         );
         break;
     }

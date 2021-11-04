@@ -18,7 +18,7 @@ class VerifyPassword extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        // resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text("Verify Password"),
         ),

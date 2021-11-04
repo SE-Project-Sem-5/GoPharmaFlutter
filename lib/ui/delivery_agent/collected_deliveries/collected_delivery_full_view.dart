@@ -149,8 +149,6 @@ class CollectedDeliveryFullView extends StatelessWidget {
                             deliveryListBloc.add(
                               TransitionOrderEvent(
                                 orderID: delivery.id,
-                                //TODO: replace
-                                deliveryAgentHomeAddressID: 3,
                               ),
                             );
                             Navigator.pushReplacementNamed(

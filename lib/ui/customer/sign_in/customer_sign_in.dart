@@ -22,7 +22,6 @@ class CustomerSignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final customerRootBloc = BlocProvider.of<CustomerRootBloc>(context);
-    final size = MediaQuery.of(context).size;
 
     return BlocListener<CustomerRootBloc, CustomerRootState>(
       listenWhen: (context, state) {
@@ -54,7 +53,7 @@ class CustomerSignInPage extends StatelessWidget {
       },
       child: SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          // resizeToAvoidBottomInset: false,
           appBar: AppBar(
             title: Text("SIGN IN"),
           ),
@@ -64,211 +63,217 @@ class CustomerSignInPage extends StatelessWidget {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : Container(
-                    child: Column(
-                      children: [
-                        Form(
-                          key: _form,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 70,
-                              ),
-                              Text(
-                                "Sign in to your account.",
-                                style: TextStyle(
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: GoPharmaColors.PrimaryColor),
-                              ),
-                              SizedBox(
-                                height: 70,
-                              ),
-                              TextFieldContainer(
-                                child: TextFormField(
-                                  controller: emailController,
-                                  // ignore: missing_return
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return ("Please type in your email address.");
-                                    } else if (!EmailValidator.validate(
-                                        emailController.text)) {
-                                      return ("Please type in a valid email address");
-                                    }
-                                  },
+                : SingleChildScrollView(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Form(
+                            key: _form,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 70,
+                                ),
+                                Text(
+                                  "Sign in to your account.",
                                   style: TextStyle(
-                                    fontSize: 18.0,
-                                    color: Colors.black,
-                                  ),
-                                  onChanged: (String value) {},
-                                  cursorColor: GoPharmaColors.PrimaryColor,
-                                  decoration: InputDecoration(
-                                    icon: Icon(
-                                      Icons.person,
-                                      color: GoPharmaColors.PrimaryColor,
-                                    ),
-                                    hintText: "Your email",
-                                    hintStyle: TextStyle(
-                                      color: GoPharmaColors.hintTextColor,
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: GoPharmaColors.PrimaryColor),
+                                ),
+                                SizedBox(
+                                  height: 70,
+                                ),
+                                TextFieldContainer(
+                                  child: TextFormField(
+                                    controller: emailController,
+                                    // ignore: missing_return
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return ("Please type in your email address.");
+                                      } else if (!EmailValidator.validate(
+                                          emailController.text)) {
+                                        return ("Please type in a valid email address");
+                                      }
+                                    },
+                                    style: TextStyle(
                                       fontSize: 18.0,
+                                      color: Colors.black,
                                     ),
-                                    border: InputBorder.none,
+                                    onChanged: (String value) {},
+                                    cursorColor: GoPharmaColors.PrimaryColor,
+                                    decoration: InputDecoration(
+                                      icon: Icon(
+                                        Icons.person,
+                                        color: GoPharmaColors.PrimaryColor,
+                                      ),
+                                      hintText: "Your email",
+                                      hintStyle: TextStyle(
+                                        color: GoPharmaColors.hintTextColor,
+                                        fontSize: 18.0,
+                                      ),
+                                      border: InputBorder.none,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              BlocBuilder<CustomerRootBloc, CustomerRootState>(
-                                buildWhen: (previous, current) =>
-                                    previous.isVisible != current.isVisible,
-                                builder: (context, state) {
-                                  final bloc =
-                                      BlocProvider.of<CustomerRootBloc>(
-                                          context);
-                                  return TextFieldContainer(
-                                    child: TextFormField(
-                                      controller: passwordController,
-                                      //ignore: missing_return
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return ("Please type in your password.");
-                                        }
-                                      },
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Colors.black,
-                                      ),
-                                      obscureText: state.isVisible,
-                                      onChanged: (String value) {},
-                                      cursorColor: GoPharmaColors.PrimaryColor,
-                                      decoration: InputDecoration(
-                                        icon: Icon(
-                                          Icons.lock,
-                                          color: GoPharmaColors.PrimaryColor,
-                                        ),
-                                        hintText: "Password",
-                                        hintStyle: TextStyle(
-                                          color: GoPharmaColors.hintTextColor,
+                                BlocBuilder<CustomerRootBloc,
+                                    CustomerRootState>(
+                                  buildWhen: (previous, current) =>
+                                      previous.isVisible != current.isVisible,
+                                  builder: (context, state) {
+                                    final bloc =
+                                        BlocProvider.of<CustomerRootBloc>(
+                                            context);
+                                    return TextFieldContainer(
+                                      child: TextFormField(
+                                        controller: passwordController,
+                                        //ignore: missing_return
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return ("Please type in your password.");
+                                          }
+                                        },
+                                        style: TextStyle(
                                           fontSize: 18.0,
+                                          color: Colors.black,
                                         ),
-                                        border: InputBorder.none,
-                                        suffixIcon: GestureDetector(
-                                          child: Icon(
-                                            state.isVisible
-                                                ? Icons.visibility
-                                                : Icons.visibility_off,
+                                        obscureText: state.isVisible,
+                                        onChanged: (String value) {},
+                                        cursorColor:
+                                            GoPharmaColors.PrimaryColor,
+                                        decoration: InputDecoration(
+                                          icon: Icon(
+                                            Icons.lock,
                                             color: GoPharmaColors.PrimaryColor,
                                           ),
-                                          onTap: () {
-                                            bloc.add(
-                                              ToggleVisibility(),
-                                            );
-                                          },
+                                          hintText: "Password",
+                                          hintStyle: TextStyle(
+                                            color: GoPharmaColors.hintTextColor,
+                                            fontSize: 18.0,
+                                          ),
+                                          border: InputBorder.none,
+                                          suffixIcon: GestureDetector(
+                                            child: Icon(
+                                              state.isVisible
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                              color:
+                                                  GoPharmaColors.PrimaryColor,
+                                            ),
+                                            onTap: () {
+                                              bloc.add(
+                                                ToggleVisibility(),
+                                              );
+                                            },
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Don't have an account? ",
-                                    style: TextStyle(
-                                      color: GoPharmaColors.PrimaryColor,
-                                      fontSize: 16.0,
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    child: Text(
-                                      "Sign up.",
+                                    );
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Don't have an account? ",
                                       style: TextStyle(
-                                        fontWeight: FontWeight.bold,
                                         color: GoPharmaColors.PrimaryColor,
                                         fontSize: 16.0,
                                       ),
                                     ),
-                                    onTap: () {
-                                      Navigator.pushReplacementNamed(
-                                        context,
-                                        CustomerSignUpPage.id,
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              BlocBuilder<CustomerRootBloc, CustomerRootState>(
-                                builder: (context, state) {
-                                  return RoundedButtonFilled(
-                                    title: "Next",
-                                    size: MediaQuery.of(context).size,
-                                    fillColor: GoPharmaColors.PrimaryColor,
-                                    textColor: GoPharmaColors.WhiteColor,
-                                    onTapped: () {
-                                      if (_form.currentState.validate()) {
-                                        customerRootBloc.add(
-                                          LoginUser(
-                                            email: emailController.text,
-                                            password: passwordController.text,
-                                          ),
+                                    GestureDetector(
+                                      child: Text(
+                                        "Sign up.",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: GoPharmaColors.PrimaryColor,
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        Navigator.pushReplacementNamed(
+                                          context,
+                                          CustomerSignUpPage.id,
                                         );
-                                      }
-                                    },
-                                  );
-                                },
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              RoundedButtonFilled(
-                                title: "Forgot Password?",
-                                size: MediaQuery.of(context).size,
-                                fillColor: GoPharmaColors.GreyColor,
-                                textColor: GoPharmaColors.BlackColor,
-                                onTapped: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    ForgotPasswordPage.id,
-                                  );
-                                },
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              // Text(
-                              //   "OR",
-                              //   style: TextStyle(
-                              //       fontSize: 16.0,
-                              //       fontWeight: FontWeight.bold,
-                              //       color: GoPharmaColors.PrimaryColor),
-                              // ),
-                              // SizedBox(
-                              //   height: 10,
-                              // ),
-                            ],
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                BlocBuilder<CustomerRootBloc,
+                                    CustomerRootState>(
+                                  builder: (context, state) {
+                                    return RoundedButtonFilled(
+                                      title: "Next",
+                                      size: MediaQuery.of(context).size,
+                                      fillColor: GoPharmaColors.PrimaryColor,
+                                      textColor: GoPharmaColors.WhiteColor,
+                                      onTapped: () {
+                                        if (_form.currentState.validate()) {
+                                          customerRootBloc.add(
+                                            LoginUser(
+                                              email: emailController.text,
+                                              password: passwordController.text,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    );
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                RoundedButtonFilled(
+                                  title: "Forgot Password?",
+                                  size: MediaQuery.of(context).size,
+                                  fillColor: GoPharmaColors.GreyColor,
+                                  textColor: GoPharmaColors.BlackColor,
+                                  onTapped: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      ForgotPasswordPage.id,
+                                    );
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                // Text(
+                                //   "OR",
+                                //   style: TextStyle(
+                                //       fontSize: 16.0,
+                                //       fontWeight: FontWeight.bold,
+                                //       color: GoPharmaColors.PrimaryColor),
+                                // ),
+                                // SizedBox(
+                                //   height: 10,
+                                // ),
+                              ],
+                            ),
                           ),
-                        ),
-                        // GoogleButton(
-                        //   size: size,
-                        //   onClick: () {},
-                        //   title: 'Sign in with Google',
-                        // ),
-                        // SizedBox(
-                        //   height: 10,
-                        // ),
-                        // FacebookButton(
-                        //   size: size,
-                        //   onClick: () {},
-                        //   title: 'Sign in with Facebook',
-                        // ),
-                      ],
+                          // GoogleButton(
+                          //   size: size,
+                          //   onClick: () {},
+                          //   title: 'Sign in with Google',
+                          // ),
+                          // SizedBox(
+                          //   height: 10,
+                          // ),
+                          // FacebookButton(
+                          //   size: size,
+                          //   onClick: () {},
+                          //   title: 'Sign in with Facebook',
+                          // ),
+                        ],
+                      ),
                     ),
                   );
           }),

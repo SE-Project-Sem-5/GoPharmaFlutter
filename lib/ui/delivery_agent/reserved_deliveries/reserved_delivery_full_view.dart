@@ -150,8 +150,6 @@ class ReservedDeliveryFullView extends StatelessWidget {
                             deliveryListBloc.add(
                               CollectOrderEvent(
                                 orderProductID: delivery.id,
-                                //TODO: replace
-                                deliveryAgentHomeAddressID: 3,
                               ),
                             );
                             Navigator.pushReplacementNamed(

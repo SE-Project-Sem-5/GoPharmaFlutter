@@ -26,15 +26,19 @@ class ReservedDeliveriesPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                 )
-              : Container(
-                  child: ListView.builder(
-                    physics: ClampingScrollPhysics(),
-                    itemCount: state.reservedOrders.deliveries.length,
-                    itemBuilder: (context, index) => ReservedDeliveryCard(
-                      delivery: state.reservedOrders.deliveries[index],
-                    ),
-                  ),
-                );
+              : state.reservedOrders.deliveries.length == 0
+                  ? Text(
+                      "You do not have any deliveries to collect at the moment.",
+                    )
+                  : Container(
+                      child: ListView.builder(
+                        physics: ClampingScrollPhysics(),
+                        itemCount: state.reservedOrders.deliveries.length,
+                        itemBuilder: (context, index) => ReservedDeliveryCard(
+                          delivery: state.reservedOrders.deliveries[index],
+                        ),
+                      ),
+                    );
         },
       ),
     );

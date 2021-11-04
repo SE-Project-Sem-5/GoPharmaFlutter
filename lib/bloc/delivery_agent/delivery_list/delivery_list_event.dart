@@ -10,24 +10,15 @@ class ErrorEvent extends DeliveryListEvent {
 }
 
 class GetAllConfirmedOrders extends DeliveryListEvent {
-  final int deliveryAgentHomeAddressID;
-  GetAllConfirmedOrders({
-    this.deliveryAgentHomeAddressID,
-  });
+  GetAllConfirmedOrders();
 }
 
 class GetAllReservedOrders extends DeliveryListEvent {
-  final int deliveryAgentHomeAddressID;
-  GetAllReservedOrders({
-    this.deliveryAgentHomeAddressID,
-  });
+  GetAllReservedOrders();
 }
 
 class GetAllCollectedOrders extends DeliveryListEvent {
-  final int deliveryAgentHomeAddressID;
-  GetAllCollectedOrders({
-    this.deliveryAgentHomeAddressID,
-  });
+  GetAllCollectedOrders();
 }
 
 class GetAllTransientOrders extends DeliveryListEvent {
@@ -43,51 +34,41 @@ class GetAllShippedOrders extends DeliveryListEvent {
 }
 
 class ReserveOrderForDeliveryEvent extends DeliveryListEvent {
-  final int deliveryAgentHomeAddressID;
   final int orderProductID;
   ReserveOrderForDeliveryEvent({
     this.orderProductID,
-    this.deliveryAgentHomeAddressID,
   });
 }
 
 class CollectOrderEvent extends DeliveryListEvent {
   final int orderProductID;
-  final int deliveryAgentHomeAddressID;
 
   CollectOrderEvent({
     this.orderProductID,
-    this.deliveryAgentHomeAddressID,
   });
 }
 
 class TransitionOrderEvent extends DeliveryListEvent {
   final int orderID;
-  final int deliveryAgentHomeAddressID;
 
   TransitionOrderEvent({
     this.orderID,
-    this.deliveryAgentHomeAddressID,
   });
 }
 
 class TransitionCollectOrderEvent extends DeliveryListEvent {
   final int orderID;
-  final int deliveryAgentHomeAddressID;
 
   TransitionCollectOrderEvent({
     this.orderID,
-    this.deliveryAgentHomeAddressID,
   });
 }
 
 class ShipOrderEvent extends DeliveryListEvent {
   final int orderID;
-  final int deliveryAgentHomeAddressID;
 
   ShipOrderEvent({
     this.orderID,
-    this.deliveryAgentHomeAddressID,
   });
 }
 

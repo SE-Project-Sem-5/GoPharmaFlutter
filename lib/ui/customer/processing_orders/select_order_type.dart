@@ -7,7 +7,7 @@ import 'package:go_pharma/ui/customer/processing_orders/prescription_orders/proc
 
 class SelectProcessingOrderType extends StatelessWidget {
   static const id = "select_processing_order_type";
-  final String title = "Select Order Type.";
+  final String title = "Select Order Type";
 
   @override
   Widget build(BuildContext context) {

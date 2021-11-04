@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_event.dart';
 import 'package:go_pharma/bloc/customer/checkout/checkout_state.dart';
+import 'package:go_pharma/payment_gateway/payment.dart';
 import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/repos/common/signup/userAPIProvider.dart';
 import 'package:go_pharma/repos/customer/actual/orderInProgress/address.dart';
@@ -13,6 +14,8 @@ import 'package:go_pharma/repos/customer/actual/orderInProgress/orderPriceInform
 import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.dart';
 import 'package:go_pharma/repos/customer/actual/product/orderProductModel.dart';
 import 'dart:async';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   CheckoutBloc(BuildContext context) : super(CheckoutState.initialState);
@@ -43,7 +46,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
 
       // =========== Remove a prescription image ===========
-
       case RemoveImageEvent:
         final String image = (event as RemoveImageEvent).image;
         final List<String> localPhotoPaths = state.localPhotoPaths;
@@ -57,7 +59,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
 
       // =========== Add/Remove/Update quantity of products ===========
-
       case UpdateProductListEvent:
         final product = (event as UpdateProductListEvent).product;
         final prescriptionNeeded = product.prescriptionNeeded;
@@ -115,7 +116,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         break;
 
       //  Get delivery charge for normal order
-
       case GetDeliveryChargeForNormalOrder:
         yield state.clone(orderLoading: true);
         List<DeliveryChargeProduct> deliveryProducts = [];
@@ -172,7 +172,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           );
           orderConfirmationProducts.add(newOrderConfirmationProduct);
         }
-
         for (OrderProduct p in state.productListNeedPrescriptions) {
           OrderConfirmationProducts newOrderConfirmationProduct =
               new OrderConfirmationProducts(
@@ -186,13 +185,9 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           orderConfirmationProducts.add(newOrderConfirmationProduct);
         }
         OrderResponse response;
-        print(state.productListTotal);
-        print(state.deliveryCharge);
         NormalOrder order = new NormalOrder(
           totalPrice: state.productListTotal,
           deliveryCharge: state.deliveryCharge,
-          //TODO: get from logged in user
-          customerEmail: "sgayangi@gmail.com",
           orderType: "normal",
           products: orderConfirmationProducts,
           address: new Address(
@@ -231,18 +226,103 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           error: "Order not confirmed. Please try again later.",
         );
         break;
-
       case ConfirmNormalOnlineOrder:
         yield state.clone(orderLoading: true);
-
-        yield state.clone(orderLoading: false);
-        break;
-
-      case ConfirmPrescriptionOrder:
         yield state.clone(orderLoading: true);
+        List<OrderConfirmationProducts> orderConfirmationProducts = [];
+        for (OrderProduct p in state.productListPrescriptionless) {
+          OrderConfirmationProducts newOrderConfirmationProduct =
+              new OrderConfirmationProducts(
+            productID: p.id.toString(),
+            quantity: p.amountOrdered,
+            supplierID: p.product.supplierID,
+            soldUnitPrice: p.actualPrice,
+            addedChargePercentage: 0,
+            addedCharge: 0,
+          );
+          orderConfirmationProducts.add(newOrderConfirmationProduct);
+        }
 
-        yield state.clone(orderLoading: false);
+        for (OrderProduct p in state.productListNeedPrescriptions) {
+          OrderConfirmationProducts newOrderConfirmationProduct =
+              new OrderConfirmationProducts(
+            productID: p.id.toString(),
+            quantity: p.amountOrdered,
+            supplierID: p.product.supplierID,
+            soldUnitPrice: p.actualPrice,
+            addedChargePercentage: 0,
+            addedCharge: 0,
+          );
+          orderConfirmationProducts.add(newOrderConfirmationProduct);
+        }
+        NormalOrder order = new NormalOrder(
+          totalPrice: state.productListTotal,
+          deliveryCharge: state.deliveryCharge,
+          orderType: "normal",
+          products: orderConfirmationProducts,
+          address: new Address(
+            streetAddress: state.streetAddress,
+            city: state.city.city,
+            district: state.city.district,
+          ),
+        );
+        OrderResponse response;
+        if (state.productListNeedPrescriptions.length == 0) {
+          response = await orderAPIProvider
+              .confirmNormalOnlinePrescriptionlessOrder(order);
+        } else {
+          order.hasPrescriptions = true;
+          response =
+              await orderAPIProvider.confirmNormalOnlineOrderWithPrescriptions(
+            order,
+            state.localPhotoPaths,
+          );
+        }
+        if (response.orderID != null) {
+          var prefs = await SharedPreferences.getInstance();
+          var email = prefs.get("email");
+          var firstName = prefs.get("firstName");
+          var lastName = prefs.get("lastName");
+          var city = prefs.get("city");
+          var district = prefs.get("district");
+          var address = prefs.get("address");
+          var contactNumber = prefs.get("contactNumber");
+          PaymentGateway.pay(
+            items: getProductNames(
+              state.productListPrescriptionless +
+                  state.productListNeedPrescriptions,
+            ),
+            orderID: response.orderID,
+            totalPrice: state.productListTotal,
+            deliveryCharge: state.deliveryCharge,
+            streetAddress: state.streetAddress,
+            deliveryCity: state.city.city,
+            deliveryDistrict: state.city.district,
+            city: city,
+            address: address,
+            district: district,
+            contactNumber: contactNumber,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+          );
+          yield state.clone(
+            orderLoading: false,
+            orderID: response.orderID,
+            localPhotoPaths: [],
+            deliveryCharge: 0.0,
+            streetAddress: "",
+            city: new City(),
+            district: "",
+            productIDs: [],
+            photos: [],
+            productListPrescriptionless: [],
+            productListTotal: 0,
+            productListNeedPrescriptions: [],
+          );
+        }
         break;
+
       case UpdateProductAmountEvent:
         double tempTotal = 0;
         for (OrderProduct p in state.productListPrescriptionless) {
@@ -310,6 +390,14 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   @override
   Future<void> close() async {
     await super.close();
+  }
+
+  getProductNames(List<OrderProduct> products) {
+    List<String> names = [];
+    for (OrderProduct i in products) {
+      names.add(i.productName);
+    }
+    return names;
   }
 
   void _addErr(e) {

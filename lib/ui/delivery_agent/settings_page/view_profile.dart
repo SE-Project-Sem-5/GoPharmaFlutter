@@ -46,13 +46,20 @@ class DeliveryAgentSettingsPage extends StatelessWidget {
           ),
           body: BlocBuilder<DeliveryAgentRootBloc, DeliveryAgentRootState>(
             builder: (context, state) {
-              firstNameController.text = state.user.firstName;
-              lastNameController.text = state.user.lastName;
-              birthdayController.text = state.user.dateOfBirth.substring(0, 10);
-              contactNumberController.text = state.user.contactNumber;
-              addressController.text = state.user.addressDetail.streetAddress;
-              cityController.text =
-                  state.user.addressDetail.provinceDistrictCity.toString();
+              firstNameController.text = state.user.firstName ?? "First Name";
+              lastNameController.text = state.user.lastName ?? "Last Name";
+              birthdayController.text = state.user.dateOfBirth != null
+                  ? state.user.dateOfBirth.substring(0, 10)
+                  : "Date of Birth";
+              contactNumberController.text =
+                  state.user.contactNumber ?? "Contact Number";
+              addressController.text = state.user.addressDetail != null
+                  ? state.user.addressDetail.streetAddress
+                  : "Address";
+              cityController.text = state.user.addressDetail != null
+                  ? state.user.addressDetail.provinceDistrictCity.toString()
+                  : "Address";
+
               return Padding(
                 padding: EdgeInsets.only(
                   left: 25.0,
@@ -269,7 +276,19 @@ class DeliveryAgentSettingsPage extends StatelessWidget {
                                 size: MediaQuery.of(context).size,
                                 fillColor: GoPharmaColors.PrimaryColor,
                                 textColor: GoPharmaColors.WhiteColor,
-                                onTapped: () {},
+                                onTapped: () {
+                                  bloc.add(
+                                    UpdateUserInformation(
+                                      firstName: firstNameController.text,
+                                      lastName: lastNameController.text,
+                                      streetAddress: addressController.text,
+                                      birthDate: birthdayController.text,
+                                      gender: state.gender.toLowerCase(),
+                                      contactNumber:
+                                          contactNumberController.text,
+                                    ),
+                                  );
+                                },
                               ),
                               Spacer(),
                               RoundedButtonFilled(

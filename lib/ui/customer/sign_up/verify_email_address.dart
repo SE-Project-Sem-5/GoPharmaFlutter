@@ -5,7 +5,6 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_event.dart';
 import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
-import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_2fa.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 import 'enable_two_fa_question.dart';
