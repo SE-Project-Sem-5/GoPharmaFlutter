@@ -14,9 +14,7 @@ class PendingDeliveriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
     deliveryListBloc.add(
-      GetAllConfirmedOrders(
-        deliveryAgentHomeAddressID: 3,
-      ),
+      GetAllConfirmedOrders(),
     );
     return CommonSkeleton(
       title: title,
@@ -28,15 +26,20 @@ class PendingDeliveriesPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                 )
-              : Container(
-                  child: ListView.builder(
-                    physics: ClampingScrollPhysics(),
-                    itemCount: state.confirmedOrders.deliveries.length,
-                    itemBuilder: (context, index) => PendingDeliveryFullView(
-                      delivery: state.confirmedOrders.deliveries[index],
-                    ),
-                  ),
-                );
+              : state.confirmedOrders.deliveries.length == 0
+                  ? Text(
+                      "You do not have any pending deliveries at the moment.",
+                    )
+                  : Container(
+                      child: ListView.builder(
+                        physics: ClampingScrollPhysics(),
+                        itemCount: state.confirmedOrders.deliveries.length,
+                        itemBuilder: (context, index) =>
+                            PendingDeliveryFullView(
+                          delivery: state.confirmedOrders.deliveries[index],
+                        ),
+                      ),
+                    );
         },
       ),
     );

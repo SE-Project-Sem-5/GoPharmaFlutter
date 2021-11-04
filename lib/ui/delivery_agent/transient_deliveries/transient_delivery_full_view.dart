@@ -4,7 +4,7 @@ import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.d
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/transientDelivery.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/transient_deliveries/transient_deliveries_page.dart';
 
 class TransientDeliveryFullView extends StatelessWidget {
   final TransientDelivery delivery;
@@ -146,13 +146,11 @@ class TransientDeliveryFullView extends StatelessWidget {
                             deliveryListBloc.add(
                               TransitionCollectOrderEvent(
                                 orderID: delivery.orderID,
-                                //TODO: replace
-                                deliveryAgentHomeAddressID: 3,
                               ),
                             );
                             Navigator.pushReplacementNamed(
                               context,
-                              ReservedDeliveriesPage.id,
+                              TransientDeliveriesPage.id,
                             );
                           },
                           style: ElevatedButton.styleFrom(

@@ -14,9 +14,7 @@ class CollectedDeliveriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
     deliveryListBloc.add(
-      GetAllCollectedOrders(
-        deliveryAgentHomeAddressID: 3,
-      ),
+      GetAllCollectedOrders(),
     );
     return CommonSkeleton(
       title: title,
@@ -28,15 +26,19 @@ class CollectedDeliveriesPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                 )
-              : Container(
-                  child: ListView.builder(
-                    physics: ClampingScrollPhysics(),
-                    itemCount: state.collectedOrders.deliveries.length,
-                    itemBuilder: (context, index) => CollectedDeliveryCard(
-                      delivery: state.collectedOrders.deliveries[index],
-                    ),
-                  ),
-                );
+              : state.collectedOrders.deliveries.length == 0
+                  ? Text(
+                      "You do not have any collected deliveries at the moment.",
+                    )
+                  : Container(
+                      child: ListView.builder(
+                        physics: ClampingScrollPhysics(),
+                        itemCount: state.collectedOrders.deliveries.length,
+                        itemBuilder: (context, index) => CollectedDeliveryCard(
+                          delivery: state.collectedOrders.deliveries[index],
+                        ),
+                      ),
+                    );
         },
       ),
     );

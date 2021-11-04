@@ -132,7 +132,8 @@ class SettingsPage extends StatelessWidget {
                                           activeColor:
                                               Theme.of(context).primaryColor,
                                           value: "male",
-                                          groupValue: state.gender,
+                                          groupValue:
+                                              state.gender.toLowerCase(),
                                           onChanged: (value) {
                                             bloc.add(UpdateGenderEvent(
                                                 gender: value));
@@ -148,7 +149,8 @@ class SettingsPage extends StatelessWidget {
                                           activeColor:
                                               Theme.of(context).primaryColor,
                                           value: "female",
-                                          groupValue: state.gender,
+                                          groupValue:
+                                              state.gender.toLowerCase(),
                                           onChanged: (value) {
                                             bloc.add(
                                               UpdateGenderEvent(gender: value),

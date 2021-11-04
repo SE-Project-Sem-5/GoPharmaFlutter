@@ -7,7 +7,6 @@ import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'package:go_pharma/ui/delivery_agent/transient_deliveries/transient_delivery_card.dart';
 
 class TransientDeliveriesPage extends StatelessWidget {
-  //TODO:replace with the list gotten from the backend
   static final String id = "transient_deliveries_page";
   final String title = "Transient Deliveries";
 
@@ -27,15 +26,19 @@ class TransientDeliveriesPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                 )
-              : Container(
-                  child: ListView.builder(
-                    physics: ClampingScrollPhysics(),
-                    itemCount: state.transientOrders.deliveries.length,
-                    itemBuilder: (context, index) => TransientDeliveryCard(
-                      delivery: state.transientOrders.deliveries[index],
-                    ),
-                  ),
-                );
+              : state.transientCollectedOrders.deliveries.length == 0
+                  ? Text(
+                      "You do not have any transient deliveries at the moment.",
+                    )
+                  : Container(
+                      child: ListView.builder(
+                        physics: ClampingScrollPhysics(),
+                        itemCount: state.transientOrders.deliveries.length,
+                        itemBuilder: (context, index) => TransientDeliveryCard(
+                          delivery: state.transientOrders.deliveries[index],
+                        ),
+                      ),
+                    );
         },
       ),
     );

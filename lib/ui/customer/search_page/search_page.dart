@@ -13,7 +13,7 @@ class SearchPage extends StatelessWidget {
       child: Scaffold(
         drawer: CustomerDrawer(),
         backgroundColor: GoPharmaColors.GreyColor,
-        resizeToAvoidBottomInset: false,
+        // resizeToAvoidBottomInset: false,
         body: Stack(
           fit: StackFit.expand,
           children: [

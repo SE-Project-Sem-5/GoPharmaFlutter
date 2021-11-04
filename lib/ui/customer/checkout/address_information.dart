@@ -28,7 +28,7 @@ class AddressInformationPage extends StatelessWidget {
                   ),
                 )
               : Scaffold(
-                  resizeToAvoidBottomInset: false,
+                  // resizeToAvoidBottomInset: false,
                   appBar: AppBar(
                     title: Text("Delivery Address Details"),
                   ),

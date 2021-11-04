@@ -13,8 +13,7 @@ import 'package:go_pharma/repos/utilities.dart';
 class DeliveryListAPIProvider {
   final Dio _dio = Client.init();
 
-  Future<PendingDeliveryList> getConfirmedDeliveryOrders(
-      int deliveryAgentHomeAddressID) async {
+  Future<PendingDeliveryList> getConfirmedDeliveryOrders() async {
     try {
       final cookie = await Utilities.getCookie();
       if (_dio.options.headers.containsKey("cookie")) {
@@ -25,9 +24,6 @@ class DeliveryListAPIProvider {
       _dio.options.headers.update("cookie", (c) => cookie);
       Response response = await _dio.post(
         "delivery-agent/order/view",
-        data: {
-          "deliveryAgentHomeAddressID": deliveryAgentHomeAddressID,
-        },
       );
       print(response);
       return PendingDeliveryList.fromJson(response.data);
@@ -37,8 +33,7 @@ class DeliveryListAPIProvider {
     }
   }
 
-  Future<ReservedDeliveryList> getReservedDeliveryOrders(
-      int deliveryAgentHomeAddressID) async {
+  Future<ReservedDeliveryList> getReservedDeliveryOrders() async {
     try {
       final cookie = await Utilities.getCookie();
       if (_dio.options.headers.containsKey("cookie")) {
@@ -57,9 +52,7 @@ class DeliveryListAPIProvider {
     }
   }
 
-  Future<CollectedDeliveryList> getCollectedDeliveryOrders(
-    int deliveryAgentHomeAddressID,
-  ) async {
+  Future<CollectedDeliveryList> getCollectedDeliveryOrders() async {
     try {
       final cookie = await Utilities.getCookie();
       if (_dio.options.headers.containsKey("cookie")) {
@@ -69,9 +62,6 @@ class DeliveryListAPIProvider {
       }
       Response response = await _dio.post(
         "delivery-agent/order/collected/view",
-        data: {
-          "deliveryAgentHomeAddressID": deliveryAgentHomeAddressID,
-        },
       );
       return CollectedDeliveryList.fromJson(response.data);
     } catch (error, stacktrace) {
@@ -168,7 +158,7 @@ class DeliveryListAPIProvider {
       Response response = await _dio.post(
         "delivery-agent/order/order-product/collect",
         data: {
-          "orderID": orderID,
+          "orderProductID": orderID,
         },
       );
       return OrderResponse.fromJson(response.data);

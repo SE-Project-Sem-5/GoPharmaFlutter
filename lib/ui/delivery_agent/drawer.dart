@@ -36,10 +36,7 @@ class DeliveryAgentDrawer extends StatelessWidget {
               icon: Icons.search,
               onTap: () {
                 deliveryListBloc.add(
-                  GetAllConfirmedOrders(
-                    //TODO: replace
-                    deliveryAgentHomeAddressID: 3,
-                  ),
+                  GetAllConfirmedOrders(),
                 );
                 Navigator.pop(context);
                 Navigator.pushNamed(

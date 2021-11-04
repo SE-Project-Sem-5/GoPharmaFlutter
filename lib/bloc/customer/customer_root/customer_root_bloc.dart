@@ -459,6 +459,7 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
         final isEditable = state.isGeneralInformationEditable;
         yield state.clone(
           isGeneralInformationEditable: !isEditable,
+          signInState: CustomerRootSignInState.SIGNED_IN,
         );
         break;
     }

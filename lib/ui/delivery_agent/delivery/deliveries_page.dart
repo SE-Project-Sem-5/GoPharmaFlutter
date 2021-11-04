@@ -27,10 +27,7 @@ class DeliveriesPage extends StatelessWidget {
                   //ignore: missing_return
                   onRefresh: () {
                     deliveryListBloc.add(
-                      GetAllConfirmedOrders(
-                        //TODO: replace
-                        deliveryAgentHomeAddressID: 3,
-                      ),
+                      GetAllConfirmedOrders(),
                     );
                   },
                   child: ListView.builder(

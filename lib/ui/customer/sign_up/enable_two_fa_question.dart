@@ -36,7 +36,7 @@ class EnableTwoFAQuestion extends StatelessWidget {
       },
       child: SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          // resizeToAvoidBottomInset: false,
           appBar: AppBar(
             leading: SizedBox(),
             title: Text(

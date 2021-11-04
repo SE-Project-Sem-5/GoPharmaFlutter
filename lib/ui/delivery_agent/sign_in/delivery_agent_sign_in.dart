@@ -20,7 +20,6 @@ class DeliveryAgentSignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<DeliveryAgentRootBloc>(context);
-    final size = MediaQuery.of(context).size;
 
     return BlocListener<DeliveryAgentRootBloc, DeliveryAgentRootState>(
       listenWhen: (context, state) {
@@ -43,7 +42,7 @@ class DeliveryAgentSignInPage extends StatelessWidget {
       },
       child: SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          // resizeToAvoidBottomInset: false,
           appBar: AppBar(
             title: Text("SIGN IN"),
           ),

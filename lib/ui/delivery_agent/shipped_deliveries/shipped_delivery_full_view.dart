@@ -218,8 +218,6 @@ class ShippedDeliveryFullView extends StatelessWidget {
                                   ),
                                 ),
                                 child: Text(
-                                  //Accept Payment first for cash orders
-                                  //do both in one endpoint?
                                   "Accept Payment for Delivery Confirmation",
                                 ),
                               )
