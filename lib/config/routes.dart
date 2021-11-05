@@ -20,7 +20,7 @@ import 'package:go_pharma/ui/customer/products/product_home_page.dart';
 import 'package:go_pharma/ui/customer/checkout/shopping_cart_page.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
 import 'package:go_pharma/ui/customer/profile/view_security_settings.dart';
-import 'package:go_pharma/ui/customer/search_page/search_page.dart';
+import 'package:go_pharma/ui/customer/search_page/search_page_routing.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in_2fa.dart';
 import 'package:go_pharma/ui/customer/sign_in/customer_sign_in.dart';
 import 'package:go_pharma/ui/customer/sign_in/forgot_password_page.dart';
@@ -56,7 +56,6 @@ Map<String, Widget Function(BuildContext context)> routes = {
   SettingsPage.id: (context) => SettingsPage(),
   CheckoutReceipt.id: (context) => CheckoutReceipt(),
   CategoryProvider.id: (context) => CategoryProvider(),
-  SearchPage.id: (context) => SearchPage(),
   PastOrdersPage.id: (context) => PastOrdersPage(),
   ProcessingNormalOrdersPage.id: (context) => ProcessingNormalOrdersPage(),
   ProcessingPrescriptionOrdersPage.id: (context) =>
@@ -72,6 +71,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   ConfirmedOrdersPage.id: (context) => ConfirmedOrdersPage(),
   SelectProcessingOrderType.id: (context) => SelectProcessingOrderType(),
   ForgotPasswordPage.id: (context) => ForgotPasswordPage(),
+  SearchPageRouting.id: (context) => SearchPageRouting(),
 
   //Customer sign up
   CustomerSignUpPage.id: (context) => CustomerSignUpPage(),

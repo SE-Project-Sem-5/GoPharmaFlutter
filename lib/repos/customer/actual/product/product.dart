@@ -9,14 +9,12 @@ class Product {
   String imageURL;
   bool prescriptionNeeded;
   bool returnable;
-  double unitPrice;
-  double actualPrice;
+  num unitPrice;
+  num actualPrice;
   String priceDescription;
-  double discount;
+  num discount;
   int stock;
   int reorderingLevel;
-  String createdAt;
-  String updatedAt;
   String brandName;
   int categoryID;
   int supplierID;
@@ -36,8 +34,6 @@ class Product {
     this.discount,
     this.stock,
     this.reorderingLevel,
-    this.createdAt,
-    this.updatedAt,
     this.brandName,
     this.categoryID,
     this.supplierID,
@@ -59,8 +55,6 @@ class Product {
     discount = json['discount'].toDouble();
     stock = json['stock'];
     reorderingLevel = json['reorderingLevel'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
     brandName = json['brandName'];
     categoryID = json['categoryID'];
     supplierID = json['supplierID'];
@@ -89,8 +83,6 @@ class Product {
     data['discount'] = this.discount;
     data['stock'] = this.stock;
     data['reorderingLevel'] = this.reorderingLevel;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
     data['brandName'] = this.brandName;
     data['categoryID'] = this.categoryID;
     data['supplierID'] = this.supplierID;

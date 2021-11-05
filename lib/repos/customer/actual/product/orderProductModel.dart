@@ -3,7 +3,7 @@ import 'package:go_pharma/repos/customer/actual/product/product.dart';
 class OrderProduct {
   final int id;
   final String productName;
-  final double actualPrice;
+  final num actualPrice;
   int amountOrdered;
   String unitOfMeasure;
   final Product product;

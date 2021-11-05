@@ -129,14 +129,15 @@ class Product {
   Category category;
   ProductSize productSize;
 
-  Product(
-      {this.productName,
-      this.brandName,
-      this.description,
-      this.prescriptionNeeded,
-      this.unitPrice,
-      this.category,
-      this.productSize});
+  Product({
+    this.productName,
+    this.brandName,
+    this.description,
+    this.prescriptionNeeded,
+    this.unitPrice,
+    this.category,
+    this.productSize,
+  });
 
   Product.fromJson(Map<String, dynamic> json) {
     productName = json['productName'];

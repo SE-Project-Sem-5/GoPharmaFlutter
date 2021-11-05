@@ -27,7 +27,6 @@ class DeliveryAgentRootBloc
       Map<String, dynamic> result =
           await userApiProvider.getCurrentUser(cookie);
       if (result.containsKey("user")) {
-        print("Has user");
         add(
           UpdateUserEvent(
             result["user"],
