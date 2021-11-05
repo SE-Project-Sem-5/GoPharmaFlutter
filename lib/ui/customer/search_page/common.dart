@@ -5,11 +5,11 @@ import 'package:go_pharma/bloc/customer/search/search_event.dart';
 import 'package:go_pharma/bloc/customer/search/search_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 
-class FilterChipSearch extends StatelessWidget {
+class SearchFilterChip extends StatelessWidget {
   final String value;
   final String tag;
 
-  const FilterChipSearch({
+  const SearchFilterChip({
     Key key,
     @required this.value,
     @required this.tag,
@@ -27,6 +27,9 @@ class FilterChipSearch extends StatelessWidget {
             child: FilterChip(
               label: Text(
                 this.tag,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
               selected: state.filter == value,
               onSelected: (bool v) {

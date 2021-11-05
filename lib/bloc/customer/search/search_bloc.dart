@@ -2,11 +2,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/search/search_event.dart';
 import 'package:go_pharma/bloc/customer/search/search_state.dart';
+import 'package:go_pharma/repos/customer/actual/product/productList.dart';
 import 'dart:async';
+
+import 'package:go_pharma/repos/customer/actual/search/searchAPIProvider.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchBloc(BuildContext context) : super(SearchState.initialState);
-
+  SearchAPIProvider searchAPIProvider = new SearchAPIProvider();
   @override
   Stream<SearchState> mapEventToState(SearchEvent event) async* {
     switch (event.runtimeType) {
@@ -23,8 +26,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         );
         break;
       case ProductSearchEvent:
-        final String filter = (event as ProductSearchEvent).filter;
         final String searchValue = (event as ProductSearchEvent).searchValue;
+        final ProductList products =
+            await searchAPIProvider.searchProducts(state.filter, searchValue);
+        Map<String, ProductList> searchResults = state.searchResults;
+        searchResults[state.filter] = products;
+        yield state.clone(
+          searchResults: searchResults,
+        );
         break;
     }
   }

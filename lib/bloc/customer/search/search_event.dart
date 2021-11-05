@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 abstract class SearchEvent {}
 
 class ProductSearchEvent extends SearchEvent {
-  final String filter;
   final String searchValue;
   ProductSearchEvent({
-    this.filter,
     this.searchValue,
   });
 }
