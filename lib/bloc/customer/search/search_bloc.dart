@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/customer/search/search_event.dart';
 import 'package:go_pharma/bloc/customer/search/search_state.dart';
 import 'dart:async';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchBloc(BuildContext context) : super(SearchState.initialState);
@@ -17,10 +16,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           error: error,
         );
         break;
+      case UpdateFilterEvent:
+        final String filter = (event as UpdateFilterEvent).filter;
+        yield state.clone(
+          filter: filter,
+        );
+        break;
       case ProductSearchEvent:
         final String filter = (event as ProductSearchEvent).filter;
         final String searchValue = (event as ProductSearchEvent).searchValue;
-
         break;
     }
   }

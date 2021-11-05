@@ -5,6 +5,8 @@ import 'package:go_pharma/bloc/customer/customer_root/customer_root_state.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
 
+import 'common.dart';
+
 class SearchPageRouting extends StatelessWidget {
   static final String id = "search_page_routing";
   @override
@@ -30,22 +32,23 @@ class SearchPageRouting extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Spacer(),
-                RoundedButtonFilled(
-                  title: "Yes",
-                  size: MediaQuery.of(context).size,
-                  fillColor: GoPharmaColors.PrimaryColor,
-                  textColor: GoPharmaColors.WhiteColor,
-                  onTapped: () {},
+                FilterChipSearch(
+                  tag: "Brand",
+                  value: "productBrand",
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                RoundedButtonFilled(
-                  title: "No",
-                  size: MediaQuery.of(context).size,
-                  fillColor: GoPharmaColors.GreyColor,
-                  textColor: GoPharmaColors.BlackColor,
-                  onTapped: () {},
+                FilterChipSearch(
+                  tag: "Product",
+                  value: "productName",
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                FilterChipSearch(
+                  tag: "Supplier",
+                  value: "productSupplier",
                 ),
                 Spacer(),
               ],

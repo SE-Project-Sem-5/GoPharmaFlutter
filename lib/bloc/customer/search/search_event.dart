@@ -17,3 +17,9 @@ class ErrorEvent extends SearchEvent {
 
   ErrorEvent(this.error);
 }
+
+class UpdateFilterEvent extends SearchEvent {
+  final String filter;
+
+  UpdateFilterEvent(this.filter);
+}
