@@ -26,9 +26,11 @@ class TransientDeliveriesPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                 )
-              : state.transientCollectedOrders.deliveries.length == 0
-                  ? Text(
-                      "You do not have any transient deliveries at the moment.",
+              : state.transientOrders.deliveries.length == 0
+                  ? Center(
+                      child: Text(
+                        "You do not have any transient deliveries at the moment.",
+                      ),
                     )
                   : Container(
                       child: ListView.builder(
