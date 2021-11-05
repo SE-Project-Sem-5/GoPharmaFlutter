@@ -17,9 +17,15 @@ class SearchState {
   static SearchState get initialState => SearchState(
         error: '',
         searchResults: {
-          "productBrand": new ProductList(),
-          "productSupplier": new ProductList(),
-          "productName": new ProductList(),
+          "productBrand": new ProductList(
+            products: [],
+          ),
+          "productSupplier": new ProductList(
+            products: [],
+          ),
+          "productName": new ProductList(
+            products: [],
+          ),
         },
         filter: "productName",
         isLoading: false,

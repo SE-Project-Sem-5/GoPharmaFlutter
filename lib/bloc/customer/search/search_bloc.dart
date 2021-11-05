@@ -4,7 +4,6 @@ import 'package:go_pharma/bloc/customer/search/search_event.dart';
 import 'package:go_pharma/bloc/customer/search/search_state.dart';
 import 'package:go_pharma/repos/customer/actual/product/productList.dart';
 import 'dart:async';
-
 import 'package:go_pharma/repos/customer/actual/search/searchAPIProvider.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
@@ -26,6 +25,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         );
         break;
       case ProductSearchEvent:
+        yield state.clone(
+          isLoading: true,
+        );
         final String searchValue = (event as ProductSearchEvent).searchValue;
         final ProductList products =
             await searchAPIProvider.searchProducts(state.filter, searchValue);
@@ -33,6 +35,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         searchResults[state.filter] = products;
         yield state.clone(
           searchResults: searchResults,
+          isLoading: false,
         );
         break;
     }

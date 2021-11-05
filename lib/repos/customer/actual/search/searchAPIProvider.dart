@@ -8,7 +8,7 @@ class SearchAPIProvider {
   Future<ProductList> searchProducts(String filter, String searchValue) async {
     try {
       Response response = await _dio.get(
-        "customer/search-product?$filter=$searchValue",
+        "customer/order/search?$filter=$searchValue",
       );
       print(response);
       return ProductList.fromJson(response.data);

@@ -8,7 +8,6 @@ import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/customer/past_orders/past_orders_page.dart';
 import 'package:go_pharma/ui/customer/processing_orders/select_order_type.dart';
 import 'package:go_pharma/ui/customer/profile/view_profile.dart';
-import 'package:go_pharma/ui/customer/search_page/search_page.dart';
 import 'package:go_pharma/ui/customer/search_page/search_page_routing.dart';
 
 import 'confirmed_orders/confirmed_orders_page.dart';

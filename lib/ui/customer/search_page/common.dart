@@ -38,7 +38,7 @@ class SearchFilterChip extends StatelessWidget {
                 );
               },
               pressElevation: 15,
-              selectedColor: GoPharmaColors.PrimaryColor,
+              selectedColor: GoPharmaColors.PrimaryColor.withOpacity(0.5),
             ));
       },
     );

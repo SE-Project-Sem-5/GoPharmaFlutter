@@ -72,15 +72,19 @@ class ProductFullView extends StatelessWidget {
                     color: Colors.black87.withOpacity(0.5),
                   ),
                 ),
-                Text(
-                  "Size: " +
-                      product.productSize.sizeName +
-                      " (${product.productSize.description})",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.black87.withOpacity(0.5),
-                  ),
-                ),
+                product.productSize != null
+                    ? Text(
+                        "Size: " +
+                            product.productSize.sizeName +
+                            " (${product.productSize.description})",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black87.withOpacity(0.5),
+                        ),
+                      )
+                    : SizedBox(
+                        height: 1.0,
+                      ),
               ],
             ),
           ),

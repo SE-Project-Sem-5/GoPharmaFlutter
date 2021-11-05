@@ -14,7 +14,10 @@ class ShoppingCartPageProductCard extends StatelessWidget {
   final OrderProduct orderProduct;
   final Product product;
 
-  const ShoppingCartPageProductCard({this.product, this.orderProduct});
+  const ShoppingCartPageProductCard({
+    this.product,
+    this.orderProduct,
+  });
 
   @override
   Widget build(BuildContext context) {

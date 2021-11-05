@@ -3,23 +3,34 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/customer/search/search_bloc.dart';
 import 'package:go_pharma/bloc/customer/search/search_event.dart';
 import 'package:go_pharma/bloc/customer/search/search_state.dart';
-import 'package:go_pharma/repos/customer/actual/product/product.dart';
 import 'package:go_pharma/repos/customer/actual/product/productList.dart';
+import 'package:go_pharma/ui/customer/products/product_full_view.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-
 import 'common.dart';
+import 'package:go_pharma/repos/customer/actual/product/product.dart';
 
 class SearchPageRouting extends StatelessWidget {
   static final String id = "search_page_routing";
 
   @override
   Widget build(BuildContext context) {
-    final searchBloc = BlocProvider.of<SearchBloc>(context);
     return SafeArea(
       child: Scaffold(
         body: Stack(
           fit: StackFit.expand,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 90,
+                left: 20,
+              ),
+              child: Text(
+                "Filter By:",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 100),
               child: Row(
@@ -72,11 +83,13 @@ class SearchPageRouting extends StatelessWidget {
         debounceDelay: const Duration(milliseconds: 500),
         onQueryChanged: (query) {
           // Call your model, bloc, controller here.
-          searchBloc.add(
-            ProductSearchEvent(
-              searchValue: query,
-            ),
-          );
+          if (query.length > 3) {
+            searchBloc.add(
+              ProductSearchEvent(
+                searchValue: query,
+              ),
+            );
+          }
         },
         // Specify a custom transition to be used for
         // animating between opened and closed stated.
@@ -105,16 +118,20 @@ class SearchPageRouting extends StatelessWidget {
                       ? Center(
                           child: CircularProgressIndicator(),
                         )
-                      : Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: getSearchResults(
-                                state.searchResults[state.filter]),
-                          ),
-                        );
+                      : state.searchResults[state.filter].products.length == 0
+                          ? SizedBox()
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: getSearchResults(
+                                  state.searchResults[state.filter],
+                                  context,
+                                ),
+                              ),
+                            );
                 },
               ),
             ),
@@ -124,15 +141,31 @@ class SearchPageRouting extends StatelessWidget {
     );
   }
 
-  List<Widget> getSearchResults(ProductList list) {
+  List<Widget> getSearchResults(
+    ProductList list,
+    BuildContext context,
+  ) {
     List<Widget> searchResults = [];
     for (Product p in list.products) {
-      searchResults.add(GestureDetector(
-        child: SearchBarResult(
-          text: p.productName,
+      searchResults.add(
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductFullView(
+                  product: p,
+                ),
+              ),
+            );
+          },
+          child: SearchBarResult(
+            text: p.productName,
+          ),
         ),
-      ));
+      );
     }
+    return searchResults;
   }
 }
 
