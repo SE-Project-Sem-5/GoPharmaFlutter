@@ -27,8 +27,10 @@ class ShippedDeliveriesPage extends StatelessWidget {
                   ),
                 )
               : state.shippedOrders.deliveries.length == 0
-                  ? Text(
-                      "You have not been assigned any customer deliveries at the moment.",
+                  ? Center(
+                      child: Text(
+                        "You have not been assigned any customer deliveries at the moment.",
+                      ),
                     )
                   : Container(
                       child: ListView.builder(
