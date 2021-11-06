@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/collectedDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/returnReservedOrderList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/transientCollectedList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/transientDelivery.dart';
@@ -16,6 +17,7 @@ class DeliveryListState {
   final TransientDeliveryList transientOrders;
   final TransientCollectedList transientCollectedOrders;
   final ShippedOrderList shippedOrders;
+  final ReturnReservedOrderList returnReservedOrders;
 
   DeliveryListState({
     this.confirmedOrders,
@@ -26,6 +28,7 @@ class DeliveryListState {
     this.shippedOrders,
     this.error,
     this.isLoading,
+    this.returnReservedOrders,
   });
 
   static DeliveryListState get initialState => DeliveryListState(
@@ -49,6 +52,9 @@ class DeliveryListState {
         shippedOrders: new ShippedOrderList(
           deliveries: [],
         ),
+        returnReservedOrders: new ReturnReservedOrderList(
+          deliveries: [],
+        ),
       );
 
   DeliveryListState clone({
@@ -61,6 +67,7 @@ class DeliveryListState {
     TransientDeliveryList transientOrders,
     TransientCollectedList transientCollectedOrders,
     ShippedOrderList shippedOrders,
+    ReturnReservedOrderList returnReservedOrders,
   }) {
     return DeliveryListState(
       error: error ?? this.error,
@@ -72,6 +79,7 @@ class DeliveryListState {
       transientCollectedOrders:
           transientCollectedOrders ?? this.transientCollectedOrders,
       shippedOrders: shippedOrders ?? this.shippedOrders,
+      returnReservedOrders: returnReservedOrders ?? this.returnReservedOrders,
     );
   }
 }
