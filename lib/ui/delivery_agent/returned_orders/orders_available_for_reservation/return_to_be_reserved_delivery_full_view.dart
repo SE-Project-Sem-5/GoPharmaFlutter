@@ -7,7 +7,7 @@ import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
 
 class ReturnToBeReservedDeliveryFullView extends StatelessWidget {
-  final ReturnReservedDelivery delivery;
+  final ReturnToBeReservedDelivery delivery;
   const ReturnToBeReservedDeliveryFullView({@required this.delivery});
   final String bullet = "\u2022 ";
   final double leftPadding = 30.0;

@@ -1,13 +1,13 @@
-class ReturnToBeReservedOrderList {
-  List<ReturnToBeReservedDelivery> deliveries;
+class ReturnCollectedOrderList {
+  List<ReturnCollectedOrders> deliveries;
 
-  ReturnToBeReservedOrderList({this.deliveries});
+  ReturnCollectedOrderList({this.deliveries});
 
-  ReturnToBeReservedOrderList.fromJson(Map<String, dynamic> json) {
+  ReturnCollectedOrderList.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       deliveries = [];
       json['data'].forEach((v) {
-        deliveries.add(new ReturnToBeReservedDelivery.fromJson(v));
+        deliveries.add(new ReturnCollectedOrders.fromJson(v));
       });
     }
   }
@@ -15,65 +15,65 @@ class ReturnToBeReservedOrderList {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.deliveries != null) {
-      data['returnReservedOrders'] =
+      data['returnCollectedOrders'] =
           this.deliveries.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class ReturnToBeReservedDelivery {
+class ReturnCollectedOrders {
   int id;
-  int quantity;
-  int totalPrice;
-  int orderID;
   String productName;
+  int quantity;
+  String brandName;
+  int totalPrice;
   String customerName;
-  String customerContactNumber;
+  String customerContactNo;
   String customerAddress;
   String supplierName;
-  String supplierContactNumber;
+  String supplierContactNo;
   String supplierAddress;
 
-  ReturnToBeReservedDelivery(
+  ReturnCollectedOrders(
       {this.id,
-      this.quantity,
-      this.totalPrice,
-      this.orderID,
       this.productName,
+      this.quantity,
+      this.brandName,
+      this.totalPrice,
       this.customerName,
-      this.customerContactNumber,
+      this.customerContactNo,
       this.customerAddress,
       this.supplierName,
-      this.supplierContactNumber,
+      this.supplierContactNo,
       this.supplierAddress});
 
-  ReturnToBeReservedDelivery.fromJson(Map<String, dynamic> json) {
+  ReturnCollectedOrders.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    quantity = json['quantity'];
-    totalPrice = json['totalPrice'];
-    orderID = json['orderID'];
     productName = json['productName'];
+    quantity = json['quantity'];
+    brandName = json['brandName'];
+    totalPrice = json['totalPrice'];
     customerName = json['customerName'];
-    customerContactNumber = json['customerContactNumber'];
+    customerContactNo = json['customerContactNo'];
     customerAddress = json['customerAddress'];
     supplierName = json['supplierName'];
-    supplierContactNumber = json['supplierContactNumber'];
+    supplierContactNo = json['supplierContactNo'];
     supplierAddress = json['supplierAddress'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['quantity'] = this.quantity;
-    data['totalPrice'] = this.totalPrice;
-    data['orderID'] = this.orderID;
     data['productName'] = this.productName;
+    data['quantity'] = this.quantity;
+    data['brandName'] = this.brandName;
+    data['totalPrice'] = this.totalPrice;
     data['customerName'] = this.customerName;
-    data['customerContactNumber'] = this.customerContactNumber;
+    data['customerContactNo'] = this.customerContactNo;
     data['customerAddress'] = this.customerAddress;
     data['supplierName'] = this.supplierName;
-    data['supplierContactNumber'] = this.supplierContactNumber;
+    data['supplierContactNo'] = this.supplierContactNo;
     data['supplierAddress'] = this.supplierAddress;
     return data;
   }

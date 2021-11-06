@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/collectedDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/returnCollectedOrderList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/returnReservedOrderList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/transientCollectedList.dart';
@@ -17,7 +18,9 @@ class DeliveryListState {
   final TransientDeliveryList transientOrders;
   final TransientCollectedList transientCollectedOrders;
   final ShippedOrderList shippedOrders;
-  final ReturnReservedOrderList returnReservedOrders;
+  final ReturnToBeReservedOrderList returnReservedOrders;
+  final ReturnCollectedOrderList returnCollectedOrders;
+  final ReturnCollectedOrderList returnConfirmedOrders;
 
   DeliveryListState({
     this.confirmedOrders,
@@ -29,6 +32,8 @@ class DeliveryListState {
     this.error,
     this.isLoading,
     this.returnReservedOrders,
+    this.returnCollectedOrders,
+    this.returnConfirmedOrders,
   });
 
   static DeliveryListState get initialState => DeliveryListState(
@@ -52,7 +57,13 @@ class DeliveryListState {
         shippedOrders: new ShippedOrderList(
           deliveries: [],
         ),
-        returnReservedOrders: new ReturnReservedOrderList(
+        returnReservedOrders: new ReturnToBeReservedOrderList(
+          deliveries: [],
+        ),
+        returnCollectedOrders: new ReturnCollectedOrderList(
+          deliveries: [],
+        ),
+        returnConfirmedOrders: new ReturnCollectedOrderList(
           deliveries: [],
         ),
       );
@@ -67,7 +78,9 @@ class DeliveryListState {
     TransientDeliveryList transientOrders,
     TransientCollectedList transientCollectedOrders,
     ShippedOrderList shippedOrders,
-    ReturnReservedOrderList returnReservedOrders,
+    ReturnToBeReservedOrderList returnReservedOrders,
+    ReturnCollectedOrderList returnCollectedOrders,
+    ReturnCollectedOrderList returnConfirmedOrders,
   }) {
     return DeliveryListState(
       error: error ?? this.error,
@@ -80,6 +93,10 @@ class DeliveryListState {
           transientCollectedOrders ?? this.transientCollectedOrders,
       shippedOrders: shippedOrders ?? this.shippedOrders,
       returnReservedOrders: returnReservedOrders ?? this.returnReservedOrders,
+      returnCollectedOrders:
+          returnCollectedOrders ?? this.returnCollectedOrders,
+      returnConfirmedOrders:
+          returnConfirmedOrders ?? this.returnConfirmedOrders,
     );
   }
 }

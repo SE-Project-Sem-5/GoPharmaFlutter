@@ -4,7 +4,7 @@ import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_available_for_reservation/return_to_be_reserved_delivery_full_view.dart';
 
 class ReturnToBeReservedDeliveryCard extends StatelessWidget {
-  final ReturnReservedDelivery delivery;
+  final ReturnToBeReservedDelivery delivery;
 
   const ReturnToBeReservedDeliveryCard({this.delivery});
 

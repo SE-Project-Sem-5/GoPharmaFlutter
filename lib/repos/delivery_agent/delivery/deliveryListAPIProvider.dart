@@ -4,6 +4,8 @@ import 'package:go_pharma/repos/customer/actual/orderInProgress/orderResponse.da
 import 'package:go_pharma/repos/delivery_agent/delivery/collectedDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/pendingDelivery.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/reservedDelivery.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/returnCollectedOrderList.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/returnReservedOrderList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/shippedOrderList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/transientCollectedList.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/transientDelivery.dart';
@@ -284,6 +286,130 @@ class DeliveryListAPIProvider {
         "delivery-agent/order/online/deliver",
         data: {
           "orderID": orderID,
+        },
+      );
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
+
+//  RETURNED ORDERS
+  Future<ReturnToBeReservedOrderList> getAllReturnedToBeReservedOrders() async {
+    try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
+      Response response = await _dio.post(
+        "delivery-agent/order/return/view",
+      );
+      return ReturnToBeReservedOrderList.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return ReturnToBeReservedOrderList();
+    }
+  }
+
+  Future<OrderResponse> reserveOrderForReturn(
+    int orderProductID,
+  ) async {
+    try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
+      Response response = await _dio.post(
+        "delivery-agent/order/return/reserve",
+        data: {
+          "orderProductID": orderProductID,
+        },
+      );
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
+
+  Future<ReturnCollectedOrderList> getAllReservedForCollectionOrders() async {
+    try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
+      Response response = await _dio.get(
+        "delivery-agent/order/return/reserve/view",
+      );
+      return ReturnCollectedOrderList.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return ReturnCollectedOrderList();
+    }
+  }
+
+  Future<OrderResponse> collectOrderForReturn(
+    int orderProductID,
+  ) async {
+    try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
+      Response response = await _dio.post(
+        "delivery-agent/order/return/collect",
+        data: {
+          "orderProductID": orderProductID,
+        },
+      );
+      return OrderResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return OrderResponse();
+    }
+  }
+
+  Future<ReturnCollectedOrderList> getAllReturnCollectedOrders() async {
+    try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
+      Response response = await _dio.get(
+        "delivery-agent/order/return/collected/view",
+      );
+      return ReturnCollectedOrderList.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return ReturnCollectedOrderList();
+    }
+  }
+
+  Future<OrderResponse> returnOrderToCustomer(
+    int orderProductID,
+  ) async {
+    try {
+      final cookie = await Utilities.getCookie();
+      if (_dio.options.headers.containsKey("cookie")) {
+        _dio.options.headers.update("cookie", (c) => cookie);
+      } else {
+        _dio.options.headers.putIfAbsent("cookie", () => cookie);
+      }
+      Response response = await _dio.post(
+        "delivery-agent/order/return/confirm",
+        data: {
+          "orderProductID": orderProductID,
         },
       );
       return OrderResponse.fromJson(response.data);
