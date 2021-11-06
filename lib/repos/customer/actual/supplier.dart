@@ -1,36 +1,35 @@
-import 'package:go_pharma/repos/customer/actual/addressDetails.dart';
-
 class Supplier {
   int userID;
   String businessName;
-  Null businessContactNo;
-  Null nicMainSide;
-  Null nicBackSide;
-  Null businessRegistrationCertificate;
-  Null pharmacyLicense;
-  Null verificationState;
+  String businessContactNo;
+  String nicMainSide;
+  String nicBackSide;
+  String businessRegistrationCertificate;
+  String pharmacyLicense;
+  int followers;
+  bool verificationState;
+  int verifiedAdmin;
+  int transferAccountID;
   String createdAt;
   String updatedAt;
-  int verifiedAdmin;
   int businessAddressID;
-  Null transferAccountID;
-  AddressDetail addressDetail;
 
-  Supplier(
-      {this.userID,
-      this.businessName,
-      this.businessContactNo,
-      this.nicMainSide,
-      this.nicBackSide,
-      this.businessRegistrationCertificate,
-      this.pharmacyLicense,
-      this.verificationState,
-      this.createdAt,
-      this.updatedAt,
-      this.verifiedAdmin,
-      this.businessAddressID,
-      this.transferAccountID,
-      this.addressDetail});
+  Supplier({
+    this.userID,
+    this.businessName,
+    this.businessContactNo,
+    this.nicMainSide,
+    this.nicBackSide,
+    this.businessRegistrationCertificate,
+    this.pharmacyLicense,
+    this.followers,
+    this.verificationState,
+    this.verifiedAdmin,
+    this.transferAccountID,
+    this.createdAt,
+    this.updatedAt,
+    this.businessAddressID,
+  });
 
   Supplier.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -40,15 +39,13 @@ class Supplier {
     nicBackSide = json['nicBackSide'];
     businessRegistrationCertificate = json['businessRegistrationCertificate'];
     pharmacyLicense = json['pharmacyLicense'];
+    followers = json['followers'];
     verificationState = json['verificationState'];
+    verifiedAdmin = json['verifiedAdmin'];
+    transferAccountID = json['transferAccountID'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    verifiedAdmin = json['verifiedAdmin'];
     businessAddressID = json['businessAddressID'];
-    transferAccountID = json['transferAccountID'];
-    addressDetail = json['AddressDetail'] != null
-        ? new AddressDetail.fromJson(json['AddressDetail'])
-        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -61,15 +58,13 @@ class Supplier {
     data['businessRegistrationCertificate'] =
         this.businessRegistrationCertificate;
     data['pharmacyLicense'] = this.pharmacyLicense;
+    data['followers'] = this.followers;
     data['verificationState'] = this.verificationState;
+    data['verifiedAdmin'] = this.verifiedAdmin;
+    data['transferAccountID'] = this.transferAccountID;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
-    data['verifiedAdmin'] = this.verifiedAdmin;
     data['businessAddressID'] = this.businessAddressID;
-    data['transferAccountID'] = this.transferAccountID;
-    if (this.addressDetail != null) {
-      data['AddressDetail'] = this.addressDetail.toJson();
-    }
     return data;
   }
 }
