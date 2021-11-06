@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
-import 'package:go_pharma/repos/delivery_agent/delivery/returnReservedOrderList.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/returnCollectedOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
 
 class ReturnReservedDeliveryFullView extends StatelessWidget {
-  final ReturnToBeReservedDelivery delivery;
+  final ReturnCollectedOrders delivery;
   const ReturnReservedDeliveryFullView({@required this.delivery});
   final String bullet = "\u2022 ";
   final double leftPadding = 30.0;

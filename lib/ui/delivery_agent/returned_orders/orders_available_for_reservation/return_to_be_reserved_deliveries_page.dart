@@ -29,7 +29,7 @@ class ReturnToBeReservedDeliveriesPage extends StatelessWidget {
               : state.returnToBeReservedOrders.deliveries.length == 0
                   ? Center(
                       child: Text(
-                        "You do not have any deliveries to collect at the moment.",
+                        "You do not have any deliveries to reserve at the moment.",
                       ),
                     )
                   : Container(

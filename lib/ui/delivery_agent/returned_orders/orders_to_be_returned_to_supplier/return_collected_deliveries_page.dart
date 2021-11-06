@@ -25,7 +25,7 @@ class ReturnCollectedDeliveriesPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                 )
-              : state.returnToBeReservedOrders.deliveries.length == 0
+              : state.returnCollectedOrders.deliveries.length == 0
                   ? Center(
                       child: Text(
                         "You do not have any deliveries to collect at the moment.",
@@ -35,11 +35,11 @@ class ReturnCollectedDeliveriesPage extends StatelessWidget {
                       child: ListView.builder(
                         physics: ClampingScrollPhysics(),
                         itemCount:
-                            state.returnToBeReservedOrders.deliveries.length,
+                            state.returnCollectedOrders.deliveries.length,
                         itemBuilder: (context, index) =>
                             ReturnCollectedDeliveryCard(
                           delivery:
-                              state.returnToBeReservedOrders.deliveries[index],
+                              state.returnCollectedOrders.deliveries[index],
                         ),
                       ),
                     );
