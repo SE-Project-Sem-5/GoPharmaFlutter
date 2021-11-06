@@ -7,8 +7,8 @@ import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_collected_from_customer/return_reserved_delivery_card.dart';
 
 class ReturnReservedDeliveriesPage extends StatelessWidget {
-  static final String id = "return_collected_deliveries_page";
-  final String title = "Returnable Orders Collected from Customer";
+  static final String id = "return_reserved_deliveries_page";
+  final String title = "Reserved Returnable Deliveries";
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ReturnReservedDeliveriesPage extends StatelessWidget {
               : state.returnReservedOrders.deliveries.length == 0
                   ? Center(
                       child: Text(
-                        "You do not have any deliveries to collect at the moment.",
+                        "You do not have any reserved deliveries to return at the moment.",
                       ),
                     )
                   : Container(

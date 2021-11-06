@@ -7,8 +7,8 @@ import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_returned_to_supplier/return_collected_delivery_card.dart';
 
 class ReturnCollectedDeliveriesPage extends StatelessWidget {
-  static final String id = "return_reserved_deliveries_page";
-  final String title = "Reserved Deliveries for Return";
+  static final String id = "return_collected_deliveries_page";
+  final String title = "Collected Deliveries for Return";
 
   @override
   Widget build(BuildContext context) {

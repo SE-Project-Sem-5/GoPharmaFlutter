@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
@@ -58,7 +59,7 @@ class ReturnToBeReservedDeliveryFullView extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: leftPadding),
                         child: Text(
-                          'Reservation Details: ',
+                          'Return Information: ',
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
@@ -98,6 +99,16 @@ class ReturnToBeReservedDeliveryFullView extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(
+                                      height: 15.0,
+                                    ),
+                                    Text(
+                                      "TO BE RETURNED TO: ",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
                                       height: 5.0,
                                     ),
                                     Text(
@@ -108,6 +119,65 @@ class ReturnToBeReservedDeliveryFullView extends StatelessWidget {
                                     ),
                                     SizedBox(
                                       height: 5.0,
+                                    ),
+                                    Text(
+                                      "Supplier Contact Number: " +
+                                          delivery.supplierContactNumber,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "Supplier Address: " +
+                                          delivery.supplierAddress,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15.0,
+                                    ),
+                                    Text(
+                                      "TO BE COLLECTED FROM: ",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "Customer Name: " + delivery.customerName,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "Customer Contact Number: " +
+                                          delivery.customerContactNumber,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "Customer Address: " +
+                                          delivery.customerAddress,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15.0,
                                     ),
                                   ],
                                 ),
@@ -128,7 +198,7 @@ class ReturnToBeReservedDeliveryFullView extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {
                             deliveryListBloc.add(
-                              CollectOrderEvent(
+                              ReserveOrderForReturn(
                                 orderProductID: delivery.id,
                               ),
                             );

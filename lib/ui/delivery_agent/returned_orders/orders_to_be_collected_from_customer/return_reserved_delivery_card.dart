@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/returnCollectedOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_collected_from_customer/return_reserved_delivery_full_view.dart';
+import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_collected_from_customer/return_reserved_deliveries_page.dart';
 
 class ReturnReservedDeliveryCard extends StatelessWidget {
   final ReturnCollectedOrders delivery;
@@ -10,6 +13,7 @@ class ReturnReservedDeliveryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(5.0),
@@ -43,7 +47,7 @@ class ReturnReservedDeliveryCard extends StatelessWidget {
                   horizontal: 70,
                 ),
                 child: Text(
-                  "Customer Address: " + delivery.customerAddress,
+                  "Collection Address: " + delivery.customerAddress,
                 ),
               ),
               SizedBox(
@@ -54,30 +58,39 @@ class ReturnReservedDeliveryCard extends StatelessWidget {
                   horizontal: 70,
                 ),
                 child: Text(
-                  "Destination: " + delivery.supplierAddress,
+                  "Customer Contact Number: " + delivery.customerContactNo,
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const SizedBox(width: 8),
-                    TextButton(
-                      child: const Text('View Delivery Details'),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ReturnReservedDeliveryFullView(
-                              delivery: delivery,
-                            ),
-                          ),
-                        );
-                      },
+                padding: EdgeInsets.only(
+                  left: 70,
+                  right: 30,
+                  bottom: 15.0,
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    deliveryListBloc.add(
+                      CollectOrderForReturn(
+                        orderProductID: delivery.id,
+                      ),
+                    );
+                    Navigator.pushReplacementNamed(
+                      context,
+                      ReturnReservedDeliveriesPage.id,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: GoPharmaColors.PrimaryColor,
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
+                  child: Text(
+                    "Confirm Collection",
+                  ),
                 ),
               ),
             ],

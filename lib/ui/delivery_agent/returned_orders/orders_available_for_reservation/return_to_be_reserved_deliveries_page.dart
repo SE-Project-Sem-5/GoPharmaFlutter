@@ -7,7 +7,7 @@ import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_available_for_reservation/return_to_be_reserved_delivery_card.dart';
 
 class ReturnToBeReservedDeliveriesPage extends StatelessWidget {
-  static final String id = "return_reserved_deliveries_page";
+  static final String id = "return_reservable_deliveries_page";
   final String title = "Reserved Deliveries for Return";
 
   @override
