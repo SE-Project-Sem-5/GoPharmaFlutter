@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
-import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_state.dart';
 import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
-import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_delivery_card.dart';
+import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_returned_to_supplier/return_collected_delivery_card.dart';
 
 class ReturnCollectedDeliveriesPage extends StatelessWidget {
-  static final String id = "return_collected_deliveries_page";
-  final String title = "Returnable Orders Collected from Customer";
+  static final String id = "return_reserved_deliveries_page";
+  final String title = "Reserved Deliveries for Return";
 
   @override
   Widget build(BuildContext context) {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
-    deliveryListBloc.add(
-      GetAllReservedOrders(),
-    );
+    // deliveryListBloc.add(
+    //   GetAllReservedOrders(),
+    // );
     return CommonSkeleton(
       title: title,
       child: BlocBuilder<DeliveryListBloc, DeliveryListState>(
@@ -36,8 +35,10 @@ class ReturnCollectedDeliveriesPage extends StatelessWidget {
                       child: ListView.builder(
                         physics: ClampingScrollPhysics(),
                         itemCount: state.returnReservedOrders.deliveries.length,
-                        itemBuilder: (context, index) => ReservedDeliveryCard(
-                          delivery: state.reservedOrders.deliveries[index],
+                        itemBuilder: (context, index) =>
+                            ReturnCollectedDeliveryCard(
+                          delivery:
+                              state.returnReservedOrders.deliveries[index],
                         ),
                       ),
                     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/returnReservedOrderList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
-import 'package:go_pharma/ui/delivery_agent/returned_orders/reserved_to_be_collected_from_customer/return_reserved_delivery_full_view.dart';
+import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_collected_from_customer/return_reserved_delivery_full_view.dart';
 
 class ReturnReservedDeliveryCard extends StatelessWidget {
   final ReturnReservedDelivery delivery;

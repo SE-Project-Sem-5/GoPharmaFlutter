@@ -34,7 +34,8 @@ import 'package:go_pharma/ui/delivery_agent/delivery_agent_starting_page.dart';
 import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_available_for_reservation/return_to_be_reserved_deliveries_page.dart';
-import 'package:go_pharma/ui/delivery_agent/returned_orders/reserved_to_be_collected_from_customer/return_reserved_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_collected_from_customer/return_reserved_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_returned_to_supplier/return_collected_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/settings_page/view_profile.dart';
 import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/sign_in/delivery_agent_sign_in.dart';
@@ -100,8 +101,7 @@ Map<String, Widget Function(BuildContext context)> routes = {
   DeliveryAgentSettingsPage.id: (context) => DeliveryAgentSettingsPage(),
   ReturnToBeReservedDeliveriesPage.id: (context) =>
       ReturnToBeReservedDeliveriesPage(),
-  ReturnCollectedDeliveriesPage.id: (context) =>
-      ReturnCollectedDeliveriesPage(),
+  ReturnReservedDeliveriesPage.id: (context) => ReturnReservedDeliveriesPage(),
   ReturnCollectedDeliveriesPage.id: (context) =>
       ReturnCollectedDeliveriesPage(),
 };
