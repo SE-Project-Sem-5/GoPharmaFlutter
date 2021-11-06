@@ -49,7 +49,7 @@ class ConfirmedOrdersPage extends StatelessWidget {
                           )
                         : Center(
                             child: Text(
-                              "Nothing to see here. ",
+                              "No orders have been confirmed yet. ",
                               style: TextStyle(
                                 fontSize: 18,
                               ),

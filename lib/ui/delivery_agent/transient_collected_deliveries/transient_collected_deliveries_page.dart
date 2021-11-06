@@ -27,8 +27,10 @@ class TransientCollectedDeliveriesPage extends StatelessWidget {
                   ),
                 )
               : state.transientCollectedOrders.deliveries.length == 0
-                  ? Text(
-                      "You do not have any transient deliveries to collect at the moment.",
+                  ? Center(
+                      child: Text(
+                        "You do not have any transient deliveries to collect at the moment.",
+                      ),
                     )
                   : Container(
                       child: ListView.builder(

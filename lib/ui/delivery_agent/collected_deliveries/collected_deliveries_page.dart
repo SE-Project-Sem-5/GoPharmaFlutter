@@ -27,8 +27,10 @@ class CollectedDeliveriesPage extends StatelessWidget {
                   ),
                 )
               : state.collectedOrders.deliveries.length == 0
-                  ? Text(
-                      "You do not have any collected deliveries at the moment.",
+                  ? Center(
+                      child: Text(
+                        "You do not have any collected deliveries at the moment.",
+                      ),
                     )
                   : Container(
                       child: ListView.builder(

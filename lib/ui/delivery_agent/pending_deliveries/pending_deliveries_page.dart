@@ -27,8 +27,10 @@ class PendingDeliveriesPage extends StatelessWidget {
                   ),
                 )
               : state.confirmedOrders.deliveries.length == 0
-                  ? Text(
-                      "You do not have any pending deliveries at the moment.",
+                  ? Center(
+                      child: Text(
+                        "You do not have any pending deliveries at the moment.",
+                      ),
                     )
                   : Container(
                       child: ListView.builder(

@@ -27,8 +27,10 @@ class ReservedDeliveriesPage extends StatelessWidget {
                   ),
                 )
               : state.reservedOrders.deliveries.length == 0
-                  ? Text(
-                      "You do not have any deliveries to collect at the moment.",
+                  ? Center(
+                      child: Text(
+                        "You do not have any deliveries to collect at the moment.",
+                      ),
                     )
                   : Container(
                       child: ListView.builder(
