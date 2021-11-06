@@ -18,9 +18,9 @@ class DeliveryListState {
   final TransientDeliveryList transientOrders;
   final TransientCollectedList transientCollectedOrders;
   final ShippedOrderList shippedOrders;
-  final ReturnToBeReservedOrderList returnReservedOrders;
+  final ReturnToBeReservedOrderList returnToBeReservedOrders;
+  final ReturnCollectedOrderList returnReservedOrders;
   final ReturnCollectedOrderList returnCollectedOrders;
-  final ReturnCollectedOrderList returnConfirmedOrders;
 
   DeliveryListState({
     this.confirmedOrders,
@@ -31,9 +31,9 @@ class DeliveryListState {
     this.shippedOrders,
     this.error,
     this.isLoading,
+    this.returnToBeReservedOrders,
     this.returnReservedOrders,
     this.returnCollectedOrders,
-    this.returnConfirmedOrders,
   });
 
   static DeliveryListState get initialState => DeliveryListState(
@@ -57,20 +57,19 @@ class DeliveryListState {
         shippedOrders: new ShippedOrderList(
           deliveries: [],
         ),
-        returnReservedOrders: new ReturnToBeReservedOrderList(
+        returnToBeReservedOrders: new ReturnToBeReservedOrderList(
+          deliveries: [],
+        ),
+        returnReservedOrders: new ReturnCollectedOrderList(
           deliveries: [],
         ),
         returnCollectedOrders: new ReturnCollectedOrderList(
-          deliveries: [],
-        ),
-        returnConfirmedOrders: new ReturnCollectedOrderList(
           deliveries: [],
         ),
       );
 
   DeliveryListState clone({
     String error = '',
-    // List<Category> categories,
     bool isLoading,
     PendingDeliveryList confirmedOrders,
     ReservedDeliveryList reservedOrders,
@@ -78,9 +77,9 @@ class DeliveryListState {
     TransientDeliveryList transientOrders,
     TransientCollectedList transientCollectedOrders,
     ShippedOrderList shippedOrders,
-    ReturnToBeReservedOrderList returnReservedOrders,
+    ReturnToBeReservedOrderList returnToBeReservedOrders,
+    ReturnCollectedOrderList returnReservedOrders,
     ReturnCollectedOrderList returnCollectedOrders,
-    ReturnCollectedOrderList returnConfirmedOrders,
   }) {
     return DeliveryListState(
       error: error ?? this.error,
@@ -92,11 +91,11 @@ class DeliveryListState {
       transientCollectedOrders:
           transientCollectedOrders ?? this.transientCollectedOrders,
       shippedOrders: shippedOrders ?? this.shippedOrders,
+      returnToBeReservedOrders:
+          returnToBeReservedOrders ?? this.returnToBeReservedOrders,
       returnReservedOrders: returnReservedOrders ?? this.returnReservedOrders,
       returnCollectedOrders:
           returnCollectedOrders ?? this.returnCollectedOrders,
-      returnConfirmedOrders:
-          returnConfirmedOrders ?? this.returnConfirmedOrders,
     );
   }
 }
