@@ -5,6 +5,9 @@ import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/delivery_agent/pending_deliveries/pending_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/reserved_deliveries/reserved_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_available_for_reservation/return_to_be_reserved_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_collected_from_customer/return_reserved_deliveries_page.dart';
+import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_returned_to_supplier/return_collected_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/settings_page/view_profile.dart';
 import 'package:go_pharma/ui/delivery_agent/shipped_deliveries/shipped_deliveries_page.dart';
 import 'package:go_pharma/ui/delivery_agent/transient_collected_deliveries/transient_collected_deliveries_page.dart';
@@ -93,6 +96,39 @@ class DeliveryAgentDrawer extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.pushReplacementNamed(
                     context, ShippedDeliveriesPage.id);
+              },
+            ),
+            DrawerTile(
+              text: "Returnable Deliveries",
+              icon: Icons.history,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                  context,
+                  ReturnToBeReservedDeliveriesPage.id,
+                );
+              },
+            ),
+            DrawerTile(
+              text: "Reserved Returnable Deliveries",
+              icon: Icons.history,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                  context,
+                  ReturnReservedDeliveriesPage.id,
+                );
+              },
+            ),
+            DrawerTile(
+              text: "Collected Returnable Deliveries",
+              icon: Icons.history,
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                  context,
+                  ReturnCollectedDeliveriesPage.id,
+                );
               },
             ),
             DrawerTile(

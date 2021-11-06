@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_bloc.dart';
+import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_state.dart';
 import 'package:go_pharma/ui/delivery_agent/common_skeleton.dart';
 import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_returned_to_supplier/return_collected_delivery_card.dart';
@@ -12,9 +13,9 @@ class ReturnCollectedDeliveriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deliveryListBloc = BlocProvider.of<DeliveryListBloc>(context);
-    // deliveryListBloc.add(
-    //   GetAllReservedOrders(),
-    // );
+    deliveryListBloc.add(
+      GetAllReturnCollectedOrders(),
+    );
     return CommonSkeleton(
       title: title,
       child: BlocBuilder<DeliveryListBloc, DeliveryListState>(
