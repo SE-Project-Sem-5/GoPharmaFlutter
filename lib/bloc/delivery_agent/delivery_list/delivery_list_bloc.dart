@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_event.dart';
 import 'package:go_pharma/bloc/delivery_agent/delivery_list/delivery_list_state.dart';
 import 'package:go_pharma/repos/delivery_agent/delivery/deliveryListAPIProvider.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/returnCollectedOrderList.dart';
+import 'package:go_pharma/repos/delivery_agent/delivery/returnReservedOrderList.dart';
 
 class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
   DeliveryListBloc(BuildContext context)
@@ -207,6 +209,85 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         yield state.clone(
           isLoading: false,
           shippedOrders: shippedOrders,
+        );
+        break;
+
+      //    RETURNED ORDERS
+
+      case GetAllReturnOrdersAvailableForReservation:
+        yield state.clone(
+          isLoading: true,
+        );
+        ReturnToBeReservedOrderList orders =
+            await deliveryListAPIProvider.getAllReturnedToBeReservedOrders();
+        yield state.clone(
+          isLoading: false,
+          returnToBeReservedOrders: orders,
+        );
+        break;
+      case ReserveOrderForReturn:
+        yield state.clone(
+          isLoading: true,
+        );
+        final orderProductID = (event as ReserveOrderForReturn).orderProductID;
+        await deliveryListAPIProvider.reserveOrderForReturn(orderProductID);
+        ReturnToBeReservedOrderList orders =
+            await deliveryListAPIProvider.getAllReturnedToBeReservedOrders();
+        yield state.clone(
+          isLoading: false,
+          returnToBeReservedOrders: orders,
+        );
+        break;
+
+      case GetAllReservedForReturnOrders:
+        yield state.clone(
+          isLoading: true,
+        );
+        ReturnCollectedOrderList orders =
+            await deliveryListAPIProvider.getAllReservedForCollectionOrders();
+        yield state.clone(
+          isLoading: false,
+          returnReservedOrders: orders,
+        );
+        break;
+
+      case CollectOrderForReturn:
+        yield state.clone(
+          isLoading: true,
+        );
+        final orderProductID = (event as CollectOrderForReturn).orderProductID;
+        await deliveryListAPIProvider.collectOrderForReturn(orderProductID);
+        ReturnCollectedOrderList orders =
+            await deliveryListAPIProvider.getAllReservedForCollectionOrders();
+        yield state.clone(
+          isLoading: false,
+          returnReservedOrders: orders,
+        );
+        break;
+
+      case GetAllReturnCollectedOrders:
+        yield state.clone(
+          isLoading: true,
+        );
+        ReturnCollectedOrderList orders =
+            await deliveryListAPIProvider.getAllReturnCollectedOrders();
+        yield state.clone(
+          isLoading: false,
+          returnCollectedOrders: orders,
+        );
+        break;
+
+      case ConfirmOrderReturn:
+        yield state.clone(
+          isLoading: true,
+        );
+        final orderProductID = (event as ConfirmOrderReturn).orderProductID;
+        await deliveryListAPIProvider.returnOrderToCustomer(orderProductID);
+        ReturnCollectedOrderList orders =
+            await deliveryListAPIProvider.getAllReturnCollectedOrders();
+        yield state.clone(
+          isLoading: false,
+          returnCollectedOrders: orders,
         );
         break;
     }

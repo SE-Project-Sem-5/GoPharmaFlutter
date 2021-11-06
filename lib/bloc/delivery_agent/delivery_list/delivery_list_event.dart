@@ -99,3 +99,31 @@ class DeliverOnlineOrder extends DeliveryListEvent {
     this.deliveryAgentHomeAddressID,
   });
 }
+
+//RETURNED ORDERS
+class GetAllReturnOrdersAvailableForReservation extends DeliveryListEvent {
+  GetAllReturnOrdersAvailableForReservation();
+}
+
+class ReserveOrderForReturn extends DeliveryListEvent {
+  final int orderProductID;
+  ReserveOrderForReturn({this.orderProductID});
+}
+
+class GetAllReservedForReturnOrders extends DeliveryListEvent {
+  GetAllReservedForReturnOrders();
+}
+
+class CollectOrderForReturn extends DeliveryListEvent {
+  final int orderProductID;
+  CollectOrderForReturn({this.orderProductID});
+}
+
+class GetAllReturnCollectedOrders extends DeliveryListEvent {
+  GetAllReturnCollectedOrders();
+}
+
+class ConfirmOrderReturn extends DeliveryListEvent {
+  final int orderProductID;
+  ConfirmOrderReturn({this.orderProductID});
+}
