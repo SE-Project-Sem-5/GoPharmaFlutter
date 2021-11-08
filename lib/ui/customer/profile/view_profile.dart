@@ -81,7 +81,9 @@ class SettingsPage extends StatelessWidget {
                             fontSize: 16.0,
                           ),
                           InformationText(
-                            text: state.user.userAccount.email,
+                            text: state.user.userAccount != null
+                                ? state.user.userAccount.email
+                                : "User Email",
                           ),
                           BoldText(
                             text: "First Name",

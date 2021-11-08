@@ -6,7 +6,6 @@ import 'package:go_pharma/bloc/delivery_agent/delivery_agent_root/delivery_agent
 import 'package:go_pharma/repos/common/signup/cityList.dart';
 import 'package:go_pharma/ui/common/colors.dart';
 import 'package:go_pharma/ui/common/widgets/rounded_button_filled.dart';
-import 'package:go_pharma/ui/delivery_agent/settings_page/verify_password.dart';
 import 'package:go_pharma/ui/initial_routing_page.dart';
 import 'package:intl/intl.dart';
 
@@ -73,7 +72,9 @@ class DeliveryAgentSettingsPage extends StatelessWidget {
                       fontSize: 16.0,
                     ),
                     InformationText(
-                      text: state.user.userAccount.email,
+                      text: state.user.userAccount != null
+                          ? state.user.userAccount.email
+                          : "Email",
                     ),
                     BoldText(
                       text: 'First Name',
@@ -158,7 +159,9 @@ class DeliveryAgentSettingsPage extends StatelessWidget {
                             },
                           )
                         : InformationText(
-                            text: state.user.gender.toUpperCase(),
+                            text: state.user.gender != null
+                                ? state.user.gender.toUpperCase()
+                                : "Gender",
                           ),
                     BoldText(
                       text: "Date of Birth",
@@ -324,21 +327,21 @@ class DeliveryAgentSettingsPage extends StatelessWidget {
                                     );
                                   },
                                 ),
-                                RoundedButtonFilled(
-                                  title: "View Security Settings",
-                                  widthMultiplier: 0.5,
-                                  size: MediaQuery.of(context).size,
-                                  fillColor: GoPharmaColors.GreyColor,
-                                  textColor: GoPharmaColors.BlackColor,
-                                  onTapped: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => VerifyPassword(),
-                                      ),
-                                    );
-                                  },
-                                ),
+                                // RoundedButtonFilled(
+                                //   title: "View Security Settings",
+                                //   widthMultiplier: 0.5,
+                                //   size: MediaQuery.of(context).size,
+                                //   fillColor: GoPharmaColors.GreyColor,
+                                //   textColor: GoPharmaColors.BlackColor,
+                                //   onTapped: () {
+                                //     Navigator.push(
+                                //       context,
+                                //       MaterialPageRoute(
+                                //         builder: (context) => VerifyPassword(),
+                                //       ),
+                                //     );
+                                //   },
+                                // ),
                                 RoundedButtonFilled(
                                   title: "Log Out",
                                   widthMultiplier: 0.5,

@@ -5,7 +5,6 @@ import 'package:go_pharma/bloc/customer/order_list/order_list_event.dart';
 import 'package:go_pharma/bloc/customer/order_list/order_list_state.dart';
 import 'package:go_pharma/repos/customer/actual/order/normalOrderList.dart';
 import 'package:go_pharma/repos/customer/actual/order/orderListAPIProvider.dart';
-import 'package:go_pharma/ui/customer/processing_orders/normal_orders/processing_normal_orders_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
@@ -42,10 +41,11 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListState> {
         print(orderListResponse);
         Map<String, NormalOrderList> orderList = {};
         for (String status in statuses) {
-          orderList[status] = new NormalOrderList();
+          orderList[status] = new NormalOrderList(orders: []);
           orderList[status].orders = [];
         }
         for (NormalOrder order in orderListResponse.orders) {
+          print("STATUS " + order.status);
           orderList[order.status].orders.add(order);
         }
         print(orderList);
@@ -137,4 +137,9 @@ List<String> statuses = [
   'transient-collected',
   'shipped',
   'delivered',
+  'unpaid',
+  'toBeReturned',
+  'reservedForReturn',
+  'collectedForReturn',
+  'returned',
 ];
