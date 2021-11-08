@@ -199,9 +199,9 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
           } else {
             Map<String, dynamic> result =
                 await userApiProvider.getCurrentUser(cookie);
+            print(result);
             if (loginReponse.data.twoFactorAuth == "true") {
               User user = result["user"];
-              var prefs = await SharedPreferences.getInstance();
               prefs.setString("firstName", user.firstName);
               prefs.setString("lastName", user.lastName);
               prefs.setString(
@@ -220,7 +220,6 @@ class CustomerRootBloc extends Bloc<CustomerRootEvent, CustomerRootState> {
               );
             } else {
               User user = result["user"];
-              var prefs = await SharedPreferences.getInstance();
               prefs.setString("firstName", user.firstName);
               prefs.setString("lastName", user.lastName);
               prefs.setString(

@@ -44,7 +44,7 @@ class PastOrdersPage extends StatelessWidget {
                             )
                           : Center(
                               child: Text(
-                                "Nothing to see here. ",
+                                "No orders have been completed yet. ",
                                 style: TextStyle(
                                   fontSize: 18,
                                 ),

@@ -97,13 +97,18 @@ class ProcessingPrescriptionOrderFullView extends StatelessWidget {
                                     ),
                                     HorizontalLine(),
                                     Container(
-                                      height: 300,
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.9,
                                       child: ListView.builder(
                                         physics: ClampingScrollPhysics(),
                                         itemCount: order.prescriptions.length,
                                         itemBuilder: (context, index) =>
                                             Container(
-                                          height: 300,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              2,
                                           width: 150,
                                           child: Image.network(
                                             URL.baseURL +
