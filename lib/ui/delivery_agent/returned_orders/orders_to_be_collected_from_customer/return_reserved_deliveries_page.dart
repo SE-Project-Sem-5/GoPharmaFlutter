@@ -8,7 +8,7 @@ import 'package:go_pharma/ui/delivery_agent/returned_orders/orders_to_be_collect
 
 class ReturnReservedDeliveriesPage extends StatelessWidget {
   static final String id = "return_reserved_deliveries_page";
-  final String title = "Reserved Returnable Deliveries";
+  final String title = "Reserved Deliveries for Return";
 
   @override
   Widget build(BuildContext context) {

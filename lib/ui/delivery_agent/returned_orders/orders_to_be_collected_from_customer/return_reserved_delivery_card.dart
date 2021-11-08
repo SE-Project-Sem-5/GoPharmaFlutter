@@ -89,7 +89,7 @@ class ReturnReservedDeliveryCard extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "Confirm Collection",
+                    "Confirm Collection From Customer",
                   ),
                 ),
               ),

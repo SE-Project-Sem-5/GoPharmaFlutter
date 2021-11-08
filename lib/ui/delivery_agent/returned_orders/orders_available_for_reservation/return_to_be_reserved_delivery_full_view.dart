@@ -214,7 +214,7 @@ class ReturnToBeReservedDeliveryFullView extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            "Confirm Collection",
+                            "Confirm Reservation for Return",
                           ),
                         ),
                       ),
