@@ -23,7 +23,16 @@ class OrderListState {
         error: '',
         status: '',
         cookie: '',
-        normalOrderList: {},
+        normalOrderList: {
+          "delivered": new NormalOrderList(orders: []),
+          "processing": new NormalOrderList(orders: []),
+          "confirmed": new NormalOrderList(orders: []),
+          "reserved": new NormalOrderList(orders: []),
+          "collected": new NormalOrderList(orders: []),
+          "transient": new NormalOrderList(orders: []),
+          "transient-collected": new NormalOrderList(orders: []),
+          "shipped": new NormalOrderList(orders: []),
+        },
         isLoading: false,
         prescriptionOrderList: new PrescriptionOrderList(),
       );
