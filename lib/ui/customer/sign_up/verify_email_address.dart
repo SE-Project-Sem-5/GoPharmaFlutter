@@ -31,7 +31,6 @@ class VerifyEmailAddress extends StatelessWidget {
         return state.signUpProcessState == SignUpProcessState.VERIFIED;
       },
       listener: (context, state) {
-        print("inside listener");
         Navigator.pushReplacementNamed(
           context,
           EnableTwoFAQuestion.id,

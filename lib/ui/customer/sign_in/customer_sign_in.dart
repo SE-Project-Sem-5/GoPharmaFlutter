@@ -88,6 +88,7 @@ class CustomerSignInPage extends StatelessWidget {
                                 ),
                                 TextFieldContainer(
                                   child: TextFormField(
+                                    key: Key('email'),
                                     controller: emailController,
                                     // ignore: missing_return
                                     validator: (value) {

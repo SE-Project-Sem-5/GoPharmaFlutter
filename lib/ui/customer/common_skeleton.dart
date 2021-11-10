@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'drawer.dart';
 
 class CommonSkeleton extends StatelessWidget {

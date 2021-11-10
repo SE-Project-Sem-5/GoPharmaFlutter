@@ -49,10 +49,12 @@ dependencies:
   url_launcher: ^6.0.9
   material_floating_search_bar: ^0.3.4
   pinput: ^1.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  bloc_test: ^8.3.0
+  mockito: ^5.0.16
 flutter:
   assets:
     - images/

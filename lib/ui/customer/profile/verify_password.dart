@@ -12,7 +12,6 @@ import 'bold_text.dart';
 class VerifyPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var bloc = BlocProvider.of<CustomerRootBloc>(context);
     TextEditingController passwordController = new TextEditingController();
     final _form = GlobalKey<FormState>();
 
@@ -29,9 +28,8 @@ class VerifyPassword extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BoldText(
-                    text: 'Please enter your current password.',
-                    fontSize: 20.0,
+                  Text(
+                    'Please enter your current password.',
                   ),
                   Padding(
                     padding: const EdgeInsets.all(50.0),
@@ -65,11 +63,7 @@ class VerifyPassword extends StatelessWidget {
                                   : Icons.visibility_off,
                               color: GoPharmaColors.PrimaryColor,
                             ),
-                            onTap: () {
-                              bloc.add(
-                                ToggleVisibility(),
-                              );
-                            },
+                            onTap: () {},
                           ),
                         ),
                       ),

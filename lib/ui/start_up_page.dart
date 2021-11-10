@@ -15,40 +15,13 @@ class AppStartUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return BlocListener<CustomerRootBloc, CustomerRootState>(
-      listenWhen: (context, state) {
-        return state.signInState == CustomerRootSignInState.SIGNED_IN ||
-            state.signInState == CustomerRootSignInState.SIGNED_OUT;
-      },
-      listener: (context, state) {
-        if (state.signInState == CustomerRootSignInState.SIGNED_OUT) {
-          Navigator.pushReplacementNamed(
-            context,
-            InitialRoutingPage.id,
-          );
-        } else if (state.signInState == CustomerRootSignInState.SIGNED_IN) {
-          final role = state.user.role;
-          if (role == "customer") {
-            Navigator.pushReplacementNamed(
-              context,
-              CustomerHomePage.id,
-            );
-          } else if (role == "delivery agent") {
-            Navigator.pushReplacementNamed(
-              context,
-              PendingDeliveriesPage.id,
-            );
-          }
-        }
-      },
-      child: SafeArea(
-        child: Scaffold(
-          body: Container(
-            width: size.width,
-            height: size.height,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: size.width,
+          height: size.height,
+          child: Center(
+            child: CircularProgressIndicator(),
           ),
         ),
       ),
