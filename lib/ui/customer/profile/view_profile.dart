@@ -170,7 +170,9 @@ class SettingsPage extends StatelessWidget {
                                   },
                                 )
                               : InformationText(
-                                  text: state.user.gender.toUpperCase(),
+                                  text: state.user.gender != null
+                                      ? state.user.gender.toUpperCase()
+                                      : "MALE",
                                 ),
                           BoldText(
                             text: "Date of Birth",

@@ -14,7 +14,6 @@ class AppStartUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final bloc = BlocProvider.of<CustomerRootBloc>(context);
 
     return BlocListener<CustomerRootBloc, CustomerRootState>(
       listenWhen: (context, state) {
