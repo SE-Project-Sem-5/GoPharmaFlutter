@@ -16,7 +16,7 @@ class ForgotPasswordPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "This functionality is currently not available in the mobile application. "
-              "Please visit the GoPharma website for more information.",
+              "Please visit the GoPharma website to reset your password.",
               style: TextStyle(
                 fontSize: 18.0,
                 color: GoPharmaColors.PrimaryColor,

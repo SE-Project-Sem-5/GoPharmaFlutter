@@ -70,7 +70,7 @@ class UserAPIProvider {
       return {"success": "Successfully updated."};
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      return {"error": "Error in logging out, please try again later."};
+      return {"error": "Error in updating, please try again later."};
     }
   }
 

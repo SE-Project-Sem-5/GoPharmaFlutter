@@ -220,6 +220,7 @@ class DeliveryListBloc extends Bloc<DeliveryListEvent, DeliveryListState> {
         );
         ReturnToBeReservedOrderList orders =
             await deliveryListAPIProvider.getAllReturnedToBeReservedOrders();
+        print(orders.deliveries);
         yield state.clone(
           isLoading: false,
           returnToBeReservedOrders: orders,
