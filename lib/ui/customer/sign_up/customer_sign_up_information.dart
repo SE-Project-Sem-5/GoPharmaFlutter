@@ -181,40 +181,40 @@ class SignUpInformation extends StatelessWidget {
                             SizedBox(
                               height: 20,
                             ),
-                            DropdownButton<String>(
-                              value: state.city != null
-                                  ? state.city.description
-                                  : state.cities.cities[0].description,
-                              icon: const Icon(
-                                Icons.arrow_downward,
-                                color: GoPharmaColors.PrimaryColor,
-                              ),
-                              iconSize: 24,
-                              elevation: 16,
-                              style: const TextStyle(
-                                color: GoPharmaColors.BlackColor,
-                                fontSize: 16,
-                              ),
-                              underline: Container(
-                                height: 2,
-                                color: GoPharmaColors.PrimaryColor,
-                              ),
-                              onChanged: (String newValue) {
-                                print("Changing");
-                                bloc.add(
-                                  UpdateCity(city: newValue),
-                                );
-                              },
-                              items: state.cities.cities
-                                  .map<DropdownMenuItem<String>>((City value) {
-                                return DropdownMenuItem<String>(
-                                  value: value.description,
-                                  child: Text(
-                                    value.description,
-                                  ),
-                                );
-                              }).toList(),
-                            ),
+                            // DropdownButton<String>(
+                            //   value: state.city != null
+                            //       ? state.city.description
+                            //       : state.cities.cities[0].description,
+                            //   icon: const Icon(
+                            //     Icons.arrow_downward,
+                            //     color: GoPharmaColors.PrimaryColor,
+                            //   ),
+                            //   iconSize: 24,
+                            //   elevation: 16,
+                            //   style: const TextStyle(
+                            //     color: GoPharmaColors.BlackColor,
+                            //     fontSize: 16,
+                            //   ),
+                            //   underline: Container(
+                            //     height: 2,
+                            //     color: GoPharmaColors.PrimaryColor,
+                            //   ),
+                            //   onChanged: (String newValue) {
+                            //     print("Changing");
+                            //     bloc.add(
+                            //       UpdateCity(city: newValue),
+                            //     );
+                            //   },
+                            //   items: state.cities.cities
+                            //       .map<DropdownMenuItem<String>>((City value) {
+                            //     return DropdownMenuItem<String>(
+                            //       value: value.description,
+                            //       child: Text(
+                            //         value.description,
+                            //       ),
+                            //     );
+                            //   }).toList(),
+                            // ),
                             SizedBox(
                               height: 20,
                             ),

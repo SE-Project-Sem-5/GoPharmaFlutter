@@ -16,57 +16,46 @@ class InitialRoutingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
-      child: BlocListener<InternetBloc, InternetState>(
-        listener: (context, state) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                state.connection.toString(),
-              ),
-            ),
-          );
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            title: Row(
-              children: [
-                Text(title),
-              ],
-            ),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Row(
+            children: [
+              Text(title),
+            ],
           ),
-          body: Container(
-            width: size.width,
-            height: size.height,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Are you a customer, or a delivery agent?",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+        ),
+        body: Container(
+          width: size.width,
+          height: size.height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Are you a customer, or a delivery agent?",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                RoundedButtonFilled(
-                  title: "CUSTOMER",
-                  size: size,
-                  onTapped: () => Navigator.pushNamed(
-                    context,
-                    CustomerStartingPage.id,
-                  ),
+              ),
+              RoundedButtonFilled(
+                title: "CUSTOMER",
+                size: size,
+                onTapped: () => Navigator.pushNamed(
+                  context,
+                  CustomerStartingPage.id,
                 ),
-                RoundedButtonFilled(
-                  title: "DELIVERY AGENT",
-                  size: size,
-                  fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
-                  textColor: GoPharmaColors.BlackColor,
-                  onTapped: () => Navigator.pushNamed(
-                    context,
-                    DeliveryAgentSignInPage.id,
-                  ),
+              ),
+              RoundedButtonFilled(
+                title: "DELIVERY AGENT",
+                size: size,
+                fillColor: GoPharmaColors.GreyColor.withOpacity(0.5),
+                textColor: GoPharmaColors.BlackColor,
+                onTapped: () => Navigator.pushNamed(
+                  context,
+                  DeliveryAgentSignInPage.id,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -10,7 +10,6 @@ import 'horizontal_product_card.dart';
 
 class ProductHomePage extends StatelessWidget {
   static final String id = "product_home_page";
-  //Rough skeleton for how all product pages would appear
   const ProductHomePage({Key key}) : super(key: key);
 
   @override
@@ -19,7 +18,6 @@ class ProductHomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(""),
-          //TODO: Add product page title here?
           backgroundColor: GoPharmaColors.PrimaryColor,
           elevation: 0,
           actions: [
