@@ -39,7 +39,9 @@ class OrderListState {
           "returned": new NormalOrderList(orders: []),
         },
         isLoading: false,
-        prescriptionOrderList: new PrescriptionOrderList(),
+        prescriptionOrderList: new PrescriptionOrderList(
+          prescriptionOrder: [],
+        ),
       );
 
   OrderListState clone({
