@@ -15,7 +15,7 @@ class PrescriptionOrderList {
 
 class PrescriptionOrder {
   String orderedDate;
-  Null totalPrice;
+  num totalPrice;
   String zone;
   String status;
   String orderType;
